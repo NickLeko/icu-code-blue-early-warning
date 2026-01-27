@@ -12,6 +12,9 @@ clinically meaningful evaluation**, not leaderboard metrics.
 - **eICU Collaborative Research Database v2.0**
 - Accessed via **Google BigQuery** (PhysioNet credentialed access required)
 - No patient-level data is redistributed in this repository
+- 
+> **Data access:**  
+> This project uses the eICU-CRD v2.0 dataset from PhysioNet. Data are *not* included in this repo; users must obtain access independently under the PhysioNet Data Use Agreement. See `CITATION.md` for details.
 
 ---
 
