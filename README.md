@@ -65,10 +65,11 @@ Accuracy and default-threshold F1 are intentionally deprioritized.
 ## Results (Held-out Test Hospitals)
 
 | Model | Features | ROC-AUC | Precision @ 0.5% |
-|------|---------|--------:|------------------:|
+|------|----------|--------:|------------------:|
 | LR v1 | Vitals | ~0.70 | 0.33% |
-| **LR v3** | **Vitals + Labs** | **0.73** | **0.44%** |
+| LR v3 | Vitals + Labs | 0.73 | 0.44% |
 | LR v4 | + Trends | 0.73 | 0.41% |
+
 
 Baseline prevalence ≈ **0.025%**  
 Final model achieves **~18× enrichment** at a realistic alert rate.
