@@ -1,19 +1,23 @@
 ## Methodology
 
+### Cohort
+Adult ICU stays (age 18–120) with ≥6 hours ICU length of stay.
+
 ### Label Construction
-Cardiac arrest events were identified using diagnosis and treatment records
-containing CPR, defibrillation, ACLS, or code blue terminology.
-To reduce label leakage, events occurring within the first 6 hours of ICU
-admission were excluded.
+Cardiac arrest events identified using treatment and diagnosis records
+containing CPR, defibrillation, ACLS, or code-blue terminology.
+To reduce contamination from pre-ICU events, labels occurring within the first
+6 hours of ICU admission were excluded.
 
 ### Temporal Alignment
-Data were aligned using minute offsets from ICU admission.
-Features at time t only used data from [t-6h, t).
+All features at time t are computed using data from [t−6h, t).
+Rows at or after the event time are excluded from training.
 
 ### Splitting Strategy
-To assess generalization across institutions, hospitals were split using a
-hash-based partition into train (70%), validation (15%), and test (15%) sets.
+Hospitals are assigned to train/validation/test splits using a hash-based
+partition to assess cross-institution generalization.
 
-### Evaluation Strategy
-Given extreme class imbalance (~0.025% event rate), evaluation focused on
-precision at fixed alert rates rather than accuracy or F1 score.
+### Evaluation
+Given extreme class imbalance, models are evaluated using ranking-based metrics,
+with primary emphasis on precision at fixed alert rates rather than default
+classification thresholds.
