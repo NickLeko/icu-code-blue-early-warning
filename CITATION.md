@@ -2,16 +2,26 @@
 
 This project uses the **eICU Collaborative Research Database (eICU-CRD) v2.0**.
 
-- Origin: Philips eICU program
-- Hosted by: **PhysioNet**
-- Access: Credentialed (PhysioNet account and Data Use Agreement required)
-- Version: 2.0
-- URL: https://physionet.org/content/eicu-crd/2.0/
+- Origin: Philips eICU Program  
+- Hosted by: PhysioNet  
+- Version: 2.0  
+- DOI: https://doi.org/10.13026/C2WM1R  
+- URL: https://physionet.org/content/eicu-crd/2.0/  
 
-Please cite the database as:
+Access to the dataset requires a PhysioNet account and agreement to the
+PhysioNet Data Use Agreement. No patient-level data are included in this
+repository.
 
-> Johnson AEW, Pollard TJ, Shen L, Lehman L-wH, Feng M, Ghassemi M, Moody B, Szolovits P, Celi LA, Mark RG.  
-> MIMIC-III, a freely accessible critical care database. *Scientific Data* 2016;3:160035.  
-> (Note: eICU uses a similar citation format — see PhysioNet for official citation recommendations.)
+## BibTeX
 
-This repository **does not include** any patient-level or clinical data. Users must obtain independent access to eICU-CRD and agree to the PhysioNet dataset terms before running the SQL pipeline.
+```bibtex
+@misc{eicu_crd_2018,
+  title        = {eICU Collaborative Research Database v2.0},
+  author       = {Pollard, Tom J. and Johnson, Alistair E. W. and Raffa, Jesse D. and Celi, Leo Anthony and Mark, Roger G. and Badawi, Omar},
+  year         = {2018},
+  publisher    = {PhysioNet},
+  doi          = {10.13026/C2WM1R},
+  url          = {https://physionet.org/content/eicu-crd/2.0/},
+  note         = {Credentialed access required. Data use governed by the PhysioNet Data Use Agreement.}
+}
+
