@@ -16,6 +16,13 @@ clinically meaningful evaluation**, not leaderboard metrics.
 > **Data access:**  
 > This project uses the eICU-CRD v2.0 dataset from PhysioNet. Data are *not* included in this repo; users must obtain access independently under the PhysioNet Data Use Agreement. See `CITATION.md` for details.
 
+
+```md
+> **Citation:**  
+> eICU Collaborative Research Database v2.0 (PhysioNet).  
+> See `CITATION.md` for full reference and BibTeX.
+
+
 ---
 
 ## Problem Definition
