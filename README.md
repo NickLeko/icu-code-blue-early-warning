@@ -6,6 +6,11 @@ documented cardiac arrest / CPR within the next 2 hours.
 This project emphasizes **temporal correctness, honest generalization, and
 clinically meaningful evaluation**, not leaderboard metrics.
 
+
+> **Additional Documentation:**  
+> - See [`MODEL_CARD.md`](MODEL_CARD.md) for intended use, limitations, risks, and monitoring considerations.  
+> - See [`CASE_STUDY.md`](CASE_STUDY.md) for product rationale, design tradeoffs, and lessons learned.
+
 ---
 
 ## Dataset
