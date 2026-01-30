@@ -146,4 +146,4 @@ run.md
 
 License
 
-MITH
+MIT
