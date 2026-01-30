@@ -1,6 +1,6 @@
 # Model Card: ICU Code Blue Early Warning Model
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Last Updated:** January 2026  
 **Author:** Nicholas Leko  
 **License:** MIT  
@@ -13,7 +13,7 @@
 - **Model type:** Logistic Regression (L2-regularized)  
 - **Task:** Predict risk of in-hospital cardiac arrest / CPR (“code blue”) within the next 2 hours  
 - **Prediction unit:** Patient-hour  
-- **Primary output:** Risk score used to rank patients for alerting under fixed alert-rate constraints  
+- **Primary output:** Continuous risk score used for ranking and prioritization under fixed alert-rate constraints  
 
 ---
 
@@ -23,9 +23,11 @@ This model is intended to:
 
 - Support **early identification of ICU patients at elevated short-term risk** of cardiac arrest  
 - Enable **prioritization of clinical attention** under constrained alert budgets  
-- Serve as a **clinical decision support tool**, not an autonomous decision-maker  
+- Serve as a **clinical decision support signal**, not an autonomous decision-maker  
 
-The model is designed for **retrospective evaluation and silent-mode prospective testing** prior to any clinical use.
+Model outputs are designed to be used in **retrospective analysis** and **silent-mode prospective testing** prior to any clinical integration.
+
+Importantly, **model outputs alone do not define alerting behavior**. Actionability depends on post-model alerting policies (e.g., debouncing, cooldown windows) designed to balance signal detection with clinical workflow constraints.
 
 ---
 
@@ -38,7 +40,7 @@ This model is **not** intended to:
 - Autonomously determine treatment decisions  
 - Evaluate or compare individual clinician performance  
 - Be used outside ICU settings without revalidation  
-- Be deployed without calibration and monitoring safeguards  
+- Be deployed without calibration, monitoring, and governance safeguards  
 
 ---
 
@@ -91,10 +93,10 @@ These exclusions are intentional to reduce care-pattern and provider leakage.
 
 This model assumes:
 
-- ICU monitoring practices broadly similar to those in eICU  
+- ICU monitoring practices broadly similar to those represented in eICU  
 - Comparable definitions and documentation of cardiac arrest / CPR events  
 - Stable relationships between physiological deterioration and short-term arrest risk  
-- Risk scores are used for **ranking and prioritization**, not as absolute probabilities without calibration  
+- Risk scores are used for **ranking and prioritization**, not interpreted as calibrated absolute probabilities without additional processing  
 
 ---
 
@@ -110,9 +112,17 @@ Evaluation was performed using **hospital-level holdout splits** to assess gener
 - **Risk enrichment:** ~18× baseline  
 
 **Interpretation:**  
-At a realistic alert rate of 0.5% (1 alert per 200 patient-hours), the model identifies patient-hours with approximately **18× higher event rates** than random screening.
+At a realistic alert rate of 0.5% (approximately 1 alert per 200 patient-hours), the model identifies patient-hours with roughly **18× higher event rates** than random screening.
 
-This constitutes strong **internal validation**, but **not full external validation**.
+This represents strong **internal validation**, but does **not** constitute external or prospective clinical validation.
+
+---
+
+## Deployment & Alerting Considerations
+
+Hourly risk scores can repeatedly flag the same patient across consecutive hours. To address this, post-model alerting policies such as **first-crossing alerts** and **cooldown-based debouncing** were evaluated to reduce alert burden while improving precision per alert.
+
+These policies operate **on top of** model outputs and are critical for aligning model performance with real ICU workflows.
 
 ---
 
@@ -136,13 +146,13 @@ This constitutes strong **internal validation**, but **not full external validat
 ## Potential Biases & Risks
 
 - **Care-pattern confounding:**  
-  The model may partially reflect local practice patterns (e.g., lab ordering behavior) rather than pure physiology.
+  Model predictions may partially reflect local practice patterns (e.g., lab ordering behavior) rather than pure physiology.
 
 - **Outcome definition drift:**  
-  Changes in how cardiac arrest events are documented could degrade performance.
+  Changes in how cardiac arrest events are documented may degrade performance over time.
 
 - **Feedback loops:**  
-  If deployed in active workflows, clinician response to alerts may alter future outcome distributions.
+  If integrated into active workflows, clinician responses to alerts may alter future outcome distributions.
 
 These risks require ongoing monitoring and governance.
 
@@ -157,7 +167,7 @@ If deployed, the following should be monitored:
 - Feature distribution shifts  
 - Outcome prevalence changes  
 
-Retraining should be **triggered by evidence of drift**, not by elapsed time alone.
+Retraining should be **triggered by observed drift or performance degradation**, not by elapsed time alone.
 
 ---
 
@@ -167,7 +177,7 @@ Retraining should be **triggered by evidence of drift**, not by elapsed time alo
   - Provider performance evaluation  
   - Staffing or operational ranking  
 
-- All clinical use should be:
+- Any clinical use should be:
   - Transparent  
   - Auditable  
   - Reviewed by a multidisciplinary governance group  
@@ -176,4 +186,26 @@ Retraining should be **triggered by evidence of drift**, not by elapsed time alo
 
 ## Summary Statement
 
-This model is a **task-specific ICU early warning system** designed to support timely clinical awareness under realistic operational constraints. Its simplicity, interpretability, and explicit limitations are intentional design choices to support safe evaluation and potential future deployment.
+This model is a **task-specific ICU early warning system** designed to support timely clinical awareness under realistic operational constraints. Its simplicity, interpretability, and explicit treatment of post-model alerting decisions are intentional design choices to support safe evaluation and potential future deployment.
+```
+
+---
+
+## Final judgment
+
+* ✅ This model card now matches the **quality of your README**
+* ✅ It clearly distinguishes **model performance vs alerting behavior**
+* ✅ It signals **clinical realism and product judgment**
+* ✅ It is safe to **lock**
+
+**Recommendation:**
+Commit this as `MODEL_CARD.md`, tag the project as done, and do not revisit unless:
+
+* You tailor it for a specific role, or
+* You get real prospective data
+
+If you want, next we can:
+
+* Do a **15-minute audit of the next repo**, or
+* Extract **interview-ready talking points** from this project while it’s fresh
+
