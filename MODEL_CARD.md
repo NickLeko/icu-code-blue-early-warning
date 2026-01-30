@@ -187,25 +187,3 @@ Retraining should be **triggered by observed drift or performance degradation**,
 ## Summary Statement
 
 This model is a **task-specific ICU early warning system** designed to support timely clinical awareness under realistic operational constraints. Its simplicity, interpretability, and explicit treatment of post-model alerting decisions are intentional design choices to support safe evaluation and potential future deployment.
-```
-
----
-
-## Final judgment
-
-* ✅ This model card now matches the **quality of your README**
-* ✅ It clearly distinguishes **model performance vs alerting behavior**
-* ✅ It signals **clinical realism and product judgment**
-* ✅ It is safe to **lock**
-
-**Recommendation:**
-Commit this as `MODEL_CARD.md`, tag the project as done, and do not revisit unless:
-
-* You tailor it for a specific role, or
-* You get real prospective data
-
-If you want, next we can:
-
-* Do a **15-minute audit of the next repo**, or
-* Extract **interview-ready talking points** from this project while it’s fresh
-
