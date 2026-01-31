@@ -1,10 +1,8 @@
 # ICU Code Blue Early Warning System
 
-Early warning model to identify ICU patient-hours at elevated risk of
-documented cardiac arrest / CPR within the next 2 hours.
+Early warning system to identify **ICU patient-hours entering elevated short-term risk** of documented cardiac arrest / CPR within the next 2 hours.
 
-This project emphasizes **temporal correctness, honest generalization, and
-clinically meaningful evaluation**, not leaderboard metrics.
+This project emphasizes **temporal correctness, honest generalization, and operational realism**, rather than leaderboard metrics or abstract optimization.
 
 > **Additional Documentation:**  
 > - See [`MODEL_CARD.md`](MODEL_CARD.md) for intended use, limitations, risks, and monitoring considerations.  
@@ -33,6 +31,8 @@ clinically meaningful evaluation**, not leaderboard metrics.
 - Lookback window: **previous 6 hours**
 - Minimum lead time: events occurring <6h from ICU admission excluded
 
+Each row represents a *patient-hour*, framing the task as **short-term risk estimation over time**, not one-off event prediction.
+
 ---
 
 ## Feature Sets
@@ -47,7 +47,7 @@ clinically meaningful evaluation**, not leaderboard metrics.
 
 3. **Vitals + labs + trends**
    - Tested via simple slopes
-   - Did not materially improve performance and was excluded from final model
+   - Did not materially improve performance and was excluded from the final model
 
 ---
 
@@ -57,36 +57,44 @@ clinically meaningful evaluation**, not leaderboard metrics.
 - Trained on ~170k ICU stays
 - **Hospital-level split** to test cross-institution generalization
 
+The model outputs a **continuous short-term risk score** used for ranking and alerting policy design.
+
 ---
 
 ## Evaluation Strategy
-Given extreme class imbalance (~0.025% event rate), evaluation focuses on:
+Given extreme class imbalance (~0.025% event rate), evaluation prioritizes **actionable signal under constrained attention**, not default classification metrics.
 
 **Primary**
 - Precision at fixed alert rate (top **0.5%** highest-risk patient-hours)
 
 **Secondary**
-- ROC-AUC
-- Log loss
+- ROC-AUC (global ranking quality)
+- Log loss (probabilistic sanity check)
 
-Accuracy and default-threshold F1 are intentionally deprioritized.
+Accuracy and default-threshold F1 are intentionally deprioritized due to their poor alignment with ICU alerting workflows.
 
 ---
 
 ## Temporal alerting: persistence vs debounced alerts
 
-A naive “top 0.5% risk per patient-hour” alerting policy can repeatedly alert on the same patient across many consecutive hours (“stuck-high-risk” spam). To assess temporal behavior and operational realism, we evaluated two post-model alerting strategies.
+A naive “top 0.5% risk per patient-hour” policy repeatedly alerts on the same patient across consecutive hours, creating **alert spam without new information**. To assess temporal behavior and operational realism, we evaluated two post-model alerting strategies.
 
 ### 1) Persistence tiers (diagnostic)
 Alerts were bucketed by consecutive runs:
-- Tier 1: first alert hour
-- Tier 2: 2nd consecutive alert hour
-- Tier 3: ≥3 consecutive alert hours
 
-**Finding:** Tier 3 alerts comprised the majority of alerts and exhibited *lower* precision than Tier 1 alerts, indicating that repeated hourly alerts largely increase alert burden without adding signal.
+- **Tier 1:** first alert hour  
+- **Tier 2:** second consecutive alert hour  
+- **Tier 3:** ≥3 consecutive alert hours  
+
+**Finding:**  
+Tier 3 alerts comprised the majority of alerts and exhibited *lower* precision than Tier 1 alerts, indicating that prolonged high-risk states primarily increase alert burden without adding predictive signal.
+
+This suggests that **time spent above a threshold is not equivalent to increasing risk**, and that persistence alone does not reliably encode progression toward arrest.
+
+---
 
 ### 2) Debounced first-crossing alerts (deployment-oriented)
-Alerts are triggered only when a patient *enters* the extreme-risk set (top 0.5%), with subsequent alerts suppressed for a cooldown window.
+Alerts are triggered only when a patient **enters** the extreme-risk set (top 0.5%), with subsequent alerts suppressed for a cooldown window.
 
 | Policy | Alerts | True events | Precision |
 |---|---:|---:|---:|
@@ -95,7 +103,8 @@ Alerts are triggered only when a patient *enters* the extreme-risk set (top 0.5%
 | Debounced (6h cooldown) | 2,074 | 14 | 0.675% |
 | Debounced (12h cooldown) | 1,799 | 14 | 0.778% |
 
-**Takeaway:** Debounced alerting substantially reduces alert burden while improving precision per alert, making it more aligned with ICU workflow constraints.
+**Takeaway:**  
+Debounced first-crossing alerts substantially reduce alert burden while improving precision per alert. These results indicate that **risk transitions (entering the extreme tail)** carry more actionable information than sustained elevation, making debouncing more aligned with ICU workflow constraints.
 
 ---
 
@@ -108,20 +117,28 @@ Alerts are triggered only when a patient *enters* the extreme-risk set (top 0.5%
 | LR v4 | + Trends | 0.73 | 0.41% |
 
 Baseline prevalence ≈ **0.025%**  
-Final model achieves **~18× enrichment** at a realistic alert rate.
+Final model achieves **~18× enrichment** at a clinically realistic alert rate.
 
 ---
 
 ## Key Methodological Notes
-- Strict temporal alignment: no future information leakage
-- Early ICU documentation artifacts removed
+- Strict temporal alignment; no future information leakage
+- Early ICU documentation artifacts excluded
 - Hospital-level split prevents institutional memorization
-- Ranking-based evaluation reflects real alerting workflows
+- Ranking-based evaluation reflects real alerting constraints
+- Alert thresholds treated as **capacity decisions**, not learned parameters
 
 ---
 
 ## Why this project stops here
-This project intentionally stops at **post-model alerting policy design** rather than additional model complexity. The results show that operational decisions (e.g., debouncing and escalation logic) have a larger impact on actionability than marginal gains in discrimination. Further work would focus on prospective validation, workflow integration, and clinician-in-the-loop evaluation rather than additional feature engineering.
+This project intentionally stops at **post-model alerting policy design** rather than additional model complexity. Results show that **operational decisions (debouncing, alert consolidation)** have a larger impact on usability and signal quality than marginal gains in discrimination.
+
+Further work would prioritize:
+- Prospective validation
+- Workflow integration
+- Clinician-in-the-loop evaluation
+
+rather than additional feature engineering or model tuning.
 
 ---
 
@@ -142,6 +159,7 @@ docs/
   methodology.md
   results.md
 run.md
+
 
 
 License
