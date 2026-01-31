@@ -161,6 +161,9 @@ docs/
 run.md
 
 
-##License
+---
+
+License
 
 MIT
+
