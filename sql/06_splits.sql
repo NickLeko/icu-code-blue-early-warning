@@ -34,5 +34,3 @@ FROM hashed;
 -- ORDER BY split;
 ```
 
-Tell me when to proceed to **`sql/07_model_table.sql`**.
-
