@@ -167,7 +167,7 @@ If deployed, the following should be monitored:
 - Feature distribution shifts  
 - Outcome prevalence changes  
 
-Retraining should be **triggered by observed drift or performance degradation**, not by elapsed time alone.
+Retraining should be **infrequent and triggered only by sustained degradation in ranking quality or alert enrichment**, with alert policy adjustments (e.g., debouncing or threshold recalibration) preferred as first-line mitigations.
 
 ---
 
