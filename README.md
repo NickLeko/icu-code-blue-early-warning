@@ -7,6 +7,8 @@ This project emphasizes **temporal correctness, honest generalization, and opera
 > **Additional Documentation:**  
 > - See [`MODEL_CARD.md`](MODEL_CARD.md) for intended use, limitations, risks, and monitoring considerations.  
 > - See [`CASE_STUDY.md`](CASE_STUDY.md) for product rationale, design tradeoffs, and lessons learned.
+> - See [`PCCP.md`](PCCP.md) for the predetermined change control plan outlining post-deployment monitoring and safe modification boundaries.
+
 
 ---
 
