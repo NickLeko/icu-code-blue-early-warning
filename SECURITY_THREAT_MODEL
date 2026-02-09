@@ -1,0 +1,249 @@
+# Security Threat Model  
+## ICU Code Blue Early Warning System
+
+**Author:** Nicholas Leko  
+**Version:** 1.0  
+**Last Updated:** February 2026  
+**Scope:** Security, misuse, and integrity risks for an ICU clinical decision support system  
+**Related Artifacts:** PRD.md, MODEL_CARD.md, PCCP.md, CASE_STUDY.md  
+
+---
+
+## 1. Purpose
+
+This document identifies and assesses **security, misuse, and integrity threats** relevant to the ICU Code Blue Early Warning System.
+
+Unlike traditional infrastructure security reviews, this threat model focuses on **AI-specific and workflow-specific risks** that could:
+
+- compromise patient safety,
+- undermine clinician trust,
+- violate data protection expectations,
+- or silently degrade decision quality while appearing “secure.”
+
+The goal is not exhaustive cybersecurity coverage, but **risk-aware product governance** appropriate for a regulated clinical decision support system.
+
+---
+
+## 2. System Overview (Threat Modeling Scope)
+
+### 2.1 System Components (Conceptual)
+
+- **Input data:** ICU vitals and laboratory results (batch, structured)
+- **Model:** Logistic regression producing hourly risk scores
+- **Post-model logic:** Ranking, first-crossing detection, debouncing/cooldown
+- **Outputs:** Advisory alerts for clinical awareness only (no automation)
+
+### 2.2 Scope Boundaries
+
+**In scope:**
+- Data integrity and corruption risks  
+- Model misuse or misinterpretation  
+- Alerting abuse or misconfiguration  
+- Insider misuse  
+- Silent degradation that appears operationally “healthy”
+
+**Out of scope (assumed handled by hosting environment):**
+- Hospital network perimeter security  
+- EHR vendor infrastructure security  
+- Physical access control  
+- Endpoint malware protection  
+
+---
+
+## 3. Threat Modeling Framework
+
+Threats are organized using a **STRIDE-inspired framework**, adapted for AI-enabled clinical decision support systems:
+
+- **S**poofing – identity or source authenticity issues  
+- **T**ampering – data, model, or configuration manipulation  
+- **R**epudiation – lack of auditability or accountability  
+- **I**nformation Disclosure – PHI or sensitive data leakage  
+- **D**enial of Service – alert flooding or system unavailability  
+- **E**levation of Privilege – misuse beyond intended role or authority  
+
+Each threat includes:
+- description,
+- potential impact,
+- qualitative likelihood,
+- mitigation strategy.
+
+---
+
+## 4. Identified Threats and Mitigations
+
+### 4.1 Data Integrity & Tampering
+
+**Threat:**  
+Upstream data corruption or manipulation (intentional or accidental) alters model inputs, leading to misleading risk scores.
+
+**Examples:**
+- Missing or duplicated vital signs  
+- Delayed lab results treated as current  
+- Unit inconsistencies or parsing errors  
+
+**Impact:**  
+False reassurance or unnecessary alerts; erosion of clinician trust.
+
+**Likelihood:** Medium  
+**Severity:** High  
+
+**Mitigations:**
+- Feature missingness monitoring (see PCCP)
+- Score distribution drift monitoring
+- Rank-based alerting (reduces dependence on absolute values)
+- Preference for alert-policy adjustment over retraining
+
+---
+
+### 4.2 Alert Flooding / Denial of Attention
+
+**Threat:**  
+Misconfiguration or malicious adjustment of alert thresholds generates excessive alerts, overwhelming clinical staff.
+
+**Impact:**  
+Alert fatigue → ignored alerts → patient harm.
+
+**Likelihood:** Medium  
+**Severity:** High  
+
+**Mitigations:**
+- Fixed alert budgets (top 0.5% of patient-hours)
+- First-crossing detection with cooldown-based debouncing
+- Alert volume monitoring per shift
+- Governance review for any alert policy changes (PCCP)
+
+This risk is treated as a **primary safety concern**, not merely an operational issue.
+
+---
+
+### 4.3 Model Output Misuse (Automation Bias)
+
+**Threat:**  
+Clinicians or downstream systems treat model outputs as directives rather than advisory signals.
+
+**Impact:**  
+Over-reliance on model output; inappropriate escalation or de-escalation of care.
+
+**Likelihood:** Medium  
+**Severity:** High  
+
+**Mitigations:**
+- Explicit “decision support only” positioning (PRD, Model Card)
+- No automated actions triggered by alerts
+- Alerts framed as prioritization signals, not diagnoses
+- Human-in-the-loop retained at all times
+
+---
+
+### 4.4 Insider Misuse / Privilege Abuse
+
+**Threat:**  
+Authorized users intentionally alter alerting logic, thresholds, or monitoring to suppress or inflate alerts.
+
+**Impact:**  
+Biased decision-making, masking of safety issues, governance failures.
+
+**Likelihood:** Low–Medium  
+**Severity:** High  
+
+**Mitigations:**
+- Documented alert policy parameters
+- Change control via PCCP
+- Auditability of alert volume and enrichment metrics
+- Separation of clinical governance and technical modification authority
+
+---
+
+### 4.5 Information Disclosure (PHI Exposure)
+
+**Threat:**  
+Exposure of patient-identifiable information through logs, exports, or derived artifacts.
+
+**Impact:**  
+HIPAA violations; legal and reputational harm.
+
+**Likelihood:** Low  
+**Severity:** High  
+
+**Mitigations:**
+- No raw patient-level data stored in repository
+- Derived features only; no free-text notes
+- Batch processing with controlled access
+- Reliance on PhysioNet and hosting environment access controls
+
+---
+
+### 4.6 Model Drift Masquerading as Security Stability
+
+**Threat:**  
+Model performance degrades over time due to practice changes or population shift while security controls remain intact.
+
+**Impact:**  
+False sense of safety; silent harm through degraded prioritization.
+
+**Likelihood:** Medium  
+**Severity:** Medium–High  
+
+**Mitigations:**
+- Monitoring of alert enrichment and precision at fixed alert rates
+- Feature distribution drift tracking
+- Preference for alert policy tuning before retraining
+- Periodic review under clinical governance
+
+---
+
+### 4.7 Adversarial Gaming (Low Likelihood, High Impact)
+
+**Threat:**  
+Deliberate manipulation of inputs (e.g., increased monitoring frequency) to influence alerting behavior.
+
+**Impact:**  
+Distorted risk rankings; inequitable attention allocation.
+
+**Likelihood:** Low  
+**Severity:** Medium  
+
+**Mitigations:**
+- Use of summary statistics rather than raw counts alone
+- Monitoring for sudden changes in measurement frequency
+- Governance oversight of sustained pattern shifts
+
+---
+
+## 5. Risk Summary Matrix
+
+| Threat Category | Likelihood | Severity | Primary Mitigation |
+|-----------------|------------|----------|--------------------|
+| Data tampering | Medium | High | Drift + missingness monitoring |
+| Alert flooding | Medium | High | Fixed budgets + debouncing |
+| Automation bias | Medium | High | Human-in-the-loop design |
+| Insider misuse | Low–Medium | High | Change control + auditability |
+| PHI disclosure | Low | High | Access controls + data minimization |
+| Silent drift | Medium | Medium–High | Performance monitoring |
+| Adversarial gaming | Low | Medium | Pattern monitoring |
+
+---
+
+## 6. Alignment With Governance Artifacts
+
+- **PRD:** Defines decision boundaries and non-goals
+- **Model Card:** Documents intended use and limitations
+- **PCCP:** Governs allowable post-deployment changes
+- **Case Study:** Explains tradeoffs and failure modes
+
+This threat model complements, rather than duplicates, those artifacts.
+
+---
+
+## 7. Summary
+
+The dominant risks for this system are **not classic cyberattacks**, but:
+
+- misuse,
+- misconfiguration,
+- silent degradation,
+- and erosion of clinical trust.
+
+Security for healthcare AI is therefore treated as a **socio-technical problem**, combining technical controls, workflow design, and governance.
+
+This document demonstrates that security considerations were addressed **at the product design level**, not retrofitted after implementation.
