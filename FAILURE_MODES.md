@@ -4,274 +4,274 @@
 **Author:** Nicholas Leko  
 **Version:** 1.0  
 **Last Updated:** February 2026  
-**Scope:** Known and anticipated failure modes for an ICU clinical decision support system  
-**Related Artifacts:** PRD.md, MODEL_CARD.md, PCCP.md, SECURITY_THREAT_MODEL.md, CASE_STUDY.md  
+**Scope:** System-level failure modes, evaluation failures, misuse risks, and safety guardrails  
+**Related Artifacts:** PRD.md, MODEL_CARD.md, PCCP.md, CASE_STUDY.md
 
 ---
 
 ## 1. Purpose
 
-This document enumerates **known, anticipated, and structurally plausible failure modes** of the ICU Code Blue Early Warning System.
+This document enumerates **how the system can fail in practice**, why those failures occur, and how they are **bounded, mitigated, or governed**.
 
-The intent is not to claim completeness or perfection, but to demonstrate:
-- awareness of how the system can fail,
-- understanding of which failures are most dangerous,
-- and explicit strategies for detection and mitigation.
+It intentionally goes beyond offline metrics to address:
+- evaluation failures under extreme class imbalance,
+- temporal and workflow-induced failures,
+- human–AI interaction risks (automation bias),
+- governance and post-deployment risks.
 
-This analysis is written from a **product safety and deployment perspective**, not a purely statistical one.
-
----
-
-## 2. Failure Mode Taxonomy
-
-Failure modes are grouped into five categories:
-
-1. **Model performance failures**  
-2. **Data and measurement artifacts**  
-3. **Temporal and alerting failures**  
-4. **Human–AI interaction failures**  
-5. **System-level and governance failures**
-
-Each failure mode includes:
-- description,
-- potential impact,
-- detectability,
-- mitigation strategy.
+This is the **single source of truth** for failure analysis and safety reasoning for this project.
 
 ---
 
-## 3. Model Performance Failures
+## 2. System Context (What Is Being Analyzed)
 
-### 3.1 False Reassurance (High-Risk Patient Not Flagged)
+### 2.1 System Summary
+- **Inputs:** Structured ICU vitals and labs (batch, hourly)
+- **Model:** L2-regularized logistic regression producing hourly risk scores
+- **Post-model logic:** Ranking, first-crossing detection, cooldown-based debouncing
+- **Outputs:** Advisory alerts for prioritization only (no automation)
 
-**Description:**  
-The model fails to surface a patient-hour that later progresses to cardiac arrest.
-
-**Impact:**  
-Missed opportunity for heightened clinical attention.
-
-**Why this happens:**
-- Extreme class imbalance
-- Physiologic deterioration that is abrupt or poorly captured
-- Events driven by non-physiologic causes (e.g., sudden arrhythmia)
-
-**Detectability:**  
-Low at the individual level; moderate in aggregate via recall analysis.
-
-**Mitigations:**
-- Model positioned as prioritization support, not exhaustive screening
-- Alert budgets chosen to maximize enrichment, not recall
-- Emphasis on trend awareness and clinical judgment
-- Transparent communication of non-goals in PRD and Model Card
-
----
-
-### 3.2 Spurious High-Risk Scores (False Positives)
-
-**Description:**  
-Patients are flagged as high risk without progressing to arrest.
-
-**Impact:**  
-Alert fatigue; erosion of trust.
-
-**Why this happens:**
-- Care-pattern confounding (frequent labs, intensive monitoring)
-- Chronic instability without acute decompensation
-
-**Detectability:**  
-High via alert precision monitoring.
-
-**Mitigations:**
+### 2.2 Safety Posture
+- Decision support, not diagnosis
 - Fixed alert budgets
-- Debounced first-crossing alerts
-- Tiered alert analysis showing diminishing value of persistent alerts
-- Preference for alert policy tuning over model retraining
+- Human-in-the-loop at all times
+- Operational controls prioritized over model complexity
 
 ---
 
-## 4. Data & Measurement Artifacts
+## 3. Evaluation Failures (Why “Good Metrics” Can Still Be Unsafe)
 
-### 4.1 Measurement Frequency Bias
+### 3.1 Why Conventional Metrics Fail Here
 
-**Description:**  
-The model partially learns *how often* patients are measured rather than *what the measurements show*.
+With an event rate ≈ **0.025% per patient-hour**:
+- Accuracy is meaningless
+- Default-threshold F1 optimizes the wrong tradeoff
+- Recall maximization produces unmanageable alert fatigue
 
-**Impact:**  
-Over-prioritization of patients receiving more attention rather than those at true physiologic risk.
+A model can have strong ROC-AUC and still be **clinically unusable**.
 
-**Detectability:**  
-Moderate via feature importance inspection and subgroup analysis.
-
-**Mitigations:**
-- Explicit recognition in Case Study and Model Card
-- Summary statistics used instead of raw event counts
-- Governance awareness: monitoring frequency changes flagged as potential drift
+**Primary evaluation question:**
+> *Given a fixed and very limited alert budget, does the system meaningfully concentrate attention on patient-hours at elevated short-term risk?*
 
 ---
 
-### 4.2 Missing or Delayed Data
+### 3.2 Capacity-Constrained Evaluation (Accepted Approach)
 
-**Description:**  
-Key labs or vitals are missing or delayed, degrading risk estimation.
+**Primary metric:** Precision at a fixed alert rate (top **0.5%** of patient-hours)
 
-**Impact:**  
-Unstable scores; unpredictable alert behavior.
+- Baseline prevalence ≈ 0.025%
+- Observed precision ≈ 0.44%
+- **~18× risk enrichment**
 
-**Detectability:**  
-High via missingness monitoring.
+This metric directly measures **actionable signal under real attention constraints**.
 
-**Mitigations:**
-- Batch scoring cadence (not real-time)
-- Feature missingness monitoring
-- Rank-based alerting reduces sensitivity to absolute values
-
----
-
-## 5. Temporal & Alerting Failures
-
-### 5.1 Alert Persistence Without Added Signal
-
-**Description:**  
-Repeated alerts on the same patient across consecutive hours without increased predictive value.
-
-**Impact:**  
-Alert fatigue without incremental benefit.
-
-**Detectability:**  
-High via tiered alert analysis.
-
-**Mitigations:**
-- First-crossing alert logic
-- Cooldown-based debouncing
-- Empirical demonstration that Tier 3 alerts reduce precision
+**Secondary metrics (monitored, not optimized):**
+- ROC-AUC (global ranking sanity check)
+- Log loss (probabilistic stability)
+- Alert volume per patient (operational burden)
 
 ---
 
-### 5.2 Threshold Miscalibration
+## 4. Temporal Failure Modes (Static Alerts Break in Practice)
+
+### 4.1 Persistence-Induced Alert Spam
+
+**Failure:**  
+Naively alerting every hour above a threshold repeatedly fires on the same patient, increasing burden without adding information.
+
+**Observed behavior:**  
+Persistent (≥3 consecutive) alerts:
+- dominated alert volume,
+- had *lower* precision than first alerts.
+
+**Conclusion:**  
+Time spent above a threshold ≠ increasing risk.
+
+---
+
+### 4.2 First-Crossing Failure (If Not Debounced)
+
+**Failure:**  
+Triggering alerts on every threshold crossing without suppression still leads to clustered alerts during unstable periods.
+
+**Mitigation (Adopted):**
+- **First-crossing alerts** only
+- **Cooldown-based debouncing** (6–12 hours evaluated)
+
+**Effect:**
+- ~80% alert volume reduction
+- Improved precision per alert
+- Better alignment with clinician expectations of “new risk”
+
+---
+
+## 5. Model-Level Failure Modes
+
+### 5.1 False Positives (Expected and Accepted)
 
 **Description:**  
-Alert thresholds drift from operational capacity due to staffing or census changes.
+Alerts may fire for patients who do not arrest.
 
-**Impact:**  
-Either excessive alerts or missed prioritization opportunities.
-
-**Detectability:**  
-High via alert volume monitoring.
+**Why this happens:**
+- Physiologic instability does not always progress
+- Early intervention may prevent events (success masquerading as error)
 
 **Mitigations:**
+- Fixed alert budgets cap burden
+- Alerts are advisory only
+- First-crossing + cooldown limits repetition
+
+---
+
+### 5.2 Care-Pattern Confounding
+
+**Description:**  
+Measurement frequency and lab ordering encode clinician concern.
+
+**Why this happens:**
+- Sicker patients are monitored more frequently
+- Documentation intensity correlates with risk
+
+**Mitigations:**
+- Explicit exclusion of provider, bed, and staffing identifiers
+- Hospital-level holdout validation
+- Transparent documentation of this limitation
+
+---
+
+### 5.3 Calibration Drift
+
+**Description:**  
+Absolute probabilities degrade as care practices evolve.
+
+**Why this happens:**
+- Protocol changes
+- Documentation or coding shifts
+- Population drift
+
+**Mitigations:**
+- Risk scores used for **ranking**, not absolute probability
 - Thresholds treated as capacity decisions
-- Explicit change control via PCCP
-- No automatic threshold adaptation
+- Alert policy tuning preferred over retraining
 
 ---
 
-## 6. Human–AI Interaction Failures
+## 6. System & Workflow Failure Modes
 
 ### 6.1 Automation Bias
 
-**Description:**  
-Clinicians over-trust model output and discount contradictory clinical signals.
-
-**Impact:**  
-Inappropriate de-escalation or delayed intervention.
-
-**Detectability:**  
-Low without qualitative feedback.
+**Failure:**  
+Users over-trust alerts as directives rather than advisory signals.
 
 **Mitigations:**
-- Decision-support-only framing
+- Explicit decision-support framing (PRD, Model Card)
 - No automated actions
-- Emphasis on prioritization, not diagnosis
-- Human-in-the-loop retained at all times
+- Human judgment retained at all times
 
 ---
 
-### 6.2 Alert Desensitization
+### 6.2 Alert Fatigue / Denial of Attention
 
-**Description:**  
-Clinicians gradually ignore alerts due to perceived low value.
-
-**Impact:**  
-Loss of intended benefit even if model performance is stable.
-
-**Detectability:**  
-Moderate via alert acknowledgment rates (if available).
+**Failure:**  
+Misconfigured thresholds or policies overwhelm staff.
 
 **Mitigations:**
-- Alert volume minimization
-- Emphasis on novelty (first-crossing alerts)
-- Governance review if alert precision degrades
+- Fixed alert budgets
+- Debounced first-crossing logic
+- Alert volume monitoring per shift
+- Governance review for any policy change (PCCP)
+
+This is treated as a **primary safety risk**, not a UX issue.
 
 ---
 
-## 7. System-Level & Governance Failures
+### 6.3 Silent Degradation
 
-### 7.1 Silent Model Drift
-
-**Description:**  
-Changes in care practices or documentation reduce model relevance while surface metrics appear stable.
-
-**Impact:**  
-Gradual erosion of clinical utility.
-
-**Detectability:**  
-Moderate via enrichment and score distribution monitoring.
+**Failure:**  
+Model performance degrades while security and uptime remain intact.
 
 **Mitigations:**
-- Monitoring of alert enrichment over time
-- Preference for alert policy adjustment before retraining
-- Conservative retraining strategy defined in PCCP
+- Monitoring of alert enrichment at fixed alert rates
+- Feature distribution and missingness tracking
+- Preference for policy adjustment before retraining
 
 ---
 
-### 7.2 Feedback Loop Effects
+## 7. Governance, Security, and Misuse Risks
 
-**Description:**  
-Alerts trigger interventions that prevent arrests, making the model appear less accurate over time.
+### 7.1 Insider Misuse
 
-**Impact:**  
-False perception of degradation; pressure to “improve” a working system.
-
-**Detectability:**  
-Low without careful interpretation.
+**Risk:**  
+Authorized users alter alerting behavior to suppress or inflate alerts.
 
 **Mitigations:**
-- Explicit recognition as a success mode
-- Avoid naive accuracy-based reevaluation
-- Use enrichment and workflow-aligned metrics
+- Documented alert policy parameters
+- Change control via PCCP
+- Auditability of alert volume and enrichment
 
 ---
 
-## 8. Failure Modes Explicitly Accepted
+### 7.2 Information Disclosure (PHI)
 
-The following are **known and accepted limitations**, given the system’s intended use:
+**Risk:**  
+Exposure of patient-identifiable data through logs or exports.
 
-- Incomplete recall of all cardiac arrests  
-- Sensitivity to care-pattern differences across hospitals  
-- Dependence on documentation quality  
-- Lack of prospective clinical validation  
-
-These are documented to prevent scope creep and misuse.
+**Mitigations:**
+- No raw patient data stored in repo
+- Derived features only
+- Controlled access via hosting environment
 
 ---
 
-## 9. Why This Document Exists
+### 7.3 Feedback Loops
 
-This failure mode analysis demonstrates that:
+**Failure:**  
+Successful alerts prevent events, making the model appear worse over time.
 
-- Safety is treated as a design problem, not an afterthought  
-- Model evaluation extends beyond aggregate metrics  
-- Governance decisions are grounded in realistic failure scenarios  
+**Mitigations:**
+- Model positioned strictly as decision support
+- Monitor alert stability alongside outcome rates
+- Avoid outcome-only performance interpretation
 
-In healthcare AI, **knowing how a system fails is as important as knowing how it performs**.
+---
+
+## 8. Explicit Safety Guardrails
+
+**Design Guardrails**
+- Fixed alert budget (default 0.5%)
+- Rank-based alerting
+- Debounced first-crossing logic
+- No automated clinical actions
+
+**Operational Kill Switches**
+- Alerting can be disabled without retraining
+- Thresholds can be tightened immediately
+- Retraining is a last resort (governed by PCCP)
+
+---
+
+## 9. What This System Explicitly Does *Not* Do
+
+This system does **not**:
+- guarantee arrest prediction,
+- maximize recall,
+- infer causality,
+- replace clinician judgment,
+- operate without human oversight.
+
+These are intentional non-goals.
 
 ---
 
 ## 10. Summary
 
-This system is intentionally designed to:
-- fail *gracefully* rather than catastrophically,
-- surface uncertainty rather than conceal it,
-- and prioritize trust and usability over maximal automation.
+Most healthcare AI failures are **not modeling failures**, but:
+- evaluation failures,
+- workflow mismatches,
+- governance gaps,
+- or silent degradation.
 
-These failure modes inform alerting policy, monitoring strategy, and change control — and are central to any responsible evaluation or future deployment.
+This document makes those risks explicit and bounded.
+
+**Core principle:**  
+Operational controls, alert policy design, and governance matter more than marginal model improvements for safety in high-acuity clinical settings.
