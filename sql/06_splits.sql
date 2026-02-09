@@ -1,10 +1,5 @@
-### `sql/06_splits.sql`
-
-Hospital-level split (hash-based) so your evaluation generalizes across institutions.
-
-```sql
 -- 06_splits.sql
--- Create a hospital-level train/val/test split for honest generalization.
+-- Hospital-level train/val/test split (hash-based) for honest generalization.
 -- Output: `{{PROJECT_ID}}.icu_ml.split_hospital_v1`
 
 CREATE OR REPLACE TABLE `{{PROJECT_ID}}.icu_ml.split_hospital_v1` AS
@@ -32,5 +27,3 @@ FROM hashed;
 -- FROM `{{PROJECT_ID}}.icu_ml.split_hospital_v1`
 -- GROUP BY split
 -- ORDER BY split;
-```
-
