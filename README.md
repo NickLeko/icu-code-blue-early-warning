@@ -145,22 +145,35 @@ rather than additional feature engineering or model tuning.
 ---
 
 ```text
-sql/
-  01_cohort.sql
-  02_labels.sql
-  03_features_vitals.sql
-  04_features_labs.sql
-  05_train_rows.sql
-  06_splits.sql
-  07_model_table.sql
-  08_bqml_models.sql
-  09_eval_alert_rate.sql
-  10_eval_temporal_alert_tiers.sql
-  11_eval_first_crossing_cooldown.sql
-docs/
-  methodology.md
-  results.md
-run.md
+Directory structure:
+└── nickleko-icu-code-blue-early-warning/
+    ├── README.md
+    ├── CASE_STUDY.md
+    ├── CITATION.md
+    ├── FAILURE_MODES.md
+    ├── INTENDED_USE.md
+    ├── LICENSE
+    ├── MODEL_CARD.md
+    ├── PCCP.md
+    ├── PRD.md
+    ├── RUN.md
+    ├── SECURITY_THREAT_MODEL
+    ├── docs/
+    │   ├── methodology.md
+    │   └── results.md
+    └── sql/
+        ├── 01_cohort.sql
+        ├── 02_labels.sql
+        ├── 03_features_vitals.sql
+        ├── 04_features_labs.sql
+        ├── 05_train_rows.sql
+        ├── 06_splits.sql
+        ├── 07_model_table.sql
+        ├── 08_bqml_models.sql
+        ├── 09_eval_alert_rate.sql
+        ├── 10_eval_temporal_alert_tiers.sql
+        └── 11_eval_first_crossing_cooldown.sql
+
 ```
 
 ## License
