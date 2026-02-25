@@ -163,7 +163,6 @@ These boundaries are intentionally explicit.
 ## Lessons Learned
 
 **What I would do differently:**
-- Start with a vitals-only baseline before adding labs  
 - Integrate calibration analysis earlier in evaluation  
 - Document feature importance sooner for clinical face validity  
 
