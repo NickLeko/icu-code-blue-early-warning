@@ -1,5 +1,8 @@
 ## Methodology
 
+This page is a concise scientific summary of the SQL pipeline. For exact
+execution order and output table names, see `RUN.md`.
+
 ### Cohort
 Adult ICU stays (age 18–120) with ≥6 hours ICU length of stay.
 
@@ -21,3 +24,6 @@ partition to assess cross-institution generalization.
 Given extreme class imbalance, models are evaluated using ranking-based metrics,
 with primary emphasis on precision at fixed alert rates rather than default
 classification thresholds.
+
+The final reported model is the vitals + labs logistic regression defined in
+`sql/08_bqml_models.sql`.

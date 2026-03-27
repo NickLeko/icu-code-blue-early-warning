@@ -1,182 +1,183 @@
 # ICU Code Blue Early Warning System
 
-Early warning system to identify **ICU patient-hours entering elevated short-term risk** of documented cardiac arrest / CPR within the next 2 hours.
+An interpretable ICU early warning project that estimates whether a patient-hour is entering elevated risk of documented cardiac arrest / CPR in the next 2 hours.
 
-This project emphasizes **temporal correctness, honest generalization, and operational realism**, rather than leaderboard metrics or abstract optimization.
+The repository is intentionally presented as a scientific and product artifact, not just a modeling notebook. The emphasis is on temporal correctness, conservative evaluation, operational realism, and honest boundaries.
 
-> **Additional Documentation:**  
-> - See [`MODEL_CARD.md`](MODEL_CARD.md) for intended use, limitations, risks, and monitoring considerations.  
-> - See [`CASE_STUDY.md`](CASE_STUDY.md) for product rationale, design tradeoffs, and lessons learned.
-> - See [`PCCP.md`](PCCP.md) for the predetermined change control plan outlining post-deployment monitoring and safe modification boundaries.
+## Two-Minute Overview
 
+- **Clinical task:** rank ICU patient-hours by short-term code-blue risk
+- **Data:** eICU-CRD v2.0 via BigQuery; no patient-level data are redistributed
+- **Model:** BigQuery ML logistic regression with vitals + labs
+- **Prediction cadence:** hourly
+- **Lookback / horizon:** previous 6 hours to predict the next 2 hours
+- **Validation:** hospital-level holdout split
+- **Primary metric:** precision at a fixed 0.5% alert rate
+- **Key operational insight:** debounced first-crossing alerts were more usable than naive repeated hourly alerts
 
----
+## Why This Repo Exists
 
-## Dataset
-- **eICU Collaborative Research Database v2.0**
-- Accessed via **Google BigQuery** (PhysioNet credentialed access required)
-- No patient-level data is redistributed in this repository
+This project is meant to signal:
 
-> **Data access:**  
-> This project uses the eICU-CRD v2.0 dataset from PhysioNet. Data are *not* included in this repo; users must obtain access independently under the PhysioNet Data Use Agreement. See `CITATION.md` for details.
+- practical ML fluency
+- healthcare-aware evaluation design
+- interpretable modeling discipline
+- reproducibility and scientific restraint
+- honest discussion of limitations and deployment risk
 
-> **Citation:**  
-> eICU Collaborative Research Database v2.0 (PhysioNet).  
-> See `CITATION.md` for full reference and BibTeX.
-
----
+It is intentionally not a model-complexity demo. The main claim is that in this setting, evaluation design and alert policy matter as much as, or more than, squeezing out marginal AUC gains.
 
 ## Problem Definition
-- Binary prediction task at **hourly time steps**
+
+Each row is a patient-hour.
+
 - Outcome: first documented in-ICU cardiac arrest / CPR event
-- Prediction horizon: **next 2 hours**
-- Lookback window: **previous 6 hours**
-- Minimum lead time: events occurring <6h from ICU admission excluded
+- Prediction horizon: next 2 hours
+- Lookback window: prior 6 hours
+- Minimum lead time: stays with events in the first 6 ICU hours are excluded from positive labeling
 
-Each row represents a *patient-hour*, framing the task as **short-term risk estimation over time**, not one-off event prediction.
+This framing turns the problem into short-term temporal risk ranking rather than one-time stay-level classification.
 
----
+## Final Model
 
-## Feature Sets
-1. **Vitals only**
-   - HR, RR, SaO₂, BP, MAP, temperature
-   - Summary statistics over 6h (mean, min, max, count)
-
-2. **Vitals + labs** (final model)
-   - Lactate, pH, potassium, creatinine, hemoglobin, WBC
-   - Parsed numerically from structured and text lab fields
-   - Same 6h summary statistics + most recent value
-
-3. **Vitals + labs + trends**
-   - Tested via simple slopes
-   - Did not materially improve performance and was excluded from the final model
-
----
-
-## Model
-- Logistic Regression (BigQuery ML)
+- Logistic regression in BigQuery ML
 - L2 regularization
-- Trained on ~170k ICU stays
-- **Hospital-level split** to test cross-institution generalization
+- Final feature set: vitals + labs
+- Trained on approximately 170k ICU stays
+- Evaluated on held-out hospitals rather than random row splits
 
-The model outputs a **continuous short-term risk score** used for ranking and alerting policy design.
+The model output is used as a continuous ranking score. Alerting policy is treated separately from the model itself.
 
----
-
-## Evaluation Strategy
-Given extreme class imbalance (~0.025% event rate), evaluation prioritizes **actionable signal under constrained attention**, not default classification metrics.
-
-**Primary**
-- Precision at fixed alert rate (top **0.5%** highest-risk patient-hours)
-
-**Secondary**
-- ROC-AUC (global ranking quality)
-- Log loss (probabilistic sanity check)
-
-Accuracy and default-threshold F1 are intentionally deprioritized due to their poor alignment with ICU alerting workflows.
-
----
-
-## Temporal alerting: persistence vs debounced alerts
-
-A naive “top 0.5% risk per patient-hour” policy repeatedly alerts on the same patient across consecutive hours, creating **alert spam without new information**. To assess temporal behavior and operational realism, we evaluated two post-model alerting strategies.
-
-### 1) Persistence tiers (diagnostic)
-Alerts were bucketed by consecutive runs:
-
-- **Tier 1:** first alert hour  
-- **Tier 2:** second consecutive alert hour  
-- **Tier 3:** ≥3 consecutive alert hours  
-
-**Finding:**  
-Tier 3 alerts comprised the majority of alerts and exhibited *lower* precision than Tier 1 alerts, indicating that prolonged high-risk states primarily increase alert burden without adding predictive signal.
-
-This suggests that **time spent above a threshold is not equivalent to increasing risk**, and that persistence alone does not reliably encode progression toward arrest.
-
----
-
-### 2) Debounced first-crossing alerts (deployment-oriented)
-Alerts are triggered only when a patient **enters** the extreme-risk set (top 0.5%), with subsequent alerts suppressed for a cooldown window.
-
-| Policy | Alerts | True events | Precision |
-|---|---:|---:|---:|
-| Hourly top-0.5% (baseline) | 10,391 | 46 | 0.443% |
-| First-crossing (0h cooldown) | 2,322 | 14 | 0.603% |
-| Debounced (6h cooldown) | 2,074 | 14 | 0.675% |
-| Debounced (12h cooldown) | 1,799 | 14 | 0.778% |
-
-**Takeaway:**  
-Debounced first-crossing alerts substantially reduce alert burden while improving precision per alert. These results indicate that **risk transitions (entering the extreme tail)** carry more actionable information than sustained elevation, making debouncing more aligned with ICU workflow constraints.
-
----
-
-## Results (Held-out Test Hospitals)
+## Main Results
 
 | Model | Features | ROC-AUC | Precision @ 0.5% |
-|------|----------|--------:|------------------:|
+|---|---|---:|---:|
 | LR v1 | Vitals | ~0.70 | 0.33% |
 | LR v3 | Vitals + Labs | 0.73 | 0.44% |
 | LR v4 | + Trends | 0.73 | 0.41% |
 
-Baseline prevalence ≈ **0.025%**  
-Final model achieves **~18× enrichment** at a clinically realistic alert rate.
+Baseline event prevalence is approximately **0.025%** per patient-hour, so the final model achieves about **18x enrichment** at a clinically constrained alert budget.
 
----
+## Alerting Insight
 
-## Key Methodological Notes
-- Strict temporal alignment; no future information leakage
-- Early ICU documentation artifacts excluded
-- Hospital-level split prevents institutional memorization
-- Ranking-based evaluation reflects real alerting constraints
-- Alert thresholds treated as **capacity decisions**, not learned parameters
+Naively alerting on every hour in the top 0.5% creates repeated alerts on the same patient. This repo therefore also evaluates post-model alerting logic:
 
----
+- persistence tiers for diagnostic analysis
+- first-crossing alerts with optional cooldown windows for deployment-oriented alert suppression
 
-## Why this project stops here
-This project intentionally stops at **post-model alerting policy design** rather than additional model complexity. Results show that **operational decisions (debouncing, alert consolidation)** have a larger impact on usability and signal quality than marginal gains in discrimination.
+Observed result: debounced first-crossing alerts reduced alert volume substantially while improving precision per alert.
 
-Further work would prioritize:
-- Prospective validation
-- Workflow integration
-- Clinician-in-the-loop evaluation
+## Reviewer Guide
 
-rather than additional feature engineering or model tuning.
+If you only have a few minutes:
 
----
+1. Read this file for the project summary.
+2. Read [`docs/methodology.md`](docs/methodology.md) for the pipeline design.
+3. Read [`docs/results.md`](docs/results.md) for the performance summary.
+4. Read [`RUN.md`](RUN.md) for reproducibility and execution order.
+5. Read [`MODEL_CARD.md`](MODEL_CARD.md) and [`INTENDED_USE.md`](INTENDED_USE.md) for boundaries, limitations, and deployment posture.
+
+For a portfolio or product-style walkthrough, [`CASE_STUDY.md`](CASE_STUDY.md) is the fastest narrative artifact.
+For a time-boxed hiring-manager path, see [`docs/reviewer_guide.md`](docs/reviewer_guide.md).
+
+## Repository Map
 
 ```text
-Directory structure:
-└── nickleko-icu-code-blue-early-warning/
-    ├── README.md
-    ├── CASE_STUDY.md
-    ├── CITATION.md
-    ├── FAILURE_MODES.md
-    ├── INTENDED_USE.md
-    ├── LICENSE
-    ├── MODEL_CARD.md
-    ├── PCCP.md
-    ├── PRD.md
-    ├── RUN.md
-    ├── SECURITY_THREAT_MODEL
-    ├── docs/
-    │   ├── methodology.md
-    │   └── results.md
-    └── sql/
-        ├── 01_cohort.sql
-        ├── 02_labels.sql
-        ├── 03_features_vitals.sql
-        ├── 04_features_labs.sql
-        ├── 05_train_rows.sql
-        ├── 06_splits.sql
-        ├── 07_model_table.sql
-        ├── 08_bqml_models.sql
-        ├── 09_eval_alert_rate.sql
-        ├── 10_eval_temporal_alert_tiers.sql
-        └── 11_eval_first_crossing_cooldown.sql
-
+.
+├── README.md                     Project summary and reviewer guide
+├── RUN.md                        BigQuery execution order and reproducibility notes
+├── MODEL_CARD.md                 Intended use, limitations, monitoring, governance
+├── INTENDED_USE.md               Explicit safe-use and non-goal boundaries
+├── CASE_STUDY.md                 Product/portfolio framing and design tradeoffs
+├── FAILURE_MODES.md              Safety and workflow failure analysis
+├── PCCP.md                       Predetermined change control plan
+├── CITATION.md                   Dataset citation and access notes
+├── docs/
+│   ├── change_policy.md         Maintenance boundary for sensitive SQL
+│   ├── methodology.md            Concise scientific workflow description
+│   ├── decision_log.md           Maintenance log and change boundaries
+│   ├── reviewer_guide.md         Fast path for hiring managers and interviewers
+│   ├── reproducibility.md        Low-risk maintenance and sensitivity guide
+│   ├── validation_checklist.md   Manual rerun and sanity-check checklist
+│   └── results.md                Compact result summary
+├── sql/
+│   ├── 01_cohort.sql             Cohort definition
+│   ├── 02_labels.sql             Event labeling
+│   ├── 03_features_vitals.sql    Vitals feature engineering
+│   ├── 04_features_labs.sql      Final feature engineering
+│   ├── 05_train_rows.sql         Timepoint-level label construction
+│   ├── 06_splits.sql             Hospital-level split logic
+│   ├── 07_model_table.sql        Model-ready join table
+│   ├── 08_bqml_models.sql        BQML training
+│   ├── 09_eval_alert_rate.sql    Test predictions and precision@0.5%
+│   ├── 10_eval_temporal_alert_tiers.sql
+│   └── 11_eval_first_crossing_cooldown.sql
+├── scripts/
+│   ├── prepare_sql.sh            Render non-canonical runnable SQL copies
+│   └── smoke_check.sh            Dependency-free repo integrity checks
+└── Makefile                      Convenience target for local smoke checks
 ```
+
+## Quick Start
+
+### Data access
+
+- Obtain credentialed access to **eICU Collaborative Research Database v2.0**
+- Ensure it is queryable in BigQuery as `physionet-data.eicu_crd.*`
+- Create a target dataset in your own GCP project, assumed here to be `icu_ml`
+
+No source data are included in this repository. See [`CITATION.md`](CITATION.md).
+
+### Reproduce the pipeline
+
+1. Replace `{{PROJECT_ID}}` in the SQL files with your GCP project ID.
+2. Run the SQL files in numeric order from [`sql/01_cohort.sql`](sql/01_cohort.sql) through [`sql/11_eval_first_crossing_cooldown.sql`](sql/11_eval_first_crossing_cooldown.sql).
+3. Use [`RUN.md`](RUN.md) for expected outputs and manual sanity checks after key steps.
+
+If you prefer not to edit the canonical SQL files, you can render runnable copies with:
+
+```bash
+make prepare PROJECT_ID=my-gcp-project
+```
+
+This writes substituted copies to `out/sql_rendered/` and leaves `sql/` unchanged.
+
+### Local smoke check
+
+Run:
+
+```bash
+make smoke
+```
+
+This only validates repository structure and SQL placeholder hygiene. It does not execute the model pipeline or touch BigQuery.
+
+## High-Sensitivity Files
+
+These files define scientific behavior and should not be edited casually:
+
+- `sql/01_cohort.sql`: cohort inclusion semantics
+- `sql/02_labels.sql`: label definition and event-source logic
+- `sql/03_features_vitals.sql` and `sql/04_features_labs.sql`: feature meaning and temporal windows
+- `sql/05_train_rows.sql`: outcome horizon and leakage boundary
+- `sql/06_splits.sql`: train/validation/test split semantics
+- `sql/08_bqml_models.sql`: model specification
+- `sql/09_eval_alert_rate.sql`, `sql/10_eval_temporal_alert_tiers.sql`, `sql/11_eval_first_crossing_cooldown.sql`: evaluation and alert-policy analysis
+
+This maintenance pass intentionally leaves those behaviors unchanged.
+
+## Additional Documentation
+
+- [`RUN.md`](RUN.md): exact execution order and output tables
+- [`docs/reproducibility.md`](docs/reproducibility.md): assumptions, artifact provenance, and maintenance guidance
+- [`docs/decision_log.md`](docs/decision_log.md): maintenance history and explicit non-semantic change log
+- [`docs/validation_checklist.md`](docs/validation_checklist.md): manual rerun checks for key pipeline stages
+- [`docs/reviewer_guide.md`](docs/reviewer_guide.md): fastest reading path for interview and portfolio review
+- [`docs/change_policy.md`](docs/change_policy.md): maintenance boundary for high-sensitivity SQL files
+- [`MODEL_CARD.md`](MODEL_CARD.md): intended use, limitations, and monitoring
+- [`FAILURE_MODES.md`](FAILURE_MODES.md): failure analysis and safety posture
+- [`PCCP.md`](PCCP.md): bounded post-deployment changes
 
 ## License
 
 MIT
-

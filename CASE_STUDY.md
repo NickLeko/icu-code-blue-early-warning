@@ -1,5 +1,16 @@
 # Case Study: ICU Code Blue Early Warning Model
 
+## At a Glance
+
+- **Task:** rank ICU patient-hours by risk of documented cardiac arrest / CPR in the next 2 hours
+- **Execution environment:** Google BigQuery over eICU-CRD v2.0
+- **Final model:** BigQuery ML logistic regression using vitals + labs
+- **Validation design:** hospital-level holdout split
+- **Primary metric:** precision at a fixed 0.5% alert rate
+- **Key outcome:** approximately 18x enrichment over baseline prevalence at the chosen alert budget
+
+For exact pipeline order and artifact names, see `RUN.md`. For intended-use boundaries, see `MODEL_CARD.md` and `INTENDED_USE.md`.
+
 ## Context & Motivation
 
 In-hospital cardiac arrest (“code blue”) events are rare but catastrophic.  
@@ -111,6 +122,8 @@ Ranking at fixed alert rates is more robust to distribution shift than relying o
 - At operational alert rates, the model would surface roughly **1 true event per ~227 alerts**, compared to ~1 per 4,000 patient-hours under random screening
 
 These results suggest the model can meaningfully concentrate clinical attention despite the rarity of events.
+
+In repo terms, these summary claims correspond to the final model artifact `{{PROJECT_ID}}.icu_ml.bqml_lr_v3` and the held-out prediction table `{{PROJECT_ID}}.icu_ml.preds_test_v3` described in `RUN.md`.
 
 ---
 
