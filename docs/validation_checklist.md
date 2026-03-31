@@ -33,6 +33,8 @@ Use this checklist to confirm that a rerun still matches the intended project de
 - Verify `features_v2` and `features_v3` were created
 - Confirm the feature tables are keyed by `patientunitstayid` and `prediction_time_min`
 - Confirm the lookback logic remains `[t-6h, t)` rather than including future information
+- Confirm `features_v3` has the same row count as `features_v2` (lab enrichment should not multiply windows)
+- Spot-check that vital count features in `features_v3` still match the corresponding values in `features_v2`
 - Spot-check that lab parsing produced non-null values for the intended labs
 
 ### After `sql/05_train_rows.sql`
@@ -47,6 +49,7 @@ Use this checklist to confirm that a rerun still matches the intended project de
 - Verify the split table exists: `{{PROJECT_ID}}.icu_ml.split_hospital_v1`
 - Confirm hospitals are assigned to train, val, and test
 - Confirm the split is hospital-level rather than row-level
+- Remember that the current repo path materializes `val` but does not execute a reproduced validation-based model search
 
 ### After `sql/07_model_table.sql`
 
@@ -66,12 +69,12 @@ Use this checklist to confirm that a rerun still matches the intended project de
 - Verify the predictions table exists: `{{PROJECT_ID}}.icu_ml.preds_test_v3`
 - Confirm evaluation is restricted to the held-out test split
 - Confirm the top-0.5% alert rule is still implemented via `NTILE(200)`
-- Compare alert volume and precision to the documented expected range
+- Record alert volume and precision with `artifacts/queries/02_reference_run_operating_point.sql`
 
 ### After `sql/10_eval_temporal_alert_tiers.sql`
 
 - Confirm the persistence tiers are computed from the same `preds_test_v3` predictions
-- Confirm repeated alerts dominate volume more than new alerts
+- Inspect whether repeated alerts dominate volume more than new alerts
 - Confirm this file is being used as a diagnostic analysis, not as a change to the model itself
 
 ### After `sql/11_eval_first_crossing_cooldown.sql`
@@ -85,7 +88,8 @@ Use this checklist to confirm that a rerun still matches the intended project de
 - README summary remains consistent with `docs/results.md`
 - The final reported model remains `bqml_lr_v3`
 - The final held-out prediction artifact remains `preds_test_v3`
-- Any deviations from documented metrics are treated as something to investigate, not silently normalize
+- Reviewer-facing aggregate exports can be regenerated from `artifacts/queries/`
+- Any unexpected differences between reruns or exported aggregates are treated as something to investigate, not silently normalize
 
 ## If Something Looks Off
 

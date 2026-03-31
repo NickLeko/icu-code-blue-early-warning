@@ -2,18 +2,22 @@
 
 ## At a Glance
 
-- **Task:** rank ICU patient-hours by risk of documented cardiac arrest / CPR in the next 2 hours
+- **Task:** rank ICU patient-hours by risk of a documented code-event / resuscitation proxy in the next 2 hours
 - **Execution environment:** Google BigQuery over eICU-CRD v2.0
 - **Final model:** BigQuery ML logistic regression using vitals + labs
 - **Validation design:** hospital-level holdout split
 - **Primary metric:** precision at a fixed 0.5% alert rate
-- **Key outcome:** approximately 18x enrichment over baseline prevalence at the chosen alert budget
+- **Published proof surface:** aggregate-only reviewer queries in `artifacts/queries/` plus a checked-in reference export in `artifacts/reference_run/`
 
-For exact pipeline order and artifact names, see `RUN.md`. For intended-use boundaries, see `MODEL_CARD.md` and `INTENDED_USE.md`.
+This repo intentionally publishes one fixed final-model path. It does not
+currently reproduce benchmark comparisons for alternate model versions,
+trend-feature variants, or random-split baselines.
+
+For exact pipeline order and artifact names, see `RUN.md`. For intended-use boundaries, see `MODEL_CARD.md` and `docs/supporting/INTENDED_USE.md`.
 
 ## Context & Motivation
 
-In-hospital cardiac arrest (“code blue”) events are rare but catastrophic.  
+In-hospital code events (“code blue”) are rare but catastrophic.  
 Clinicians operate under severe attention constraints, and many early warning systems either:
 
 - generate excessive alerts (alert fatigue), or  
@@ -26,7 +30,9 @@ The goal of this project was **not** to build the most complex model possible, b
 ## Problem Definition
 
 **Clinical question:**  
-Can we identify ICU patient-hours at elevated short-term risk of cardiac arrest (within 2 hours) early enough to support clinical awareness?
+Can we identify ICU patient-hours at elevated short-term risk of a documented
+code-event / resuscitation proxy (within 2 hours) early enough to support
+clinical awareness?
 
 **Operational constraint:**  
 Alerts must be extremely sparse to be usable (≪1% of patient-hours).
@@ -62,7 +68,7 @@ Sacrifices headline metrics in favor of workflow realism.
 Use L2-regularized logistic regression instead of deep learning.
 
 **Rationale:**  
-- Improves interpretability and calibration  
+- Improves interpretability and auditability  
 - Easier to audit and reason about  
 - More aligned with hospital governance expectations  
 
@@ -83,7 +89,7 @@ Random splits can leak institution-specific practice patterns and inflate perfor
 Holding out entire hospitals better approximates real-world generalization.
 
 **Tradeoff:**  
-More conservative performance estimates (ROC-AUC dropped ~0.12 vs. random splits).
+More conservative than random row-split evaluation.
 
 ---
 
@@ -116,14 +122,27 @@ Ranking at fixed alert rates is more robust to distribution shift than relying o
 
 ## What Worked Well
 
-- At a **0.5% alert rate**, the model achieved **~18× risk enrichment**  
-  (precision ≈ 0.44% vs. baseline prevalence ≈ 0.025%)
-- ROC-AUC ≈ **0.73** on held-out hospitals  
-- At operational alert rates, the model would surface roughly **1 true event per ~227 alerts**, compared to ~1 per 4,000 patient-hours under random screening
+The repo now has a cleaner proof boundary and a checked-in corrected reference
+run:
 
-These results suggest the model can meaningfully concentrate clinical attention despite the rarity of events.
+- one fixed final-model path
+- one held-out operating-point evaluation query
+- separate post-model alert-policy analyses
+- aggregate-only reviewer exports for counts, operating-point metrics, and weights
+- 177,418 cohort stays and 2,078,011 held-out test patient-hours
+- top-0.5% operating point: 10,391 alerts, 21 positive labeled windows,
+  0.2021% precision, 13.55x enrichment over test prevalence
+- first-crossing alert policy: 3,350 alerts, 8 positive labeled windows,
+  0.2388% precision
+- 12-hour debounced first-crossing: 2,650 alerts, 7 positive labeled windows,
+  0.2642% precision
 
-In repo terms, these summary claims correspond to the final model artifact `{{PROJECT_ID}}.icu_ml.bqml_lr_v3` and the held-out prediction table `{{PROJECT_ID}}.icu_ml.preds_test_v3` described in `RUN.md`.
+As a secondary ranking metric, held-out `ML.EVALUATE` reports ROC-AUC 0.6377
+and log loss 0.002723.
+
+These are retrospective held-out-hospital results on a chart-derived proxy
+label. They should be read as ranking evidence, not prospective clinical-effect
+claims.
 
 ---
 
@@ -180,8 +199,7 @@ These boundaries are intentionally explicit.
 - Document feature importance sooner for clinical face validity  
 
 **What surprised me:**
-- Trend features (slopes) added limited value  
-- Measurement frequency was highly predictive  
+- Measurement frequency deserves explicit scrutiny because count features can encode care-pattern signal  
 - Hospital-level splits exposed how much apparent performance comes from institutional memorization
 
 **What this taught me about healthcare ML:**
@@ -197,7 +215,6 @@ These boundaries are intentionally explicit.
 2. Subgroup performance analysis (demographics, ICU type)  
 3. Calibration stability assessment across hospitals  
 4. Prospective silent-mode testing  
-5. Exploration of representation learning to reduce feature engineering  
 
 ---
 

@@ -47,6 +47,9 @@ If you change one of the high-sensitivity files:
 3. Re-run the relevant validation checks in `docs/validation_checklist.md`.
 4. Reassess whether README, results summaries, or model-card claims need updating.
 
-## Maintenance Boundary for This Upgrade Pass
+## Maintenance Boundary for Future Upgrade Passes
 
-The current maintenance pass intentionally preserves all scientific behavior and reported results. Any future departure from that boundary should be called out explicitly.
+Routine maintenance should not be described as preserving scientific behavior if
+it changes feature construction, labels, model inputs, evaluation outputs, or
+reported results. Any such departure should be called out explicitly as a
+scientific change.

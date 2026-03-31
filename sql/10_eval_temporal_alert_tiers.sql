@@ -78,7 +78,7 @@ tiered AS (
 SELECT
   alert_tier,
   COUNTIF(is_alert = 1) AS n_alerts,
-  COUNTIF(is_alert = 1 AND y = 1) AS n_true_events,
+  COUNTIF(is_alert = 1 AND y = 1) AS n_positive_windows,
   SAFE_DIVIDE(COUNTIF(is_alert = 1 AND y = 1), NULLIF(COUNTIF(is_alert = 1), 0)) AS precision_at_tier,
   AVG(CASE WHEN is_alert = 1 THEN prob_1 END) AS avg_prob_on_alerts,
   AVG(CASE WHEN is_alert = 1 THEN consecutive_alerts END) AS avg_consecutive_on_alerts,

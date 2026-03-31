@@ -1,0 +1,4 @@
+policy,cooldown_hours,alerts,positive_windows,precision,alert_ratio_vs_naive
+naive_top_0_5pct,12,10391,21,0.002020979693965932,1.0
+first_crossing,12,3350,8,0.0023880597014925373,0.3223943797517082
+debounced_first_crossing,12,2650,7,0.0026415094339622643,0.2550283899528438

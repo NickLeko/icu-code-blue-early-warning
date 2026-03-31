@@ -1,5 +1,7 @@
 -- 09_eval_alert_rate.sql
--- Evaluate model actionability via precision at a fixed alert rate (top 0.5% risk).
+-- Evaluate the published final model at a fixed alert rate (top 0.5% risk).
+-- This file is the canonical operating-point evaluation for the current repo;
+-- unreproduced benchmark comparisons are intentionally omitted.
 -- Outputs:
 --   1) `{{PROJECT_ID}}.icu_ml.preds_test_v3` (test predictions with prob for class 1)
 --   2) A query to compute precision@0.5% alerts on the test set
@@ -60,7 +62,7 @@ WITH ranked AS (
 )
 SELECT
   COUNT(*) AS alerts,
-  SUM(y) AS true_events,
+  SUM(y) AS positive_windows,
   SAFE_DIVIDE(SUM(y), COUNT(*)) AS precision_at_0_5pct
 FROM ranked
 WHERE bucket = 1;

@@ -1,0 +1,8 @@
+metric,value,source
+alerts_top_0_5pct,10391.0,preds_test_v3
+enrichment_top_0_5pct,13.547154951089807,precision_top_0_5pct / test_prevalence
+positive_windows_top_0_5pct,21.0,preds_test_v3
+precision_top_0_5pct,0.002020979693965932,preds_test_v3
+test_positive_rows,310.0,model_table_v3 test split
+test_prevalence,1.49181115980618E-4,model_table_v3 test split
+test_rows,2078011.0,model_table_v3 test split

@@ -1,17 +1,20 @@
-# Security Threat Model  
+# Hypothetical Deployment Threat Model  
 ## ICU Code Blue Early Warning System
 
 **Author:** Nicholas Leko  
 **Version:** 1.0  
 **Last Updated:** February 2026  
-**Scope:** Security, misuse, and integrity risks for an ICU clinical decision support system  
-**Related Artifacts:** PRD.md, MODEL_CARD.md, PCCP.md, CASE_STUDY.md  
+**Scope:** Hypothetical security, misuse, and integrity risks for an ICU clinical decision support system  
+**Related Artifacts:** docs/supporting/PRD.md, MODEL_CARD.md, docs/hypothetical_deployment/PCCP.md, CASE_STUDY.md  
 
 ---
 
 ## 1. Purpose
 
 This document identifies and assesses **security, misuse, and integrity threats** relevant to the ICU Code Blue Early Warning System.
+
+It is a design-stage threat-modeling exercise for a possible future deployment,
+not evidence of an implemented regulated product.
 
 Unlike traditional infrastructure security reviews, this threat model focuses on **AI-specific and workflow-specific risks** that could:
 
@@ -20,7 +23,9 @@ Unlike traditional infrastructure security reviews, this threat model focuses on
 - violate data protection expectations,
 - or silently degrade decision quality while appearing “secure.”
 
-The goal is not exhaustive cybersecurity coverage, but **risk-aware product governance** appropriate for a regulated clinical decision support system.
+The goal is not exhaustive cybersecurity coverage, but **risk-aware product
+governance** appropriate for a hypothetical future clinical decision-support
+deployment.
 
 ---
 

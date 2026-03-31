@@ -1,5 +1,8 @@
 -- 06_splits.sql
 -- Hospital-level train/val/test split (hash-based) for honest generalization.
+-- The val split is materialized for clean future model-selection boundaries.
+-- The current published repo path trains one prespecified model and does not
+-- perform a validation-driven model search.
 -- Output: `{{PROJECT_ID}}.icu_ml.split_hospital_v1`
 
 CREATE OR REPLACE TABLE `{{PROJECT_ID}}.icu_ml.split_hospital_v1` AS

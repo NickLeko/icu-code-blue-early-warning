@@ -37,7 +37,7 @@ Run the SQL files in numeric order.
 | Step | File | Purpose | Output |
 |---|---|---|---|
 | 1 | `sql/01_cohort.sql` | Build the adult ICU cohort with minimum ICU length of stay | `cohort_v1` |
-| 2 | `sql/02_labels.sql` | Construct earliest qualifying cardiac arrest / CPR event labels | `labels_v2` |
+| 2 | `sql/02_labels.sql` | Construct earliest qualifying documented code-event / resuscitation proxy labels | `labels_v2` |
 | 3 | `sql/03_features_vitals.sql` | Build hourly vitals features over a 6-hour lookback | `features_v2` |
 | 4 | `sql/04_features_labs.sql` | Add lab features and produce the final feature table | `features_v3` |
 | 5 | `sql/05_train_rows.sql` | Create row-level target `y` for each patient-hour | `train_rows_v3` |
@@ -47,6 +47,18 @@ Run the SQL files in numeric order.
 | 9 | `sql/09_eval_alert_rate.sql` | Create test predictions and compute precision at top 0.5% | `preds_test_v3` |
 | 10 | `sql/10_eval_temporal_alert_tiers.sql` | Analyze repeated-alert persistence tiers | query result |
 | 11 | `sql/11_eval_first_crossing_cooldown.sql` | Analyze first-crossing alerts with cooldown logic | query result |
+
+## Model Selection Boundary
+
+This repo intentionally publishes one **prespecified final-model path**:
+
+- hospital-level splits are materialized as `train`, `val`, and `test`
+- the executable path trains the fixed final model on `train` only
+- the repo does **not** reproduce a validation-driven benchmark sweep across
+  alternative feature sets or random-split baselines
+
+Treat `val` as reserved for future model-selection work rather than evidence of
+an implemented tuning pipeline in this version of the repo.
 
 ## Expected Core Artifacts
 
@@ -66,9 +78,23 @@ Run the SQL files in numeric order.
 - After `sql/05_train_rows.sql`, inspect row count and prevalence of `y=1`.
 - After `sql/06_splits.sql`, confirm hospitals are distributed across train, val, and test.
 - After `sql/07_model_table.sql`, confirm split counts and positive counts per split.
-- After `sql/09_eval_alert_rate.sql`, confirm top-0.5% alert volume and precision are in the expected range.
+- After `sql/09_eval_alert_rate.sql`, record top-0.5% alert volume and precision and export them with `artifacts/queries/02_reference_run_operating_point.sql`.
 
 Several SQL files contain optional commented sanity-check snippets you can run manually.
+
+## Reviewer-Facing Aggregate Exports
+
+After running the pipeline, use the queries in `artifacts/queries/` to export
+aggregate-only proof artifacts for reviewers:
+
+- cohort / split / prevalence counts
+- held-out operating-point metrics
+- naive vs debounced alert-policy counts
+- model coefficients via `ML.WEIGHTS`
+
+The current checked-in corrected reference export lives under
+`artifacts/reference_run/`. Regenerate that directory only after a fresh rerun
+of the current SQL.
 
 ## Runtime Notes
 

@@ -1,16 +1,23 @@
-# Predetermined Change Control Plan (PCCP)
+# Hypothetical Post-Deployment Change Control Notes (PCCP-style)
 
 **Project:** ICU Code Blue Early Warning System  
 **Version:** 1.0  
-**Scope:** Post-deployment monitoring and controlled modification of an ICU early warning decision-support system.
+**Scope:** Hypothetical post-deployment monitoring and controlled modification of an ICU early warning decision-support system.
 
 ---
 
 ## 1. Purpose and Scope
 
-This Predetermined Change Control Plan (PCCP) defines the **anticipated, bounded modifications** for the ICU Code Blue Early Warning System following initial deployment.
+This document captures **if-deployed change-control thinking** for the
+retrospective repo. It is not evidence of an active deployment program.
 
-The system is intended as a **non-diagnostic clinical decision support tool** that surfaces patient-hours entering elevated short-term risk for cardiac arrest. No automated clinical actions are taken based on model output.
+It defines the **anticipated, bounded modifications** for the ICU Code Blue
+Early Warning System in a hypothetical future deployment.
+
+The system is framed as a **non-diagnostic clinical decision support tool**
+that would surface patient-hours entering elevated short-term risk for a
+documented code-event / resuscitation proxy. No automated clinical actions
+would be taken based on model output.
 
 This PCCP emphasizes **operational safety, alert burden control, and generalization stability**, rather than continuous model optimization.
 

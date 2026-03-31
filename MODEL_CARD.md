@@ -1,7 +1,7 @@
-# Model Card: ICU Code Blue Early Warning Model
+# Model Card: Retrospective ICU Code-Event Proxy Ranking Model
 
 **Version:** 1.1  
-**Last Updated:** January 2026  
+**Last Updated:** March 2026  
 **Author:** Nicholas Leko  
 **License:** MIT  
 **Data License:** eICU-CRD (PhysioNet credentialed access required)
@@ -11,21 +11,26 @@
 ## Model Overview
 
 - **Model type:** Logistic Regression (L2-regularized)  
-- **Task:** Predict risk of in-hospital cardiac arrest / CPR (“code blue”) within the next 2 hours  
+- **Task:** Predict risk of a documented ICU code-event / resuscitation proxy within the next 2 hours  
 - **Prediction unit:** Patient-hour  
 - **Primary output:** Continuous risk score used for ranking and prioritization under fixed alert-rate constraints  
+
+This repository is a **retrospective modeling artifact**, not evidence of live
+clinical deployment readiness.
 
 ---
 
 ## Intended Use
 
-This model is intended to:
+This repo frames the model around a potential clinical decision-support use case.
+In the current artifact, the model is intended to:
 
-- Support **early identification of ICU patients at elevated short-term risk** of cardiac arrest  
+- Support retrospective analysis of ICU patients at elevated short-term risk of a documented code-event / resuscitation proxy  
 - Enable **prioritization of clinical attention** under constrained alert budgets  
 - Serve as a **clinical decision support signal**, not an autonomous decision-maker  
 
-Model outputs are designed to be used in **retrospective analysis** and **silent-mode prospective testing** prior to any clinical integration.
+Any live clinical use would require additional local validation, silent-mode
+testing, workflow review, monitoring, and governance.
 
 Importantly, **model outputs alone do not define alerting behavior**. Actionability depends on post-model alerting policies (e.g., debouncing, cooldown windows) designed to balance signal detection with clinical workflow constraints.
 
@@ -69,7 +74,7 @@ These exclusions are intentional to reduce care-pattern and provider leakage.
 
 **Exclusion criteria (for modeling cohort):**
 - Patient-hours with insufficient lookback data  
-- Time windows immediately adjacent to documented events (to reduce label leakage)  
+- Time windows immediately adjacent to documented proxy events (to reduce label leakage)  
 - Non-ICU care settings  
 
 ---
@@ -80,7 +85,7 @@ These exclusions are intentional to reduce care-pattern and provider leakage.
 - **Algorithm:** Logistic Regression (BigQuery ML)  
 - **Regularization:** L2  
 - **Feature set:** ~30 engineered summary statistics  
-- **Training cohort:** ~170k ICU stays (~2M patient-hours)  
+- **Cohort and row counts:** checked in under `artifacts/reference_run/` and regenerable via `artifacts/queries/`  
 
 ### Inference
 - **Lookback window:** 6 hours  
@@ -94,35 +99,46 @@ These exclusions are intentional to reduce care-pattern and provider leakage.
 This model assumes:
 
 - ICU monitoring practices broadly similar to those represented in eICU  
-- Comparable definitions and documentation of cardiac arrest / CPR events  
-- Stable relationships between physiological deterioration and short-term arrest risk  
+- Comparable definitions and documentation of the chart-derived proxy events used here  
+- Stable relationships between physiological deterioration and short-term proxy-event risk  
 - Risk scores are used for **ranking and prioritization**, not interpreted as calibrated absolute probabilities without additional processing  
 
 ---
 
 ## Evaluation Summary
 
-Evaluation was performed using **hospital-level holdout splits** to assess generalization across care settings within the same data ecosystem.
+Evaluation was performed using a **hospital-level train/val/test split** to
+assess held-out-hospital performance within the same eICU data ecosystem. The
+current published repo path trains one prespecified final model on `train`; it
+does not reproduce a validation-based model-selection sweep.
 
 ### Test Set Performance (Hospital Holdout)
 
-- **ROC-AUC:** ~0.73  
-- **Baseline event prevalence:** ~0.025% per patient-hour  
-- **Precision @ 0.5% alert rate:** ~0.44%  
-- **Risk enrichment:** ~18× baseline  
+- **Held-out hospitals:** 31
+- **Held-out patient-hours:** 2,078,011
+- **Positive labeled windows on test:** 310 (0.0149% row prevalence)
+- **Held-out `ML.EVALUATE`:** ROC-AUC 0.6377, log loss 0.002723
+- **Operating point at top 0.5% of test rows:** 10,391 alerts, 21 positive
+  labeled windows, 0.2021% precision, 13.55x enrichment over test prevalence
+- **First-crossing alert policy:** 3,350 alerts, 8 positive labeled windows,
+  0.2388% precision
+- **12-hour debounced first-crossing:** 2,650 alerts, 7 positive labeled
+  windows, 0.2642% precision
 
-**Interpretation:**  
-At a realistic alert rate of 0.5% (approximately 1 alert per 200 patient-hours), the model identifies patient-hours with roughly **18× higher event rates** than random screening.
-
-This represents strong **internal validation**, but does **not** constitute external or prospective clinical validation.
+This is retrospective held-out-hospital evaluation only; it does **not**
+constitute external, prospective, or live-workflow validation. Exact aggregate
+counts supporting these metrics are checked in under `artifacts/reference_run/`.
 
 ---
 
 ## Deployment & Alerting Considerations
 
-Hourly risk scores can repeatedly flag the same patient across consecutive hours. To address this, post-model alerting policies such as **first-crossing alerts** and **cooldown-based debouncing** were evaluated to reduce alert burden while improving precision per alert.
+Hourly risk scores can repeatedly flag the same patient across consecutive
+hours. This repo therefore includes retrospective analyses of **first-crossing
+alerts** and **cooldown-based debouncing** as post-model alert-policy studies.
 
-These policies operate **on top of** model outputs and are critical for aligning model performance with real ICU workflows.
+These policies operate **on top of** model outputs and should be treated as
+evaluation artifacts here, not as evidence of a deployment-ready alerting stack.
 
 ---
 
@@ -149,7 +165,7 @@ These policies operate **on top of** model outputs and are critical for aligning
   Model predictions may partially reflect local practice patterns (e.g., lab ordering behavior) rather than pure physiology.
 
 - **Outcome definition drift:**  
-  Changes in how cardiac arrest events are documented may degrade performance over time.
+  Changes in how proxy events are documented may degrade performance over time.
 
 - **Feedback loops:**  
   If integrated into active workflows, clinician responses to alerts may alter future outcome distributions.
@@ -186,4 +202,8 @@ Retraining should be **infrequent and triggered only by sustained degradation in
 
 ## Summary Statement
 
-This model is a **task-specific ICU early warning system** designed to support timely clinical awareness under realistic operational constraints. Its simplicity, interpretability, and explicit treatment of post-model alerting decisions are intentional design choices to support safe evaluation and potential future deployment.
+This model is a **task-specific retrospective ICU ranking artifact** designed to
+support careful evaluation under realistic operational constraints. Its
+simplicity, interpretability, and explicit treatment of post-model alerting
+decisions are intentional design choices for defensible analysis rather than a
+claim of deployment readiness.

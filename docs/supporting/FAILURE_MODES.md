@@ -1,17 +1,18 @@
-# Failure Modes & Safety Analysis  
+# Failure Modes & If-Deployed Safety Analysis  
 ## ICU Code Blue Early Warning System
 
 **Author:** Nicholas Leko  
 **Version:** 1.0  
 **Last Updated:** February 2026  
-**Scope:** System-level failure modes, evaluation failures, misuse risks, and safety guardrails  
-**Related Artifacts:** PRD.md, MODEL_CARD.md, PCCP.md, CASE_STUDY.md
+**Scope:** Retrospective evaluation failures plus hypothetical deployment misuse risks and safety guardrails  
+**Related Artifacts:** docs/supporting/PRD.md, MODEL_CARD.md, docs/hypothetical_deployment/PCCP.md, CASE_STUDY.md
 
 ---
 
 ## 1. Purpose
 
-This document enumerates **how the system can fail in practice**, why those failures occur, and how they are **bounded, mitigated, or governed**.
+This document enumerates **how the model and surrounding workflow can fail**,
+why those failures occur, and how they are **bounded, mitigated, or governed**.
 
 It intentionally goes beyond offline metrics to address:
 - evaluation failures under extreme class imbalance,
@@ -19,7 +20,8 @@ It intentionally goes beyond offline metrics to address:
 - human–AI interaction risks (automation bias),
 - governance and post-deployment risks.
 
-This is the **single source of truth** for failure analysis and safety reasoning for this project.
+This is a companion reasoning artifact for the retrospective repo, not evidence
+of an implemented deployment program.
 
 ---
 
@@ -29,7 +31,7 @@ This is the **single source of truth** for failure analysis and safety reasoning
 - **Inputs:** Structured ICU vitals and labs (batch, hourly)
 - **Model:** L2-regularized logistic regression producing hourly risk scores
 - **Post-model logic:** Ranking, first-crossing detection, cooldown-based debouncing
-- **Outputs:** Advisory alerts for prioritization only (no automation)
+- **Outputs:** Retrospective alert-policy analyses; if deployed, advisory alerts for prioritization only (no automation)
 
 ### 2.2 Safety Posture
 - Decision support, not diagnosis
@@ -43,7 +45,7 @@ This is the **single source of truth** for failure analysis and safety reasoning
 
 ### 3.1 Why Conventional Metrics Fail Here
 
-With an event rate ≈ **0.025% per patient-hour**:
+With a **very low event rate at the patient-hour level**:
 - Accuracy is meaningless
 - Default-threshold F1 optimizes the wrong tradeoff
 - Recall maximization produces unmanageable alert fatigue
@@ -59,11 +61,11 @@ A model can have strong ROC-AUC and still be **clinically unusable**.
 
 **Primary metric:** Precision at a fixed alert rate (top **0.5%** of patient-hours)
 
-- Baseline prevalence ≈ 0.025%
-- Observed precision ≈ 0.44%
-- **~18× risk enrichment**
-
 This metric directly measures **actionable signal under real attention constraints**.
+
+Because the corrected `sql/04_features_labs.sql` construction changes
+downstream model inputs, exact prevalence / precision / enrichment values
+should be regenerated from `artifacts/queries/` after rerunning the pipeline.
 
 **Secondary metrics (monitored, not optimized):**
 - ROC-AUC (global ranking sanity check)
@@ -79,10 +81,10 @@ This metric directly measures **actionable signal under real attention constrain
 **Failure:**  
 Naively alerting every hour above a threshold repeatedly fires on the same patient, increasing burden without adding information.
 
-**Observed behavior:**  
-Persistent (≥3 consecutive) alerts:
-- dominated alert volume,
-- had *lower* precision than first alerts.
+**Questions to inspect in this repo:**  
+Persistent (≥3 consecutive) alerts may:
+- dominate alert volume,
+- carry different precision than first alerts.
 
 **Conclusion:**  
 Time spent above a threshold ≠ increasing risk.
@@ -94,14 +96,12 @@ Time spent above a threshold ≠ increasing risk.
 **Failure:**  
 Triggering alerts on every threshold crossing without suppression still leads to clustered alerts during unstable periods.
 
-**Mitigation (Adopted):**
+**Mitigation (Evaluated in repo):**
 - **First-crossing alerts** only
-- **Cooldown-based debouncing** (6–12 hours evaluated)
+- **Cooldown-based debouncing**
 
-**Effect:**
-- ~80% alert volume reduction
-- Improved precision per alert
-- Better alignment with clinician expectations of “new risk”
+This repo includes first-crossing and cooldown analyses so reviewers can inspect
+how alert volume and precision shift under suppression policies.
 
 ---
 

@@ -1,5 +1,8 @@
 -- 08_bqml_models.sql
--- Train the final BigQuery ML logistic regression model (vitals + labs).
+-- Train the final prespecified BigQuery ML logistic regression model
+-- (vitals + labs).
+-- This repo publishes one fixed final-model path; it does not reproduce a
+-- hyperparameter sweep or validation-based benchmark selection story.
 -- Output model: `{{PROJECT_ID}}.icu_ml.bqml_lr_v3`
 
 CREATE OR REPLACE MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v3`
@@ -31,6 +34,11 @@ SELECT
 FROM `{{PROJECT_ID}}.icu_ml.model_table_v3`
 WHERE split = 'train';
 
+-- Note:
+--   `split = 'val'` is reserved for future model-selection work, but the
+--   current repo intentionally keeps the executable path to one prespecified
+--   model trained on train only and evaluated on test.
+
 -- Optional evaluation snippets (run manually)
 -- Test:
 -- SELECT *
@@ -55,4 +63,3 @@ WHERE split = 'train';
 --     WHERE split = 'test'
 --   )
 -- );
-

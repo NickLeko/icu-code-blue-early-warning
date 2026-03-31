@@ -11,6 +11,7 @@ Reproducibility in this repo means:
 - the SQL pipeline can be run in a fixed order against the same source dataset
 - the cohort, labels, features, splits, model, and evaluation tables are clearly named
 - the reported metrics can be traced to concrete evaluation queries
+- reviewer-facing aggregate exports can be regenerated from checked-in artifact queries
 - documentation states what was intentionally not changed
 
 It does not mean bit-for-bit portability across arbitrary environments, because the project depends on:
@@ -27,6 +28,8 @@ It does not mean bit-for-bit portability across arbitrary environments, because 
 - SQL files are run manually in numeric order unless you create your own orchestration wrapper
 
 There is no Python training package in this repo. That is intentional; the project’s executable artifact is the SQL pipeline itself.
+The current published path is one prespecified final model, not a reproduced
+benchmark sweep.
 
 ## Scientific Sensitivity Zones
 
@@ -70,6 +73,8 @@ Core output objects produced by the pipeline:
 | Test predictions | `{{PROJECT_ID}}.icu_ml.preds_test_v3` |
 
 Reported result summaries in the README and `docs/results.md` are derived from these artifacts and the evaluation SQL files.
+Aggregate-only reviewer exports are generated separately from `artifacts/queries/`,
+and the current checked-in reference bundle lives in `artifacts/reference_run/`.
 
 ## Manual Verification Checklist
 
@@ -79,7 +84,7 @@ Recommended checks after key steps:
 2. After `sql/05_train_rows.sql`, inspect row-level prevalence and confirm rows at or after the event are excluded.
 3. After `sql/06_splits.sql`, inspect train/val/test hospital counts.
 4. After `sql/07_model_table.sql`, inspect row counts and positive counts per split.
-5. After `sql/09_eval_alert_rate.sql`, confirm alert volume and precision at top 0.5% are consistent with documented expectations.
+5. After `sql/09_eval_alert_rate.sql`, export alert volume and precision at top 0.5% with `artifacts/queries/02_reference_run_operating_point.sql`.
 
 These checks are intentionally manual in this repo to keep the project lightweight and transparent.
 
@@ -89,6 +94,7 @@ These checks are intentionally manual in this repo to keep the project lightweig
 - No automated BigQuery integration test is included
 - No frozen source snapshot of eICU is possible within the repo
 - Reported results are documented, but not regenerated automatically inside CI
+- Validation splits are materialized, but the current published path does not implement a reproduced validation-based model-selection sweep
 
 These are acceptable tradeoffs for a portfolio artifact, but they should be stated explicitly.
 

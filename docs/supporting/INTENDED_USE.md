@@ -1,9 +1,17 @@
-# Intended Use — ICU Code Blue Early Warning System
+# Hypothetical Intended Use — ICU Code Blue Early Warning System
 
 ## Intended Use (what this is for)
-This system is intended to support **clinical decision support** in adult ICU settings by identifying **patient-hours entering elevated short-term risk** of documented cardiac arrest / CPR within the next 2 hours.
+This document describes **if-deployed boundaries** for the retrospective model
+artifact in this repo. It is not evidence that the current repo is deployment-ready.
 
-The output is a **risk score used for ranking and prioritization under a fixed alert budget**, not a diagnostic determination. The system is designed to be evaluated in **retrospective analysis** and **silent-mode prospective testing** prior to any clinical integration.
+If ever operationalized, the system would be intended to support **clinical
+decision support** in adult ICU settings by identifying **patient-hours
+entering elevated short-term risk** of a documented code-event /
+resuscitation proxy within the next 2 hours.
+
+The output would be a **risk score used for ranking and prioritization under a
+fixed alert budget**, not a diagnostic determination. The current repo artifact
+is limited to retrospective analysis.
 
 ## Intended Users
 - ICU bedside nurses and charge nurses (primary)
@@ -19,7 +27,7 @@ This is **prioritization**, not automated escalation, diagnosis, or treatment se
 ## Decision Authority and Human Oversight
 - The system **does not** initiate clinical actions.
 - Clinicians retain full authority to ignore, defer, or investigate alerts.
-- The system should be deployed only with:
+- Any future deployment would require:
   - documented governance oversight,
   - audit logging,
   - a rollback/disable pathway,
@@ -36,7 +44,7 @@ This system is **not** intended to:
 - Be used as the sole basis for triage, transfer, discharge, or escalation decisions
 
 ## Patient / Context Exclusions (deployment exclusions without additional validation)
-This project is validated only within the eICU-CRD context and should be treated as **unvalidated** for:
+This project is retrospectively evaluated only within the eICU-CRD context and should be treated as **unvalidated** for:
 - pediatric patients
 - non-ICU care settings
 - hospitals with materially different monitoring/documentation practices
@@ -52,7 +60,7 @@ If deployed, the system should degrade safely:
   3) retrain only if sustained degradation persists.
 
 ## Evaluation and Rollout Expectations (what “responsible use” requires)
-Before any live clinical use, the minimum expected steps are:
+Before any live clinical use were considered, the minimum expected steps would be:
 1. Retrospective evaluation on local data with hospital-specific slice analysis
 2. Silent-mode prospective run to measure alert burden, stability, and failure patterns
 3. Shadow-mode exposure with clinician feedback (no required action)

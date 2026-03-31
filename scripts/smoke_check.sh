@@ -8,18 +8,26 @@ cd "$repo_root"
 required_files=(
   "README.md"
   "RUN.md"
+  "artifacts/README.md"
+  "artifacts/queries/01_reference_run_counts.sql"
+  "artifacts/queries/02_reference_run_operating_point.sql"
+  "artifacts/queries/03_reference_run_alert_policy.sql"
+  "artifacts/queries/04_reference_run_weights.sql"
+  "artifacts/queries/05_reference_run_ml_evaluate.sql"
   "MODEL_CARD.md"
-  "INTENDED_USE.md"
   "CASE_STUDY.md"
-  "FAILURE_MODES.md"
-  "PCCP.md"
-  "CITATION.md"
   "docs/methodology.md"
   "docs/change_policy.md"
   "docs/decision_log.md"
+  "docs/hypothetical_deployment/PCCP.md"
+  "docs/hypothetical_deployment/SECURITY_THREAT_MODEL.md"
   "docs/reviewer_guide.md"
   "docs/results.md"
   "docs/reproducibility.md"
+  "docs/supporting/CITATION.md"
+  "docs/supporting/FAILURE_MODES.md"
+  "docs/supporting/INTENDED_USE.md"
+  "docs/supporting/PRD.md"
   "docs/validation_checklist.md"
   "scripts/prepare_sql.sh"
 )
@@ -75,6 +83,10 @@ grep -q 'docs/validation_checklist.md' README.md || {
 }
 grep -q 'docs/change_policy.md' README.md || {
   echo "README is missing change policy reference" >&2
+  exit 1
+}
+grep -q 'artifacts/README.md' README.md || {
+  echo "README is missing proof-artifacts reference" >&2
   exit 1
 }
 grep -q 'make smoke' README.md || {

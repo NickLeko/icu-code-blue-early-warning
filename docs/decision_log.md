@@ -1,5 +1,35 @@
 # Decision Log
 
+## 2026-03-31: Scientific correction and trust-tightening pass
+
+Scope:
+
+- corrected `sql/04_features_labs.sql` to aggregate vitals and labs separately before joining
+- tightened outcome wording to a documented code-event / resuscitation proxy label
+- removed unreproduced benchmark / model-selection claims
+- added aggregate-only proof queries under `artifacts/queries/`
+- moved post-deployment governance notes under `docs/hypothetical_deployment/`
+
+Explicitly changed:
+
+- final feature-table construction semantics in `sql/04_features_labs.sql`
+- downstream model inputs derived from `features_v3`
+- reviewer-facing claims about what the current repo directly reproduces
+
+Explicitly not changed:
+
+- cohort inclusion logic in `sql/01_cohort.sql`
+- raw label string-matching logic in `sql/02_labels.sql`
+- split assignment algorithm in `sql/06_splits.sql`
+- model family (BigQuery ML logistic regression)
+
+Rationale:
+
+The prior `features_v3` construction could multiply raw vitals rows by raw lab
+rows inside the same prediction window, which made count-based features
+non-defensible. Once corrected, older headline metrics should be treated as
+stale until the pipeline is rerun and aggregate proof exports are regenerated.
+
 ## 2026-03-27: Phase 1 maintenance and reproducibility pass
 
 Scope:

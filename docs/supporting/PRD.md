@@ -5,11 +5,18 @@
 **Status:** Final (Retrospective PRD)  
 **Last Updated:** January 2026  
 
+This is a retrospective product-framing artifact for the model in this repo,
+not evidence of an implemented deployment program.
+
 ---
 
 ## 1. Problem Statement
 
-In ICU settings, cardiac arrest events are rare but catastrophic. Existing monitoring systems generate frequent alarms, contributing to alert fatigue and reducing clinician trust. There is a need for a system that **prioritizes clinical attention toward the highest-risk patient-hours** without overwhelming staff.
+In ICU settings, serious code events are rare but catastrophic. Existing
+monitoring systems generate frequent alarms, contributing to alert fatigue and
+reducing clinician trust. There is a need for a system that **prioritizes
+clinical attention toward the highest-risk patient-hours** without overwhelming
+staff.
 
 The core problem is **not detection**, but **actionable prioritization under constrained attention**.
 
@@ -31,7 +38,7 @@ The core problem is **not detection**, but **actionable prioritization under con
 ## 3. Goals & Non-Goals
 
 ### Goals
-- Identify ICU patient-hours at elevated short-term risk of cardiac arrest
+- Identify ICU patient-hours at elevated short-term risk of a documented code-event / resuscitation proxy
 - Operate under a **fixed alert budget** to prevent alert fatigue
 - Surface alerts that are interpretable and operationally feasible
 - Enable safe evaluation prior to any live deployment
@@ -111,7 +118,7 @@ The system supports **prioritization**, not diagnosis or intervention.
 - Display alerts without actionability
 - Collect qualitative clinician feedback
 
-### Live Deployment
+### Hypothetical Live Deployment
 - Limited rollout with rollback controls
 - Governance review prior to expansion
 

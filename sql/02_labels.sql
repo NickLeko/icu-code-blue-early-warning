@@ -1,6 +1,8 @@
 -- 02_labels.sql
--- Build event labels (documented CPR / code-blue-like events).
--- Uses treatment (high-specificity) + diagnosis (supporting) signals.
+-- Build a documented code-event / resuscitation proxy label.
+-- Uses treatment-string matches plus diagnosis-string matches to create a
+-- retrospective proxy outcome from charted events; this is not an adjudicated
+-- cardiac-arrest registry.
 -- Applies a minimum lead-time filter to reduce pre-ICU / ED documentation artifacts.
 -- Output: `{{PROJECT_ID}}.icu_ml.labels_v2`
 
@@ -40,7 +42,8 @@ WHERE treatmentoffset IS NOT NULL
   )
 GROUP BY patientunitstayid;
 
--- (C) Final label per ICU stay: earliest event from dx/tx, with lead-time filter >= 6h
+-- (C) Final proxy label per ICU stay: earliest qualifying event from dx/tx,
+-- with lead-time filter >= 6h
 CREATE OR REPLACE TABLE `{{PROJECT_ID}}.icu_ml.labels_v2` AS
 SELECT
   c.patientunitstayid,
@@ -62,4 +65,3 @@ HAVING event_offset_min IS NULL OR event_offset_min >= 360;
 --   SAFE_DIVIDE(COUNTIF(event_offset_min IS NOT NULL), COUNT(*)) AS prevalence,
 --   APPROX_QUANTILES(event_offset_min, 10)[OFFSET(5)] AS median_event_min
 -- FROM `{{PROJECT_ID}}.icu_ml.labels_v2`;
-
