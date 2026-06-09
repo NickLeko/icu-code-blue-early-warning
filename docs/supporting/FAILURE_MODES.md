@@ -3,7 +3,7 @@
 
 **Author:** Nicholas Leko  
 **Version:** 1.0  
-**Last Updated:** February 2026  
+**Last Updated:** June 2026  
 **Scope:** Retrospective evaluation failures plus hypothetical deployment misuse risks and safety guardrails  
 **Related Artifacts:** docs/supporting/PRD.md, MODEL_CARD.md, docs/hypothetical_deployment/PCCP.md, CASE_STUDY.md
 
@@ -74,6 +74,88 @@ should be regenerated from `artifacts/queries/` after rerunning the pipeline.
 
 ---
 
+### 3.3 Prediction Grid Uses Discharge Time as a Future Endpoint
+
+**Confirmed limitation:**  
+The prediction grid in `sql/03_features_vitals.sql` is generated with
+`GENERATE_ARRAY(360, c.unitdischargeoffset - 120, 60)` and then constrained by
+`c.unitdischargeoffset - t_hour >= 120`.
+
+This means every scored prediction time is selected using the ICU discharge
+offset. In retrospective BigQuery analysis that timestamp is available, but in
+deployment the system would not know a patient's future ICU discharge time.
+
+**Impact:**  
+The evaluation grid is conditioned on future information and excludes the final
+2 hours of each ICU stay from downstream training/scoring rows. Those final
+hours are clinically important and may contain many deterioration events.
+
+**Required if-deployed correction:**  
+A live system would need a different grid termination strategy, such as rolling
+hourly scoring from admission while data remain available, or scoring triggered
+by real-time observation availability. The checked-in metrics should therefore
+be read as retrospective ranking results on this discharge-bounded grid, not as
+evidence of a deployment-valid scoring schedule.
+
+---
+
+### 3.4 Outcome Offset Is Documentation Entry Time, Not Adjudicated Event Time
+
+**Confirmed limitation:**  
+The label query uses `MIN(diagnosisoffset)` and `MIN(treatmentoffset)` from
+eICU diagnosis and treatment tables. eICU documentation defines these offsets as
+the minutes from unit admission when the diagnosis or treatment was entered.
+
+**Impact:**  
+The 2-hour prediction horizon is measured against chart-entry time, not an
+adjudicated bedside event timestamp. If documentation lags the true code event,
+some apparent lead time may be documentation lag. The effective clinical lead
+time is therefore 2 hours minus uncharacterized charting lag.
+
+**Boundary:**  
+The repo does not estimate charting lag for code-event documentation in eICU.
+The reported metrics remain honest for the chart-derived proxy label, but they
+should not be interpreted as proof of 2 full hours of clinical lead time before
+true arrest.
+
+---
+
+### 3.5 Proxy Label Includes Non-Arrest Ventricular Tachycardia
+
+**Confirmed limitation:**  
+`sql/02_labels.sql` includes diagnosis-string matches for `ventricular
+tachycardia` and `vtach` without distinguishing pulseless VT from stable or
+monitored VT.
+
+**Impact:**  
+The positive class can include patients who had ventricular tachycardia but did
+not have a code blue or cardiac arrest. This contaminates the proxy outcome,
+inflates the positive count with non-arrest events, and reduces the clinical
+specificity of the label.
+
+**Boundary:**  
+This is still a reproducible documented code-event / resuscitation proxy. It is
+not an adjudicated cardiac-arrest registry.
+
+---
+
+### 3.6 Early-Event Stays Are Excluded From the Dataset
+
+**Confirmed limitation:**  
+The minimum lead-time filter in `sql/02_labels.sql` is applied with
+`HAVING event_offset_min IS NULL OR event_offset_min >= 360` when constructing
+`labels_v2`. `sql/05_train_rows.sql` then joins feature rows to `labels_v2`.
+
+**Impact:**  
+ICU stays with qualifying events in the first 6 hours fail the `HAVING` clause
+and are absent from `labels_v2`, so they are excluded from the downstream
+dataset entirely. They are not merely excluded from positive labeling.
+
+This creates survivorship bias in the evaluation population by removing the
+highest-acuity rapid-deterioration cases before model training and scoring.
+
+---
+
 ## 4. Temporal Failure Modes (Static Alerts Break in Practice)
 
 ### 4.1 Persistence-Induced Alert Spam
@@ -126,11 +208,19 @@ Alerts may fire for patients who do not arrest.
 ### 5.2 Care-Pattern Confounding
 
 **Description:**  
-Measurement frequency and lab ordering encode clinician concern.
+Measurement frequency and lab ordering encode clinician concern. In the checked
+in reference model weights, the largest non-intercept coefficients are dominated
+by ABG/lab-derived pH features and lab-count features: `ph_last_6h`,
+`ph_min_6h`, `ph_max_6h`, `ph_n_6h`, `ph_mean_6h`, `lactate_n_6h`, and
+`creat_n_6h` are all among the top absolute weights. pO2 and pCO2 are not in
+the current final feature set.
 
 **Why this happens:**
 - Sicker patients are monitored more frequently
 - Documentation intensity correlates with risk
+- The model can partially learn "clinicians ordered more labs" as a proxy for
+  deterioration, which is surveillance bias rather than independent physiologic
+  prediction
 
 **Mitigations:**
 - Explicit exclusion of provider, bed, and staffing identifiers

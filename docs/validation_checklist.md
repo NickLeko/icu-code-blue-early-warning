@@ -26,13 +26,18 @@ Use this checklist to confirm that a rerun still matches the intended project de
 - Verify the output table exists: `{{PROJECT_ID}}.icu_ml.labels_v2`
 - Inspect positive prevalence at the stay level
 - Inspect event-time plausibility for a small sample
-- Confirm labeled events inside the first 6 ICU hours are excluded from the final label table
+- Confirm stays with qualifying events inside the first 6 ICU hours are absent
+  from the final label table, meaning they are excluded from downstream datasets
+  rather than merely relabeled negative
 
 ### After `sql/03_features_vitals.sql` and `sql/04_features_labs.sql`
 
 - Verify `features_v2` and `features_v3` were created
 - Confirm the feature tables are keyed by `patientunitstayid` and `prediction_time_min`
 - Confirm the lookback logic remains `[t-6h, t)` rather than including future information
+- Confirm the prediction grid remains bounded by `unitdischargeoffset - 120`;
+  this is a documented retrospective limitation, not a deployment-valid scoring
+  policy
 - Confirm `features_v3` has the same row count as `features_v2` (lab enrichment should not multiply windows)
 - Spot-check that vital count features in `features_v3` still match the corresponding values in `features_v2`
 - Spot-check that lab parsing produced non-null values for the intended labs

@@ -3,10 +3,15 @@
 
 **Author:** Nicholas Leko  
 **Status:** Final (Retrospective PRD)  
-**Last Updated:** January 2026  
+**Last Updated:** June 2026  
 
 This is a retrospective product-framing artifact for the model in this repo,
 not evidence of an implemented deployment program.
+
+Repository caveat: the current artifact's 2-hour horizon is measured against
+chart-entry offsets for a proxy label, and its prediction grid is bounded by
+future ICU discharge time. Those are retrospective evaluation limitations that
+would need correction before any deployment-oriented product work.
 
 ---
 

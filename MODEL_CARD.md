@@ -74,7 +74,10 @@ These exclusions are intentional to reduce care-pattern and provider leakage.
 
 **Exclusion criteria (for modeling cohort):**
 - Patient-hours with insufficient lookback data  
-- Time windows immediately adjacent to documented proxy events (to reduce label leakage)  
+- Rows at or after the documented proxy-event offset  
+- ICU stays with qualifying proxy events in the first 6 ICU hours  
+- Final 2 hours of each ICU stay, because the retrospective prediction grid is
+  bounded by `unitdischargeoffset - 120`  
 - Non-ICU care settings  
 
 ---
@@ -143,6 +146,27 @@ evaluation artifacts here, not as evidence of a deployment-ready alerting stack.
 ---
 
 ## Known Limitations
+
+### Confirmed Methodological Limitations
+- **Discharge-bounded prediction grid:**  
+  Prediction times are generated using `unitdischargeoffset` as an endpoint.
+  This uses a future discharge timestamp that would not be known in deployment
+  and excludes the final 2 hours of each ICU stay from scoring.
+
+- **Documentation-time label:**  
+  The 2-hour horizon is measured against diagnosis/treatment entry offsets, not
+  adjudicated bedside event timestamps. Any documentation lag reduces the actual
+  clinical lead time.
+
+- **Proxy label contamination:**  
+  The diagnosis string match includes ventricular tachycardia without separating
+  pulseless VT from stable/monitored VT, so the positive class can include
+  non-arrest events.
+
+- **Early-event survivorship bias:**  
+  Stays with qualifying events in the first 6 ICU hours are excluded from the
+  downstream dataset entirely, removing rapid-deterioration cases from the
+  evaluation population.
 
 ### Not Yet Evaluated
 - Performance by demographic subgroups (age, sex, race/ethnicity)  

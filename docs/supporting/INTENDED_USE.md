@@ -9,6 +9,13 @@ decision support** in adult ICU settings by identifying **patient-hours
 entering elevated short-term risk** of a documented code-event /
 resuscitation proxy within the next 2 hours.
 
+In the current retrospective artifact, that 2-hour horizon is measured against
+diagnosis/treatment documentation entry offsets, not adjudicated bedside event
+times. The checked-in scoring grid also uses future ICU discharge time as an
+endpoint. Any operational system would need a deployment-valid scoring schedule
+and local validation of event-time semantics before this intended use could be
+considered.
+
 The output would be a **risk score used for ranking and prioritization under a
 fixed alert budget**, not a diagnostic determination. The current repo artifact
 is limited to retrospective analysis.

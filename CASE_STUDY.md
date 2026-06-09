@@ -169,11 +169,20 @@ All impact claims are hypothetical and would require prospective validation.
 - **Care-pattern confounding:**  
   Lab ordering frequency and monitoring intensity may partially drive predictions.
 
+- **Retrospective grid limitation:**  
+  The scoring grid is bounded by future ICU discharge time and omits the final 2
+  hours of each stay, so it is not a deployment-valid scheduling policy.
+
+- **Chart-derived label limitations:**  
+  The 2-hour horizon is measured against documentation entry offsets, broad VT
+  diagnosis matches can include non-arrest events, and stays with qualifying
+  events in the first 6 ICU hours are excluded from the dataset entirely.
+
 - **Calibration drift:**  
   As standards of care evolve, absolute risk estimates may degrade.
 
 - **Feedback loops:**  
-  If alerts trigger earlier interventions (e.g., fluids, escalation, monitoring), some predicted arrests may be prevented.  
+  If alerts trigger earlier interventions (e.g., fluids, escalation, monitoring), some predicted proxy events may be prevented.  
   This can make the model appear “less accurate” over time even as outcomes improve—a success mode masquerading as a failure.
 
 These risks informed the decision to frame the model strictly as **decision support**, not automation.

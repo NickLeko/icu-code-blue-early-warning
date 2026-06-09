@@ -41,6 +41,23 @@ Each row is a patient-hour.
 
 This framing turns the problem into short-term temporal risk ranking rather than one-time stay-level classification.
 
+Revision notes (June 2026):
+
+- The "next 2 hours" horizon is measured against diagnosis/treatment chart-entry
+  offsets, not adjudicated bedside event timestamps. Actual clinical lead time
+  may be shorter by the amount of documentation lag, which is not characterized
+  in this repo.
+- The prediction grid in `sql/03_features_vitals.sql` uses
+  `unitdischargeoffset` as its endpoint and requires at least 120 minutes before
+  ICU discharge. That conditions retrospective scoring on a future discharge
+  timestamp and means the final 2 hours of each stay are not scored.
+- The minimum lead-time implementation is stronger than "excluded from positive
+  labeling": stays with qualifying events in the first 6 ICU hours are excluded
+  from `labels_v2` and therefore from the downstream dataset entirely.
+- The diagnosis string match includes broad ventricular tachycardia terms
+  without distinguishing pulseless VT from stable/monitored VT, so the proxy
+  positive class can include non-arrest events.
+
 ## Final Model
 
 - Logistic regression in BigQuery ML
