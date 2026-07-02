@@ -1,34 +1,61 @@
-# ICU Code Blue Early Warning System
+# ICU Code Blue Early Warning
 
-An ICU early warning project that ranks patient-hours by short-term risk of a documented code-event / resuscitation proxy in the next 2 hours.
+Clinical prediction tools do not fail only because the model is weak. They fail when alert policy, workflow fit, validation design, and deployment constraints are treated as afterthoughts.
 
-The repository is intentionally presented as a scientific and reviewer-facing artifact, not just a modeling notebook. The emphasis is on temporal correctness, conservative evaluation, operational realism, and honest boundaries.
+This project is a retrospective ICU risk-modeling artifact using eICU data with hospital-level holdout validation and fixed alert-budget evaluation. The focus is not just whether a model can rank risk, but whether the evaluation design makes the output interpretable for real clinical workflow discussions.
 
-## Two-Minute Overview
+It is a self-directed research prototype, not a clinically validated alerting system or bedside deployment. The goal is to show calibrated risk-modeling judgment, explicit limitations, and separation between predictive signal and deployable clinical product.
+
+## What This Evaluates
+
+- Hospital-level generalization
+- Fixed alert-budget performance
+- Risk enrichment over baseline
+- Alert-policy implications
+- Model limitations and label caveats
+- Clinical deployment boundaries
+
+## Main Result
+
+The held-out test split contained 31 hospitals, 2,078,011 patient-hours, and 310
+positive labeled windows. A fixed alert budget covering the top 0.5% of scored
+patient-hours selected 10,391 rows containing 21 positive windows: 0.2021%
+precision versus 0.0149% prevalence across the test split, or **13.55x risk
+enrichment over baseline**. Held-out `ML.EVALUATE` results were ROC-AUC 0.6377
+and log loss 0.002723.
+
+Post-model policy analysis shows the operational tradeoff behind that result.
+Restricting alerts to first crossings reduced volume to 3,350 alerts with 8
+positive windows; adding a 12-hour cooldown reduced it to 2,650 alerts with 7
+positive windows. These are row-level results for a chart-derived proxy label,
+not deduplicated clinical events or evidence of improved patient outcomes. The
+supporting aggregate export is checked in under
+[`artifacts/reference_run/`](artifacts/reference_run/).
+
+## Scope Boundary
+
+This repository is a retrospective evaluation artifact, not a deployable
+clinical alerting system. It has no real-time data pipeline, bedside workflow
+integration, prospective validation, external-dataset validation, local
+calibration study, or clinical impact evaluation. The outcome is derived from
+documentation strings rather than adjudicated cardiac-arrest events, and the
+retrospective scoring grid uses a future discharge timestamp as its endpoint.
+See the [`MODEL_CARD.md`](MODEL_CARD.md) for intended use and limitations.
+
+## Evaluation Snapshot
 
 - **Clinical task:** rank ICU patient-hours by short-term documented code-event / resuscitation proxy risk
-- **Outcome label:** documented code-event / resuscitation proxy derived from chart strings
 - **Data:** eICU-CRD v2.0 via BigQuery; no patient-level data are redistributed
 - **Model:** BigQuery ML logistic regression with vitals + labs
 - **Prediction cadence:** hourly
 - **Lookback / horizon:** previous 6 hours to predict the next 2 hours
-- **Validation:** hospital-level train/val/test split; current published path trains on `train` and reports held-out `test`
+- **Validation:** hospital-level train/val/test split; the published path trains on `train` and reports held-out `test`
 - **Primary metric:** precision at a fixed 0.5% alert rate
-- **Proof surface:** aggregate-only reviewer queries in `artifacts/queries/` with a checked-in reference export in `artifacts/reference_run/`
-- **What it proves:** a corrected, reproducible held-out-hospital ranking and alert-policy evaluation path
-- **What it does not prove:** prospective clinical impact, deployment readiness, or adjudicated cardiac-arrest prediction
+- **Evidence:** aggregate-only queries in `artifacts/queries/` and a checked-in reference export in `artifacts/reference_run/`
 
-## Why This Repo Exists
-
-This project is meant to signal:
-
-- practical ML fluency
-- healthcare-aware evaluation design
-- interpretable modeling discipline
-- reproducibility and scientific restraint
-- honest discussion of limitations and deployment risk
-
-It is intentionally not a model-complexity demo. The main claim is that in this setting, evaluation design and alert policy matter as much as, or more than, squeezing out marginal AUC gains.
+The model is intentionally simple and interpretable. Evaluation design and
+alert policy are treated as first-class parts of the artifact rather than as
+afterthoughts to model discrimination.
 
 ## Problem Definition
 
@@ -67,28 +94,6 @@ Revision notes (June 2026):
 - Evaluated on held-out hospitals
 
 The model output is used as a continuous ranking score. Alerting policy is treated separately from the model itself, and the current repo does not reproduce a benchmark sweep across alternative model versions.
-
-## Main Results
-
-The checked-in corrected reference run lives in
-[`artifacts/reference_run/`](artifacts/reference_run/).
-
-- Cohort: 177,418 ICU stays; 171,833 labeled stays; 1,401 proxy-positive stays
-  (0.815% stay-level prevalence)
-- Held-out test split: 31 hospitals, 2,078,011 patient-hours, and 310 positive
-  labeled windows (0.0149% row prevalence)
-- Operating point at the top 0.5% of scored test rows: 10,391 alerts, 21
-  positive labeled windows, 0.2021% precision, and 13.55x enrichment over test
-  prevalence
-- `ML.EVALUATE` on the held-out test split: ROC-AUC 0.6377 and log loss
-  0.002723
-- Post-model alert-policy analysis: first-crossing yields 3,350 alerts, 8
-  positive labeled windows, and 0.2388% precision; 12-hour debounced
-  first-crossing yields 2,650 alerts, 7 positive labeled windows, and 0.2642%
-  precision
-
-These are retrospective held-out-hospital results for a chart-derived proxy
-label, not prospective clinical outcome claims.
 
 ## Alerting Insight
 
