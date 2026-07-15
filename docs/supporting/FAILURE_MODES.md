@@ -30,12 +30,12 @@ of an implemented deployment program.
 ### 2.1 System Summary
 - **Inputs:** Structured ICU vitals and labs (batch, hourly)
 - **Model:** L2-regularized logistic regression producing hourly risk scores
-- **Post-model logic:** Ranking, first-crossing detection, cooldown-based debouncing
+- **Post-model logic:** Ranking, first-crossing detection, quiet-period debouncing in which suppressed crossings reset the window
 - **Outputs:** Retrospective alert-policy analyses; if deployed, advisory alerts for prioritization only (no automation)
 
 ### 2.2 Safety Posture
 - Decision support, not diagnosis
-- Fixed alert budgets
+- Retrospective corpus-wide sparse-selection analysis; no operational budget is implemented
 - Human-in-the-loop at all times
 - Operational controls prioritized over model complexity
 
@@ -53,24 +53,26 @@ With a **very low event rate at the patient-hour level**:
 A model can have strong ROC-AUC and still be **clinically unusable**.
 
 **Primary evaluation question:**
-> *Given a fixed and very limited alert budget, does the system meaningfully concentrate attention on patient-hours at elevated short-term risk?*
+> *Within a retrospective corpus-wide top-0.5% selection, does the model concentrate proxy-positive patient-hours?*
 
 ---
 
 ### 3.2 Capacity-Constrained Evaluation (Accepted Approach)
 
-**Primary metric:** Precision at a fixed alert rate (top **0.5%** of patient-hours)
+**Primary metric:** Precision in the corpus-wide top **0.5%** of held-out test patient-hours
 
-This metric directly measures **actionable signal under real attention constraints**.
+This metric measures retrospective ranking enrichment. It is not a per-shift or
+per-census operational constraint and does not establish actionability.
 
 Because the corrected `sql/04_features_labs.sql` construction changes
 downstream model inputs, exact prevalence / precision / enrichment values
 should be regenerated from `artifacts/queries/` after rerunning the pipeline.
 
-**Secondary metrics (monitored, not optimized):**
+**Secondary metrics:**
 - ROC-AUC (global ranking sanity check)
 - Log loss (probabilistic stability)
-- Alert volume per patient (operational burden)
+- Alert volume per patient is identified as a metric that should be monitored,
+  but no checked-in artifact computes it
 
 ---
 
@@ -180,10 +182,11 @@ Triggering alerts on every threshold crossing without suppression still leads to
 
 **Mitigation (Evaluated in repo):**
 - **First-crossing alerts** only
-- **Cooldown-based debouncing**
+- **Quiet-period debouncing**, where suppressed crossings reset the window
 
-This repo includes first-crossing and cooldown analyses so reviewers can inspect
-how alert volume and precision shift under suppression policies.
+This repo includes first-crossing and quiet-period-debounce analyses so
+reviewers can inspect how alert volume and precision shift under suppression
+policies. This is not a cooldown measured from the last emitted alert.
 
 ---
 
@@ -199,9 +202,9 @@ Alerts may fire for patients who do not arrest.
 - Early intervention may prevent events (success masquerading as error)
 
 **Mitigations:**
-- Fixed alert budgets cap burden
+- The retrospective corpus-wide percentile caps only aggregate evaluation volume; it does not cap live operational burden
 - Alerts are advisory only
-- First-crossing + cooldown limits repetition
+- First-crossing + quiet-period debounce limits repetition in the retrospective analysis
 
 ---
 
@@ -266,8 +269,8 @@ Users over-trust alerts as directives rather than advisory signals.
 Misconfigured thresholds or policies overwhelm staff.
 
 **Mitigations:**
-- Fixed alert budgets
-- Debounced first-crossing logic
+- An operational budget would need an explicit hospital, census, and time window
+- Quiet-period-debounced first-crossing logic
 - Alert volume monitoring per shift
 - Governance review for any policy change (PCCP)
 
@@ -281,7 +284,7 @@ This is treated as a **primary safety risk**, not a UX issue.
 Model performance degrades while security and uptime remain intact.
 
 **Mitigations:**
-- Monitoring of alert enrichment at fixed alert rates
+- Monitoring of alert enrichment under an explicitly defined operational budget
 - Feature distribution and missingness tracking
 - Preference for policy adjustment before retraining
 
@@ -328,9 +331,9 @@ Successful alerts prevent events, making the model appear worse over time.
 ## 8. Explicit Safety Guardrails
 
 **Design Guardrails**
-- Fixed alert budget (default 0.5%)
+- Retrospective corpus-wide top-0.5% selection; no operational budget is implemented
 - Rank-based alerting
-- Debounced first-crossing logic
+- Quiet-period-debounced first-crossing logic
 - No automated clinical actions
 
 **Operational Kill Switches**

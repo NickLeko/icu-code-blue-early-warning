@@ -84,9 +84,13 @@ Recommended checks after key steps:
 2. After `sql/05_train_rows.sql`, inspect row-level prevalence and confirm rows at or after the event are excluded.
 3. After `sql/06_splits.sql`, inspect train/val/test hospital counts.
 4. After `sql/07_model_table.sql`, inspect row counts and positive counts per split.
-5. After `sql/09_eval_alert_rate.sql`, export alert volume and precision at top 0.5% with `artifacts/queries/02_reference_run_operating_point.sql`.
+5. After `sql/09_eval_alert_rate.sql`, export alert volume and precision in the corpus-wide top 0.5% with `artifacts/queries/02_reference_run_operating_point.sql`.
 
 These checks are intentionally manual in this repo to keep the project lightweight and transparent.
+
+The checked-in reference metrics were generated before deterministic
+tie-breakers were added, so boundary rows with tied timestamps or scores could
+differ marginally on regeneration.
 
 ## Known Reproducibility Gaps
 

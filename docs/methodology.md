@@ -35,8 +35,9 @@ materialized but not consumed by a reproduced model-selection sweep.
 
 ### Evaluation
 Given extreme class imbalance, models are evaluated using ranking-based metrics,
-with primary emphasis on precision at fixed alert rates rather than default
-classification thresholds.
+with primary emphasis on precision in the corpus-wide top 0.5% of held-out test
+rows rather than default classification thresholds. This is a retrospective
+percentile, not a per-shift or per-census operational budget.
 
 The final reported model is the single vitals + labs logistic regression defined
 in `sql/08_bqml_models.sql`.

@@ -1,5 +1,6 @@
 -- 09_eval_alert_rate.sql
--- Evaluate the published final model at a fixed alert rate (top 0.5% risk).
+-- Evaluate the published final model at a retrospective corpus-wide top-0.5%
+-- percentile; this is not a per-shift or per-census operational alert budget.
 -- This file is the canonical operating-point evaluation for the current repo;
 -- unreproduced benchmark comparisons are intentionally omitted.
 -- Outputs:
@@ -57,7 +58,9 @@ FROM raw;
 WITH ranked AS (
   SELECT
     *,
-    NTILE(200) OVER (ORDER BY prob_1 DESC) AS bucket
+    NTILE(200) OVER (
+      ORDER BY prob_1 DESC, patientunitstayid, prediction_time_min
+    ) AS bucket
   FROM `{{PROJECT_ID}}.icu_ml.preds_test_v3`
 )
 SELECT

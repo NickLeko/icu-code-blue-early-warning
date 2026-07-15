@@ -7,6 +7,11 @@ reported numbers.
 The current checked-in evidence pack from the corrected rerun lives in
 `artifacts/reference_run/`. The queries here are how that bundle is regenerated.
 
+The checked-in alert-policy CSV predates terminology correction: its
+`cooldown_hours` column and `debounced_first_crossing` policy label describe the
+12-hour quiet-period debounce in which suppressed crossings reset the window,
+not a cooldown measured from the last emitted alert.
+
 Run them after `sql/11_eval_first_crossing_cooldown.sql`:
 
 1. `artifacts/queries/01_reference_run_counts.sql`

@@ -27,11 +27,11 @@ This PCCP emphasizes **operational safety, alert burden control, and generalizat
 
 ### 2.1 Alerting Policy Adjustments (Primary Control)
 
-- **Modification:** Adjustment of alert debouncing windows (e.g., 6h → 12h cooldown).
+- **Modification:** Adjustment of quiet-period debouncing windows (e.g., 6h → 12h); suppressed crossings reset the window.
 - **Rationale:** Operational tuning to align alert volume with ICU capacity.
 - **Constraints:**  
   - No increase in total alert rate beyond predefined capacity limits.  
-  - Debounced first-crossing logic must remain intact.
+  - Quiet-period-debounced first-crossing logic must remain intact.
 
 Alert policy changes are preferred over retraining when addressing alert fatigue or workflow misalignment.
 
@@ -39,7 +39,9 @@ Alert policy changes are preferred over retraining when addressing alert fatigue
 
 ### 2.2 Threshold Recalibration (Secondary Control)
 
-- **Modification:** Recalibration of the fixed alert budget (default: top 0.5% of patient-hours).
+- **Modification:** Definition or adjustment of an operational alert budget with
+  an explicit hospital, census, and time window. The repo's top-0.5% result is a
+  retrospective corpus-wide reference, not a deployment threshold.
 - **Rationale:** Changes in staffing, census, or monitoring tolerance.
 - **Constraints:**  
   - Thresholds remain rank-based, not probability-based.  
@@ -77,7 +79,7 @@ These metrics are reviewed regularly and act as early indicators of workflow ris
 
 ### 3.2 Performance Monitoring (Secondary)
 
-- Precision at fixed alert rate
+- Precision under the explicitly defined operational alert budget
 - Event enrichment relative to baseline prevalence
 - Recall at the chosen alert budget (informational only)
 
@@ -98,7 +100,7 @@ Global metrics (e.g., ROC-AUC) are monitored for stability, not optimization.
 Any proposed modification must demonstrate:
 
 - No increase in alert burden beyond predefined limits
-- No degradation in event enrichment at the fixed alert rate
+- No degradation in event enrichment under the explicitly defined operational alert budget
 - Stable behavior across held-out hospitals (when applicable)
 
 All evaluations are conducted on sequestered test data prior to deployment.
@@ -109,7 +111,7 @@ All evaluations are conducted on sequestered test data prior to deployment.
 
 | Risk | Mitigation |
 |----|----|
-| Alert fatigue | Fixed alert budgets and debounced first-crossing logic |
+| Alert fatigue | Explicit operational budgets and quiet-period-debounced first-crossing logic |
 | Distribution drift | Continuous score and missingness monitoring |
 | Automation bias | Alerts are advisory only; no automated actions |
 | Silent degradation | Regular review of alert volume and enrichment |

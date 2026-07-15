@@ -79,13 +79,15 @@ Use this checklist to confirm that a rerun still matches the intended project de
 ### After `sql/10_eval_temporal_alert_tiers.sql`
 
 - Confirm the persistence tiers are computed from the same `preds_test_v3` predictions
+- Confirm the inline regression assertion passes for new, repeat, and persistent alerts
 - Inspect whether repeated alerts dominate volume more than new alerts
-- Confirm this file is being used as a diagnostic analysis, not as a change to the model itself
+- Confirm this file is being used as a diagnostic analysis, not as a change to the model itself; published tier results remain withdrawn until regeneration
 
 ### After `sql/11_eval_first_crossing_cooldown.sql`
 
-- Confirm first-crossing logic is applied before cooldown suppression
-- Confirm the chosen cooldown value is the one you intended to analyze
+- Confirm first-crossing logic is applied before quiet-period suppression
+- Confirm the chosen quiet-period value is the one you intended to analyze and
+  remember that suppressed crossings reset the window
 - Confirm this analysis is treated as post-model alert policy evaluation
 
 ## Final Result Cross-Check

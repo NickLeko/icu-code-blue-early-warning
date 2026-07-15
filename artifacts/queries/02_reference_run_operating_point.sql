@@ -11,7 +11,9 @@ WITH test_rows AS (
 ranked AS (
   SELECT
     *,
-    NTILE(200) OVER (ORDER BY prob_1 DESC) AS bucket
+    NTILE(200) OVER (
+      ORDER BY prob_1 DESC, patientunitstayid, prediction_time_min
+    ) AS bucket
   FROM `{{PROJECT_ID}}.icu_ml.preds_test_v3`
 ),
 operating_point AS (

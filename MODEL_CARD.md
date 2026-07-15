@@ -11,9 +11,9 @@
 ## Model Overview
 
 - **Model type:** Logistic Regression (L2-regularized)  
-- **Task:** Predict risk of a documented ICU code-event / resuscitation proxy within the next 2 hours  
+- **Task:** Predict elevated risk within 2 hours of the documentation time of a documented ICU code-event / resuscitation proxy; charting lag is uncharacterized, so true clinical lead time is not established
 - **Prediction unit:** Patient-hour  
-- **Primary output:** Continuous risk score used for ranking and prioritization under fixed alert-rate constraints  
+- **Primary output:** Continuous risk score used for retrospective ranking; the reported operating point is a corpus-wide test-set percentile, not a per-shift or per-census operational constraint
 
 This repository is a **retrospective modeling artifact**, not evidence of live
 clinical deployment readiness.
@@ -25,14 +25,16 @@ clinical deployment readiness.
 This repo frames the model around a potential clinical decision-support use case.
 In the current artifact, the model is intended to:
 
-- Support retrospective analysis of ICU patients at elevated short-term risk of a documented code-event / resuscitation proxy  
-- Enable **prioritization of clinical attention** under constrained alert budgets  
+- Support retrospective analysis of ICU patient-hours within 2 hours before the documentation time of a documented code-event / resuscitation proxy; this is not established clinical lead time
+- Evaluate ranking under a sparse corpus-wide percentile rule; operational prioritization is not established
 - Serve as a **clinical decision support signal**, not an autonomous decision-maker  
 
 Any live clinical use would require additional local validation, silent-mode
 testing, workflow review, monitoring, and governance.
 
-Importantly, **model outputs alone do not define alerting behavior**. Actionability depends on post-model alerting policies (e.g., debouncing, cooldown windows) designed to balance signal detection with clinical workflow constraints.
+Importantly, **model outputs alone do not define alerting behavior**. The current
+post-model policy uses a quiet-period debounce in which suppressed crossings
+reset the window; it is not a cooldown measured from the last emitted alert.
 
 ---
 
@@ -73,7 +75,7 @@ This model is **not** intended to:
 These exclusions are intentional to reduce care-pattern and provider leakage.
 
 **Exclusion criteria (for modeling cohort):**
-- Patient-hours with insufficient lookback data  
+- Prediction times before six elapsed ICU hours; rows are not required to contain a minimum number of observations, so sparse rows remain included
 - Rows at or after the documented proxy-event offset  
 - ICU stays with qualifying proxy events in the first 6 ICU hours  
 - Final 2 hours of each ICU stay, because the retrospective prediction grid is
@@ -87,12 +89,12 @@ These exclusions are intentional to reduce care-pattern and provider leakage.
 ### Training
 - **Algorithm:** Logistic Regression (BigQuery ML)  
 - **Regularization:** L2  
-- **Feature set:** ~30 engineered summary statistics  
+- **Feature set:** 49 non-intercept features (19 vital-sign summaries and 30 laboratory summaries)
 - **Cohort and row counts:** checked in under `artifacts/reference_run/` and regenerable via `artifacts/queries/`  
 
 ### Inference
 - **Lookback window:** 6 hours  
-- **Prediction horizon:** 2 hours  
+- **Prediction horizon:** 2 hours before proxy documentation time; true clinical lead time is not established because charting lag is uncharacterized
 - **Scoring cadence:** Hourly batch scoring (not real-time streaming)  
 
 ---
@@ -103,7 +105,7 @@ This model assumes:
 
 - ICU monitoring practices broadly similar to those represented in eICU  
 - Comparable definitions and documentation of the chart-derived proxy events used here  
-- Stable relationships between physiological deterioration and short-term proxy-event risk  
+- Stable relationships between the available features and proximity to proxy-event documentation time
 - Risk scores are used for **ranking and prioritization**, not interpreted as calibrated absolute probabilities without additional processing  
 
 ---
@@ -121,12 +123,12 @@ does not reproduce a validation-based model-selection sweep.
 - **Held-out patient-hours:** 2,078,011
 - **Positive labeled windows on test:** 310 (0.0149% row prevalence)
 - **Held-out `ML.EVALUATE`:** ROC-AUC 0.6377, log loss 0.002723
-- **Operating point at top 0.5% of test rows:** 10,391 alerts, 21 positive
+- **Retrospective corpus-wide operating point at top 0.5% of test rows:** 10,391 alerts, 21 positive
   labeled windows, 0.2021% precision, 13.55x enrichment over test prevalence
 - **First-crossing alert policy:** 3,350 alerts, 8 positive labeled windows,
   0.2388% precision
-- **12-hour debounced first-crossing:** 2,650 alerts, 7 positive labeled
-  windows, 0.2642% precision
+- **12-hour quiet-period-debounced first-crossing (suppressed crossings reset
+  the window):** 2,650 alerts, 7 positive labeled windows, 0.2642% precision
 
 This is retrospective held-out-hospital evaluation only; it does **not**
 constitute external, prospective, or live-workflow validation. Exact aggregate
@@ -138,7 +140,7 @@ counts supporting these metrics are checked in under `artifacts/reference_run/`.
 
 Hourly risk scores can repeatedly flag the same patient across consecutive
 hours. This repo therefore includes retrospective analyses of **first-crossing
-alerts** and **cooldown-based debouncing** as post-model alert-policy studies.
+alerts** and **quiet-period debouncing** as post-model alert-policy studies.
 
 These policies operate **on top of** model outputs and should be treated as
 evaluation artifacts here, not as evidence of a deployment-ready alerting stack.
@@ -155,8 +157,9 @@ evaluation artifacts here, not as evidence of a deployment-ready alerting stack.
 
 - **Documentation-time label:**  
   The 2-hour horizon is measured against diagnosis/treatment entry offsets, not
-  adjudicated bedside event timestamps. Any documentation lag reduces the actual
-  clinical lead time.
+  adjudicated bedside event timestamps. Because documentation lag is
+  uncharacterized, true clinical lead time is not established and measurements
+  preceding chart entry may occur after the clinical event.
 
 - **Proxy label contamination:**  
   The diagnosis string match includes ventricular tachycardia without separating
@@ -227,7 +230,8 @@ Retraining should be **infrequent and triggered only by sustained degradation in
 ## Summary Statement
 
 This model is a **task-specific retrospective ICU ranking artifact** designed to
-support careful evaluation under realistic operational constraints. Its
+support careful retrospective evaluation under a corpus-wide sparse-selection
+rule that is not an operational alert budget. Its
 simplicity, interpretability, and explicit treatment of post-model alerting
 decisions are intentional design choices for defensible analysis rather than a
 claim of deployment readiness.

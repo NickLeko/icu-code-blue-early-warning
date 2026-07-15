@@ -6,7 +6,7 @@
 - **Execution environment:** Google BigQuery over eICU-CRD v2.0
 - **Final model:** BigQuery ML logistic regression using vitals + labs
 - **Validation design:** hospital-level holdout split
-- **Primary metric:** precision at a fixed 0.5% alert rate
+- **Primary metric:** precision in the corpus-wide top 0.5% of held-out test rows
 - **Published proof surface:** aggregate-only reviewer queries in `artifacts/queries/` plus a checked-in reference export in `artifacts/reference_run/`
 
 This repo intentionally publishes one fixed final-model path. It does not
@@ -23,7 +23,10 @@ Clinicians operate under severe attention constraints, and many early warning sy
 - generate excessive alerts (alert fatigue), or  
 - optimize retrospective metrics that do not map to real workflows  
 
-The goal of this project was **not** to build the most complex model possible, but to explore whether a **simple, interpretable risk model** could meaningfully enrich clinical attention under **realistic alerting constraints**.
+The goal of this project was **not** to build the most complex model possible,
+but to measure whether a **simple, interpretable risk model** enriched a sparse,
+retrospective corpus-wide selection. That selection is not a per-shift or
+per-census operational alert budget.
 
 ---
 
@@ -51,11 +54,13 @@ These constraints fundamentally shaped the modeling and evaluation strategy.
 ### 1. Framing the Task Around Alert Budgets
 
 **Decision:**  
-Optimize and evaluate the model using **precision at fixed alert rates**, rather than accuracy or F1.
+Evaluate the model using **precision in the corpus-wide top 0.5% of test rows**, rather than accuracy or F1.
 
 **Rationale:**  
 In clinical environments, *how many alerts fire* matters more than aggregate discrimination.  
-A model that performs well at a 0.5% alert rate is more actionable than one with higher AUC but excessive alerts.
+This retrospective percentile measures sparse ranking enrichment; operational
+actionability and alert budgeting would require a defined hospital, census, and
+time window.
 
 **Tradeoff:**  
 Sacrifices headline metrics in favor of workflow realism.
@@ -116,7 +121,7 @@ Potential loss of predictive signal in exchange for safer generalization.
 Use the model strictly for **risk ranking**, not absolute probability interpretation.
 
 **Rationale:**  
-Ranking at fixed alert rates is more robust to distribution shift than relying on calibrated probabilities.
+The reported analysis uses ranking rather than calibrated probability interpretation.
 
 ---
 
@@ -130,12 +135,12 @@ run:
 - separate post-model alert-policy analyses
 - aggregate-only reviewer exports for counts, operating-point metrics, and weights
 - 177,418 cohort stays and 2,078,011 held-out test patient-hours
-- top-0.5% operating point: 10,391 alerts, 21 positive labeled windows,
+- corpus-wide top-0.5% operating point: 10,391 alerts, 21 positive labeled windows,
   0.2021% precision, 13.55x enrichment over test prevalence
 - first-crossing alert policy: 3,350 alerts, 8 positive labeled windows,
   0.2388% precision
-- 12-hour debounced first-crossing: 2,650 alerts, 7 positive labeled windows,
-  0.2642% precision
+- 12-hour quiet-period-debounced first-crossing (suppressed crossings reset the
+  window): 2,650 alerts, 7 positive labeled windows, 0.2642% precision
 
 As a secondary ranking metric, held-out `ML.EVALUATE` reports ROC-AUC 0.6377
 and log loss 0.002723.
@@ -209,7 +214,8 @@ These boundaries are intentionally explicit.
 
 **What surprised me:**
 - Measurement frequency deserves explicit scrutiny because count features can encode care-pattern signal  
-- Hospital-level splits exposed how much apparent performance comes from institutional memorization
+- A hospital-level holdout exists, but without a random-split baseline the
+  effect of institutional memorization is hypothesized rather than quantified
 
 **What this taught me about healthcare ML:**
 - Evaluation design matters more than model architecture  

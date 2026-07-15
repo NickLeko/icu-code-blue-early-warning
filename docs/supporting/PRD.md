@@ -44,7 +44,8 @@ The core problem is **not detection**, but **actionable prioritization under con
 
 ### Goals
 - Identify ICU patient-hours at elevated short-term risk of a documented code-event / resuscitation proxy
-- Operate under a **fixed alert budget** to prevent alert fatigue
+- Evaluate a sparse retrospective corpus-wide percentile; any operational alert
+  budget would require an explicit hospital, census, and time window
 - Surface alerts that are interpretable and operationally feasible
 - Enable safe evaluation prior to any live deployment
 
@@ -62,7 +63,7 @@ The core problem is **not detection**, but **actionable prioritization under con
 ### In Scope
 - Hourly risk scoring of ICU patient-hours
 - Ranking-based prioritization
-- Post-model alerting policy design (debouncing, cooldowns)
+- Post-model alerting policy design (first crossings and quiet-period debouncing)
 - Offline and silent-mode evaluation
 
 ### Out of Scope
@@ -85,7 +86,7 @@ The system supports **prioritization**, not diagnosis or intervention.
 ## 6. Success Metrics
 
 ### Primary Metric
-- **Precision at fixed alert rate** (top 0.5% of patient-hours)
+- **Precision in the corpus-wide top 0.5% of held-out test patient-hours**
 
 ### Secondary Metrics
 - Event enrichment relative to baseline prevalence
@@ -133,7 +134,7 @@ The system supports **prioritization**, not diagnosis or intervention.
 
 | Risk | Mitigation |
 |----|----|
-| Alert fatigue | Fixed alert budgets, debounced alerts |
+| Alert fatigue | A future operational budget with an explicit time/census window; quiet-period-debounced alerts |
 | Model overfitting | Hospital-level generalization testing |
 | Workflow mismatch | Shadow mode and clinician feedback |
 | Silent degradation | Monitoring of alert volume and enrichment |
@@ -144,7 +145,8 @@ The system supports **prioritization**, not diagnosis or intervention.
 
 This project intentionally stops after:
 - Demonstrating feasible alert enrichment under realistic constraints
-- Designing and validating post-model alerting policies
+- Designing post-model alerting-policy analyses; persistence-tier results are
+  withdrawn pending regeneration of the corrected classification logic
 - Establishing monitoring and change control boundaries
 
 Further model complexity is unlikely to yield proportional gains without prospective validation.

@@ -2,14 +2,17 @@
 
 Clinical prediction tools do not fail only because the model is weak. They fail when alert policy, workflow fit, validation design, and deployment constraints are treated as afterthoughts.
 
-This project is a retrospective ICU risk-modeling artifact using eICU data with hospital-level holdout validation and fixed alert-budget evaluation. The focus is not just whether a model can rank risk, but whether the evaluation design makes the output interpretable for real clinical workflow discussions.
+This project is a retrospective ICU risk-modeling artifact using eICU data with
+hospital-level holdout validation and a corpus-wide top-0.5% percentile
+evaluation. That retrospective percentile is not a per-shift or per-census
+operational alert budget.
 
 It is a self-directed research prototype, not a clinically validated alerting system or bedside deployment. The goal is to show calibrated risk-modeling judgment, explicit limitations, and separation between predictive signal and deployable clinical product.
 
 ## What This Evaluates
 
 - Hospital-level generalization
-- Fixed alert-budget performance
+- Retrospective corpus-wide top-0.5% performance
 - Risk enrichment over baseline
 - Alert-policy implications
 - Model limitations and label caveats
@@ -18,16 +21,20 @@ It is a self-directed research prototype, not a clinically validated alerting sy
 ## Main Result
 
 The held-out test split contained 31 hospitals, 2,078,011 patient-hours, and 310
-positive labeled windows. A fixed alert budget covering the top 0.5% of scored
-patient-hours selected 10,391 rows containing 21 positive windows: 0.2021%
+positive labeled windows. A corpus-wide percentile rule selecting the top 0.5%
+of scored test patient-hours selected 10,391 rows containing 21 positive windows: 0.2021%
 precision versus 0.0149% prevalence across the test split, or **13.55x risk
 enrichment over baseline**. Held-out `ML.EVALUATE` results were ROC-AUC 0.6377
-and log loss 0.002723.
+and log loss 0.002723. This rule is applied retrospectively across the complete
+test corpus; operational alert budgeting would require a separately defined
+hospital, census, and time window.
 
 Post-model policy analysis shows the operational tradeoff behind that result.
 Restricting alerts to first crossings reduced volume to 3,350 alerts with 8
-positive windows; adding a 12-hour cooldown reduced it to 2,650 alerts with 7
-positive windows. These are row-level results for a chart-derived proxy label,
+positive windows; applying a **12-hour quiet-period debounce (suppressed
+crossings reset the window)** reduced it to 2,650 alerts with 7 positive
+windows. This is not a post-alert cooldown measured from the last emitted
+alert. These are row-level results for a chart-derived proxy label,
 not deduplicated clinical events or evidence of improved patient outcomes. The
 supporting aggregate export is checked in under
 [`artifacts/reference_run/`](artifacts/reference_run/).
@@ -44,13 +51,13 @@ See the [`MODEL_CARD.md`](MODEL_CARD.md) for intended use and limitations.
 
 ## Evaluation Snapshot
 
-- **Clinical task:** rank ICU patient-hours by short-term documented code-event / resuscitation proxy risk
+- **Clinical task:** rank ICU patient-hours by risk of falling within 2 hours before the chart-entry offset of a documented code-event / resuscitation proxy; true clinical lead time is not established because charting lag is uncharacterized
 - **Data:** eICU-CRD v2.0 via BigQuery; no patient-level data are redistributed
 - **Model:** BigQuery ML logistic regression with vitals + labs
 - **Prediction cadence:** hourly
-- **Lookback / horizon:** previous 6 hours to predict the next 2 hours
+- **Lookback / horizon:** previous 6 hours to predict proximity within 2 hours of proxy documentation time, not the clinical event time
 - **Validation:** hospital-level train/val/test split; the published path trains on `train` and reports held-out `test`
-- **Primary metric:** precision at a fixed 0.5% alert rate
+- **Primary metric:** precision in the corpus-wide top 0.5% of held-out test rows
 - **Evidence:** aggregate-only queries in `artifacts/queries/` and a checked-in reference export in `artifacts/reference_run/`
 
 The model is intentionally simple and interpretable. Evaluation design and
@@ -62,7 +69,8 @@ afterthoughts to model discrimination.
 Each row is a patient-hour.
 
 - Outcome: earliest qualifying documented code-event / resuscitation proxy built from diagnosis and treatment string matches
-- Prediction horizon: next 2 hours
+- Prediction horizon: within 2 hours before the proxy documentation offset;
+  charting lag is uncharacterized, so true clinical lead time is not established
 - Lookback window: prior 6 hours
 - Minimum lead time: stays with events in the first 6 ICU hours are excluded from positive labeling
 
@@ -70,10 +78,10 @@ This framing turns the problem into short-term temporal risk ranking rather than
 
 Revision notes (June 2026):
 
-- The "next 2 hours" horizon is measured against diagnosis/treatment chart-entry
-  offsets, not adjudicated bedside event timestamps. Actual clinical lead time
-  may be shorter by the amount of documentation lag, which is not characterized
-  in this repo.
+- The 2-hour horizon is measured against diagnosis/treatment chart-entry
+  offsets, not adjudicated bedside event timestamps. Charting lag is not
+  characterized, so true clinical lead time may be shorter, absent, or negative
+  and is not established by this repo.
 - The prediction grid in `sql/03_features_vitals.sql` uses
   `unitdischargeoffset` as its endpoint and requires at least 120 minutes before
   ICU discharge. That conditions retrospective scoring on a future discharge
@@ -97,10 +105,13 @@ The model output is used as a continuous ranking score. Alerting policy is treat
 
 ## Alerting Insight
 
-Naively alerting on every hour in the top 0.5% can create repeated alerts on the same patient. This repo therefore evaluates post-model alerting logic separately from model training:
+Naively alerting on every hour in the retrospective corpus-wide top 0.5% can create repeated alerts on the same patient. This repo therefore evaluates post-model alerting logic separately from model training:
 
-- persistence tiers for diagnostic analysis
-- first-crossing alerts with optional cooldown windows for analysis of alert suppression tradeoffs
+- first-crossing alerts
+- a 12-hour quiet-period debounce in which suppressed crossings reset the window
+
+**Persistence-tier analysis: WITHDRAWN.** The tier classification logic was
+found defective in review and results will be republished after regeneration.
 
 The canonical queries for this work live in `sql/10_eval_temporal_alert_tiers.sql` and `sql/11_eval_first_crossing_cooldown.sql`. Aggregate reviewer exports for those analyses live in `artifacts/queries/`.
 

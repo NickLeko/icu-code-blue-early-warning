@@ -1,7 +1,8 @@
--- Aggregate-only naive vs first-crossing vs debounced alert-policy counts.
+-- Aggregate-only naive vs first-crossing vs quiet-period-debounced policy counts.
+-- Suppressed crossings reset the quiet-period window.
 
 WITH params AS (
-  SELECT 12 AS cooldown_hours
+  SELECT 12 AS quiet_period_hours
 ),
 ranked AS (
   SELECT
@@ -10,7 +11,9 @@ ranked AS (
     DIV(prediction_time_min, 60) AS prediction_hour,
     y,
     prob_1,
-    NTILE(200) OVER (ORDER BY prob_1 DESC) AS bucket
+    NTILE(200) OVER (
+      ORDER BY prob_1 DESC, patientunitstayid, prediction_time_min
+    ) AS bucket
   FROM `{{PROJECT_ID}}.icu_ml.preds_test_v3`
 ),
 alerts AS (
@@ -54,7 +57,7 @@ final AS (
       WHEN is_first_crossing = 1
            AND (
              prev_first_crossing_hour IS NULL
-             OR prediction_hour - prev_first_crossing_hour >= params.cooldown_hours
+             OR prediction_hour - prev_first_crossing_hour >= params.quiet_period_hours
            )
       THEN 1
       ELSE 0
@@ -65,7 +68,7 @@ final AS (
 policy_counts AS (
   SELECT
     'naive_top_0_5pct' AS policy,
-    MAX(cooldown_hours) AS cooldown_hours,
+    MAX(quiet_period_hours) AS quiet_period_hours,
     COUNTIF(is_alert = 1) AS alerts,
     COUNTIF(is_alert = 1 AND y = 1) AS positive_windows,
     SAFE_DIVIDE(COUNTIF(is_alert = 1 AND y = 1), COUNTIF(is_alert = 1)) AS precision
@@ -75,7 +78,7 @@ policy_counts AS (
 
   SELECT
     'first_crossing',
-    MAX(cooldown_hours),
+    MAX(quiet_period_hours),
     COUNTIF(is_first_crossing = 1),
     COUNTIF(is_first_crossing = 1 AND y = 1),
     SAFE_DIVIDE(COUNTIF(is_first_crossing = 1 AND y = 1), COUNTIF(is_first_crossing = 1))
@@ -84,8 +87,8 @@ policy_counts AS (
   UNION ALL
 
   SELECT
-    'debounced_first_crossing',
-    MAX(cooldown_hours),
+    'quiet_period_debounced_first_crossing',
+    MAX(quiet_period_hours),
     COUNTIF(alert_debounced = 1),
     COUNTIF(alert_debounced = 1 AND y = 1),
     SAFE_DIVIDE(COUNTIF(alert_debounced = 1 AND y = 1), COUNTIF(alert_debounced = 1))
@@ -98,7 +101,7 @@ naive AS (
 )
 SELECT
   p.policy,
-  p.cooldown_hours,
+  p.quiet_period_hours,
   p.alerts,
   p.positive_windows,
   p.precision,
@@ -109,6 +112,6 @@ ORDER BY
   CASE p.policy
     WHEN 'naive_top_0_5pct' THEN 1
     WHEN 'first_crossing' THEN 2
-    WHEN 'debounced_first_crossing' THEN 3
+    WHEN 'quiet_period_debounced_first_crossing' THEN 3
     ELSE 4
   END;

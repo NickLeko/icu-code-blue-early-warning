@@ -1,8 +1,10 @@
 -- 11_eval_first_crossing_cooldown.sql
--- Correct first-crossing + cooldown logic
+-- First-crossing + 12-hour quiet-period debounce.
+-- Suppressed crossings reset the quiet-period window; this is not a cooldown
+-- measured from the last emitted alert.
 
 WITH params AS (
-  SELECT 12 AS cooldown_hours
+  SELECT 12 AS quiet_period_hours
 ),
 ranked AS (
   SELECT
@@ -11,7 +13,9 @@ ranked AS (
     DIV(prediction_time_min, 60) AS prediction_hour,
     y,
     prob_1,
-    NTILE(200) OVER (ORDER BY prob_1 DESC) AS bucket
+    NTILE(200) OVER (
+      ORDER BY prob_1 DESC, patientunitstayid, prediction_time_min
+    ) AS bucket
   FROM `{{PROJECT_ID}}.icu_ml.preds_test_v3`
 ),
 
@@ -61,7 +65,7 @@ final AS (
       WHEN is_first_crossing = 1
            AND (
              prev_first_crossing_hour IS NULL
-             OR prediction_hour - prev_first_crossing_hour >= params.cooldown_hours
+             OR prediction_hour - prev_first_crossing_hour >= params.quiet_period_hours
            )
       THEN 1
       ELSE 0
@@ -71,7 +75,7 @@ final AS (
 )
 
 SELECT
-  MAX(cooldown_hours) AS cooldown_hours,
+  MAX(quiet_period_hours) AS quiet_period_hours,
   COUNTIF(alert_debounced = 1) AS alerts,
   COUNTIF(alert_debounced = 1 AND y = 1) AS positive_windows,
   SAFE_DIVIDE(

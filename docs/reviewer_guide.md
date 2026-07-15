@@ -35,7 +35,7 @@ You should come away with:
 - how the data pipeline is structured
 - where the aggregate proof exports come from
 - why hospital-level holdout matters
-- why precision at a fixed alert rate is the main metric
+- why precision in the retrospective corpus-wide top 0.5% is the main metric
 - why post-model alerting policy is treated as a first-class design decision
 
 ## In 15 Minutes

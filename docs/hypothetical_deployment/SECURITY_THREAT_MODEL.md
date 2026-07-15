@@ -35,7 +35,7 @@ deployment.
 
 - **Input data:** ICU vitals and laboratory results (batch, structured)
 - **Model:** Logistic regression producing hourly risk scores
-- **Post-model logic:** Ranking, first-crossing detection, debouncing/cooldown
+- **Post-model logic:** Ranking, first-crossing detection, quiet-period debouncing
 - **Outputs:** Advisory alerts for clinical awareness only (no automation)
 
 ### 2.2 Scope Boundaries
@@ -112,8 +112,9 @@ Alert fatigue → ignored alerts → patient harm.
 **Severity:** High  
 
 **Mitigations:**
-- Fixed alert budgets (top 0.5% of patient-hours)
-- First-crossing detection with cooldown-based debouncing
+- An operational alert budget with an explicit hospital, census, and time window;
+  the repo's top-0.5% result is corpus-wide and retrospective
+- First-crossing detection with quiet-period debouncing in which suppressed crossings reset the window
 - Alert volume monitoring per shift
 - Governance review for any alert policy changes (PCCP)
 
@@ -190,7 +191,7 @@ False sense of safety; silent harm through degraded prioritization.
 **Severity:** Medium–High  
 
 **Mitigations:**
-- Monitoring of alert enrichment and precision at fixed alert rates
+- Monitoring of alert enrichment and precision under an explicitly defined operational budget
 - Feature distribution drift tracking
 - Preference for alert policy tuning before retraining
 - Periodic review under clinical governance

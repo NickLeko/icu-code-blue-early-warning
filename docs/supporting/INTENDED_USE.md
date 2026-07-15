@@ -16,9 +16,9 @@ endpoint. Any operational system would need a deployment-valid scoring schedule
 and local validation of event-time semantics before this intended use could be
 considered.
 
-The output would be a **risk score used for ranking and prioritization under a
-fixed alert budget**, not a diagnostic determination. The current repo artifact
-is limited to retrospective analysis.
+The output would be a **risk score used for ranking and prioritization**. The
+current repo evaluates a corpus-wide top-0.5% percentile, not a per-shift or
+per-census operational alert budget, and is limited to retrospective analysis.
 
 ## Intended Users
 - ICU bedside nurses and charge nurses (primary)
@@ -60,9 +60,9 @@ This project is retrospectively evaluated only within the eICU-CRD context and s
 ## Safe Failure and Degradation Principles
 If deployed, the system should degrade safely:
 - Missing or delayed inputs should **reduce confidence** and suppress or down-rank alerts rather than fabricate certainty.
-- Operational controls (fixed alert budgets + debouncing/cooldowns) are first-line safeguards against alert fatigue.
+- Any operational budget would require an explicit hospital, census, and time window; the current suppression analysis uses a quiet-period debounce in which suppressed crossings reset the window.
 - If monitoring detects drift or unstable alert volume, the preferred mitigation is:
-  1) adjust alert policy (cooldown / threshold), then
+  1) adjust alert policy (quiet-period window / threshold), then
   2) recalibrate, then
   3) retrain only if sustained degradation persists.
 

@@ -44,9 +44,9 @@ Run the SQL files in numeric order.
 | 6 | `sql/06_splits.sql` | Assign hospitals to train/val/test splits | `split_hospital_v1` |
 | 7 | `sql/07_model_table.sql` | Join row-level data to cohort and split assignments | `model_table_v3` |
 | 8 | `sql/08_bqml_models.sql` | Train the BigQuery ML logistic regression model | `bqml_lr_v3` |
-| 9 | `sql/09_eval_alert_rate.sql` | Create test predictions and compute precision at top 0.5% | `preds_test_v3` |
-| 10 | `sql/10_eval_temporal_alert_tiers.sql` | Analyze repeated-alert persistence tiers | query result |
-| 11 | `sql/11_eval_first_crossing_cooldown.sql` | Analyze first-crossing alerts with cooldown logic | query result |
+| 9 | `sql/09_eval_alert_rate.sql` | Create test predictions and compute precision in the corpus-wide top 0.5% | `preds_test_v3` |
+| 10 | `sql/10_eval_temporal_alert_tiers.sql` | Run corrected repeated-alert persistence tiers and regression assertion; published tier results are withdrawn pending regeneration | query result |
+| 11 | `sql/11_eval_first_crossing_cooldown.sql` | Analyze first-crossing alerts with a quiet-period debounce in which suppressed crossings reset the window | query result |
 
 ## Model Selection Boundary
 
