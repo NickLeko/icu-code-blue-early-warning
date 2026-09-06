@@ -145,7 +145,11 @@ metadata does not expose the precise reason for the nine-iteration termination.
 The CI uses 100,000 paired hospital resamples, seed 20260905, with fixed observed
 alert membership. It excludes uncertainty from retraining and source drift.
 Q1 found future-entered lab values in 106,328 historical test rows, including
-35 positive windows. The prior 13.55x enrichment is preserved only as a
+35 positive windows. Regeneration also applies the deterministic lab tie rule
+already present in SQL: 7,823 rows outside Q1 exposure changed, including
+1,469 test rows and one positive window; all cases were explained by draw-time
+ties. Old/new differences therefore cannot be attributed solely to availability.
+The prior 13.55x enrichment is preserved only as a
 historical comparison. The endpoint remains a **documentation proxy, not
 adjudicated cardiac arrest**. See [the full version audit](audit/2026-09-05/pit_v4/REPORT.md)
 for exposure, per-hospital old/new metrics, the prespecified AUTO_SPLIT control,

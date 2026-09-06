@@ -2,8 +2,8 @@
 ## ICU Code Blue Early Warning System
 
 **Author:** Nicholas Leko  
-**Version:** 1.0  
-**Last Updated:** June 2026  
+**Version:** 2.0.0-pit\
+**Last Updated:** September 2026\
 **Scope:** Retrospective evaluation failures plus hypothetical deployment misuse risks and safety guardrails  
 **Related Artifacts:** docs/supporting/PRD.md, MODEL_CARD.md, docs/hypothetical_deployment/PCCP.md, CASE_STUDY.md
 
@@ -57,20 +57,25 @@ A model can have strong ROC-AUC and still be **clinically unusable**.
 
 ---
 
-### 3.2 Capacity-Constrained Evaluation (Accepted Approach)
+### 3.2 Retrospective Fixed-Percentile Evaluation
 
 **Primary metric:** Precision in the corpus-wide top **0.5%** of held-out test patient-hours
 
 This metric measures retrospective ranking enrichment. It is not a per-shift or
 per-census operational constraint and does not establish actionability.
 
-Because the corrected `sql/04_features_labs.sql` construction changes
-downstream model inputs, exact prevalence / precision / enrichment values
-should be regenerated from `artifacts/queries/` after rerunning the pipeline.
+The `2.0.0-pit` rerun is complete. The raw global top 0.5% selected 10,391
+alerts with 36 positive windows: 23.22x pooled enrichment (95% hospital-cluster
+CI 11.45–41.53), 0.3465% PPV, and 11.61% positive-window recall. Within-hospital
+AUROC is 0.7348 row-weighted and 0.7827 median among 21 evaluable hospitals;
+positive alerts occur in 9/31 hospitals. Exact old/new results and provenance
+are in `audit/2026-09-05/pit_v4/REPORT.md`.
 
 **Secondary metrics:**
 - ROC-AUC (global ranking sanity check)
-- Log loss (probabilistic stability)
+- Log loss (probabilistic prediction quality, not ranking alone): 0.007776,
+  worse than the constant training-prevalence baseline of 0.001502. Ranking
+  signal does not establish calibrated absolute probabilities.
 - Alert volume per patient is identified as a metric that should be monitored,
   but no checked-in artifact computes it
 
@@ -368,3 +373,19 @@ This document makes those risks explicit and bounded.
 
 **Core principle:**  
 Operational controls, alert policy design, and governance matter more than marginal model improvements for safety in high-acuity clinical settings.
+
+## Point-in-Time Availability Correction and Residual Limits
+
+Original Q1 found 574,482 modeled windows using lab values entered/revised at
+or after prediction time, including 106,328 test rows and 35 positive windows.
+The current SQL retains draw time in `[t-360,t)` and requires
+`GREATEST(labresultoffset, labresultrevisedoffset) < t`. NULL revision offsets
+exclude records. This corrects stored-value availability relative to prediction;
+it does not reconstruct earlier revisions or establish clinical lead time before
+an actual arrest.
+
+The old/new comparison also includes an inherited deterministic lab tie rule,
+which changed 7,823 rows outside Q1 exposure, and explicit hospital validation.
+Every additional last-value case was reconciled to a draw-time tie. The new
+ranking point estimate cannot be attributed solely to the availability fix.
+The endpoint remains a documentation proxy, not adjudicated cardiac arrest.

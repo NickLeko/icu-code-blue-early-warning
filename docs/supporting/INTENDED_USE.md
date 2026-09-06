@@ -57,6 +57,10 @@ This project is retrospectively evaluated only within the eICU-CRD context and s
 - hospitals with materially different monitoring/documentation practices
 - settings where key inputs (vitals/labs frequency) differ substantially from training distribution
 
+These are proposed deployment boundaries, not additional SQL cohort filters.
+The current SQL has no `unittype` restriction, and top-coded `> 89` ages are
+excluded by numeric casting; these populations are not established as validated.
+
 ## Safe Failure and Degradation Principles
 If deployed, the system should degrade safely:
 - Missing or delayed inputs should **reduce confidence** and suppress or down-rank alerts rather than fabricate certainty.

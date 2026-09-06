@@ -8,14 +8,14 @@ Read these files in order:
 
 1. `README.md`
 2. `docs/results.md`
-3. `artifacts/reference_run/`
+3. `artifacts/reference_run_v4_pit/`
 4. `MODEL_CARD.md`
 
 You should come away with:
 
 - what the project predicts
 - what the label actually is and is not
-- why the evaluation is capacity-constrained
+- why the fixed global percentile is retrospective rather than an operational alert budget
 - what the main result is
 - what the system is not claiming
 
@@ -51,6 +51,7 @@ Read:
 7. `docs/supporting/INTENDED_USE.md`
 8. `docs/supporting/FAILURE_MODES.md`
 9. `CASE_STUDY.md`
+10. [version audit](../audit/2026-09-05/pit_v4/REPORT.md) and [hospital comparison](../audit/2026-09-05/pit_v4/HOSPITAL_COMPARISON.md)
 
 You should come away with:
 
@@ -64,7 +65,7 @@ You should come away with:
 
 - The modeling choice is intentionally simple and interpretable
 - The split strategy is more honest than typical random-split ML demos
-- The evaluation is aligned to alert-budget reality rather than headline metrics
+- The evaluation separates a fixed retrospective percentile from an unimplemented operational alert budget
 - The repo now includes aggregate-only proof queries rather than relying only on prose
 - The repo explicitly documents limitations, failure modes, and intended use boundaries
 
@@ -75,6 +76,7 @@ You should come away with:
 - `sql/06_splits.sql`: hospital-level split logic is central to the generalization claim
 - `sql/09_eval_alert_rate.sql`: this is where the key reported metric is operationalized
 - `artifacts/queries/`: this is the reviewer-facing aggregate proof surface
+- `audit/2026-09-05/pit_v4/REPORT.md`: Q1 exposure, old/new results, hospital uncertainty, worse log loss, and the inherited tie-breaking difference
 - `sql/11_eval_first_crossing_cooldown.sql`: post-model alert-policy analysis lives here
 
 ## Reading the Repo Safely

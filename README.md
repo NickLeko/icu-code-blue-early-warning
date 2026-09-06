@@ -9,7 +9,7 @@ hospital-level holdout validation and a corpus-wide top-0.5% percentile
 evaluation. That retrospective percentile is not a per-shift or per-census
 operational alert budget.
 
-It is a self-directed research prototype, not a clinically validated alerting system or bedside deployment. The goal is to show calibrated risk-modeling judgment, explicit limitations, and separation between predictive signal and deployable clinical product.
+It is a self-directed research prototype, not a clinically validated alerting system or bedside deployment. The goal is to show careful risk-modeling judgment, explicit limitations, and separation between predictive signal and deployable clinical product.
 
 ## What This Evaluates
 
