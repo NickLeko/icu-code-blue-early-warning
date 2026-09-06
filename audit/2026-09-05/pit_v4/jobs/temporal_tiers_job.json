@@ -1,0 +1,46 @@
+{
+  "kind": "bigquery#job",
+  "etag": "LjsTHKm1YuCpfQCtzINPzg==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_temporal_tiers_a32597807492",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_temporal_tiers_a32597807492?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- 10_eval_temporal_alert_tiers.sql\n-- Temporal alert persistence + tiering on top of top-0.5% alert rule.\n--\n-- Uses the same alert definition as 09_eval_alert_rate.sql:\n--   NTILE(200) over prob_1 DESC, bucket=1 => top 0.5% alerts.\n--\n-- Outputs:\n--   1) A tier-level summary: alert volume + precision per tier\n--   2) (Optional) A compact table of tiered alerts (commented) if you want to materialize\n\n-- (A) Mark alerts using the existing \"top 0.5%\" bucket rule\nWITH ranked AS (\n  SELECT\n    patientunitstayid,\n    prediction_time_min,\n    -- Convert to hour index for easy temporal operations (assumes predictions are hourly)\n    DIV(prediction_time_min, 60) AS prediction_hour,\n    y,\n    prob_1,\n    NTILE(200) OVER (\n      ORDER BY prob_1 DESC, patientunitstayid, prediction_time_min\n    ) AS bucket\n  FROM `citric-glow-485600-f4.icu_ml.preds_test_v4_pit`\n),\n\nalerts AS (\n  SELECT\n    *,\n    CASE WHEN bucket = 1 THEN 1 ELSE 0 END AS is_alert\n  FROM ranked\n),\n\n-- (B) Compute consecutive alerts per patient-stay\n-- We create \"reset_group\" that increments every time is_alert=0, then count\n-- only alert rows within each contiguous run.\nwith_reset_groups AS (\n  SELECT\n    *,\n    SUM(CASE WHEN is_alert = 0 THEN 1 ELSE 0 END)\n      OVER (PARTITION BY patientunitstayid ORDER BY prediction_hour) AS reset_group\n  FROM alerts\n),\n\ntemporal AS (\n  SELECT\n    *,\n    CASE\n      WHEN is_alert = 1 THEN\n        COUNTIF(is_alert = 1) OVER (\n          PARTITION BY patientunitstayid, reset_group\n          ORDER BY prediction_hour\n          ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n        )\n      ELSE 0\n    END AS consecutive_alerts,\n\n    -- Rolling count of alerts over the last 6 hours (current + 5 prior hours)\n    SUM(is_alert) OVER (\n      PARTITION BY patientunitstayid\n      ORDER BY prediction_hour\n      ROWS BETWEEN 5 PRECEDING AND CURRENT ROW\n    ) AS alerts_last_6h\n  FROM with_reset_groups\n),\n\n-- (C) Tier definition (simple + defensible)\ntiered AS (\n  SELECT\n    *,\n    CASE\n      WHEN is_alert = 0 THEN 'none'\n      WHEN consecutive_alerts >= 3 THEN 'tier_3_persistent'\n      WHEN consecutive_alerts = 2 THEN 'tier_2_repeat'\n      WHEN consecutive_alerts = 1 THEN 'tier_1_new'\n      ELSE 'none'\n    END AS alert_tier\n  FROM temporal\n)\n\n-- (D) Tier-level evaluation\nSELECT\n  alert_tier,\n  COUNTIF(is_alert = 1) AS n_alerts,\n  COUNTIF(is_alert = 1 AND y = 1) AS n_positive_windows,\n  SAFE_DIVIDE(COUNTIF(is_alert = 1 AND y = 1), NULLIF(COUNTIF(is_alert = 1), 0)) AS precision_at_tier,\n  AVG(CASE WHEN is_alert = 1 THEN prob_1 END) AS avg_prob_on_alerts,\n  AVG(CASE WHEN is_alert = 1 THEN consecutive_alerts END) AS avg_consecutive_on_alerts,\n  AVG(CASE WHEN is_alert = 1 THEN alerts_last_6h END) AS avg_alerts_last_6h_on_alerts\nFROM tiered\nGROUP BY alert_tier\nORDER BY\n  CASE alert_tier\n    WHEN 'tier_3_persistent' THEN 1\n    WHEN 'tier_2_repeat' THEN 2\n    WHEN 'tier_1_new' THEN 3\n    WHEN 'none' THEN 4\n    ELSE 5\n  END;\n\n-- Deterministic regression fixture for contiguous-run tier classification.\nASSERT (\n  WITH fixture AS (\n    SELECT *\n    FROM UNNEST([\n      STRUCT(1 AS patientunitstayid, 1 AS prediction_hour, 0 AS is_alert),\n      STRUCT(1 AS patientunitstayid, 2 AS prediction_hour, 1 AS is_alert),\n      STRUCT(1 AS patientunitstayid, 3 AS prediction_hour, 1 AS is_alert),\n      STRUCT(1 AS patientunitstayid, 4 AS prediction_hour, 1 AS is_alert),\n      STRUCT(1 AS patientunitstayid, 5 AS prediction_hour, 0 AS is_alert),\n      STRUCT(1 AS patientunitstayid, 6 AS prediction_hour, 1 AS is_alert)\n    ])\n  ),\n  fixture_reset_groups AS (\n    SELECT\n      *,\n      SUM(CASE WHEN is_alert = 0 THEN 1 ELSE 0 END) OVER (\n        PARTITION BY patientunitstayid\n        ORDER BY prediction_hour\n      ) AS reset_group\n    FROM fixture\n  ),\n  fixture_temporal AS (\n    SELECT\n      *,\n      CASE\n        WHEN is_alert = 1 THEN\n          COUNTIF(is_alert = 1) OVER (\n            PARTITION BY patientunitstayid, reset_group\n            ORDER BY prediction_hour\n            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n          )\n        ELSE 0\n      END AS consecutive_alerts\n    FROM fixture_reset_groups\n  ),\n  fixture_tiered AS (\n    SELECT\n      prediction_hour,\n      CASE\n        WHEN is_alert = 0 THEN 'none'\n        WHEN consecutive_alerts >= 3 THEN 'tier_3_persistent'\n        WHEN consecutive_alerts = 2 THEN 'tier_2_repeat'\n        WHEN consecutive_alerts = 1 THEN 'tier_1_new'\n        ELSE 'none'\n      END AS alert_tier\n    FROM fixture_temporal\n  ),\n  expected AS (\n    SELECT *\n    FROM UNNEST([\n      STRUCT(1 AS prediction_hour, 'none' AS expected_tier),\n      STRUCT(2 AS prediction_hour, 'tier_1_new' AS expected_tier),\n      STRUCT(3 AS prediction_hour, 'tier_2_repeat' AS expected_tier),\n      STRUCT(4 AS prediction_hour, 'tier_3_persistent' AS expected_tier),\n      STRUCT(5 AS prediction_hour, 'none' AS expected_tier),\n      STRUCT(6 AS prediction_hour, 'tier_1_new' AS expected_tier)\n    ])\n  )\n  SELECT\n    COUNT(*) = 6\n    AND COUNTIF(t.alert_tier != e.expected_tier) = 0\n  FROM fixture_tiered t\n  JOIN expected e USING (prediction_hour)\n) AS 'Temporal alert tier regression fixture failed';\n",
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "temporal_tiers",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_temporal_tiers_a32597807492",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788669443120",
+    "startTime": "1788669443160",
+    "endTime": "1788669450061",
+    "totalBytesProcessed": "66496352",
+    "query": {
+      "totalBytesProcessed": "66496352",
+      "totalBytesBilled": "67108864",
+      "totalSlotMs": "49448",
+      "statementType": "SCRIPT"
+    },
+    "totalSlotMs": "49448",
+    "numChildJobs": "2"
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

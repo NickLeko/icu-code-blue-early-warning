@@ -1,0 +1,3 @@
+split,n_rows,positive_windows
+train,6400461,1819
+val,2015025,444

@@ -1,0 +1,1462 @@
+{
+  "kind": "bigquery#getQueryResultsResponse",
+  "etag": "0/NRjDWyU0OpQg9tIGdNEA==",
+  "schema": {
+    "fields": [
+      {
+        "name": "feature",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "old_weight",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "pit_auto_weight",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "pit_custom_weight",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "custom_minus_auto_weight",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_weight_comparison_b8f391766449",
+    "location": "US"
+  },
+  "totalRows": "50",
+  "rows": [
+    {
+      "f": [
+        {
+          "v": "__INTERCEPT__"
+        },
+        {
+          "v": "-13.334767200956307"
+        },
+        {
+          "v": "-7.150773057416259"
+        },
+        {
+          "v": "1.0421191667221956"
+        },
+        {
+          "v": "8.192892224138454"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "creat_last_6h"
+        },
+        {
+          "v": "0.005847952954716501"
+        },
+        {
+          "v": "0.007489671990833703"
+        },
+        {
+          "v": "0.0034009324261954797"
+        },
+        {
+          "v": "-0.004088739564638223"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "creat_max_6h"
+        },
+        {
+          "v": "0.005797171629547999"
+        },
+        {
+          "v": "0.007526558550759506"
+        },
+        {
+          "v": "0.003409120917054515"
+        },
+        {
+          "v": "-0.004117437633704991"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "creat_mean_6h"
+        },
+        {
+          "v": "0.005333949749025843"
+        },
+        {
+          "v": "0.006873542411966814"
+        },
+        {
+          "v": "0.003322427618354941"
+        },
+        {
+          "v": "-0.003551114793611873"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "creat_min_6h"
+        },
+        {
+          "v": "0.004835678852841508"
+        },
+        {
+          "v": "0.006205986178485318"
+        },
+        {
+          "v": "0.0032163643945653953"
+        },
+        {
+          "v": "-0.0029896217839199225"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "creat_n_6h"
+        },
+        {
+          "v": "0.039886137602249426"
+        },
+        {
+          "v": "0.05923889450611013"
+        },
+        {
+          "v": "0.009801665365153953"
+        },
+        {
+          "v": "-0.049437229140956176"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "hgb_last_6h"
+        },
+        {
+          "v": "0.004041804961654041"
+        },
+        {
+          "v": "0.006755199736948432"
+        },
+        {
+          "v": "3.372265917978018E-4"
+        },
+        {
+          "v": "-0.00641797314515063"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "hgb_max_6h"
+        },
+        {
+          "v": "0.004944885387443354"
+        },
+        {
+          "v": "0.008013804543314657"
+        },
+        {
+          "v": "6.253452872197223E-4"
+        },
+        {
+          "v": "-0.007388459256094934"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "hgb_mean_6h"
+        },
+        {
+          "v": "0.004458372047189325"
+        },
+        {
+          "v": "0.007450963146193476"
+        },
+        {
+          "v": "4.0533572836111767E-4"
+        },
+        {
+          "v": "-0.007045627417832359"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "hgb_min_6h"
+        },
+        {
+          "v": "0.003559247289330343"
+        },
+        {
+          "v": "0.006312071223003769"
+        },
+        {
+          "v": "1.2683113671445483E-4"
+        },
+        {
+          "v": "-0.006185240086289314"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "hgb_n_6h"
+        },
+        {
+          "v": "-0.016744927346279977"
+        },
+        {
+          "v": "-0.028297285753453333"
+        },
+        {
+          "v": "-2.1712331301781629E-4"
+        },
+        {
+          "v": "0.028080162440435517"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "hr_max_6h"
+        },
+        {
+          "v": "9.605040180390168E-4"
+        },
+        {
+          "v": "0.0014978053402112377"
+        },
+        {
+          "v": "2.1496970854361838E-4"
+        },
+        {
+          "v": "-0.0012828356316676192"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "hr_mean_6h"
+        },
+        {
+          "v": "-3.4228349658377933E-4"
+        },
+        {
+          "v": "-5.042420227133712E-4"
+        },
+        {
+          "v": "-6.0299964231779694E-5"
+        },
+        {
+          "v": "4.4394205848159154E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "hr_min_6h"
+        },
+        {
+          "v": "-0.0015654931980633867"
+        },
+        {
+          "v": "-0.0024062061903283556"
+        },
+        {
+          "v": "-3.334419561830729E-4"
+        },
+        {
+          "v": "0.0020727642341452825"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "hr_n_6h"
+        },
+        {
+          "v": "-4.271503764592347E-4"
+        },
+        {
+          "v": "-6.631652072373572E-4"
+        },
+        {
+          "v": "-9.913606992236738E-5"
+        },
+        {
+          "v": "5.640291373149899E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "k_last_6h"
+        },
+        {
+          "v": "0.0165632145889502"
+        },
+        {
+          "v": "0.024322700796618604"
+        },
+        {
+          "v": "0.009389617206418226"
+        },
+        {
+          "v": "-0.014933083590200378"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "k_max_6h"
+        },
+        {
+          "v": "0.028942315951008542"
+        },
+        {
+          "v": "0.04275742068363421"
+        },
+        {
+          "v": "0.012474921308644717"
+        },
+        {
+          "v": "-0.030282499374989492"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "k_mean_6h"
+        },
+        {
+          "v": "0.01895453333475304"
+        },
+        {
+          "v": "0.027597304297769926"
+        },
+        {
+          "v": "0.009866564550141177"
+        },
+        {
+          "v": "-0.01773073974762875"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "k_min_6h"
+        },
+        {
+          "v": "0.005732094539130452"
+        },
+        {
+          "v": "0.008461750956170355"
+        },
+        {
+          "v": "0.006586950709615098"
+        },
+        {
+          "v": "-0.0018748002465552574"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "k_n_6h"
+        },
+        {
+          "v": "0.016961575574471432"
+        },
+        {
+          "v": "0.01949871987890311"
+        },
+        {
+          "v": "0.00655173973687628"
+        },
+        {
+          "v": "-0.012946980142026832"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "lactate_last_6h"
+        },
+        {
+          "v": "-0.020050180408288636"
+        },
+        {
+          "v": "-1.5050711317977954E-5"
+        },
+        {
+          "v": "0.012596895250330016"
+        },
+        {
+          "v": "0.012611945961647993"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "lactate_max_6h"
+        },
+        {
+          "v": "-0.011696983867039356"
+        },
+        {
+          "v": "0.0133054869636241"
+        },
+        {
+          "v": "0.01410395618945303"
+        },
+        {
+          "v": "7.984692258289298E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "lactate_mean_6h"
+        },
+        {
+          "v": "-0.020892332047736963"
+        },
+        {
+          "v": "-6.666450577601681E-4"
+        },
+        {
+          "v": "0.0122797808347464"
+        },
+        {
+          "v": "0.012946425892506568"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "lactate_min_6h"
+        },
+        {
+          "v": "-0.029787454254530176"
+        },
+        {
+          "v": "-0.014084212481370902"
+        },
+        {
+          "v": "0.010302382179465"
+        },
+        {
+          "v": "0.024386594660835904"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "lactate_n_6h"
+        },
+        {
+          "v": "0.0845576712841892"
+        },
+        {
+          "v": "0.1397311181897315"
+        },
+        {
+          "v": "0.03864614454811208"
+        },
+        {
+          "v": "-0.10108497364161942"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "map_mean_6h"
+        },
+        {
+          "v": "-3.834287336608039E-5"
+        },
+        {
+          "v": "-2.0470860560892933E-4"
+        },
+        {
+          "v": "-1.0628886024116989E-4"
+        },
+        {
+          "v": "9.841974536775944E-5"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "map_min_6h"
+        },
+        {
+          "v": "-0.0017814966063241186"
+        },
+        {
+          "v": "-0.0027611387857189086"
+        },
+        {
+          "v": "-4.97541433791608E-4"
+        },
+        {
+          "v": "0.0022635973519273007"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "map_n_6h"
+        },
+        {
+          "v": "2.708243384966465E-4"
+        },
+        {
+          "v": "4.0494038562885335E-4"
+        },
+        {
+          "v": "9.24518894377745E-5"
+        },
+        {
+          "v": "-3.124884961910789E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "ph_last_6h"
+        },
+        {
+          "v": "0.4393523072769429"
+        },
+        {
+          "v": "0.3771535029113584"
+        },
+        {
+          "v": "-0.2039309961846984"
+        },
+        {
+          "v": "-0.5810844990960569"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "ph_max_6h"
+        },
+        {
+          "v": "0.1306863712533719"
+        },
+        {
+          "v": "-0.21527851479447827"
+        },
+        {
+          "v": "-0.1592150940482247"
+        },
+        {
+          "v": "0.05606342074625356"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "ph_mean_6h"
+        },
+        {
+          "v": "0.08903388364513443"
+        },
+        {
+          "v": "-0.23110865609011805"
+        },
+        {
+          "v": "-0.22548330404873276"
+        },
+        {
+          "v": "0.005625352041385284"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "ph_min_6h"
+        },
+        {
+          "v": "0.34246784025013205"
+        },
+        {
+          "v": "0.1835631031030596"
+        },
+        {
+          "v": "-0.23704789933233186"
+        },
+        {
+          "v": "-0.42061100243539146"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "ph_n_6h"
+        },
+        {
+          "v": "0.09385396085113817"
+        },
+        {
+          "v": "0.13858545721194643"
+        },
+        {
+          "v": "0.028114476653937747"
+        },
+        {
+          "v": "-0.11047098055800868"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "rr_max_6h"
+        },
+        {
+          "v": "8.268047702240682E-4"
+        },
+        {
+          "v": "0.0012433331681991856"
+        },
+        {
+          "v": "1.9224437306265317E-4"
+        },
+        {
+          "v": "-0.0010510887951365325"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "rr_mean_6h"
+        },
+        {
+          "v": "1.427322808116737E-4"
+        },
+        {
+          "v": "3.2108264390956677E-4"
+        },
+        {
+          "v": "7.504001421411463E-5"
+        },
+        {
+          "v": "-2.4604262969545217E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "rr_min_6h"
+        },
+        {
+          "v": "-0.0011892476147989765"
+        },
+        {
+          "v": "-0.0017842341277664675"
+        },
+        {
+          "v": "-2.446555887576566E-4"
+        },
+        {
+          "v": "0.0015395785390088109"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "rr_n_6h"
+        },
+        {
+          "v": "1.1635938044977154E-4"
+        },
+        {
+          "v": "1.858007775211793E-4"
+        },
+        {
+          "v": "2.3934786359384995E-5"
+        },
+        {
+          "v": "-1.618659911617943E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "sao2_mean_6h"
+        },
+        {
+          "v": "0.0010323517624745116"
+        },
+        {
+          "v": "8.818939588707747E-4"
+        },
+        {
+          "v": "-2.419232895627009E-4"
+        },
+        {
+          "v": "-0.0011238172484334757"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "sao2_min_6h"
+        },
+        {
+          "v": "-0.0039747502729426485"
+        },
+        {
+          "v": "-0.006292194822360006"
+        },
+        {
+          "v": "-0.00100512400214592"
+        },
+        {
+          "v": "0.0052870708202140855"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "sao2_n_6h"
+        },
+        {
+          "v": "-5.829639851645779E-4"
+        },
+        {
+          "v": "-9.388547660435913E-4"
+        },
+        {
+          "v": "-1.4438395430763713E-4"
+        },
+        {
+          "v": "7.944708117359542E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "sbp_mean_6h"
+        },
+        {
+          "v": "-4.412646082514462E-4"
+        },
+        {
+          "v": "-7.412995387573831E-4"
+        },
+        {
+          "v": "-1.8226225298047946E-4"
+        },
+        {
+          "v": "5.590372857769036E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "sbp_min_6h"
+        },
+        {
+          "v": "-0.001552642401662212"
+        },
+        {
+          "v": "-0.0023536679732252355"
+        },
+        {
+          "v": "-4.2327489839544795E-4"
+        },
+        {
+          "v": "0.0019303930748297876"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "sbp_n_6h"
+        },
+        {
+          "v": "2.698070630775094E-4"
+        },
+        {
+          "v": "4.0330858899642646E-4"
+        },
+        {
+          "v": "9.12209888823348E-5"
+        },
+        {
+          "v": "-3.120876001140917E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "temp_mean_6h"
+        },
+        {
+          "v": "-0.0012590420056245184"
+        },
+        {
+          "v": "-0.0019472177660205888"
+        },
+        {
+          "v": "-2.499291008729002E-4"
+        },
+        {
+          "v": "0.0016972886651476886"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "temp_n_6h"
+        },
+        {
+          "v": "3.8120479563006075E-4"
+        },
+        {
+          "v": "5.696984722451192E-4"
+        },
+        {
+          "v": "1.0815195265066436E-4"
+        },
+        {
+          "v": "-4.615465195944548E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "wbc_last_6h"
+        },
+        {
+          "v": "4.765812355052093E-4"
+        },
+        {
+          "v": "0.0010789287303600242"
+        },
+        {
+          "v": "5.352942287794935E-4"
+        },
+        {
+          "v": "-5.436345015805308E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "wbc_max_6h"
+        },
+        {
+          "v": "5.961427712013896E-4"
+        },
+        {
+          "v": "0.0014030587318024823"
+        },
+        {
+          "v": "5.825286911908607E-4"
+        },
+        {
+          "v": "-8.205300406116216E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "wbc_mean_6h"
+        },
+        {
+          "v": "3.939681967700845E-4"
+        },
+        {
+          "v": "0.0010106114895168682"
+        },
+        {
+          "v": "5.277525011732229E-4"
+        },
+        {
+          "v": "-4.828589883436454E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "wbc_min_6h"
+        },
+        {
+          "v": "1.8663685755550396E-4"
+        },
+        {
+          "v": "5.976682381096186E-4"
+        },
+        {
+          "v": "4.6736925778892023E-4"
+        },
+        {
+          "v": "-1.3029898032069836E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "wbc_n_6h"
+        },
+        {
+          "v": "0.005822075683868156"
+        },
+        {
+          "v": "0.01313980691430024"
+        },
+        {
+          "v": "0.0033149874678696754"
+        },
+        {
+          "v": "-0.009824819446430565"
+        }
+      ]
+    }
+  ],
+  "totalBytesProcessed": "5187",
+  "jobComplete": true,
+  "cacheHit": false,
+  "auditJobStatistics": {
+    "creationTime": "1788669437448",
+    "startTime": "1788669437569",
+    "endTime": "1788669438139",
+    "totalBytesProcessed": "5187",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Input",
+          "id": "0",
+          "startMs": "1788669437718",
+          "endMs": "1788669437813",
+          "waitRatioAvg": 0.047619047619047616,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.047619047619047616,
+          "waitMsMax": "2",
+          "readRatioAvg": 0.047619047619047616,
+          "readMsAvg": "2",
+          "readRatioMax": 0.047619047619047616,
+          "readMsMax": "2",
+          "computeRatioAvg": 0.5238095238095238,
+          "computeMsAvg": "22",
+          "computeRatioMax": 0.5238095238095238,
+          "computeMsMax": "22",
+          "writeRatioAvg": 0.4523809523809524,
+          "writeMsAvg": "19",
+          "writeRatioMax": 0.4523809523809524,
+          "writeMsMax": "19",
+          "shuffleOutputBytes": "1209",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:hr_mean_6h, $2:hr_min_6h, $3:hr_max_6h, $4:hr_n_6h, $5:rr_mean_6h, $6:rr_min_6h, $7:rr_max_6h, $8:rr_n_6h, $9:sao2_mean_6h, $10:sao2_min_6h, $11:sao2_n_6h, $12:temp_mean_6h, $13:temp_n_6h, $14:sbp_mean_6h, $15:sbp_min_6h, $16:sbp_n_6h",
+                "FROM citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit",
+                "WHERE is_null($51)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$200 := STRUCT_FIELD_OP(1, $220)",
+                "$201 := STRUCT_FIELD_OP(0, $220)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$220 := ML_WEIGHTS_ID('hr_mean_6h', ieee_divide($1, 16.99188122546386), 'hr_min_6h', ieee_divide($2, 16.859134520509592), 'hr_max_6h', ...)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$210, $211",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "205",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S01: Input",
+          "id": "1",
+          "startMs": "1788669437729",
+          "endMs": "1788669437804",
+          "waitRatioAvg": 0.047619047619047616,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.047619047619047616,
+          "waitMsMax": "2",
+          "readRatioAvg": 0.07142857142857142,
+          "readMsAvg": "3",
+          "readRatioMax": 0.07142857142857142,
+          "readMsMax": "3",
+          "computeRatioAvg": 0.42857142857142855,
+          "computeMsAvg": "18",
+          "computeRatioMax": 0.42857142857142855,
+          "computeMsMax": "18",
+          "writeRatioAvg": 0.6666666666666666,
+          "writeMsAvg": "28",
+          "writeRatioMax": 0.6666666666666666,
+          "writeMsMax": "28",
+          "shuffleOutputBytes": "1209",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$120:hr_mean_6h, $121:hr_min_6h, $122:hr_max_6h, $123:hr_n_6h, $124:rr_mean_6h, $125:rr_min_6h, $126:rr_max_6h, $127:rr_n_6h, $128:sao2_mean_6h, $129:sao2_min_6h, $130:sao2_n_6h, $131:temp_mean_6h, $132:temp_n_6h, $133:sbp_mean_6h, $134:sbp_min_6h, $135:sbp_n_6h",
+                "FROM citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit_autosplit_control",
+                "WHERE is_null($170)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$250 := STRUCT_FIELD_OP(1, $280)",
+                "$251 := STRUCT_FIELD_OP(0, $280)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$280 := ML_WEIGHTS_ID('hr_mean_6h', ieee_divide($120, 16.991981648086231), 'hr_min_6h', ieee_divide($121, 16.859197373817711), 'hr_max_6h', ...)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$260, $261",
+                "TO __stage01_output"
+              ]
+            }
+          ],
+          "slotMs": "125",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S02: Input",
+          "id": "2",
+          "startMs": "1788669437740",
+          "endMs": "1788669437799",
+          "waitRatioAvg": 0.047619047619047616,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.047619047619047616,
+          "waitMsMax": "2",
+          "readRatioAvg": 1,
+          "readMsAvg": "42",
+          "readRatioMax": 1,
+          "readMsMax": "42",
+          "computeRatioAvg": 0.3333333333333333,
+          "computeMsAvg": "14",
+          "computeRatioMax": 0.3333333333333333,
+          "computeMsMax": "14",
+          "writeRatioAvg": 0.07142857142857142,
+          "writeMsAvg": "3",
+          "writeRatioMax": 0.07142857142857142,
+          "writeMsMax": "3",
+          "shuffleOutputBytes": "1209",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$60:hr_mean_6h, $61:hr_min_6h, $62:hr_max_6h, $63:hr_n_6h, $64:rr_mean_6h, $65:rr_min_6h, $66:rr_max_6h, $67:rr_n_6h, $68:sao2_mean_6h, $69:sao2_min_6h, $70:sao2_n_6h, $71:temp_mean_6h, $72:temp_n_6h, $73:sbp_mean_6h, $74:sbp_min_6h, $75:sbp_n_6h",
+                "FROM citric-glow-485600-f4.icu_ml.bqml_lr_v3",
+                "WHERE is_null($110)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$230 := STRUCT_FIELD_OP(1, $270)",
+                "$231 := STRUCT_FIELD_OP(0, $270)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$270 := ML_WEIGHTS_ID('hr_mean_6h', ieee_divide($60, 16.991927700543851), 'hr_min_6h', ieee_divide($61, 16.859128565982928), 'hr_max_6h', ...)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$240, $241",
+                "TO __stage02_output"
+              ]
+            }
+          ],
+          "slotMs": "54",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S03: Join+",
+          "id": "3",
+          "startMs": "1788669437817",
+          "endMs": "1788669437921",
+          "inputStages": [
+            "1",
+            "2"
+          ],
+          "waitRatioAvg": 0.023809523809523808,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.07142857142857142,
+          "waitMsMax": "3",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.30952380952380953,
+          "computeMsAvg": "13",
+          "computeRatioMax": 0.5,
+          "computeMsMax": "21",
+          "writeRatioAvg": 0.16666666666666666,
+          "writeMsAvg": "7",
+          "writeRatioMax": 0.5714285714285714,
+          "writeMsMax": "24",
+          "shuffleOutputBytes": "3177",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "100",
+          "recordsWritten": "50",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$240, $241",
+                "FROM __stage02_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$260, $261",
+                "FROM __stage01_output"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$190 := coalesce($290, $292)"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$290 := $240, $291 := $241, $292 := $260, $293 := $261",
+                "FULL OUTER HASH JOIN EACH  WITH EACH  ON $240 = $260"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$190, $290, $291, $292, $293",
+                "TO __stage03_output"
+              ]
+            }
+          ],
+          "slotMs": "10018",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S04: Join+",
+          "id": "4",
+          "startMs": "1788669437930",
+          "endMs": "1788669437971",
+          "inputStages": [
+            "3",
+            "0"
+          ],
+          "waitRatioAvg": 0.07142857142857142,
+          "waitMsAvg": "3",
+          "waitRatioMax": 0.09523809523809523,
+          "waitMsMax": "4",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.2619047619047619,
+          "computeMsAvg": "11",
+          "computeRatioMax": 0.42857142857142855,
+          "computeMsMax": "18",
+          "writeRatioAvg": 0.09523809523809523,
+          "writeMsAvg": "4",
+          "writeRatioMax": 0.21428571428571427,
+          "writeMsMax": "9",
+          "shuffleOutputBytes": "2559",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "100",
+          "recordsWritten": "50",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$190, $290, $291, $292, $293",
+                "FROM __stage03_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$210, $211",
+                "FROM __stage00_output"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$180 := coalesce($300, $302, $304)",
+                "$181 := subtract($305, $303)"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$300 := $290, $301 := $291, $302 := $292, $303 := $293, $304 := $210, $305 := $211",
+                "FULL OUTER HASH JOIN EACH  WITH EACH  ON $190 = $210"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$180, $181, $305, $301, $303",
+                "TO __stage04_output"
+              ]
+            }
+          ],
+          "slotMs": "2200",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S05: Output",
+          "id": "5",
+          "startMs": "1788669437978",
+          "endMs": "1788669437990",
+          "inputStages": [
+            "4"
+          ],
+          "waitRatioAvg": 0.023809523809523808,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.023809523809523808,
+          "waitMsMax": "1",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.2619047619047619,
+          "computeMsAvg": "11",
+          "computeRatioMax": 0.2619047619047619,
+          "computeMsMax": "11",
+          "writeRatioAvg": 0.023809523809523808,
+          "writeMsAvg": "1",
+          "writeRatioMax": 0.023809523809523808,
+          "writeMsMax": "1",
+          "shuffleOutputBytes": "2559",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$180, $181, $305, $301, $303",
+                "FROM __stage04_output"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$180 ASC"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$310, $311, $312, $313, $314",
+                "TO __stage05_output"
+              ]
+            }
+          ],
+          "slotMs": "13",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "5187",
+      "timeline": [
+        {
+          "elapsedMs": "431",
+          "totalSlotMs": "12617",
+          "pendingUnits": "100",
+          "completedUnits": "103",
+          "activeUnits": "100",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "422",
+          "totalSlotMs": "12617",
+          "pendingUnits": "0",
+          "completedUnits": "204",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "5187",
+      "totalBytesBilled": "31457280",
+      "billingTier": 1,
+      "totalSlotMs": "12617",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "bqml_lr_v3"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "bqml_lr_v4_pit_autosplit_control"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "bqml_lr_v4_pit"
+        }
+      ],
+      "statementType": "SELECT",
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "bqml_lr_v3"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "bqml_lr_v4_pit_autosplit_control"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "bqml_lr_v4_pit"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "12617",
+    "finalExecutionDurationMs": "288"
+  }
+}

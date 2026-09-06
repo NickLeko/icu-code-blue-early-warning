@@ -1,0 +1,70 @@
+{
+  "kind": "bigquery#job",
+  "etag": "g4E2wQly1cE07iyE1c+iyg==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_predictions_control_71c2586a8c8f",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_predictions_control_71c2586a8c8f?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- Fixed diagnostic control only; not eligible for release selection.\n-- 09_eval_alert_rate.sql\n-- Evaluate the published final model at a retrospective corpus-wide top-0.5%\n-- percentile; this is not a per-shift or per-census operational alert budget.\n-- This file is the canonical operating-point evaluation for the current repo;\n-- unreproduced benchmark comparisons are intentionally omitted.\n-- Outputs:\n--   1) `citric-glow-485600-f4.icu_ml.preds_test_v4_pit_autosplit_control` (test predictions with prob for class 1)\n--   2) A query to compute precision@0.5% alerts on the test set\n\n-- (A) Create predictions table for the test set\nCREATE OR REPLACE TABLE `citric-glow-485600-f4.icu_ml.preds_test_v4_pit_autosplit_control` AS\nWITH raw AS (\n  SELECT\n    patientunitstayid,\n    prediction_time_min,\n    y,\n    predicted_y_probs\n  FROM ML.PREDICT(\n    MODEL `citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit_autosplit_control`,\n    (\n      SELECT\n        patientunitstayid,\n        prediction_time_min,\n        y,\n\n        -- vitals\n        hr_mean_6h, hr_min_6h, hr_max_6h, hr_n_6h,\n        rr_mean_6h, rr_min_6h, rr_max_6h, rr_n_6h,\n        sao2_mean_6h, sao2_min_6h, sao2_n_6h,\n        temp_mean_6h, temp_n_6h,\n        sbp_mean_6h, sbp_min_6h, sbp_n_6h,\n        map_mean_6h, map_min_6h, map_n_6h,\n\n        -- labs\n        lactate_mean_6h, lactate_min_6h, lactate_max_6h, lactate_n_6h, lactate_last_6h,\n        ph_mean_6h, ph_min_6h, ph_max_6h, ph_n_6h, ph_last_6h,\n        k_mean_6h, k_min_6h, k_max_6h, k_n_6h, k_last_6h,\n        creat_mean_6h, creat_min_6h, creat_max_6h, creat_n_6h, creat_last_6h,\n        hgb_mean_6h, hgb_min_6h, hgb_max_6h, hgb_n_6h, hgb_last_6h,\n        wbc_mean_6h, wbc_min_6h, wbc_max_6h, wbc_n_6h, wbc_last_6h\n\n      FROM `citric-glow-485600-f4.icu_ml.model_table_v4_pit`\n      WHERE split = 'test'\n    )\n  )\n)\nSELECT\n  patientunitstayid,\n  prediction_time_min,\n  y,\n  (SELECT p.prob\n   FROM UNNEST(predicted_y_probs) p\n   WHERE CAST(p.label AS STRING) = '1'\n   LIMIT 1) AS prob_1\nFROM raw;\n\n-- (B) Precision at top 0.5% alert rate\nWITH ranked AS (\n  SELECT\n    *,\n    NTILE(200) OVER (\n      ORDER BY prob_1 DESC, patientunitstayid, prediction_time_min\n    ) AS bucket\n  FROM `citric-glow-485600-f4.icu_ml.preds_test_v4_pit_autosplit_control`\n)\nSELECT\n  COUNT(*) AS alerts,\n  SUM(y) AS positive_windows,\n  SAFE_DIVIDE(SUM(y), COUNT(*)) AS precision_at_0_5pct\nFROM ranked\nWHERE bucket = 1;\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+        "tableId": "anone84400378a47b2c4244e3d83cb75f23f2b2a548dc98bee2a7f0d8711d3fccfcf"
+      },
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "predictions_control",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_predictions_control_71c2586a8c8f",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788669353620",
+    "startTime": "1788669353676",
+    "endTime": "1788669358672",
+    "totalBytesProcessed": "2507984907",
+    "query": {
+      "totalBytesProcessed": "2507984907",
+      "totalBytesBilled": "2509242368",
+      "totalSlotMs": "64650",
+      "schema": {
+        "fields": [
+          {
+            "name": "alerts",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "positive_windows",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "precision_at_0_5pct",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+          }
+        ]
+      },
+      "statementType": "SCRIPT"
+    },
+    "totalSlotMs": "64650",
+    "numChildJobs": "2"
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

@@ -1,0 +1,3431 @@
+{
+  "cohort_v1": {
+    "kind": "bigquery#table",
+    "etag": "3U/vcGmbVcZSkBszMtewug==",
+    "id": "citric-glow-485600-f4:icu_ml.cohort_v1",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/cohort_v1",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "cohort_v1"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "uniquepid",
+          "type": "STRING"
+        },
+        {
+          "name": "patienthealthsystemstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hospitalid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "gender",
+          "type": "STRING"
+        },
+        {
+          "name": "age",
+          "type": "FLOAT"
+        },
+        {
+          "name": "unitadmitsource",
+          "type": "STRING"
+        },
+        {
+          "name": "unittype",
+          "type": "STRING"
+        },
+        {
+          "name": "unitvisitnumber",
+          "type": "INTEGER"
+        },
+        {
+          "name": "unitdischargeoffset",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hospitaldischargeoffset",
+          "type": "INTEGER"
+        }
+      ]
+    },
+    "numBytes": "18235137",
+    "numLongTermBytes": "18235137",
+    "numRows": "177418",
+    "creationTime": "1774944215375",
+    "lastModifiedTime": "1774944215376",
+    "type": "TABLE",
+    "location": "US",
+    "numTimeTravelPhysicalBytes": "0",
+    "numTotalLogicalBytes": "18235137",
+    "numActiveLogicalBytes": "0",
+    "numLongTermLogicalBytes": "18235137",
+    "numTotalPhysicalBytes": "2906939",
+    "numActivePhysicalBytes": "0",
+    "numLongTermPhysicalBytes": "2906939",
+    "numCurrentPhysicalBytes": "2906939"
+  },
+  "labels_v2": {
+    "kind": "bigquery#table",
+    "etag": "h2U0Rw5D6J1Tqseq4+3YUA==",
+    "id": "citric-glow-485600-f4:icu_ml.labels_v2",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/labels_v2",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "labels_v2"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "event_offset_min",
+          "type": "INTEGER"
+        }
+      ]
+    },
+    "numBytes": "1385872",
+    "numLongTermBytes": "1385872",
+    "numRows": "171833",
+    "creationTime": "1774944227450",
+    "lastModifiedTime": "1774944227451",
+    "type": "TABLE",
+    "location": "US",
+    "numTimeTravelPhysicalBytes": "0",
+    "numTotalLogicalBytes": "1385872",
+    "numActiveLogicalBytes": "0",
+    "numLongTermLogicalBytes": "1385872",
+    "numTotalPhysicalBytes": "508986",
+    "numActivePhysicalBytes": "0",
+    "numLongTermPhysicalBytes": "508986",
+    "numCurrentPhysicalBytes": "508986"
+  },
+  "features_v2": {
+    "kind": "bigquery#table",
+    "etag": "NFqR9lMD25XYDHQflIIjKg==",
+    "id": "citric-glow-485600-f4:icu_ml.features_v2",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/features_v2",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "features_v2"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sao2_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "temp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "temp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sbp_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "map_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_n_6h",
+          "type": "INTEGER"
+        }
+      ]
+    },
+    "numBytes": "1462497872",
+    "numLongTermBytes": "1462497872",
+    "numRows": "11165329",
+    "creationTime": "1774944349322",
+    "lastModifiedTime": "1774944349323",
+    "type": "TABLE",
+    "location": "US",
+    "numTimeTravelPhysicalBytes": "0",
+    "numTotalLogicalBytes": "1462497872",
+    "numActiveLogicalBytes": "0",
+    "numLongTermLogicalBytes": "1462497872",
+    "numTotalPhysicalBytes": "193151354",
+    "numActivePhysicalBytes": "0",
+    "numLongTermPhysicalBytes": "193151354",
+    "numCurrentPhysicalBytes": "193151354"
+  },
+  "split_hospital_v1": {
+    "kind": "bigquery#table",
+    "etag": "RqymVdHJu1V6+JKz178vqQ==",
+    "id": "citric-glow-485600-f4:icu_ml.split_hospital_v1",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/split_hospital_v1",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "split_hospital_v1"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "hospitalid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "split",
+          "type": "STRING"
+        }
+      ]
+    },
+    "numBytes": "3005",
+    "numLongTermBytes": "3005",
+    "numRows": "208",
+    "creationTime": "1774944423678",
+    "lastModifiedTime": "1774944423679",
+    "type": "TABLE",
+    "location": "US",
+    "numTimeTravelPhysicalBytes": "0",
+    "numTotalLogicalBytes": "3005",
+    "numActiveLogicalBytes": "0",
+    "numLongTermLogicalBytes": "3005",
+    "numTotalPhysicalBytes": "1540",
+    "numActivePhysicalBytes": "0",
+    "numLongTermPhysicalBytes": "1540",
+    "numCurrentPhysicalBytes": "1540"
+  },
+  "features_v3": {
+    "kind": "bigquery#table",
+    "etag": "ES0gmBWj5lolPrF2+Z1fPA==",
+    "id": "citric-glow-485600-f4:icu_ml.features_v3",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/features_v3",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "features_v3"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sao2_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "temp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "temp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sbp_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "map_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "ph_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "k_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "creat_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hgb_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "wbc_last_6h",
+          "type": "FLOAT"
+        }
+      ]
+    },
+    "numBytes": "2490371968",
+    "numLongTermBytes": "2490371968",
+    "numRows": "11165329",
+    "creationTime": "1774944406664",
+    "lastModifiedTime": "1774944406665",
+    "type": "TABLE",
+    "location": "US",
+    "numTimeTravelPhysicalBytes": "0",
+    "numTotalLogicalBytes": "2490371968",
+    "numActiveLogicalBytes": "0",
+    "numLongTermLogicalBytes": "2490371968",
+    "numTotalPhysicalBytes": "310980979",
+    "numActivePhysicalBytes": "0",
+    "numLongTermPhysicalBytes": "310980979",
+    "numCurrentPhysicalBytes": "310980979"
+  },
+  "model_table_v3": {
+    "kind": "bigquery#table",
+    "etag": "IMvHDU13Oo+955B01rrjYQ==",
+    "id": "citric-glow-485600-f4:icu_ml.model_table_v3",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/model_table_v3",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "model_table_v3"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sao2_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "temp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "temp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sbp_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "map_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "ph_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "k_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "creat_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hgb_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "wbc_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "event_offset_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "y",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hospitalid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "split",
+          "type": "STRING"
+        }
+      ]
+    },
+    "numBytes": "2568031626",
+    "numLongTermBytes": "2568031626",
+    "numRows": "10493497",
+    "creationTime": "1774944452116",
+    "lastModifiedTime": "1774944452117",
+    "type": "TABLE",
+    "location": "US",
+    "numTimeTravelPhysicalBytes": "0",
+    "numTotalLogicalBytes": "2568031626",
+    "numActiveLogicalBytes": "0",
+    "numLongTermLogicalBytes": "2568031626",
+    "numTotalPhysicalBytes": "342623339",
+    "numActivePhysicalBytes": "0",
+    "numLongTermPhysicalBytes": "342623339",
+    "numCurrentPhysicalBytes": "342623339"
+  },
+  "preds_test_v3": {
+    "kind": "bigquery#table",
+    "etag": "M5097C4ie8pxa+ikP6BUCg==",
+    "id": "citric-glow-485600-f4:icu_ml.preds_test_v3",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/preds_test_v3",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "preds_test_v3"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "y",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prob_1",
+          "type": "FLOAT"
+        }
+      ]
+    },
+    "numBytes": "66496352",
+    "numLongTermBytes": "66496352",
+    "numRows": "2078011",
+    "creationTime": "1774945269053",
+    "lastModifiedTime": "1774945269054",
+    "type": "TABLE",
+    "location": "US",
+    "numTimeTravelPhysicalBytes": "0",
+    "numTotalLogicalBytes": "66496352",
+    "numActiveLogicalBytes": "0",
+    "numLongTermLogicalBytes": "66496352",
+    "numTotalPhysicalBytes": "19172915",
+    "numActivePhysicalBytes": "0",
+    "numLongTermPhysicalBytes": "19172915",
+    "numCurrentPhysicalBytes": "19172915"
+  },
+  "features_v4_pit": {
+    "kind": "bigquery#table",
+    "etag": "pSyvc/wsCEQhQD1cgJ6Ing==",
+    "id": "citric-glow-485600-f4:icu_ml.features_v4_pit",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/features_v4_pit",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "features_v4_pit"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sao2_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "temp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "temp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sbp_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "map_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "ph_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "k_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "creat_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hgb_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "wbc_last_6h",
+          "type": "FLOAT"
+        }
+      ]
+    },
+    "numBytes": "2445480608",
+    "numLongTermBytes": "0",
+    "numRows": "11165329",
+    "creationTime": "1788668976025",
+    "lastModifiedTime": "1788668976025",
+    "type": "TABLE",
+    "location": "US",
+    "numTotalLogicalBytes": "2445480608",
+    "numActiveLogicalBytes": "2445480608",
+    "numLongTermLogicalBytes": "0"
+  },
+  "train_rows_v4_pit": {
+    "kind": "bigquery#table",
+    "etag": "JZHFrN4ZACAt82c+lDx8rw==",
+    "id": "citric-glow-485600-f4:icu_ml.train_rows_v4_pit",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/train_rows_v4_pit",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "train_rows_v4_pit"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sao2_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "temp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "temp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sbp_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "map_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "ph_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "k_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "creat_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hgb_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "wbc_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "event_offset_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "y",
+          "type": "INTEGER"
+        }
+      ]
+    },
+    "numBytes": "2374714192",
+    "numLongTermBytes": "0",
+    "numRows": "10493497",
+    "creationTime": "1788669039495",
+    "lastModifiedTime": "1788669039495",
+    "type": "TABLE",
+    "location": "US",
+    "numTotalLogicalBytes": "2374714192",
+    "numActiveLogicalBytes": "2374714192",
+    "numLongTermLogicalBytes": "0"
+  },
+  "model_table_v4_pit": {
+    "kind": "bigquery#table",
+    "etag": "zvlulGZf8lJeBSRcM8Cfkw==",
+    "id": "citric-glow-485600-f4:icu_ml.model_table_v4_pit",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/model_table_v4_pit",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "model_table_v4_pit"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sao2_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "temp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "temp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sbp_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "map_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "ph_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "k_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "creat_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hgb_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "wbc_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "event_offset_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "y",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hospitalid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "split",
+          "type": "STRING"
+        }
+      ]
+    },
+    "numBytes": "2526008586",
+    "numLongTermBytes": "0",
+    "numRows": "10493497",
+    "creationTime": "1788669062291",
+    "lastModifiedTime": "1788669062291",
+    "type": "TABLE",
+    "location": "US",
+    "numTotalLogicalBytes": "2526008586",
+    "numActiveLogicalBytes": "2526008586",
+    "numLongTermLogicalBytes": "0"
+  },
+  "preds_test_v4_pit": {
+    "kind": "bigquery#table",
+    "etag": "FAgFGgNE9ob55+S42mKY4w==",
+    "id": "citric-glow-485600-f4:icu_ml.preds_test_v4_pit",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/preds_test_v4_pit",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "preds_test_v4_pit"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "y",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prob_1",
+          "type": "FLOAT"
+        }
+      ]
+    },
+    "numBytes": "66496352",
+    "numLongTermBytes": "0",
+    "numRows": "2078011",
+    "creationTime": "1788669333608",
+    "lastModifiedTime": "1788669333608",
+    "type": "TABLE",
+    "location": "US",
+    "numTotalLogicalBytes": "66496352",
+    "numActiveLogicalBytes": "66496352",
+    "numLongTermLogicalBytes": "0"
+  },
+  "preds_test_v4_pit_autosplit_control": {
+    "kind": "bigquery#table",
+    "etag": "QOTw1eUzKKk25gFay5j55A==",
+    "id": "citric-glow-485600-f4:icu_ml.preds_test_v4_pit_autosplit_control",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml/tables/preds_test_v4_pit_autosplit_control",
+    "tableReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "tableId": "preds_test_v4_pit_autosplit_control"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "y",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prob_1",
+          "type": "FLOAT"
+        }
+      ]
+    },
+    "numBytes": "66496352",
+    "numLongTermBytes": "0",
+    "numRows": "2078011",
+    "creationTime": "1788669357123",
+    "lastModifiedTime": "1788669357123",
+    "type": "TABLE",
+    "location": "US",
+    "numTotalLogicalBytes": "66496352",
+    "numActiveLogicalBytes": "66496352",
+    "numLongTermLogicalBytes": "0"
+  },
+  "source_lab": {
+    "kind": "bigquery#table",
+    "etag": "RyuVudVM1DlMI6Ei4gl1Qw==",
+    "id": "physionet-data:eicu_crd.lab",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/physionet-data/datasets/eicu_crd/tables/lab",
+    "tableReference": {
+      "projectId": "physionet-data",
+      "datasetId": "eicu_crd",
+      "tableId": "lab"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "labid",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "labresultoffset",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "labtypeid",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "labname",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "labresult",
+          "type": "FLOAT",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "labresulttext",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "labmeasurenamesystem",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "labmeasurenameinterface",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "labresultrevisedoffset",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        }
+      ]
+    },
+    "numBytes": "2922877766",
+    "numLongTermBytes": "2922877766",
+    "numRows": "39132531",
+    "creationTime": "1536337961112",
+    "lastModifiedTime": "1536337961112",
+    "type": "TABLE",
+    "location": "US",
+    "numTimeTravelPhysicalBytes": "0",
+    "numTotalLogicalBytes": "2922877766",
+    "numActiveLogicalBytes": "0",
+    "numLongTermLogicalBytes": "2922877766",
+    "numTotalPhysicalBytes": "453900097",
+    "numActivePhysicalBytes": "0",
+    "numLongTermPhysicalBytes": "453900097",
+    "numCurrentPhysicalBytes": "453900097"
+  },
+  "source_patient": {
+    "kind": "bigquery#table",
+    "etag": "MW9GJtOUFs9L5KXzM4+Sig==",
+    "id": "physionet-data:eicu_crd.patient",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/physionet-data/datasets/eicu_crd/tables/patient",
+    "tableReference": {
+      "projectId": "physionet-data",
+      "datasetId": "eicu_crd",
+      "tableId": "patient"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "patienthealthsystemstayid",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "gender",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "age",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "ethnicity",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "hospitalid",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "wardid",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "apacheadmissiondx",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "admissionheight",
+          "type": "FLOAT",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "hospitaladmittime24",
+          "type": "TIME",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "hospitaladmitoffset",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "hospitaladmitsource",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "hospitaldischargeyear",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "hospitaldischargetime24",
+          "type": "TIME",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "hospitaldischargeoffset",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "hospitaldischargelocation",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "hospitaldischargestatus",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "unittype",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "unitadmittime24",
+          "type": "TIME",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "unitadmitsource",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "unitvisitnumber",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "unitstaytype",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "admissionweight",
+          "type": "FLOAT",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "dischargeweight",
+          "type": "FLOAT",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "unitdischargetime24",
+          "type": "TIME",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "unitdischargeoffset",
+          "type": "INTEGER",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "unitdischargelocation",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "unitdischargestatus",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "uniquepid",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        }
+      ]
+    },
+    "numBytes": "55637259",
+    "numLongTermBytes": "55637259",
+    "numRows": "200859",
+    "creationTime": "1536337993612",
+    "lastModifiedTime": "1536337993612",
+    "type": "TABLE",
+    "location": "US",
+    "numTimeTravelPhysicalBytes": "0",
+    "numTotalLogicalBytes": "55637259",
+    "numActiveLogicalBytes": "0",
+    "numLongTermLogicalBytes": "55637259",
+    "numTotalPhysicalBytes": "6039633",
+    "numActivePhysicalBytes": "0",
+    "numLongTermPhysicalBytes": "6039633",
+    "numCurrentPhysicalBytes": "6039633"
+  },
+  "original_model": {
+    "etag": "rsptGQGZxWxZHGEI5VemGQ==",
+    "modelReference": {
+      "projectId": "citric-glow-485600-f4",
+      "datasetId": "icu_ml",
+      "modelId": "bqml_lr_v3"
+    },
+    "creationTime": "1774944773586",
+    "lastModifiedTime": "1774944773663",
+    "modelType": "LOGISTIC_REGRESSION",
+    "trainingRuns": [
+      {
+        "trainingOptions": {
+          "maxIterations": "50",
+          "lossType": "MEAN_LOG_LOSS",
+          "l1Regularization": 0,
+          "l2Regularization": 1,
+          "minRelativeProgress": 0.01,
+          "warmStart": false,
+          "earlyStop": true,
+          "inputLabelColumns": [
+            "y"
+          ],
+          "dataSplitMethod": "AUTO_SPLIT",
+          "learnRateStrategy": "LINE_SEARCH",
+          "initialLearnRate": 0.1,
+          "calculatePValues": false,
+          "enableGlobalExplain": false,
+          "categoryEncodingMethod": "ONE_HOT_ENCODING",
+          "fitIntercept": true,
+          "autoClassWeights": false,
+          "standardizeFeatures": true
+        },
+        "trainingStartTime": "1774944464185",
+        "results": [
+          {
+            "index": 0,
+            "durationMs": "7528",
+            "trainingLoss": 0.6444518499437307,
+            "evalLoss": 0.6444546202472962,
+            "learnRate": 0.2
+          },
+          {
+            "index": 1,
+            "durationMs": "9847",
+            "trainingLoss": 0.5587719817951101,
+            "evalLoss": 0.5587787957147237,
+            "learnRate": 0.4
+          },
+          {
+            "index": 2,
+            "durationMs": "11482",
+            "trainingLoss": 0.42642744893641604,
+            "evalLoss": 0.4264389645136616,
+            "learnRate": 0.8
+          },
+          {
+            "index": 3,
+            "durationMs": "8350",
+            "trainingLoss": 0.2666739200018834,
+            "evalLoss": 0.2666912760783895,
+            "learnRate": 1.6
+          },
+          {
+            "index": 4,
+            "durationMs": "8408",
+            "trainingLoss": 0.13555335530543192,
+            "evalLoss": 0.1355810313640236,
+            "learnRate": 3.2
+          },
+          {
+            "index": 5,
+            "durationMs": "9713",
+            "trainingLoss": 0.06331070938956236,
+            "evalLoss": 0.06334872627052503,
+            "learnRate": 6.4
+          },
+          {
+            "index": 6,
+            "durationMs": "8688",
+            "trainingLoss": 0.030368082234899868,
+            "evalLoss": 0.030417927496354618,
+            "learnRate": 12.8
+          },
+          {
+            "index": 7,
+            "durationMs": "18276",
+            "trainingLoss": 0.015407909918439978,
+            "evalLoss": 0.01546715645897344,
+            "learnRate": 25.6
+          },
+          {
+            "index": 8,
+            "durationMs": "9666",
+            "trainingLoss": 0.008420254917956118,
+            "evalLoss": 0.008488585048527621,
+            "learnRate": 51.2
+          },
+          {
+            "index": 9,
+            "durationMs": "11098",
+            "trainingLoss": 0.0052105291912366205,
+            "evalLoss": 0.005299135626777009,
+            "learnRate": 102.4
+          },
+          {
+            "index": 10,
+            "durationMs": "9552",
+            "trainingLoss": 0.004612882575618995,
+            "evalLoss": 0.004697965827160525,
+            "learnRate": 51.2
+          },
+          {
+            "index": 11,
+            "durationMs": "8289",
+            "trainingLoss": 0.0040125272942051465,
+            "evalLoss": 0.0040948321078915694,
+            "learnRate": 102.4
+          },
+          {
+            "index": 12,
+            "durationMs": "8238",
+            "trainingLoss": 0.0036681311076547075,
+            "evalLoss": 0.0036888166516129165,
+            "learnRate": 102.4
+          },
+          {
+            "index": 13,
+            "durationMs": "9184",
+            "trainingLoss": 0.0035617951464170664,
+            "evalLoss": 0.003661792950861917,
+            "learnRate": 25.6
+          }
+        ],
+        "evaluationMetrics": {
+          "binaryClassificationMetrics": {
+            "aggregateClassificationMetrics": {
+              "precision": 0,
+              "recall": 0,
+              "accuracy": 0.9997022332506204,
+              "threshold": 0.5,
+              "f1Score": 0,
+              "logLoss": 0.0036617929508619236,
+              "rocAuc": 0.6206493506493507
+            },
+            "binaryConfusionMatrixList": [
+              {
+                "positiveClassThreshold": 0.00168165783784,
+                "truePositives": "3",
+                "falsePositives": "6750",
+                "trueNegatives": "3322",
+                "falseNegatives": "0",
+                "precision": 0.000444247001332741,
+                "recall": 1,
+                "f1Score": 0.0008880994671403197,
+                "accuracy": 0.33002481389578164
+              },
+              {
+                "positiveClassThreshold": 0.00180911807764,
+                "truePositives": "1",
+                "falsePositives": "2620",
+                "trueNegatives": "7452",
+                "falseNegatives": "2",
+                "precision": 0.00038153376573826786,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0007621951219512195,
+                "accuracy": 0.7397518610421836
+              },
+              {
+                "positiveClassThreshold": 0.00202756350957,
+                "truePositives": "0",
+                "falsePositives": "908",
+                "trueNegatives": "9164",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.9095781637717122
+              },
+              {
+                "positiveClassThreshold": 0.00177721423026,
+                "truePositives": "1",
+                "falsePositives": "3326",
+                "trueNegatives": "6746",
+                "falseNegatives": "2",
+                "precision": 0.00030057108506161706,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0006006006006006006,
+                "accuracy": 0.6696774193548387
+              },
+              {
+                "positiveClassThreshold": 0.00165599077619,
+                "truePositives": "3",
+                "falsePositives": "7960",
+                "trueNegatives": "2112",
+                "falseNegatives": "0",
+                "precision": 0.00037674243375612206,
+                "recall": 1,
+                "f1Score": 0.0007532011046949536,
+                "accuracy": 0.20992555831265508
+              },
+              {
+                "positiveClassThreshold": 0.00169299861185,
+                "truePositives": "2",
+                "falsePositives": "6245",
+                "trueNegatives": "3827",
+                "falseNegatives": "1",
+                "precision": 0.00032015367376340644,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.00064,
+                "accuracy": 0.38004962779156326
+              },
+              {
+                "positiveClassThreshold": 0.00164539097477,
+                "truePositives": "3",
+                "falsePositives": "8362",
+                "trueNegatives": "1710",
+                "falseNegatives": "0",
+                "precision": 0.00035863717872086073,
+                "recall": 1,
+                "f1Score": 0.0007170172084130019,
+                "accuracy": 0.17002481389578164
+              },
+              {
+                "positiveClassThreshold": 0.00154162525295,
+                "truePositives": "3",
+                "falsePositives": "9874",
+                "trueNegatives": "198",
+                "falseNegatives": "0",
+                "precision": 0.0003037359522122102,
+                "recall": 1,
+                "f1Score": 0.0006072874493927126,
+                "accuracy": 0.019950372208436724
+              },
+              {
+                "positiveClassThreshold": 0.00168846193565,
+                "truePositives": "3",
+                "falsePositives": "6445",
+                "trueNegatives": "3627",
+                "falseNegatives": "0",
+                "precision": 0.0004652605459057072,
+                "recall": 1,
+                "f1Score": 0.0009300883583940474,
+                "accuracy": 0.36029776674937963
+              },
+              {
+                "positiveClassThreshold": 0.00161650314896,
+                "truePositives": "3",
+                "falsePositives": "9166",
+                "trueNegatives": "906",
+                "falseNegatives": "0",
+                "precision": 0.000327189442687316,
+                "recall": 1,
+                "f1Score": 0.0006541648495420846,
+                "accuracy": 0.09022332506203475
+              },
+              {
+                "positiveClassThreshold": 0.00163677639768,
+                "truePositives": "3",
+                "falsePositives": "8664",
+                "trueNegatives": "1408",
+                "falseNegatives": "0",
+                "precision": 0.00034614053305642093,
+                "recall": 1,
+                "f1Score": 0.0006920415224913495,
+                "accuracy": 0.14004962779156327
+              },
+              {
+                "positiveClassThreshold": 0.00164245158804,
+                "truePositives": "3",
+                "falsePositives": "8462",
+                "trueNegatives": "1610",
+                "falseNegatives": "0",
+                "precision": 0.0003544004725339634,
+                "recall": 1,
+                "f1Score": 0.0007085498346717053,
+                "accuracy": 0.16009925558312654
+              },
+              {
+                "positiveClassThreshold": 0.00150805105034,
+                "truePositives": "3",
+                "falsePositives": "9971",
+                "trueNegatives": "101",
+                "falseNegatives": "0",
+                "precision": 0.000300782033286545,
+                "recall": 1,
+                "f1Score": 0.0006013831813170291,
+                "accuracy": 0.01032258064516129
+              },
+              {
+                "positiveClassThreshold": 0.00171018152147,
+                "truePositives": "2",
+                "falsePositives": "5438",
+                "trueNegatives": "4634",
+                "falseNegatives": "1",
+                "precision": 0.0003676470588235294,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0007348888480617307,
+                "accuracy": 0.46014888337468984
+              },
+              {
+                "positiveClassThreshold": 0.00179182812408,
+                "truePositives": "1",
+                "falsePositives": "3023",
+                "trueNegatives": "7049",
+                "falseNegatives": "2",
+                "precision": 0.00033068783068783067,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0006607201850016518,
+                "accuracy": 0.6997518610421837
+              },
+              {
+                "positiveClassThreshold": 0.00156592405754,
+                "truePositives": "3",
+                "falsePositives": "9771",
+                "trueNegatives": "301",
+                "falseNegatives": "0",
+                "precision": 0.0003069367710251688,
+                "recall": 1,
+                "f1Score": 0.000613685179502915,
+                "accuracy": 0.030173697270471464
+              },
+              {
+                "positiveClassThreshold": 0.00174584436321,
+                "truePositives": "2",
+                "falsePositives": "4131",
+                "trueNegatives": "5941",
+                "falseNegatives": "1",
+                "precision": 0.0004839099927413501,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0009671179883945841,
+                "accuracy": 0.5898759305210918
+              },
+              {
+                "positiveClassThreshold": 0.00173306370084,
+                "truePositives": "2",
+                "falsePositives": "4532",
+                "trueNegatives": "5540",
+                "falseNegatives": "1",
+                "precision": 0.0004411116012351125,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0008816398501212255,
+                "accuracy": 0.5500744416873449
+              },
+              {
+                "positiveClassThreshold": 0.00167737008962,
+                "truePositives": "3",
+                "falsePositives": "6949",
+                "trueNegatives": "3123",
+                "falseNegatives": "0",
+                "precision": 0.00043153049482163404,
+                "recall": 1,
+                "f1Score": 0.0008626887131560029,
+                "accuracy": 0.310272952853598
+              },
+              {
+                "positiveClassThreshold": 0.00159188960102,
+                "truePositives": "3",
+                "falsePositives": "9569",
+                "trueNegatives": "503",
+                "falseNegatives": "0",
+                "precision": 0.0003134141245298788,
+                "recall": 1,
+                "f1Score": 0.0006266318537859008,
+                "accuracy": 0.05022332506203474
+              },
+              {
+                "positiveClassThreshold": 0.00173073803883,
+                "truePositives": "2",
+                "falsePositives": "4633",
+                "trueNegatives": "5439",
+                "falseNegatives": "1",
+                "precision": 0.0004314994606256742,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0008624407072013799,
+                "accuracy": 0.5400496277915633
+              },
+              {
+                "positiveClassThreshold": 0.00170597946305,
+                "truePositives": "2",
+                "falsePositives": "5641",
+                "trueNegatives": "4431",
+                "falseNegatives": "1",
+                "precision": 0.000354421407052986,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0007084661707403471,
+                "accuracy": 0.44
+              },
+              {
+                "positiveClassThreshold": 0.00230558110683,
+                "truePositives": "0",
+                "falsePositives": "303",
+                "trueNegatives": "9769",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.9696277915632754
+              },
+              {
+                "positiveClassThreshold": 0.00174938373278,
+                "truePositives": "2",
+                "falsePositives": "4029",
+                "trueNegatives": "6043",
+                "falseNegatives": "1",
+                "precision": 0.0004961548002976929,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0009915716410510659,
+                "accuracy": 0.6
+              },
+              {
+                "positiveClassThreshold": 0.00208780022188,
+                "truePositives": "0",
+                "falsePositives": "706",
+                "trueNegatives": "9366",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.9296277915632755
+              },
+              {
+                "positiveClassThreshold": 0.00396858328581,
+                "truePositives": "0",
+                "falsePositives": "1",
+                "trueNegatives": "10071",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.9996029776674938
+              },
+              {
+                "positiveClassThreshold": 0.00163329729988,
+                "truePositives": "3",
+                "falsePositives": "8762",
+                "trueNegatives": "1310",
+                "falseNegatives": "0",
+                "precision": 0.00034227039361095263,
+                "recall": 1,
+                "f1Score": 0.0006843065693430657,
+                "accuracy": 0.13032258064516128
+              },
+              {
+                "positiveClassThreshold": 0.00194442607268,
+                "truePositives": "0",
+                "falsePositives": "1312",
+                "trueNegatives": "8760",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.8694789081885856
+              },
+              {
+                "positiveClassThreshold": 0.00182890903623,
+                "truePositives": "1",
+                "falsePositives": "2317",
+                "trueNegatives": "7755",
+                "falseNegatives": "2",
+                "precision": 0.0004314063848144953,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0008616975441619991,
+                "accuracy": 0.7698263027295286
+              },
+              {
+                "positiveClassThreshold": 0.00161166415134,
+                "truePositives": "3",
+                "falsePositives": "9267",
+                "trueNegatives": "805",
+                "falseNegatives": "0",
+                "precision": 0.00032362459546925567,
+                "recall": 1,
+                "f1Score": 0.0006470397929472663,
+                "accuracy": 0.08019851116625311
+              },
+              {
+                "positiveClassThreshold": 0.00162174445329,
+                "truePositives": "3",
+                "falsePositives": "9065",
+                "trueNegatives": "1007",
+                "falseNegatives": "0",
+                "precision": 0.0003308337009263344,
+                "recall": 1,
+                "f1Score": 0.0006614485723734979,
+                "accuracy": 0.10024813895781638
+              },
+              {
+                "positiveClassThreshold": 0.0019813843833,
+                "truePositives": "0",
+                "falsePositives": "1109",
+                "trueNegatives": "8963",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.8896277915632754
+              },
+              {
+                "positiveClassThreshold": 0.00179754172451,
+                "truePositives": "1",
+                "falsePositives": "2820",
+                "trueNegatives": "7252",
+                "falseNegatives": "2",
+                "precision": 0.0003544842254519674,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.000708215297450425,
+                "accuracy": 0.7199007444168735
+              },
+              {
+                "positiveClassThreshold": 0.00176914766662,
+                "truePositives": "1",
+                "falsePositives": "3526",
+                "trueNegatives": "6546",
+                "falseNegatives": "2",
+                "precision": 0.0002835270768358378,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0005665722379603399,
+                "accuracy": 0.6498263027295286
+              },
+              {
+                "positiveClassThreshold": 0.00169060482278,
+                "truePositives": "2",
+                "falsePositives": "6349",
+                "trueNegatives": "3723",
+                "falseNegatives": "1",
+                "precision": 0.000314911037631869,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0006295247088448222,
+                "accuracy": 0.369727047146402
+              },
+              {
+                "positiveClassThreshold": 0.00162580878475,
+                "truePositives": "3",
+                "falsePositives": "8966",
+                "trueNegatives": "1106",
+                "falseNegatives": "0",
+                "precision": 0.0003344854498829301,
+                "recall": 1,
+                "f1Score": 0.0006687472135532769,
+                "accuracy": 0.11007444168734491
+              },
+              {
+                "positiveClassThreshold": 0.00205479634812,
+                "truePositives": "0",
+                "falsePositives": "809",
+                "trueNegatives": "9263",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.9194044665012407
+              },
+              {
+                "positiveClassThreshold": 0.00184479244717,
+                "truePositives": "1",
+                "falsePositives": "2118",
+                "trueNegatives": "7954",
+                "falseNegatives": "2",
+                "precision": 0.00047192071731949034,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.000942507068803016,
+                "accuracy": 0.7895781637717122
+              },
+              {
+                "positiveClassThreshold": 0.0019605931271,
+                "truePositives": "0",
+                "falsePositives": "1209",
+                "trueNegatives": "8863",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.8797022332506204
+              },
+              {
+                "positiveClassThreshold": 0.00158029786158,
+                "truePositives": "3",
+                "falsePositives": "9673",
+                "trueNegatives": "399",
+                "falseNegatives": "0",
+                "precision": 0.0003100454733360893,
+                "recall": 1,
+                "f1Score": 0.0006198987498708544,
+                "accuracy": 0.03990074441687345
+              },
+              {
+                "positiveClassThreshold": 0.00169537607494,
+                "truePositives": "2",
+                "falsePositives": "6144",
+                "trueNegatives": "3928",
+                "falseNegatives": "1",
+                "precision": 0.0003254149040026033,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0006505122784192552,
+                "accuracy": 0.3900744416873449
+              },
+              {
+                "positiveClassThreshold": 0.00243489686673,
+                "truePositives": "0",
+                "falsePositives": "201",
+                "trueNegatives": "9871",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.9797518610421836
+              },
+              {
+                "positiveClassThreshold": 0.00171979626619,
+                "truePositives": "2",
+                "falsePositives": "5036",
+                "trueNegatives": "5036",
+                "falseNegatives": "1",
+                "precision": 0.0003969829297340214,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0007934933544931561,
+                "accuracy": 0.5000496277915633
+              },
+              {
+                "positiveClassThreshold": 0.00167306319543,
+                "truePositives": "3",
+                "falsePositives": "7154",
+                "trueNegatives": "2918",
+                "falseNegatives": "0",
+                "precision": 0.0004191700433142378,
+                "recall": 1,
+                "f1Score": 0.0008379888268156424,
+                "accuracy": 0.2899255583126551
+              },
+              {
+                "positiveClassThreshold": 0.00178170370274,
+                "truePositives": "1",
+                "falsePositives": "3223",
+                "trueNegatives": "6849",
+                "falseNegatives": "2",
+                "precision": 0.00031017369727047146,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0006197706848466068,
+                "accuracy": 0.6799007444168734
+              },
+              {
+                "positiveClassThreshold": 0.00167937962732,
+                "truePositives": "3",
+                "falsePositives": "6850",
+                "trueNegatives": "3222",
+                "falseNegatives": "0",
+                "precision": 0.00043776448270830295,
+                "recall": 1,
+                "f1Score": 0.0008751458576429405,
+                "accuracy": 0.3200992555831266
+              },
+              {
+                "positiveClassThreshold": 0.00190196039733,
+                "truePositives": "1",
+                "falsePositives": "1613",
+                "trueNegatives": "8459",
+                "falseNegatives": "2",
+                "precision": 0.0006195786864931846,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0012368583797155227,
+                "accuracy": 0.8397022332506203
+              },
+              {
+                "positiveClassThreshold": 0.00212103757374,
+                "truePositives": "0",
+                "falsePositives": "605",
+                "trueNegatives": "9467",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.939652605459057
+              },
+              {
+                "positiveClassThreshold": 0.0018214223224,
+                "truePositives": "1",
+                "falsePositives": "2419",
+                "trueNegatives": "7653",
+                "falseNegatives": "2",
+                "precision": 0.00041322314049586776,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0008254230293025176,
+                "accuracy": 0.7597022332506204
+              },
+              {
+                "positiveClassThreshold": 0.0021706131429,
+                "truePositives": "0",
+                "falsePositives": "505",
+                "trueNegatives": "9567",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.9495781637717121
+              },
+              {
+                "positiveClassThreshold": 0.00170394448874,
+                "truePositives": "2",
+                "falsePositives": "5742",
+                "trueNegatives": "4330",
+                "falseNegatives": "1",
+                "precision": 0.00034818941504178273,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0006960153123368715,
+                "accuracy": 0.42997518610421837
+              },
+              {
+                "positiveClassThreshold": 0.00169963034572,
+                "truePositives": "2",
+                "falsePositives": "5945",
+                "trueNegatives": "4127",
+                "falseNegatives": "1",
+                "precision": 0.00033630401883302503,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0006722689075630252,
+                "accuracy": 0.4098263027295285
+              },
+              {
+                "positiveClassThreshold": 0.00172241272145,
+                "truePositives": "2",
+                "falsePositives": "4938",
+                "trueNegatives": "5134",
+                "falseNegatives": "1",
+                "precision": 0.0004048582995951417,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0008092251669026907,
+                "accuracy": 0.5097766749379653
+              },
+              {
+                "positiveClassThreshold": 0.00193019674021,
+                "truePositives": "0",
+                "falsePositives": "1411",
+                "trueNegatives": "8661",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.8596526054590571
+              },
+              {
+                "positiveClassThreshold": 0.00172466493471,
+                "truePositives": "2",
+                "falsePositives": "4837",
+                "trueNegatives": "5235",
+                "falseNegatives": "1",
+                "precision": 0.0004133085348212441,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0008261049153242462,
+                "accuracy": 0.5198014888337469
+              },
+              {
+                "positiveClassThreshold": 0.00163960249107,
+                "truePositives": "3",
+                "falsePositives": "8563",
+                "trueNegatives": "1509",
+                "falseNegatives": "0",
+                "precision": 0.0003502218071445249,
+                "recall": 1,
+                "f1Score": 0.000700198389543704,
+                "accuracy": 0.1500744416873449
+              },
+              {
+                "positiveClassThreshold": 0.00165331672619,
+                "truePositives": "3",
+                "falsePositives": "8058",
+                "trueNegatives": "2014",
+                "falseNegatives": "0",
+                "precision": 0.0003721622627465575,
+                "recall": 1,
+                "f1Score": 0.000744047619047619,
+                "accuracy": 0.2001985111662531
+              },
+              {
+                "positiveClassThreshold": 0.00170184846559,
+                "truePositives": "2",
+                "falsePositives": "5842",
+                "trueNegatives": "4230",
+                "falseNegatives": "1",
+                "precision": 0.00034223134839151266,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0006841115101761587,
+                "accuracy": 0.4200496277915633
+              },
+              {
+                "positiveClassThreshold": 0.00173884186904,
+                "truePositives": "2",
+                "falsePositives": "4330",
+                "trueNegatives": "5742",
+                "falseNegatives": "1",
+                "precision": 0.0004616805170821791,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.000922722029988466,
+                "accuracy": 0.5701240694789081
+              },
+              {
+                "positiveClassThreshold": 0.00187687249728,
+                "truePositives": "1",
+                "falsePositives": "1814",
+                "trueNegatives": "8258",
+                "falseNegatives": "2",
+                "precision": 0.0005509641873278236,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0011001100110011,
+                "accuracy": 0.8197518610421837
+              },
+              {
+                "positiveClassThreshold": 0.00180342704973,
+                "truePositives": "1",
+                "falsePositives": "2721",
+                "trueNegatives": "7351",
+                "falseNegatives": "2",
+                "precision": 0.0003673769287288758,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0007339449541284404,
+                "accuracy": 0.729727047146402
+              },
+              {
+                "positiveClassThreshold": 0.00164788706744,
+                "truePositives": "3",
+                "falsePositives": "8261",
+                "trueNegatives": "1811",
+                "falseNegatives": "0",
+                "precision": 0.00036302032913843176,
+                "recall": 1,
+                "f1Score": 0.0007257771864037741,
+                "accuracy": 0.18004962779156328
+              },
+              {
+                "positiveClassThreshold": 0.00170793920366,
+                "truePositives": "2",
+                "falsePositives": "5541",
+                "trueNegatives": "4531",
+                "falseNegatives": "1",
+                "precision": 0.00036081544290095615,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.000721240533717995,
+                "accuracy": 0.44992555831265507
+              },
+              {
+                "positiveClassThreshold": 0.00165070888998,
+                "truePositives": "3",
+                "falsePositives": "8161",
+                "trueNegatives": "1911",
+                "falseNegatives": "0",
+                "precision": 0.0003674669279764821,
+                "recall": 1,
+                "f1Score": 0.0007346638912697441,
+                "accuracy": 0.18997518610421837
+              },
+              {
+                "positiveClassThreshold": 0.00051471414475,
+                "truePositives": "3",
+                "falsePositives": "10072",
+                "trueNegatives": "0",
+                "falseNegatives": "0",
+                "precision": 0.0002977667493796526,
+                "recall": 1,
+                "f1Score": 0.0005953562214725144,
+                "accuracy": 0.0002977667493796526
+              },
+              {
+                "positiveClassThreshold": 0.00222815411629,
+                "truePositives": "0",
+                "falsePositives": "405",
+                "trueNegatives": "9667",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.9595037220843673
+              },
+              {
+                "positiveClassThreshold": 0.00175632363015,
+                "truePositives": "2",
+                "falsePositives": "3826",
+                "trueNegatives": "6246",
+                "falseNegatives": "1",
+                "precision": 0.0005224660397074191,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0010441138084051162,
+                "accuracy": 0.6201488833746899
+              },
+              {
+                "positiveClassThreshold": 0.00165816008848,
+                "truePositives": "3",
+                "falsePositives": "7855",
+                "trueNegatives": "2217",
+                "falseNegatives": "0",
+                "precision": 0.0003817765334690761,
+                "recall": 1,
+                "f1Score": 0.0007632616715430606,
+                "accuracy": 0.22034739454094293
+              },
+              {
+                "positiveClassThreshold": 0.00167059946407,
+                "truePositives": "3",
+                "falsePositives": "7254",
+                "trueNegatives": "2818",
+                "falseNegatives": "0",
+                "precision": 0.00041339396444811904,
+                "recall": 1,
+                "f1Score": 0.0008264462809917355,
+                "accuracy": 0.28
+              },
+              {
+                "positiveClassThreshold": 0.00160639797864,
+                "truePositives": "3",
+                "falsePositives": "9369",
+                "trueNegatives": "703",
+                "falseNegatives": "0",
+                "precision": 0.0003201024327784891,
+                "recall": 1,
+                "f1Score": 0.00064,
+                "accuracy": 0.07007444168734492
+              },
+              {
+                "positiveClassThreshold": 0.00167520636148,
+                "truePositives": "3",
+                "falsePositives": "7051",
+                "trueNegatives": "3021",
+                "falseNegatives": "0",
+                "precision": 0.00042529061525375673,
+                "recall": 1,
+                "f1Score": 0.0008502196400736857,
+                "accuracy": 0.3001488833746898
+              },
+              {
+                "positiveClassThreshold": 0.00171253038823,
+                "truePositives": "2",
+                "falsePositives": "5340",
+                "trueNegatives": "4732",
+                "falseNegatives": "1",
+                "precision": 0.00037439161362785476,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0007483629560336763,
+                "accuracy": 0.46987593052109183
+              },
+              {
+                "positiveClassThreshold": 0.00166875120922,
+                "truePositives": "3",
+                "falsePositives": "7352",
+                "trueNegatives": "2720",
+                "falseNegatives": "0",
+                "precision": 0.0004078857919782461,
+                "recall": 1,
+                "f1Score": 0.0008154389779831476,
+                "accuracy": 0.27027295285359804
+              },
+              {
+                "positiveClassThreshold": 0.00171768686167,
+                "truePositives": "2",
+                "falsePositives": "5140",
+                "trueNegatives": "4932",
+                "falseNegatives": "1",
+                "precision": 0.00038895371450797355,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0007774538386783285,
+                "accuracy": 0.489727047146402
+              },
+              {
+                "positiveClassThreshold": 0.00160097197418,
+                "truePositives": "3",
+                "falsePositives": "9470",
+                "trueNegatives": "602",
+                "falseNegatives": "0",
+                "precision": 0.0003166895386889053,
+                "recall": 1,
+                "f1Score": 0.0006331785563528915,
+                "accuracy": 0.060049627791563275
+              },
+              {
+                "positiveClassThreshold": 0.00166041274592,
+                "truePositives": "3",
+                "falsePositives": "7755",
+                "trueNegatives": "2317",
+                "falseNegatives": "0",
+                "precision": 0.0003866976024748647,
+                "recall": 1,
+                "f1Score": 0.0007730962504831851,
+                "accuracy": 0.23027295285359803
+              },
+              {
+                "positiveClassThreshold": 0.00186565922833,
+                "truePositives": "1",
+                "falsePositives": "1916",
+                "trueNegatives": "8156",
+                "falseNegatives": "2",
+                "precision": 0.0005216484089723526,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0010416666666666667,
+                "accuracy": 0.8096277915632755
+              },
+              {
+                "positiveClassThreshold": 0.00177347104574,
+                "truePositives": "1",
+                "falsePositives": "3427",
+                "trueNegatives": "6645",
+                "falseNegatives": "2",
+                "precision": 0.00029171528588098014,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0005829204313611193,
+                "accuracy": 0.659652605459057
+              },
+              {
+                "positiveClassThreshold": 0.00169786572143,
+                "truePositives": "2",
+                "falsePositives": "6044",
+                "trueNegatives": "4028",
+                "falseNegatives": "1",
+                "precision": 0.0003307972213033411,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0006612663250123987,
+                "accuracy": 0.4
+              },
+              {
+                "positiveClassThreshold": 0.00181510182636,
+                "truePositives": "1",
+                "falsePositives": "2519",
+                "trueNegatives": "7553",
+                "falseNegatives": "2",
+                "precision": 0.0003968253968253968,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0007927070947284979,
+                "accuracy": 0.7497766749379653
+              },
+              {
+                "positiveClassThreshold": 0.00175335118176,
+                "truePositives": "2",
+                "falsePositives": "3927",
+                "trueNegatives": "6145",
+                "falseNegatives": "1",
+                "precision": 0.0005090353779587681,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.001017293997965412,
+                "accuracy": 0.6101240694789082
+              },
+              {
+                "positiveClassThreshold": 0.00172796341177,
+                "truePositives": "2",
+                "falsePositives": "4734",
+                "trueNegatives": "5338",
+                "falseNegatives": "1",
+                "precision": 0.0004222972972972973,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0008440599282549061,
+                "accuracy": 0.5300248138957816
+              },
+              {
+                "positiveClassThreshold": 0.00183719634898,
+                "truePositives": "1",
+                "falsePositives": "2216",
+                "trueNegatives": "7856",
+                "falseNegatives": "2",
+                "precision": 0.0004510599909788002,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0009009009009009009,
+                "accuracy": 0.7798511166253101
+              },
+              {
+                "positiveClassThreshold": 0.00168371576214,
+                "truePositives": "3",
+                "falsePositives": "6647",
+                "trueNegatives": "3425",
+                "falseNegatives": "0",
+                "precision": 0.0004511278195488722,
+                "recall": 1,
+                "f1Score": 0.00090184879001954,
+                "accuracy": 0.34024813895781636
+              },
+              {
+                "positiveClassThreshold": 0.00176487719038,
+                "truePositives": "1",
+                "falsePositives": "3630",
+                "trueNegatives": "6442",
+                "falseNegatives": "2",
+                "precision": 0.0002754062241806665,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.000550357732526142,
+                "accuracy": 0.6395037220843672
+              },
+              {
+                "positiveClassThreshold": 0.00189003067202,
+                "truePositives": "1",
+                "falsePositives": "1714",
+                "trueNegatives": "8358",
+                "falseNegatives": "2",
+                "precision": 0.0005830903790087463,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0011641443538998836,
+                "accuracy": 0.8296774193548387
+              },
+              {
+                "positiveClassThreshold": 0.00266322461891,
+                "truePositives": "0",
+                "falsePositives": "103",
+                "trueNegatives": "9969",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.9894789081885856
+              },
+              {
+                "positiveClassThreshold": 0.00200388544946,
+                "truePositives": "0",
+                "falsePositives": "1009",
+                "trueNegatives": "9063",
+                "falseNegatives": "3",
+                "precision": 0,
+                "recall": 0,
+                "f1Score": 0,
+                "accuracy": 0.8995533498759305
+              },
+              {
+                "positiveClassThreshold": 0.00174204217238,
+                "truePositives": "2",
+                "falsePositives": "4231",
+                "trueNegatives": "5841",
+                "falseNegatives": "1",
+                "precision": 0.0004724781478856603,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0009442870632672333,
+                "accuracy": 0.5799503722084367
+              },
+              {
+                "positiveClassThreshold": 0.00166419995916,
+                "truePositives": "3",
+                "falsePositives": "7555",
+                "trueNegatives": "2517",
+                "falseNegatives": "0",
+                "precision": 0.00039693040486901297,
+                "recall": 1,
+                "f1Score": 0.0007935458272715249,
+                "accuracy": 0.2501240694789082
+              },
+              {
+                "positiveClassThreshold": 0.00166649838337,
+                "truePositives": "3",
+                "falsePositives": "7455",
+                "trueNegatives": "2617",
+                "falseNegatives": "0",
+                "precision": 0.00040225261464199515,
+                "recall": 1,
+                "f1Score": 0.0008041817450743868,
+                "accuracy": 0.26004962779156326
+              },
+              {
+                "positiveClassThreshold": 0.00191453184452,
+                "truePositives": "1",
+                "falsePositives": "1512",
+                "trueNegatives": "8560",
+                "falseNegatives": "2",
+                "precision": 0.0006609385327164573,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0013192612137203166,
+                "accuracy": 0.849727047146402
+              },
+              {
+                "positiveClassThreshold": 0.00185460080653,
+                "truePositives": "1",
+                "falsePositives": "2014",
+                "trueNegatives": "8058",
+                "falseNegatives": "2",
+                "precision": 0.0004962779156327543,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0009910802775024777,
+                "accuracy": 0.7999007444168734
+              },
+              {
+                "positiveClassThreshold": 0.00173589758489,
+                "truePositives": "2",
+                "falsePositives": "4435",
+                "trueNegatives": "5637",
+                "falseNegatives": "1",
+                "precision": 0.000450755014649538,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0009009009009009009,
+                "accuracy": 0.5597022332506203
+              },
+              {
+                "positiveClassThreshold": 0.00178681185451,
+                "truePositives": "1",
+                "falsePositives": "3124",
+                "trueNegatives": "6948",
+                "falseNegatives": "2",
+                "precision": 0.00032,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0006393861892583121,
+                "accuracy": 0.689727047146402
+              },
+              {
+                "positiveClassThreshold": 0.00168627019108,
+                "truePositives": "3",
+                "falsePositives": "6548",
+                "trueNegatives": "3524",
+                "falseNegatives": "0",
+                "precision": 0.00045794535185467866,
+                "recall": 1,
+                "f1Score": 0.00091547146780592,
+                "accuracy": 0.3500744416873449
+              },
+              {
+                "positiveClassThreshold": 0.00171525093962,
+                "truePositives": "2",
+                "falsePositives": "5238",
+                "trueNegatives": "4834",
+                "falseNegatives": "1",
+                "precision": 0.0003816793893129771,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0007629219912263971,
+                "accuracy": 0.48
+              },
+              {
+                "positiveClassThreshold": 0.00166236192163,
+                "truePositives": "3",
+                "falsePositives": "7654",
+                "trueNegatives": "2418",
+                "falseNegatives": "0",
+                "precision": 0.00039179835444691133,
+                "recall": 1,
+                "f1Score": 0.000783289817232376,
+                "accuracy": 0.24029776674937967
+              },
+              {
+                "positiveClassThreshold": 0.00162957549274,
+                "truePositives": "3",
+                "falsePositives": "8866",
+                "trueNegatives": "1206",
+                "falseNegatives": "0",
+                "precision": 0.00033825684970120647,
+                "recall": 1,
+                "f1Score": 0.0006762849413886385,
+                "accuracy": 0.12
+              },
+              {
+                "positiveClassThreshold": 0.00176076700749,
+                "truePositives": "2",
+                "falsePositives": "3728",
+                "trueNegatives": "6344",
+                "falseNegatives": "1",
+                "precision": 0.0005361930294906167,
+                "recall": 0.6666666666666666,
+                "f1Score": 0.0010715242432360033,
+                "accuracy": 0.6298759305210918
+              },
+              {
+                "positiveClassThreshold": 0.0017963089685,
+                "truePositives": "1",
+                "falsePositives": "2958",
+                "trueNegatives": "7114",
+                "falseNegatives": "2",
+                "precision": 0.0003379520108144643,
+                "recall": 0.3333333333333333,
+                "f1Score": 0.0006752194463200541,
+                "accuracy": 0.7062034739454094
+              }
+            ],
+            "positiveLabel": "1",
+            "negativeLabel": "0"
+          }
+        },
+        "startTime": "2026-03-31T08:07:44.185Z",
+        "dataSplitResult": {
+          "trainingTable": {
+            "projectId": "citric-glow-485600-f4",
+            "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+            "tableId": "anon25568492_89ec_44aa_bf7f_f908223f36c0_imported_data_split_training_data"
+          },
+          "evaluationTable": {
+            "projectId": "citric-glow-485600-f4",
+            "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+            "tableId": "anon25568492_89ec_44aa_bf7f_f908223f36c0_imported_data_split_eval_data"
+          }
+        }
+      }
+    ],
+    "featureColumns": [
+      {
+        "name": "hr_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "hr_min_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "hr_max_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "hr_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "rr_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "rr_min_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "rr_max_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "rr_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "sao2_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "sao2_min_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "sao2_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "temp_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "temp_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "sbp_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "sbp_min_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "sbp_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "map_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "map_min_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "map_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "lactate_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "lactate_min_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "lactate_max_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "lactate_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "lactate_last_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "ph_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "ph_min_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "ph_max_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "ph_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "ph_last_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "k_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "k_min_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "k_max_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "k_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "k_last_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "creat_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "creat_min_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "creat_max_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "creat_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "creat_last_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "hgb_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "hgb_min_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "hgb_max_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "hgb_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "hgb_last_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "wbc_mean_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "wbc_min_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "wbc_max_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      },
+      {
+        "name": "wbc_n_6h",
+        "type": {
+          "typeKind": "INT64"
+        }
+      },
+      {
+        "name": "wbc_last_6h",
+        "type": {
+          "typeKind": "FLOAT64"
+        }
+      }
+    ],
+    "labelColumns": [
+      {
+        "name": "predicted_y",
+        "type": {
+          "typeKind": "INT64"
+        }
+      }
+    ],
+    "location": "US"
+  },
+  "billing": {
+    "projectId": "citric-glow-485600-f4",
+    "billingEnabled": true
+  }
+}

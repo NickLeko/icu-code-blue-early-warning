@@ -1,0 +1,252 @@
+{
+  "tables": {
+    "kind": "bigquery#tableList",
+    "etag": "dMWOmjTd2RbettkJr1PNvQ==",
+    "tables": [
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.cohort_v1",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "cohort_v1"
+        },
+        "type": "TABLE",
+        "creationTime": "1774944215375"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.event_dx_v1",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "event_dx_v1"
+        },
+        "type": "TABLE",
+        "creationTime": "1774944219709"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.event_tx_v1",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "event_tx_v1"
+        },
+        "type": "TABLE",
+        "creationTime": "1769476801694"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.event_tx_v2",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "event_tx_v2"
+        },
+        "type": "TABLE",
+        "creationTime": "1774944224592"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.features_v2",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "features_v2"
+        },
+        "type": "TABLE",
+        "creationTime": "1774944349322"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.features_v3",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "features_v3"
+        },
+        "type": "TABLE",
+        "creationTime": "1774944406664"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.features_v4",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "features_v4"
+        },
+        "type": "TABLE",
+        "creationTime": "1769483913366"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.labels_v1",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "labels_v1"
+        },
+        "type": "TABLE",
+        "creationTime": "1769476871204"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.labels_v2",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "labels_v2"
+        },
+        "type": "TABLE",
+        "creationTime": "1774944227450"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.model_table_v1",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v1"
+        },
+        "type": "TABLE",
+        "creationTime": "1769481133598"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.model_table_v3",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v3"
+        },
+        "type": "TABLE",
+        "creationTime": "1774944452116"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.model_table_v4",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v4"
+        },
+        "type": "TABLE",
+        "creationTime": "1769483947297"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.preds_test_v1",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "preds_test_v1"
+        },
+        "type": "TABLE",
+        "creationTime": "1769482237603"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.preds_test_v3",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "preds_test_v3"
+        },
+        "type": "TABLE",
+        "creationTime": "1774945269053"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.preds_test_v4",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "preds_test_v4"
+        },
+        "type": "TABLE",
+        "creationTime": "1769484381884"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.split_hospital_v1",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "split_hospital_v1"
+        },
+        "type": "TABLE",
+        "creationTime": "1774944423678"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.train_rows_v2",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "train_rows_v2"
+        },
+        "type": "TABLE",
+        "creationTime": "1769479080437"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.train_rows_v3",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "train_rows_v3"
+        },
+        "type": "TABLE",
+        "creationTime": "1774944419615"
+      },
+      {
+        "kind": "bigquery#table",
+        "id": "citric-glow-485600-f4:icu_ml.train_rows_v4",
+        "tableReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "train_rows_v4"
+        },
+        "type": "TABLE",
+        "creationTime": "1769483931846"
+      }
+    ],
+    "totalItems": 19
+  },
+  "models": {
+    "models": [
+      {
+        "modelReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "modelId": "bqml_lr_v1"
+        },
+        "creationTime": "1769481798125",
+        "lastModifiedTime": "1769481798202",
+        "modelType": "LOGISTIC_REGRESSION"
+      },
+      {
+        "modelReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "modelId": "bqml_lr_v3"
+        },
+        "creationTime": "1774944773586",
+        "lastModifiedTime": "1774944773663",
+        "modelType": "LOGISTIC_REGRESSION"
+      },
+      {
+        "modelReference": {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "modelId": "bqml_lr_v4"
+        },
+        "creationTime": "1769484211516",
+        "lastModifiedTime": "1769484211577",
+        "modelType": "LOGISTIC_REGRESSION"
+      }
+    ]
+  }
+}

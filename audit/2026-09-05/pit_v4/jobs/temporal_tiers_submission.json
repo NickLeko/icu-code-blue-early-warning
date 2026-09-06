@@ -1,0 +1,10 @@
+{
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_temporal_tiers_a32597807492",
+    "location": "US"
+  },
+  "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/sql/10_eval_temporal_alert_tiers.sql",
+  "querySha256": "a3259780749238d4c21a29599a7b8465b53234f70107e08b1ff99340bce592d4",
+  "submittedAt": "2026-09-06T04:37:23.244834+00:00"
+}

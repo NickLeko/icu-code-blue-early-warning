@@ -1,19 +1,23 @@
 -- 08_bqml_models.sql
--- Train the final prespecified BigQuery ML logistic regression model
--- (vitals + labs).
--- This repo publishes one fixed final-model path; it does not reproduce a
--- hyperparameter sweep or validation-based benchmark selection story.
--- Output model: `{{PROJECT_ID}}.icu_ml.bqml_lr_v3`
+-- PIT v4: fixed logistic-regression specification, with the explicit hospital
+-- validation split used for early stopping. No test rows enter CREATE MODEL.
+-- No hyperparameter sweep or threshold selection is performed.
+-- Output model: `{{PROJECT_ID}}.icu_ml.bqml_lr_v4_pit`
 
-CREATE OR REPLACE MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v3`
+CREATE OR REPLACE MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v4_pit`
 OPTIONS(
   model_type = 'LOGISTIC_REG',
   input_label_cols = ['y'],
   l2_reg = 1.0,
-  max_iterations = 50
+  max_iterations = 50,
+  data_split_method = 'CUSTOM',
+  data_split_col = 'is_validation',
+  early_stop = TRUE,
+  min_rel_progress = 0.01
 ) AS
 SELECT
   y,
+  split = 'val' AS is_validation,  -- split column is excluded from model inputs
 
   -- vitals
   hr_mean_6h, hr_min_6h, hr_max_6h, hr_n_6h,
@@ -31,19 +35,19 @@ SELECT
   hgb_mean_6h, hgb_min_6h, hgb_max_6h, hgb_n_6h, hgb_last_6h,
   wbc_mean_6h, wbc_min_6h, wbc_max_6h, wbc_n_6h, wbc_last_6h
 
-FROM `{{PROJECT_ID}}.icu_ml.model_table_v3`
-WHERE split = 'train';
+FROM `{{PROJECT_ID}}.icu_ml.model_table_v4_pit`
+WHERE split IN ('train', 'val');
 
 -- Note:
---   `split = 'val'` is reserved for future model-selection work, but the
---   current repo intentionally keeps the executable path to one prespecified
---   model trained on train only and evaluated on test.
+--   TRUE routes all validation-hospital rows to BQML evaluation; FALSE routes
+--   training-hospital rows to fitting. Early stopping deliberately remains on,
+--   with the prior 1% progress criterion and 50-iteration cap made explicit.
 
 -- Optional evaluation snippets (run manually)
 -- Test:
 -- SELECT *
 -- FROM ML.EVALUATE(
---   MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v3`,
+--   MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v4_pit`,
 --   (
 --     SELECT
 --       y,
@@ -59,7 +63,7 @@ WHERE split = 'train';
 --       creat_mean_6h, creat_min_6h, creat_max_6h, creat_n_6h, creat_last_6h,
 --       hgb_mean_6h, hgb_min_6h, hgb_max_6h, hgb_n_6h, hgb_last_6h,
 --       wbc_mean_6h, wbc_min_6h, wbc_max_6h, wbc_n_6h, wbc_last_6h
---     FROM `{{PROJECT_ID}}.icu_ml.model_table_v3`
+--     FROM `{{PROJECT_ID}}.icu_ml.model_table_v4_pit`
 --     WHERE split = 'test'
 --   )
 -- );

@@ -1,0 +1,800 @@
+{
+  "kind": "bigquery#getQueryResultsResponse",
+  "etag": "Jo8Ugii8SjmySw1xR4KrXQ==",
+  "schema": {
+    "fields": [
+      {
+        "name": "patientunitstayid",
+        "type": "INTEGER"
+      },
+      {
+        "name": "prediction_time_min",
+        "type": "INTEGER"
+      },
+      {
+        "name": "hr_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hr_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "hr_max_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "hr_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "rr_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "rr_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "rr_max_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "rr_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "sao2_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "sao2_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "sao2_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "temp_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "temp_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "sbp_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "sbp_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "sbp_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "map_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "map_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "map_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "lactate_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "lactate_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "lactate_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "lactate_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "lactate_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "ph_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "ph_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "ph_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "ph_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "ph_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "k_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "k_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "k_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "k_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "k_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "creat_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "creat_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "creat_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "creat_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "creat_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hgb_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hgb_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hgb_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hgb_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "hgb_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "wbc_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "wbc_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "wbc_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "wbc_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "wbc_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "event_offset_min",
+        "type": "INTEGER"
+      },
+      {
+        "name": "y",
+        "type": "INTEGER"
+      },
+      {
+        "name": "hospitalid",
+        "type": "INTEGER"
+      },
+      {
+        "name": "split",
+        "type": "STRING"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_model_table_9f2dc1a42818",
+    "location": "US"
+  },
+  "totalBytesProcessed": "2377555885",
+  "jobComplete": true,
+  "cacheHit": false,
+  "auditJobStatistics": {
+    "creationTime": "1788669058105",
+    "startTime": "1788669058447",
+    "endTime": "1788669062377",
+    "totalBytesProcessed": "2377555885",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Input",
+          "id": "0",
+          "startMs": "1788669058661",
+          "endMs": "1788669058738",
+          "waitRatioAvg": 0.0011665208515602217,
+          "waitMsAvg": "4",
+          "waitRatioMax": 0.0011665208515602217,
+          "waitMsMax": "4",
+          "readRatioAvg": 0.0008748906386701663,
+          "readMsAvg": "3",
+          "readRatioMax": 0.0008748906386701663,
+          "readMsMax": "3",
+          "computeRatioAvg": 0.004666083406240887,
+          "computeMsAvg": "16",
+          "computeRatioMax": 0.004666083406240887,
+          "computeMsMax": "16",
+          "writeRatioAvg": 0.0017497812773403325,
+          "writeMsAvg": "6",
+          "writeRatioMax": 0.0017497812773403325,
+          "writeMsMax": "6",
+          "shuffleOutputBytes": "3837",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "208",
+          "recordsWritten": "208",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:hospitalid, $2:split",
+                "FROM citric-glow-485600-f4.icu_ml.split_hospital_v1"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$1, $2",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "69",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S01: Input",
+          "id": "1",
+          "startMs": "1788669058667",
+          "endMs": "1788669058772",
+          "waitRatioAvg": 0.00029163021289005544,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.00029163021289005544,
+          "waitMsMax": "1",
+          "readRatioAvg": 0.0026246719160104987,
+          "readMsAvg": "9",
+          "readRatioMax": 0.0026246719160104987,
+          "readMsMax": "9",
+          "computeRatioAvg": 0.02741324001166521,
+          "computeMsAvg": "94",
+          "computeRatioMax": 0.02741324001166521,
+          "computeMsMax": "94",
+          "writeRatioAvg": 0.004082822980460776,
+          "writeMsAvg": "14",
+          "writeRatioMax": 0.004082822980460776,
+          "writeMsMax": "14",
+          "shuffleOutputBytes": "3193524",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "177418",
+          "recordsWritten": "177418",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$70:patientunitstayid, $71:hospitalid",
+                "FROM citric-glow-485600-f4.icu_ml.cohort_v1"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$70, $71",
+                "TO __stage01_output"
+              ]
+            }
+          ],
+          "slotMs": "96",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S03: Join",
+          "id": "3",
+          "startMs": "1788669058787",
+          "endMs": "1788669059626",
+          "inputStages": [
+            "1",
+            "0"
+          ],
+          "waitRatioAvg": 0.0023330417031204435,
+          "waitMsAvg": "8",
+          "waitRatioMax": 0.004374453193350831,
+          "waitMsMax": "15",
+          "readRatioAvg": 0.0032079323417906094,
+          "readMsAvg": "11",
+          "readRatioMax": 0.00758238553514144,
+          "readMsMax": "26",
+          "computeRatioAvg": 0.2995042286380869,
+          "computeMsAvg": "1027",
+          "computeRatioMax": 0.4094488188976378,
+          "computeMsMax": "1404",
+          "writeRatioAvg": 0.006707494896471274,
+          "writeMsAvg": "23",
+          "writeRatioMax": 0.0215806357538641,
+          "writeMsMax": "74",
+          "shuffleOutputBytes": "2620450059",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "17953789",
+          "recordsWritten": "10493497",
+          "parallelInputs": "50",
+          "completedParallelInputs": "50",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$10:patientunitstayid, $11:prediction_time_min, $12:hr_mean_6h, $13:hr_min_6h, $14:hr_max_6h, $15:hr_n_6h, $16:rr_mean_6h, $17:rr_min_6h, $18:rr_max_6h, $19:rr_n_6h, $20:sao2_mean_6h, $21:sao2_min_6h, $22:sao2_n_6h, $23:temp_mean_6h, $24:temp_n_6h, $25:sbp_mean_6h",
+                "FROM citric-glow-485600-f4.icu_ml.train_rows_v4_pit"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$70, $71",
+                "FROM __stage01_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1, $2",
+                "FROM __stage00_output"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$140 := $80, $141 := $81, $142 := $82, $143 := $83, $144 := $84, $145 := $85, $146 := $86, $147 := $87, $148 := $88, $149 := $89, $150 := $90, $151 := $91, $152 := $92, $153 := $93, $154 := $94, $155 := $95",
+                "INNER HASH JOIN EACH  WITH ALL  ON $133 = $1"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$80 := $10, $81 := $11, $82 := $12, $83 := $13, $84 := $14, $85 := $15, $86 := $16, $87 := $17, $88 := $18, $89 := $19, $90 := $20, $91 := $21, $92 := $22, $93 := $23, $94 := $24, $95 := $25",
+                "INNER HASH JOIN EACH  WITH ALL  ON $10 = $70"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$194, $140, $141, $142, $143, $144, $145, $146, $147, $148, $149, $150, $151, $152, $153, $154",
+                "TO __stage03_output"
+              ]
+            }
+          ],
+          "slotMs": "44388",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S04: Output",
+          "id": "4",
+          "startMs": "1788669059725",
+          "endMs": "1788669061634",
+          "inputStages": [
+            "3"
+          ],
+          "waitRatioAvg": 0.02741324001166521,
+          "waitMsAvg": "94",
+          "waitRatioMax": 0.02799650043744532,
+          "waitMsMax": "96",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.6593759113444153,
+          "computeMsAvg": "2261",
+          "computeRatioMax": 1,
+          "computeMsMax": "3429",
+          "writeRatioAvg": 0.0005832604257801109,
+          "writeMsAvg": "2",
+          "writeRatioMax": 0.002041411490230388,
+          "writeMsMax": "7",
+          "shuffleOutputBytes": "0",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "10493497",
+          "recordsWritten": "10493497",
+          "parallelInputs": "50",
+          "completedParallelInputs": "50",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$194, $140, $141, $142, $143, $144, $145, $146, $147, $148, $149, $150, $151, $152, $153, $154",
+                "FROM __stage03_output"
+              ]
+            },
+            {
+              "kind": "EXPORT",
+              "substeps": [
+                "$140:patientunitstayid, $141:prediction_time_min, $142:hr_mean_6h, $143:hr_min_6h, $144:hr_max_6h, $145:hr_n_6h, $146:rr_mean_6h, $147:rr_min_6h, $148:rr_max_6h, $149:rr_n_6h, $150:sao2_mean_6h, $151:sao2_min_6h, $152:sao2_n_6h, $153:temp_mean_6h, $154:temp_n_6h, $155:sbp_mean_6h",
+                "TO icu_ml.model_table_v4_pit"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$194, $140, $141, $142, $143, $144, $145, $146, $147, $148, $149, $150, $151, $152, $153, $154",
+                "TO __stage04_output"
+              ]
+            }
+          ],
+          "slotMs": "102506",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "2377555885",
+      "timeline": [
+        {
+          "elapsedMs": "553",
+          "totalSlotMs": "147800",
+          "pendingUnits": "50",
+          "completedUnits": "2",
+          "activeUnits": "50",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "1553",
+          "totalSlotMs": "147800",
+          "pendingUnits": "50",
+          "completedUnits": "52",
+          "activeUnits": "56",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "3189",
+          "totalSlotMs": "147800",
+          "pendingUnits": "0",
+          "completedUnits": "102",
+          "activeUnits": "31",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "2377555885",
+      "totalBytesBilled": "2378170368",
+      "billingTier": 1,
+      "totalSlotMs": "147800",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "cohort_v1"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "train_rows_v4_pit"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "split_hospital_v1"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "patientunitstayid",
+            "type": "INTEGER"
+          },
+          {
+            "name": "prediction_time_min",
+            "type": "INTEGER"
+          },
+          {
+            "name": "hr_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hr_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "hr_max_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "hr_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "rr_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "rr_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "rr_max_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "rr_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "sao2_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "sao2_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "sao2_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "temp_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "temp_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "sbp_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "sbp_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "sbp_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "map_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "map_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "map_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "lactate_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "lactate_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "lactate_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "lactate_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "lactate_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "ph_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "ph_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "ph_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "ph_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "ph_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "k_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "k_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "k_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "k_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "k_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "creat_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "creat_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "creat_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "creat_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "creat_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hgb_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hgb_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hgb_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hgb_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "hgb_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "wbc_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "wbc_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "wbc_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "wbc_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "wbc_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "event_offset_min",
+            "type": "INTEGER"
+          },
+          {
+            "name": "y",
+            "type": "INTEGER"
+          },
+          {
+            "name": "hospitalid",
+            "type": "INTEGER"
+          },
+          {
+            "name": "split",
+            "type": "STRING"
+          }
+        ]
+      },
+      "statementType": "CREATE_TABLE_AS_SELECT",
+      "ddlOperationPerformed": "CREATE",
+      "ddlTargetTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "icu_ml",
+        "tableId": "model_table_v4_pit"
+      },
+      "queryInfo": {
+        "optimizationDetails": {
+          "optimizations": [
+            {
+              "enhanced_vectorization": "applied"
+            }
+          ]
+        }
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "cohort_v1"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "train_rows_v4_pit"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "split_hospital_v1"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "147800",
+    "finalExecutionDurationMs": "3149"
+  }
+}

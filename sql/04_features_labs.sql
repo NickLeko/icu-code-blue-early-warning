@@ -4,9 +4,16 @@
 --   Vitals and labs must be aggregated separately at the prediction-window level
 --   before joining. Joining raw vitalperiodic and lab rows in the same grouped
 --   query can multiply rows and corrupt count-based features.
--- Output: `{{PROJECT_ID}}.icu_ml.features_v3`
+-- PIT v4: retain the specimen-based [t-360,t) lookback, but admit the
+-- stored lab value only when MAX(draw offset, revised-entry offset) < t.
+-- Both offsets must be known. NULL revised-entry time means unknown
+-- availability and excludes that lab record; do not fall back to draw time.
+-- This conservatively handles stored revisions; earlier result versions are
+-- not reconstructable from this table. "Last" remains latest draw among
+-- values available before t, with labid only a deterministic tie-breaker.
+-- Output: `{{PROJECT_ID}}.icu_ml.features_v4_pit`
 
-CREATE OR REPLACE TABLE `{{PROJECT_ID}}.icu_ml.features_v3` AS
+CREATE OR REPLACE TABLE `{{PROJECT_ID}}.icu_ml.features_v4_pit` AS
 WITH grid AS (
   SELECT
     patientunitstayid,
@@ -18,6 +25,7 @@ labs_clean AS (
     labid,
     patientunitstayid,
     labresultoffset,
+    GREATEST(labresultoffset, labresultrevisedoffset) AS available_offset_min,
     LOWER(TRIM(labname)) AS labname_norm,
     COALESCE(
       SAFE_CAST(labresult AS FLOAT64),
@@ -26,6 +34,7 @@ labs_clean AS (
   FROM `physionet-data.eicu_crd.lab`
   WHERE labresultoffset IS NOT NULL
     AND labresultoffset >= 0
+    AND labresultrevisedoffset IS NOT NULL
 ),
 labs_agg AS (
   SELECT
@@ -85,6 +94,7 @@ labs_agg AS (
     ON l.patientunitstayid = g.patientunitstayid
    AND l.labresultoffset >= g.prediction_time_min - 360
    AND l.labresultoffset <  g.prediction_time_min
+   AND l.available_offset_min < g.prediction_time_min
   GROUP BY g.patientunitstayid, g.prediction_time_min
 )
 SELECT

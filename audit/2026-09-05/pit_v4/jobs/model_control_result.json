@@ -1,0 +1,706 @@
+{
+  "kind": "bigquery#getQueryResultsResponse",
+  "etag": "GBNbwofO4U8SK8v8z3eN1g==",
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_model_control_736beba7440d",
+    "location": "US"
+  },
+  "totalBytesProcessed": "2273590874",
+  "jobComplete": true,
+  "errors": [
+    {
+      "reason": "invalidQuery",
+      "location": "query",
+      "message": "The input data has NULL values in one or more columns. BQML automatically handles null values (See https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-auto-preprocessing#imputation). If null values represent a special value in the data, replace them with the desired value before training and then retry."
+    }
+  ],
+  "cacheHit": false,
+  "auditJobStatistics": {
+    "creationTime": "1788669092377",
+    "startTime": "1788669092891",
+    "endTime": "1788669309883",
+    "totalBytesProcessed": "2273590874",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "Validate",
+          "id": "0",
+          "startMs": "1788669092970",
+          "endMs": "1788669098034",
+          "status": "COMPLETE",
+          "slotMs": "108522",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "Preprocess",
+          "id": "1",
+          "startMs": "1788669098034",
+          "endMs": "1788669166531",
+          "status": "COMPLETE",
+          "slotMs": "1713758",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "Train",
+          "id": "2",
+          "startMs": "1788669166531",
+          "endMs": "1788669305911",
+          "status": "COMPLETE",
+          "slotMs": "13212186",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "Evaluate",
+          "id": "3",
+          "startMs": "1788669305912",
+          "endMs": "1788669309824",
+          "shuffleOutputBytes": "0",
+          "status": "COMPLETE",
+          "slotMs": "142799",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "2273590874",
+      "timeline": [
+        {
+          "elapsedMs": "179",
+          "totalSlotMs": "0",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "179",
+          "totalSlotMs": "0",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "5352",
+          "totalSlotMs": "114820",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "15280",
+          "totalSlotMs": "491424",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "30127",
+          "totalSlotMs": "1008358",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "32522",
+          "totalSlotMs": "1096227",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "60978",
+          "totalSlotMs": "1361901",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "62500",
+          "totalSlotMs": "1366164",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "73641",
+          "totalSlotMs": "1934007",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "76141",
+          "totalSlotMs": "2118462",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "78502",
+          "totalSlotMs": "2314926",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "79539",
+          "totalSlotMs": "2316912",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "84333",
+          "totalSlotMs": "2810377",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "87390",
+          "totalSlotMs": "3018492",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "88388",
+          "totalSlotMs": "3021483",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "92511",
+          "totalSlotMs": "3539120",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "95386",
+          "totalSlotMs": "3752724",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "96336",
+          "totalSlotMs": "3755770",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "100714",
+          "totalSlotMs": "4304596",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "103254",
+          "totalSlotMs": "4497228",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "104267",
+          "totalSlotMs": "4500145",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "108385",
+          "totalSlotMs": "5051662",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "110854",
+          "totalSlotMs": "5257571",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "111861",
+          "totalSlotMs": "5261539",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "115739",
+          "totalSlotMs": "5775646",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "118226",
+          "totalSlotMs": "5978881",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "119253",
+          "totalSlotMs": "5982432",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "123432",
+          "totalSlotMs": "6546797",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "125997",
+          "totalSlotMs": "6752607",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "127073",
+          "totalSlotMs": "6757448",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "131790",
+          "totalSlotMs": "7330528",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "134236",
+          "totalSlotMs": "7533590",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "135404",
+          "totalSlotMs": "7537431",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "139592",
+          "totalSlotMs": "8071369",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "142854",
+          "totalSlotMs": "8262158",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "143363",
+          "totalSlotMs": "8267143",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "147819",
+          "totalSlotMs": "8788478",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "150409",
+          "totalSlotMs": "9005133",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "151385",
+          "totalSlotMs": "9008045",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "155470",
+          "totalSlotMs": "9559266",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "157928",
+          "totalSlotMs": "9760151",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "159140",
+          "totalSlotMs": "9764717",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "163638",
+          "totalSlotMs": "10304771",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "166194",
+          "totalSlotMs": "10510657",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "167217",
+          "totalSlotMs": "10514000",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "171492",
+          "totalSlotMs": "11059802",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "174064",
+          "totalSlotMs": "11262597",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "174993",
+          "totalSlotMs": "11267323",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "179137",
+          "totalSlotMs": "11844115",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "181412",
+          "totalSlotMs": "12042252",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "182336",
+          "totalSlotMs": "12045387",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "186265",
+          "totalSlotMs": "12578909",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "188530",
+          "totalSlotMs": "12773873",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "189547",
+          "totalSlotMs": "12777799",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "193705",
+          "totalSlotMs": "13349332",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "196054",
+          "totalSlotMs": "13559389",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "196964",
+          "totalSlotMs": "13563039",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "201201",
+          "totalSlotMs": "14109175",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "203554",
+          "totalSlotMs": "14322120",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "204641",
+          "totalSlotMs": "14326236",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "209275",
+          "totalSlotMs": "14870904",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "211995",
+          "totalSlotMs": "15081308",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "213550",
+          "totalSlotMs": "15086525",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "214133",
+          "totalSlotMs": "15087015",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "216937",
+          "totalSlotMs": "15177267",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "2273590874",
+      "totalBytesBilled": "2274361344",
+      "billingTier": 1,
+      "totalSlotMs": "15177267",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v4_pit"
+        }
+      ],
+      "statementType": "CREATE_MODEL",
+      "ddlOperationPerformed": "CREATE",
+      "ddlTargetTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "icu_ml",
+        "tableId": "bqml_lr_v4_pit_autosplit_control"
+      },
+      "mlStatistics": {
+        "maxIterations": "50",
+        "iterationResults": [
+          {
+            "index": 0,
+            "durationMs": "4861",
+            "trainingLoss": 0.6444518354128752,
+            "evalLoss": 0.6444657882750844,
+            "learnRate": 0.2
+          },
+          {
+            "index": 1,
+            "durationMs": "7850",
+            "trainingLoss": 0.5587719283386697,
+            "evalLoss": 0.5588104189525871,
+            "learnRate": 0.4
+          },
+          {
+            "index": 2,
+            "durationMs": "6997",
+            "trainingLoss": 0.42642732028394315,
+            "evalLoss": 0.4265055982134156,
+            "learnRate": 0.8
+          },
+          {
+            "index": 3,
+            "durationMs": "6918",
+            "trainingLoss": 0.2666736987450595,
+            "evalLoss": 0.2668124672770356,
+            "learnRate": 1.6
+          },
+          {
+            "index": 4,
+            "durationMs": "6587",
+            "trainingLoss": 0.13555305640474358,
+            "evalLoss": 0.13577603278223177,
+            "learnRate": 3.2
+          },
+          {
+            "index": 5,
+            "durationMs": "6365",
+            "trainingLoss": 0.06331037010845876,
+            "evalLoss": 0.06362353836083136,
+            "learnRate": 6.4
+          },
+          {
+            "index": 6,
+            "durationMs": "6744",
+            "trainingLoss": 0.030367789379267526,
+            "evalLoss": 0.030769064968254656,
+            "learnRate": 12.8
+          },
+          {
+            "index": 7,
+            "durationMs": "7154",
+            "trainingLoss": 0.015407733269444645,
+            "evalLoss": 0.015890409900498195,
+            "learnRate": 25.6
+          },
+          {
+            "index": 8,
+            "durationMs": "6944",
+            "trainingLoss": 0.008419800668679842,
+            "evalLoss": 0.008980268902820754,
+            "learnRate": 51.2
+          },
+          {
+            "index": 9,
+            "durationMs": "7046",
+            "trainingLoss": 0.005186528719429641,
+            "evalLoss": 0.00583661189829523,
+            "learnRate": 102.4
+          },
+          {
+            "index": 10,
+            "durationMs": "6542",
+            "trainingLoss": 0.004615599433399074,
+            "evalLoss": 0.005270700805522691,
+            "learnRate": 51.2
+          },
+          {
+            "index": 11,
+            "durationMs": "7053",
+            "trainingLoss": 0.004023319646011118,
+            "evalLoss": 0.0047143677526959755,
+            "learnRate": 102.4
+          },
+          {
+            "index": 12,
+            "durationMs": "6846",
+            "trainingLoss": 0.0036713437954850707,
+            "evalLoss": 0.0043125164221615,
+            "learnRate": 102.4
+          },
+          {
+            "index": 13,
+            "durationMs": "6418",
+            "trainingLoss": 0.003550489851852442,
+            "evalLoss": 0.004266981393181783,
+            "learnRate": 25.6
+          },
+          {
+            "index": 14,
+            "durationMs": "6194",
+            "trainingLoss": 0.003421776946140426,
+            "evalLoss": 0.004131006551841857,
+            "learnRate": 51.2
+          },
+          {
+            "index": 15,
+            "durationMs": "6506",
+            "trainingLoss": 0.003276724850151242,
+            "evalLoss": 0.004034722894946495,
+            "learnRate": 102.4
+          },
+          {
+            "index": 16,
+            "durationMs": "6591",
+            "trainingLoss": 0.0031270082963817227,
+            "evalLoss": 0.0038565612446286594,
+            "learnRate": 102.4
+          },
+          {
+            "index": 17,
+            "durationMs": "7354",
+            "trainingLoss": 0.003088413547786336,
+            "evalLoss": 0.0038518318262308403,
+            "learnRate": 25.6
+          }
+        ],
+        "modelType": "LOGISTIC_REGRESSION",
+        "trainingType": "SINGLE_TRAINING"
+      },
+      "searchStatistics": {
+        "indexUsageMode": "UNUSED",
+        "indexUnusedReasons": [
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.model_table_v4_pit`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            }
+          }
+        ]
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "15177267"
+  }
+}

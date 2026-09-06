@@ -3,5 +3,5 @@
 SELECT
   processed_input,
   weight
-FROM ML.WEIGHTS(MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v3`)
+FROM ML.WEIGHTS(MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v4_pit`)
 ORDER BY ABS(weight) DESC, processed_input;

@@ -1,0 +1,77 @@
+{
+  "kind": "bigquery#job",
+  "etag": "Kl0R/QB9U+pFG0Wnqu98Sg==",
+  "id": "citric-glow-485600-f4:US.",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- DRY RUN ONLY: validates model options against existing schema. Do not submit.\n-- 08_bqml_models.sql\n-- PIT v4: fixed logistic-regression specification, with the explicit hospital\n-- validation split used for early stopping. No test rows enter CREATE MODEL.\n-- No hyperparameter sweep or threshold selection is performed.\n-- Output model: `citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit`\n\nCREATE OR REPLACE MODEL `citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit`\nOPTIONS(\n  model_type = 'LOGISTIC_REG',\n  input_label_cols = ['y'],\n  l2_reg = 1.0,\n  max_iterations = 50,\n  data_split_method = 'CUSTOM',\n  data_split_col = 'is_validation',\n  early_stop = TRUE,\n  min_rel_progress = 0.01\n) AS\nSELECT\n  y,\n  split = 'val' AS is_validation,  -- split column is excluded from model inputs\n\n  -- vitals\n  hr_mean_6h, hr_min_6h, hr_max_6h, hr_n_6h,\n  rr_mean_6h, rr_min_6h, rr_max_6h, rr_n_6h,\n  sao2_mean_6h, sao2_min_6h, sao2_n_6h,\n  temp_mean_6h, temp_n_6h,\n  sbp_mean_6h, sbp_min_6h, sbp_n_6h,\n  map_mean_6h, map_min_6h, map_n_6h,\n\n  -- labs\n  lactate_mean_6h, lactate_min_6h, lactate_max_6h, lactate_n_6h, lactate_last_6h,\n  ph_mean_6h, ph_min_6h, ph_max_6h, ph_n_6h, ph_last_6h,\n  k_mean_6h, k_min_6h, k_max_6h, k_n_6h, k_last_6h,\n  creat_mean_6h, creat_min_6h, creat_max_6h, creat_n_6h, creat_last_6h,\n  hgb_mean_6h, hgb_min_6h, hgb_max_6h, hgb_n_6h, hgb_last_6h,\n  wbc_mean_6h, wbc_min_6h, wbc_max_6h, wbc_n_6h, wbc_last_6h\n\nFROM `citric-glow-485600-f4.icu_ml.model_table_v3`\nWHERE split IN ('train', 'val');\n\n-- Note:\n--   TRUE routes all validation-hospital rows to BQML evaluation; FALSE routes\n--   training-hospital rows to fitting. Early stopping deliberately remains on,\n--   with the prior 1% progress criterion and 50-iteration cap made explicit.\n\n-- Optional evaluation snippets (run manually)\n-- Test:\n-- SELECT *\n-- FROM ML.EVALUATE(\n--   MODEL `citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit`,\n--   (\n--     SELECT\n--       y,\n--       hr_mean_6h, hr_min_6h, hr_max_6h, hr_n_6h,\n--       rr_mean_6h, rr_min_6h, rr_max_6h, rr_n_6h,\n--       sao2_mean_6h, sao2_min_6h, sao2_n_6h,\n--       temp_mean_6h, temp_n_6h,\n--       sbp_mean_6h, sbp_min_6h, sbp_n_6h,\n--       map_mean_6h, map_min_6h, map_n_6h,\n--       lactate_mean_6h, lactate_min_6h, lactate_max_6h, lactate_n_6h, lactate_last_6h,\n--       ph_mean_6h, ph_min_6h, ph_max_6h, ph_n_6h, ph_last_6h,\n--       k_mean_6h, k_min_6h, k_max_6h, k_n_6h, k_last_6h,\n--       creat_mean_6h, creat_min_6h, creat_max_6h, creat_n_6h, creat_last_6h,\n--       hgb_mean_6h, hgb_min_6h, hgb_max_6h, hgb_n_6h, hgb_last_6h,\n--       wbc_mean_6h, wbc_min_6h, wbc_max_6h, wbc_n_6h, wbc_last_6h\n--     FROM `citric-glow-485600-f4.icu_ml.model_table_v3`\n--     WHERE split = 'test'\n--   )\n-- );\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "icu_ml",
+        "tableId": "bqml_lr_v4_pit"
+      },
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "dryRun": true,
+    "labels": {
+      "stage": "custom_options",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788668779835",
+    "endTime": "1788668780572",
+    "totalBytesProcessed": "2315613914",
+    "query": {
+      "totalBytesProcessed": "2315613914",
+      "totalBytesBilled": "0",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v3"
+        }
+      ],
+      "statementType": "CREATE_MODEL",
+      "ddlOperationPerformed": "CREATE",
+      "ddlTargetTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "icu_ml",
+        "tableId": "bqml_lr_v4_pit"
+      },
+      "totalBytesProcessedAccuracy": "PRECISE",
+      "mlStatistics": {
+        "maxIterations": "50",
+        "modelType": "LOGISTIC_REGRESSION",
+        "trainingType": "SINGLE_TRAINING"
+      },
+      "searchStatistics": {
+        "indexUnusedReasons": [
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.model_table_v3`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v3"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com"
+}

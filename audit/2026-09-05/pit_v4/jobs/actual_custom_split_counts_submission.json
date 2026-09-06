@@ -1,0 +1,10 @@
+{
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_actual_custom_split_counts_be8a1062d996",
+    "location": "US"
+  },
+  "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/actual_custom_split_counts.sql",
+  "querySha256": "be8a1062d9961ffd84fd21cf4462f3ce13cb8ae60f05def84db83efd28c346e2",
+  "submittedAt": "2026-09-06T04:35:16.555701+00:00"
+}

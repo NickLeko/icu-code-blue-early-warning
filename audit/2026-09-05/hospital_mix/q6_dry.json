@@ -1,0 +1,88 @@
+{
+  "kind": "bigquery#queryResponse",
+  "schema": {
+    "fields": [
+      {
+        "name": "hospitalid",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "n",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "k",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "a",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "tp",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "event_stays_with_positive_rows",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "detected_event_stays",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "prevalence",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "alert_rate",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "ppv",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "row_recall",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "evaluable_event_stay_recall",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "expected_tp_given_hospital_mix",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "pooled_observed_over_hospital_mix_expected",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "location": "US"
+  },
+  "totalBytesProcessed": "69335040",
+  "jobComplete": true,
+  "cacheHit": false,
+  "totalBytesBilled": "0",
+  "location": "US",
+  "creationTime": "1788636440607",
+  "endTime": "1788636440925"
+}

@@ -14,7 +14,7 @@ ranked AS (
     NTILE(200) OVER (
       ORDER BY prob_1 DESC, patientunitstayid, prediction_time_min
     ) AS bucket
-  FROM `{{PROJECT_ID}}.icu_ml.preds_test_v3`
+  FROM `{{PROJECT_ID}}.icu_ml.preds_test_v4_pit`
 ),
 alerts AS (
   SELECT

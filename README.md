@@ -1,5 +1,7 @@
 # ICU Code Blue Early Warning
 
+**Version 2.0.0-pit — point-in-time correction and held-out rerun completed.** Lab features now require the later of draw and revised-entry time to precede prediction. The model uses the explicit hospital-validation set for early stopping. See [the full old/new audit](audit/2026-09-05/pit_v4/REPORT.md).
+
 Clinical prediction tools do not fail only because the model is weak. They fail when alert policy, workflow fit, validation design, and deployment constraints are treated as afterthoughts.
 
 This project is a retrospective ICU risk-modeling artifact using eICU data with
@@ -18,26 +20,46 @@ It is a self-directed research prototype, not a clinically validated alerting sy
 - Model limitations and label caveats
 - Clinical deployment boundaries
 
-## Main Result
+## Main Result — Point-in-Time Corrected Run
 
-The held-out test split contained 31 hospitals, 2,078,011 patient-hours, and 310
-positive labeled windows. A corpus-wide percentile rule selecting the top 0.5%
-of scored test patient-hours selected 10,391 rows containing 21 positive windows: 0.2021%
-precision versus 0.0149% prevalence across the test split, or **13.55x risk
-enrichment over baseline**. Held-out `ML.EVALUATE` results were ROC-AUC 0.6377
-and log loss 0.002723. This rule is applied retrospectively across the complete
-test corpus; operational alert budgeting would require a separately defined
-hospital, census, and time window.
+Across **2,078,011 patient-hours from 31 held-out hospitals**, the raw global
+**top 0.5%** selected **10,391 alerts containing 36 positive documentation-proxy
+windows**: **23.22x pooled enrichment (95% hospital-cluster bootstrap CI
+11.45–41.53), 0.3465% PPV, and 11.61% positive-window recall**. Test prevalence
+was 310/2,078,011 = 0.014918%. Within-hospital AUROC was **0.7348 weighted by
+patient-hour volume and 0.7827 median** among the 21 hospitals with both classes.
+Positive alerts occurred in **9 of 31 hospitals**, versus 7 in the prior run.
+The endpoint remains a **documentation proxy, not adjudicated cardiac arrest**.
 
-Post-model policy analysis shows the operational tradeoff behind that result.
-Restricting alerts to first crossings reduced volume to 3,350 alerts with 8
-positive windows; applying a **12-hour quiet-period debounce (suppressed
-crossings reset the window)** reduced it to 2,650 alerts with 7 positive
-windows. This is not a post-alert cooldown measured from the last emitted
-alert. These are row-level results for a chart-derived proxy label,
-not deduplicated clinical events or evidence of improved patient outcomes. The
-supporting aggregate export is checked in under
-[`artifacts/reference_run/`](artifacts/reference_run/).
+The hospital-mix expectation was 1.443 positive alerts versus 36 observed
+(24.94x observed/expected), and 19/21 evaluable hospitals had AUROC above 0.5.
+Hospital mix alone does not explain the ranking signal. The interval uses
+100,000 whole-hospital resamples with fixed observed alert memberships; it does
+not refit the model or choose a new percentile in each resample. Clinical
+lead time and prospective benefit remain unestablished.
+
+Held-out global ROC-AUC was 0.7292. **Log loss was 0.007776, worse than the
+0.001502 constant training-prevalence baseline and the prior model's 0.002723.**
+Log loss measures probabilistic prediction quality, not ranking alone. This
+comparison contradicts a claim of better absolute probability estimates than
+the baseline; it does not erase the separately measured ranking signal.
+
+Before regeneration, Q1 confirmed future-entered lab values in **574,482 modeled
+patient-hours**, including **106,328 test rows and 35 positive test windows**.
+The prior 13.55x result was exposed to this defect. The correction's higher
+point estimate does not make that defect harmless. The rerun also applies an
+existing deterministic lab tie rule absent from the historical export; the
+[version audit](audit/2026-09-05/pit_v4/REPORT.md) quantifies that separate change.
+The final model and raw
+0.5% percentile rule were fixed before the new results were examined.
+
+First crossing retained 2,040 alerts/8 positive windows (0.3922% PPV); a 12-hour
+quiet-period debounce retained 1,596/8 (0.5013% PPV). Suppressed crossings reset
+the quiet period. The 23.22x headline describes the raw policy, and all counts
+are patient-hour proxy windows, not deduplicated cardiac arrests.
+See [old versus new results](docs/results.md), the
+[full version audit](audit/2026-09-05/pit_v4/REPORT.md), and
+[new aggregate exports](artifacts/reference_run_v4_pit/).
 
 ## Scope Boundary
 
@@ -56,9 +78,9 @@ See the [`MODEL_CARD.md`](MODEL_CARD.md) for intended use and limitations.
 - **Model:** BigQuery ML logistic regression with vitals + labs
 - **Prediction cadence:** hourly
 - **Lookback / horizon:** previous 6 hours to predict proximity within 2 hours of proxy documentation time, not the clinical event time
-- **Validation:** hospital-level train/val/test split; the published path trains on `train` and reports held-out `test`
+- **Validation:** hospital-level train/val/test split; the new specification fits `train`, uses all `val` hospitals for early stopping, and reserves `test` for evaluation
 - **Primary metric:** precision in the corpus-wide top 0.5% of held-out test rows
-- **Evidence:** aggregate-only queries in `artifacts/queries/` and a checked-in reference export in `artifacts/reference_run/`
+- **Evidence:** aggregate-only queries in `artifacts/queries/`, new exports in `artifacts/reference_run_v4_pit/`, and exact job/query provenance in `audit/2026-09-05/pit_v4/`
 
 The model is intentionally simple and interpretable. Evaluation design and
 alert policy are treated as first-class parts of the artifact rather than as
@@ -71,8 +93,9 @@ Each row is a patient-hour.
 - Outcome: earliest qualifying documented code-event / resuscitation proxy built from diagnosis and treatment string matches
 - Prediction horizon: within 2 hours before the proxy documentation offset;
   charting lag is uncharacterized, so true clinical lead time is not established
-- Lookback window: prior 6 hours
-- Minimum lead time: stays with events in the first 6 ICU hours are excluded from positive labeling
+- Lookback window: prior 6 hours; labs must also have draw and revised-entry offsets both known and strictly before prediction time
+- Early-event exclusion: stays with qualifying proxy events in the first 6 ICU hours are dropped from the downstream dataset entirely
+- Population: numeric ages 18–120; top-coded `> 89` and other nonnumeric ages are excluded. No `unittype` filter is applied. The base stay criterion is six hours, but the prediction grid requires at least eight hours to produce a modeled row.
 
 This framing turns the problem into short-term temporal risk ranking rather than one-time stay-level classification.
 
@@ -110,8 +133,9 @@ Naively alerting on every hour in the retrospective corpus-wide top 0.5% can cre
 - first-crossing alerts
 - a 12-hour quiet-period debounce in which suppressed crossings reset the window
 
-**Persistence-tier analysis: WITHDRAWN.** The tier classification logic was
-found defective in review and results will be republished after regeneration.
+The corrected persistence-tier query and its regression assertion were rerun.
+Its aggregate results are in `audit/2026-09-05/pit_v4/tier_metrics.csv`; the
+defective historical tier results remain withdrawn.
 
 The canonical queries for this work live in `sql/10_eval_temporal_alert_tiers.sql` and `sql/11_eval_first_crossing_cooldown.sql`. Aggregate reviewer exports for those analyses live in `artifacts/queries/`.
 
@@ -140,7 +164,8 @@ For a time-boxed hiring-manager path, see [`docs/reviewer_guide.md`](docs/review
 ├── artifacts/
 │   ├── README.md                 Aggregate-only proof export guide
 │   ├── queries/                  Reviewer-facing aggregate SQL queries
-│   └── reference_run/            Checked-in aggregate outputs from the corrected rerun
+│   ├── reference_run/            Historical v3 aggregate outputs (before PIT correction)
+│   └── reference_run_v4_pit/     Point-in-time corrected aggregate outputs
 ├── docs/
 │   ├── change_policy.md         Maintenance boundary for sensitive SQL
 │   ├── methodology.md            Concise scientific workflow description

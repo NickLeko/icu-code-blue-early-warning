@@ -4,10 +4,14 @@ These queries generate **aggregate-only** reviewer exports after the BigQuery
 pipeline has been run. They are the intended proof surface for the repo's main
 reported numbers.
 
-The current checked-in evidence pack from the corrected rerun lives in
-`artifacts/reference_run/`. The queries here are how that bundle is regenerated.
+The historical v3 evidence pack lives in `artifacts/reference_run/`. It predates
+the point-in-time correction and must be preserved. The current queries target
+`v4_pit` objects and should export to `artifacts/reference_run_v4_pit/` only after
+a successful rerun. The PIT rerun is complete; billing was enabled by the owner after the initial
+blocked attempt. Exact old/new comparisons and job evidence are
+in `audit/2026-09-05/pit_v4/REPORT.md`.
 
-The checked-in alert-policy CSV predates terminology correction: its
+The historical `reference_run/` alert-policy CSV predates terminology correction: its
 `cooldown_hours` column and `debounced_first_crossing` policy label describe the
 12-hour quiet-period debounce in which suppressed crossings reset the window,
 not a cooldown measured from the last emitted alert.

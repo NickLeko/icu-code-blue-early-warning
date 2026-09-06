@@ -1,0 +1,55 @@
+{
+  "kind": "bigquery#job",
+  "etag": "FxFwW74Mdje6q4L+RfheDg==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_expiration_probe_cd83f19a7b36",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_expiration_probe_cd83f19a7b36?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- Capability check only: no source data; expires after one hour if permitted.\n-- Tests whether a table-specific expiration avoids changing dataset defaults.\nCREATE TABLE IF NOT EXISTS `citric-glow-485600-f4.icu_ml.pit_v4_capability_probe`\nOPTIONS (expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR))\nAS SELECT 1 AS capability_probe;\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "icu_ml",
+        "tableId": "pit_v4_capability_probe"
+      },
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "expiration_probe",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_expiration_probe_cd83f19a7b36",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788668693513",
+    "startTime": "1788668693869",
+    "endTime": "1788668693869",
+    "query": {
+      "statementType": "CREATE_TABLE_AS_SELECT"
+    }
+  },
+  "status": {
+    "errorResult": {
+      "reason": "billingNotEnabled",
+      "message": "Billing has not been enabled for this project. Enable billing at https://console.cloud.google.com/billing. Datasets must have a default expiration time and default partition expiration time of less than 60 days while in sandbox mode."
+    },
+    "errors": [
+      {
+        "reason": "billingNotEnabled",
+        "message": "Billing has not been enabled for this project. Enable billing at https://console.cloud.google.com/billing. Datasets must have a default expiration time and default partition expiration time of less than 60 days while in sandbox mode."
+      }
+    ],
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

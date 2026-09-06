@@ -1,0 +1,202 @@
+{
+  "kind": "bigquery#job",
+  "etag": "sLh2Ir8wnyysQAA3tGzXMg==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_actual_custom_split_counts_be8a1062d996",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_actual_custom_split_counts_be8a1062d996?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- BQML temporary split tables from the completed model metadata.\nSELECT 'train' AS split,COUNT(*) AS n_rows,SUM(y) AS positive_windows FROM `citric-glow-485600-f4._36bcb2cf34934f993413629ae0991d97aa09a6a7.anonfb7ffe24_c973_4e78_9bd8_a1bd0a22ddfa_imported_data_split_training_data`\nUNION ALL\nSELECT 'val' AS split,COUNT(*) AS n_rows,SUM(y) AS positive_windows FROM `citric-glow-485600-f4._36bcb2cf34934f993413629ae0991d97aa09a6a7.anonfb7ffe24_c973_4e78_9bd8_a1bd0a22ddfa_imported_data_split_eval_data`;\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+        "tableId": "anon7d432b907ddcce5cea5f339d0c61c87391c3e934e0d1a82f9181d8bc04715a5f"
+      },
+      "writeDisposition": "WRITE_TRUNCATE",
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "actual_custom_split_counts",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_actual_custom_split_counts_be8a1062d996",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788669316067",
+    "startTime": "1788669316222",
+    "endTime": "1788669316441",
+    "totalBytesProcessed": "67323888",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Output",
+          "id": "0",
+          "startMs": "1788669316313",
+          "endMs": "1788669316362",
+          "waitRatioAvg": 0.00684931506849315,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.0136986301369863,
+          "waitMsMax": "2",
+          "readRatioAvg": 0.5,
+          "readMsAvg": "73",
+          "readRatioMax": 1,
+          "readMsMax": "146",
+          "computeRatioAvg": 0.3835616438356164,
+          "computeMsAvg": "56",
+          "computeRatioMax": 0.773972602739726,
+          "computeMsMax": "113",
+          "writeRatioAvg": 0.0136986301369863,
+          "writeMsAvg": "2",
+          "writeRatioMax": 0.0273972602739726,
+          "writeMsMax": "4",
+          "shuffleOutputBytes": "50",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "8415486",
+          "recordsWritten": "2",
+          "parallelInputs": "34",
+          "completedParallelInputs": "34",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:y",
+                "FROM citric-glow-485600-f4._36bcb2cf34934f993413629ae0991d97aa09a6a7.anonfb7ffe24_c973_4e78_9bd8_a1bd0a22ddfa_imported_data_split_training_data",
+                "(1 similar table omitted)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$30 := 'train'"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$50 := SUM_OF_COUNTS($70)",
+                "$51 := SUM($71)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$70 := COUNT_STAR()",
+                "$71 := SUM($1)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$40 := 'val'"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$60 := SUM_OF_COUNTS($80)",
+                "$61 := SUM($81)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$80 := COUNT_STAR()",
+                "$81 := SUM($10)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$20, $21, $22",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "211",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "67323888",
+      "timeline": [
+        {
+          "elapsedMs": "146",
+          "totalSlotMs": "211",
+          "pendingUnits": "0",
+          "completedUnits": "34",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "67323888",
+      "totalBytesBilled": "68157440",
+      "billingTier": 1,
+      "totalSlotMs": "211",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+          "tableId": "anonfb7ffe24_c973_4e78_9bd8_a1bd0a22ddfa_imported_data_split_training_data"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+          "tableId": "anonfb7ffe24_c973_4e78_9bd8_a1bd0a22ddfa_imported_data_split_eval_data"
+        }
+      ],
+      "statementType": "SELECT",
+      "queryInfo": {
+        "optimizationDetails": {
+          "optimizations": [
+            {
+              "enhanced_vectorization": "applied"
+            },
+            {
+              "short_query_optimization": "applied"
+            }
+          ]
+        }
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+              "tableId": "anonfb7ffe24_c973_4e78_9bd8_a1bd0a22ddfa_imported_data_split_training_data"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+              "tableId": "anonfb7ffe24_c973_4e78_9bd8_a1bd0a22ddfa_imported_data_split_eval_data"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "211",
+    "finalExecutionDurationMs": "63"
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

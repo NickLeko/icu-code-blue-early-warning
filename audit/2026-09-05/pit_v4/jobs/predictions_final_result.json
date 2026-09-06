@@ -1,0 +1,79 @@
+{
+  "kind": "bigquery#getQueryResultsResponse",
+  "etag": "72FKkeazH4MOkAPsJcXIhw==",
+  "schema": {
+    "fields": [
+      {
+        "name": "alerts",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "positive_windows",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "precision_at_0_5pct",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_predictions_final_725e8a82840f",
+    "location": "US"
+  },
+  "totalRows": "1",
+  "rows": [
+    {
+      "f": [
+        {
+          "v": "10391"
+        },
+        {
+          "v": "36"
+        },
+        {
+          "v": "0.003464536618227312"
+        }
+      ]
+    }
+  ],
+  "totalBytesProcessed": "2507984907",
+  "jobComplete": true,
+  "auditJobStatistics": {
+    "creationTime": "1788669330342",
+    "startTime": "1788669330385",
+    "endTime": "1788669335616",
+    "totalBytesProcessed": "2507984907",
+    "query": {
+      "totalBytesProcessed": "2507984907",
+      "totalBytesBilled": "2509242368",
+      "totalSlotMs": "62575",
+      "schema": {
+        "fields": [
+          {
+            "name": "alerts",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "positive_windows",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          },
+          {
+            "name": "precision_at_0_5pct",
+            "type": "FLOAT",
+            "mode": "NULLABLE"
+          }
+        ]
+      },
+      "statementType": "SCRIPT"
+    },
+    "totalSlotMs": "62575",
+    "numChildJobs": "2"
+  }
+}

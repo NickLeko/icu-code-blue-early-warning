@@ -1,0 +1,215 @@
+{
+  "kind": "bigquery#getQueryResultsResponse",
+  "etag": "/1j8hcL++mbbwMaaUCxmJA==",
+  "schema": {
+    "fields": [
+      {
+        "name": "train_prevalence",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "test_prevalence",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "constant_train_prevalence_log_loss",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_probability_baseline_64172d26ca22",
+    "location": "US"
+  },
+  "totalRows": "1",
+  "rows": [
+    {
+      "f": [
+        {
+          "v": "2.8419827884272695E-4"
+        },
+        {
+          "v": "1.4918111598061828E-4"
+        },
+        {
+          "v": "0.0015023851529853281"
+        }
+      ]
+    }
+  ],
+  "totalBytesProcessed": "151294394",
+  "jobComplete": true,
+  "cacheHit": false,
+  "auditJobStatistics": {
+    "creationTime": "1788669397200",
+    "startTime": "1788669397943",
+    "endTime": "1788669398281",
+    "totalBytesProcessed": "151294394",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Output",
+          "id": "0",
+          "startMs": "1788669398044",
+          "endMs": "1788669398180",
+          "waitRatioAvg": 0,
+          "waitMsAvg": "0",
+          "waitRatioMax": 0.0007961783439490446,
+          "waitMsMax": "1",
+          "readRatioAvg": 0.5,
+          "readMsAvg": "628",
+          "readRatioMax": 1,
+          "readMsMax": "1256",
+          "computeRatioAvg": 0.41878980891719747,
+          "computeMsAvg": "526",
+          "computeRatioMax": 0.8375796178343949,
+          "computeMsMax": "1052",
+          "writeRatioAvg": 0.0031847133757961785,
+          "writeMsAvg": "4",
+          "writeRatioMax": 0.006369426751592357,
+          "writeMsMax": "8",
+          "shuffleOutputBytes": "25",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "20986994",
+          "recordsWritten": "1",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:y, $2:split",
+                "FROM citric-glow-485600-f4.icu_ml.model_table_v4_pit",
+                "(1 similar table omitted)",
+                "WHERE equal($2, 'train')"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$20 := subtract(multiply(unary_minus($81), ln($80)), multiply(subtract(1, $81), ln(subtract(1, $80))))"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$80 := $30, $81 := $40",
+                "CROSS EACH  WITH EACH "
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$30 := ROOT_AVG($50)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$50 := SHARD_AVG($1)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$40 := ROOT_AVG($60)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$60 := SHARD_AVG($10)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$20, $80, $81",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "1421",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "151294394",
+      "timeline": [
+        {
+          "elapsedMs": "57",
+          "totalSlotMs": "1421",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "245",
+          "totalSlotMs": "1421",
+          "pendingUnits": "0",
+          "completedUnits": "100",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "151294394",
+      "totalBytesBilled": "152043520",
+      "billingTier": 1,
+      "totalSlotMs": "1421",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v4_pit"
+        }
+      ],
+      "statementType": "SELECT",
+      "searchStatistics": {
+        "indexUsageMode": "UNUSED",
+        "indexUnusedReasons": [
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.model_table_v4_pit`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            }
+          }
+        ]
+      },
+      "queryInfo": {
+        "optimizationDetails": {
+          "optimizations": [
+            {
+              "enhanced_vectorization": "applied"
+            },
+            {
+              "short_query_optimization": "applied"
+            }
+          ]
+        }
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            },
+            "staleness": "0s"
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "1421",
+    "finalExecutionDurationMs": "151"
+  }
+}

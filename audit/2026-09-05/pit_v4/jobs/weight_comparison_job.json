@@ -1,0 +1,506 @@
+{
+  "kind": "bigquery#job",
+  "etag": "M1fAQLNhkxQ6onoZut6iBA==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_weight_comparison_b8f391766449",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_weight_comparison_b8f391766449?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "WITH original AS (\n SELECT processed_input,weight FROM ML.WEIGHTS(MODEL `citric-glow-485600-f4.icu_ml.bqml_lr_v3`)\n), control AS (\n SELECT processed_input,weight FROM ML.WEIGHTS(MODEL `citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit_autosplit_control`)\n), final AS (\n SELECT processed_input,weight FROM ML.WEIGHTS(MODEL `citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit`)\n)\nSELECT COALESCE(o.processed_input,c.processed_input,f.processed_input) AS feature,\n o.weight AS old_weight,c.weight AS pit_auto_weight,f.weight AS pit_custom_weight,\n f.weight-c.weight AS custom_minus_auto_weight\nFROM original o FULL OUTER JOIN control c USING(processed_input)\nFULL OUTER JOIN final f USING(processed_input)\nORDER BY feature;\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+        "tableId": "anon61999e897761d098c635c8f7deb8faba01ca932401997dc063535c39f2d568c4"
+      },
+      "writeDisposition": "WRITE_TRUNCATE",
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "weight_comparison",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_weight_comparison_b8f391766449",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788669437448",
+    "startTime": "1788669437569",
+    "endTime": "1788669438139",
+    "totalBytesProcessed": "5187",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Input",
+          "id": "0",
+          "startMs": "1788669437718",
+          "endMs": "1788669437813",
+          "waitRatioAvg": 0.047619047619047616,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.047619047619047616,
+          "waitMsMax": "2",
+          "readRatioAvg": 0.047619047619047616,
+          "readMsAvg": "2",
+          "readRatioMax": 0.047619047619047616,
+          "readMsMax": "2",
+          "computeRatioAvg": 0.5238095238095238,
+          "computeMsAvg": "22",
+          "computeRatioMax": 0.5238095238095238,
+          "computeMsMax": "22",
+          "writeRatioAvg": 0.4523809523809524,
+          "writeMsAvg": "19",
+          "writeRatioMax": 0.4523809523809524,
+          "writeMsMax": "19",
+          "shuffleOutputBytes": "1209",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:hr_mean_6h, $2:hr_min_6h, $3:hr_max_6h, $4:hr_n_6h, $5:rr_mean_6h, $6:rr_min_6h, $7:rr_max_6h, $8:rr_n_6h, $9:sao2_mean_6h, $10:sao2_min_6h, $11:sao2_n_6h, $12:temp_mean_6h, $13:temp_n_6h, $14:sbp_mean_6h, $15:sbp_min_6h, $16:sbp_n_6h",
+                "FROM citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit",
+                "WHERE is_null($51)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$200 := STRUCT_FIELD_OP(1, $220)",
+                "$201 := STRUCT_FIELD_OP(0, $220)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$220 := ML_WEIGHTS_ID('hr_mean_6h', ieee_divide($1, 16.99188122546386), 'hr_min_6h', ieee_divide($2, 16.859134520509592), 'hr_max_6h', ...)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$210, $211",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "205",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S01: Input",
+          "id": "1",
+          "startMs": "1788669437729",
+          "endMs": "1788669437804",
+          "waitRatioAvg": 0.047619047619047616,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.047619047619047616,
+          "waitMsMax": "2",
+          "readRatioAvg": 0.07142857142857142,
+          "readMsAvg": "3",
+          "readRatioMax": 0.07142857142857142,
+          "readMsMax": "3",
+          "computeRatioAvg": 0.42857142857142855,
+          "computeMsAvg": "18",
+          "computeRatioMax": 0.42857142857142855,
+          "computeMsMax": "18",
+          "writeRatioAvg": 0.6666666666666666,
+          "writeMsAvg": "28",
+          "writeRatioMax": 0.6666666666666666,
+          "writeMsMax": "28",
+          "shuffleOutputBytes": "1209",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$120:hr_mean_6h, $121:hr_min_6h, $122:hr_max_6h, $123:hr_n_6h, $124:rr_mean_6h, $125:rr_min_6h, $126:rr_max_6h, $127:rr_n_6h, $128:sao2_mean_6h, $129:sao2_min_6h, $130:sao2_n_6h, $131:temp_mean_6h, $132:temp_n_6h, $133:sbp_mean_6h, $134:sbp_min_6h, $135:sbp_n_6h",
+                "FROM citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit_autosplit_control",
+                "WHERE is_null($170)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$250 := STRUCT_FIELD_OP(1, $280)",
+                "$251 := STRUCT_FIELD_OP(0, $280)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$280 := ML_WEIGHTS_ID('hr_mean_6h', ieee_divide($120, 16.991981648086231), 'hr_min_6h', ieee_divide($121, 16.859197373817711), 'hr_max_6h', ...)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$260, $261",
+                "TO __stage01_output"
+              ]
+            }
+          ],
+          "slotMs": "125",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S02: Input",
+          "id": "2",
+          "startMs": "1788669437740",
+          "endMs": "1788669437799",
+          "waitRatioAvg": 0.047619047619047616,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.047619047619047616,
+          "waitMsMax": "2",
+          "readRatioAvg": 1,
+          "readMsAvg": "42",
+          "readRatioMax": 1,
+          "readMsMax": "42",
+          "computeRatioAvg": 0.3333333333333333,
+          "computeMsAvg": "14",
+          "computeRatioMax": 0.3333333333333333,
+          "computeMsMax": "14",
+          "writeRatioAvg": 0.07142857142857142,
+          "writeMsAvg": "3",
+          "writeRatioMax": 0.07142857142857142,
+          "writeMsMax": "3",
+          "shuffleOutputBytes": "1209",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$60:hr_mean_6h, $61:hr_min_6h, $62:hr_max_6h, $63:hr_n_6h, $64:rr_mean_6h, $65:rr_min_6h, $66:rr_max_6h, $67:rr_n_6h, $68:sao2_mean_6h, $69:sao2_min_6h, $70:sao2_n_6h, $71:temp_mean_6h, $72:temp_n_6h, $73:sbp_mean_6h, $74:sbp_min_6h, $75:sbp_n_6h",
+                "FROM citric-glow-485600-f4.icu_ml.bqml_lr_v3",
+                "WHERE is_null($110)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$230 := STRUCT_FIELD_OP(1, $270)",
+                "$231 := STRUCT_FIELD_OP(0, $270)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$270 := ML_WEIGHTS_ID('hr_mean_6h', ieee_divide($60, 16.991927700543851), 'hr_min_6h', ieee_divide($61, 16.859128565982928), 'hr_max_6h', ...)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$240, $241",
+                "TO __stage02_output"
+              ]
+            }
+          ],
+          "slotMs": "54",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S03: Join+",
+          "id": "3",
+          "startMs": "1788669437817",
+          "endMs": "1788669437921",
+          "inputStages": [
+            "1",
+            "2"
+          ],
+          "waitRatioAvg": 0.023809523809523808,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.07142857142857142,
+          "waitMsMax": "3",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.30952380952380953,
+          "computeMsAvg": "13",
+          "computeRatioMax": 0.5,
+          "computeMsMax": "21",
+          "writeRatioAvg": 0.16666666666666666,
+          "writeMsAvg": "7",
+          "writeRatioMax": 0.5714285714285714,
+          "writeMsMax": "24",
+          "shuffleOutputBytes": "3177",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "100",
+          "recordsWritten": "50",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$240, $241",
+                "FROM __stage02_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$260, $261",
+                "FROM __stage01_output"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$190 := coalesce($290, $292)"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$290 := $240, $291 := $241, $292 := $260, $293 := $261",
+                "FULL OUTER HASH JOIN EACH  WITH EACH  ON $240 = $260"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$190, $290, $291, $292, $293",
+                "TO __stage03_output"
+              ]
+            }
+          ],
+          "slotMs": "10018",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S04: Join+",
+          "id": "4",
+          "startMs": "1788669437930",
+          "endMs": "1788669437971",
+          "inputStages": [
+            "3",
+            "0"
+          ],
+          "waitRatioAvg": 0.07142857142857142,
+          "waitMsAvg": "3",
+          "waitRatioMax": 0.09523809523809523,
+          "waitMsMax": "4",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.2619047619047619,
+          "computeMsAvg": "11",
+          "computeRatioMax": 0.42857142857142855,
+          "computeMsMax": "18",
+          "writeRatioAvg": 0.09523809523809523,
+          "writeMsAvg": "4",
+          "writeRatioMax": 0.21428571428571427,
+          "writeMsMax": "9",
+          "shuffleOutputBytes": "2559",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "100",
+          "recordsWritten": "50",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$190, $290, $291, $292, $293",
+                "FROM __stage03_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$210, $211",
+                "FROM __stage00_output"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$180 := coalesce($300, $302, $304)",
+                "$181 := subtract($305, $303)"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$300 := $290, $301 := $291, $302 := $292, $303 := $293, $304 := $210, $305 := $211",
+                "FULL OUTER HASH JOIN EACH  WITH EACH  ON $190 = $210"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$180, $181, $305, $301, $303",
+                "TO __stage04_output"
+              ]
+            }
+          ],
+          "slotMs": "2200",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S05: Output",
+          "id": "5",
+          "startMs": "1788669437978",
+          "endMs": "1788669437990",
+          "inputStages": [
+            "4"
+          ],
+          "waitRatioAvg": 0.023809523809523808,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.023809523809523808,
+          "waitMsMax": "1",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.2619047619047619,
+          "computeMsAvg": "11",
+          "computeRatioMax": 0.2619047619047619,
+          "computeMsMax": "11",
+          "writeRatioAvg": 0.023809523809523808,
+          "writeMsAvg": "1",
+          "writeRatioMax": 0.023809523809523808,
+          "writeMsMax": "1",
+          "shuffleOutputBytes": "2559",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$180, $181, $305, $301, $303",
+                "FROM __stage04_output"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$180 ASC"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$310, $311, $312, $313, $314",
+                "TO __stage05_output"
+              ]
+            }
+          ],
+          "slotMs": "13",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "5187",
+      "timeline": [
+        {
+          "elapsedMs": "431",
+          "totalSlotMs": "12617",
+          "pendingUnits": "100",
+          "completedUnits": "103",
+          "activeUnits": "100",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "422",
+          "totalSlotMs": "12617",
+          "pendingUnits": "0",
+          "completedUnits": "204",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "5187",
+      "totalBytesBilled": "31457280",
+      "billingTier": 1,
+      "totalSlotMs": "12617",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "bqml_lr_v3"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "bqml_lr_v4_pit_autosplit_control"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "bqml_lr_v4_pit"
+        }
+      ],
+      "statementType": "SELECT",
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "bqml_lr_v3"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "bqml_lr_v4_pit_autosplit_control"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "bqml_lr_v4_pit"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "12617",
+    "finalExecutionDurationMs": "288"
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

@@ -5,7 +5,7 @@ WITH test_rows AS (
     COUNT(*) AS test_rows,
     COUNTIF(y = 1) AS test_positive_rows,
     SAFE_DIVIDE(COUNTIF(y = 1), COUNT(*)) AS test_prevalence
-  FROM `{{PROJECT_ID}}.icu_ml.model_table_v3`
+  FROM `{{PROJECT_ID}}.icu_ml.model_table_v4_pit`
   WHERE split = 'test'
 ),
 ranked AS (
@@ -14,7 +14,7 @@ ranked AS (
     NTILE(200) OVER (
       ORDER BY prob_1 DESC, patientunitstayid, prediction_time_min
     ) AS bucket
-  FROM `{{PROJECT_ID}}.icu_ml.preds_test_v3`
+  FROM `{{PROJECT_ID}}.icu_ml.preds_test_v4_pit`
 ),
 operating_point AS (
   SELECT
@@ -27,7 +27,7 @@ operating_point AS (
 SELECT
   'test_rows' AS metric,
   CAST(tr.test_rows AS FLOAT64) AS value,
-  'model_table_v3 test split' AS source
+  'model_table_v4_pit test split' AS source
 FROM test_rows tr
 
 UNION ALL
@@ -35,7 +35,7 @@ UNION ALL
 SELECT
   'test_positive_rows',
   CAST(tr.test_positive_rows AS FLOAT64),
-  'model_table_v3 test split'
+  'model_table_v4_pit test split'
 FROM test_rows tr
 
 UNION ALL
@@ -43,7 +43,7 @@ UNION ALL
 SELECT
   'test_prevalence',
   tr.test_prevalence,
-  'model_table_v3 test split'
+  'model_table_v4_pit test split'
 FROM test_rows tr
 
 UNION ALL
@@ -51,7 +51,7 @@ UNION ALL
 SELECT
   'alerts_top_0_5pct',
   CAST(op.alerts_top_0_5pct AS FLOAT64),
-  'preds_test_v3'
+  'preds_test_v4_pit'
 FROM operating_point op
 
 UNION ALL
@@ -59,7 +59,7 @@ UNION ALL
 SELECT
   'positive_windows_top_0_5pct',
   CAST(op.positive_windows_top_0_5pct AS FLOAT64),
-  'preds_test_v3'
+  'preds_test_v4_pit'
 FROM operating_point op
 
 UNION ALL
@@ -67,7 +67,7 @@ UNION ALL
 SELECT
   'precision_top_0_5pct',
   op.precision_top_0_5pct,
-  'preds_test_v3'
+  'preds_test_v4_pit'
 FROM operating_point op
 
 UNION ALL

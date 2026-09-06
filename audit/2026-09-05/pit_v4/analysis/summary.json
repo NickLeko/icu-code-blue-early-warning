@@ -1,0 +1,95 @@
+{
+  "project": "citric-glow-485600-f4",
+  "N": 2078011,
+  "K": 310,
+  "A": 10391,
+  "TP": 36,
+  "prevalence": 0.000149181115980618,
+  "ppv": 0.003464536618227312,
+  "positive_window_recall": 0.11612903225806452,
+  "pooled_enrichment": 23.22369420186824,
+  "expected_tp_hospital_mix": 1.4432937434101045,
+  "observed_over_hospital_mix_expected": 24.94294745222268,
+  "expected_tp_uniform_row_selection": 1.5501409761546017,
+  "hospital_mix_enrichment_factor": 0.9310725705673877,
+  "allocation_weighted_hospital_prevalence": 0.0001388984451361856,
+  "test_hospitals": 31,
+  "zero_alert_hospitals": 7,
+  "zero_positive_hospitals": 10,
+  "hospitals_with_positive_alert_windows": 9,
+  "unique_detected_proxy_stays": 22,
+  "unique_proxy_stays_with_positive_rows": 160,
+  "within_enrichment_defined_hospitals": 20,
+  "within_enrichment_defined_rows": 1980305,
+  "row_volume_weighted_within_enrichment": 22.888733207389006,
+  "alert_volume_weighted_within_enrichment": 22.906065203731185,
+  "within_enrichment_distribution_defined": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 0.0,
+    "q3": 22.309813896129377,
+    "max": 124.99428571428571
+  },
+  "positive_hospital_auroc_distribution": {
+    "min": 0.4814503788302915,
+    "q1": 0.6729486910938524,
+    "median": 0.7827107537725466,
+    "q3": 0.8998447432404723,
+    "max": 0.9979592530866297
+  },
+  "positive_hospital_average_precision_distribution": {
+    "min": 0.00010677761746958996,
+    "q1": 0.0008880088207849142,
+    "median": 0.0012936784657547283,
+    "q3": 0.004541336035914103,
+    "max": 0.0943239288026187
+  },
+  "positive_hospital_ap_over_prevalence_distribution": {
+    "min": 1.0065013243438479,
+    "q1": 6.928202617744751,
+    "median": 15.2315890520257,
+    "q3": 24.364245615309546,
+    "max": 350.6887659914712
+  },
+  "row_weighted_within_hospital_auroc": 0.7348215580738173,
+  "auroc_above_half": 19,
+  "auroc_at_least_0_6": 18,
+  "auroc_below_half_hospitals": [
+    123,
+    245
+  ],
+  "hospitals_above_pooled_prevalence": 12,
+  "high_prevalence_row_share": 0.508273055339938,
+  "high_prevalence_alert_share": 0.4319122317390049,
+  "high_prevalence_positives": 249,
+  "high_prevalence_alerts": 4488,
+  "zero_positive_hospital_alerts": 187,
+  "top_alert_hospitals": [
+    443,
+    300,
+    73,
+    252,
+    176
+  ],
+  "top_3_alert_share": 0.585699162736984,
+  "top_3_row_share": 0.46614238326938595,
+  "top_5_alert_share": 0.7701857376575882,
+  "top_5_row_share": 0.647689545435515,
+  "hospital_cluster_bootstrap": {
+    "resamples": 100000,
+    "seed": 20260905,
+    "hospital_clusters_per_resample": 31,
+    "method": "paired hospital percentile bootstrap; fixed observed global-policy alert membership",
+    "undefined_pooled_replicates": 0,
+    "zero_tp_replicates": 0,
+    "pooled_enrichment_95pct_CI": [
+      11.452149078111637,
+      41.53394536829825
+    ],
+    "hospital_mix_adjusted_ratio_95pct_CI": [
+      12.490141688304607,
+      40.1919533657254
+    ],
+    "undefined_mix_ratio_replicates": 0
+  }
+}

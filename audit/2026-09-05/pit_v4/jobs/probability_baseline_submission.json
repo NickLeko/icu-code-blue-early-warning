@@ -1,0 +1,10 @@
+{
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_probability_baseline_64172d26ca22",
+    "location": "US"
+  },
+  "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/probability_baseline.sql",
+  "querySha256": "64172d26ca227a3dea51425476fde768d07ddb3a27b09f5d4c6a9a3dd0f54b74",
+  "submittedAt": "2026-09-06T04:36:38.453350+00:00"
+}

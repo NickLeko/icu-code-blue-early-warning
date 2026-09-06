@@ -1,0 +1,25 @@
+{
+  "kind": "bigquery#getQueryResultsResponse",
+  "etag": "QS/oOGSS5cqUYIIprMAhpg==",
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_temporal_tiers_a32597807492",
+    "location": "US"
+  },
+  "totalBytesProcessed": "66496352",
+  "jobComplete": true,
+  "auditJobStatistics": {
+    "creationTime": "1788669443120",
+    "startTime": "1788669443160",
+    "endTime": "1788669450061",
+    "totalBytesProcessed": "66496352",
+    "query": {
+      "totalBytesProcessed": "66496352",
+      "totalBytesBilled": "67108864",
+      "totalSlotMs": "49448",
+      "statementType": "SCRIPT"
+    },
+    "totalSlotMs": "49448",
+    "numChildJobs": "2"
+  }
+}

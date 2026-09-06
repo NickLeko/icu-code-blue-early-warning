@@ -1,51 +1,76 @@
-## Results Summary
+# Results — 2.0.0-pit
 
-This repo publishes one fixed final-model path: the vitals + labs logistic
-regression defined in `sql/08_bqml_models.sql`.
+The executed final model is `bqml_lr_v4_pit`, using point-in-time lab availability
+and the explicit hospital-validation set. Its held-out predictions are
+`preds_test_v4_pit`. The original `bqml_lr_v3` and `preds_test_v3` are preserved.
+New exports live in `artifacts/reference_run_v4_pit/`; historical exports remain
+in `artifacts/reference_run/`. Exact queries, job IDs, model metadata, and all
+old/new comparisons are in [the version audit](../audit/2026-09-05/pit_v4/REPORT.md).
 
-The checked-in corrected reference export lives in `artifacts/reference_run/`
-and is derived from the final model artifact `bqml_lr_v3` plus the held-out
-prediction table `preds_test_v3`.
+| Metric | Original v3 | PIT + CUSTOM final |
+|---|---:|---:|
+| Cohort stays | 177,418 | 177,418 |
+| Labeled stays / proxy-positive stays | 171,833 / 1,401 | 171,833 / 1,401 |
+| Train / validation / test hospitals | 135 / 42 / 31 | 135 / 42 / 31 |
+| Held-out patient-hours / positive windows | 2,078,011 / 310 | 2,078,011 / 310 |
+| Raw global top-0.5% alerts / TP | 10,391 / 21 | 10,391 / 36 |
+| PPV | 0.2021% | 0.3465% |
+| Positive-window recall | 6.77% | 11.61% |
+| Pooled enrichment | 13.55x | **23.22x** |
+| 95% hospital-cluster enrichment CI | 7.20–27.03 | **11.45–41.53** |
+| Within-hospital AUROC, row-weighted / median | 0.6110 / 0.6887 | **0.7348 / 0.7827** |
+| Within-hospital AP, median | 0.1092% | 0.1294% |
+| Positive-alert hospitals | 7/31 | **9/31** |
+| Hospital-mix expected TP | 1.1794 | 1.4433 |
+| Observed / hospital-mix expected | 17.81x | 24.94x |
+| Global BQML ROC-AUC | 0.6377 | 0.7292 |
+| Held-out log loss | 0.002723 | **0.007776** |
+| Constant training-prevalence log loss | 0.001502 | 0.001502 |
+| First crossing: alerts / TP / PPV | 3,350 / 8 / 0.2388% | 2,040 / 8 / 0.3922% |
+| 12h quiet-period debounce: alerts / TP / PPV | 2,650 / 7 / 0.2642% | 1,596 / 8 / 0.5013% |
 
-The checked-in aggregates are internally consistent, but they carry no shared
-run ID or source-snapshot binding, so single-run provenance cannot be proven
-from the checked-in artifacts alone.
+The new data show within-hospital ranking signal for a documentation proxy:
+19/21 evaluable hospitals have AUROC above 0.5, and observed positive alerts
+exceed the hospital-mix expectation by 24.94x. This remains sparse evidence:
+36 positive windows from 22 stays, concentrated in nine hospitals. It is not an
+adjudicated cardiac-arrest endpoint or evidence of clinical benefit.
 
-This repo does **not** currently publish reproducible benchmark comparisons for
-alternative model versions, trend-feature variants, or random-split baselines,
-so those comparisons are intentionally omitted from the current results summary.
+The base rate is **310/2,078,011 patient-hours = 0.014918%**, not stay prevalence.
+The 0.5% policy is applied globally to the complete test corpus, not separately
+within hospitals. Within-hospital AUROC/AP summaries use the 21 hospitals with
+both classes. The full [hospital comparison](../audit/2026-09-05/pit_v4/HOSPITAL_COMPARISON.md)
+reports every hospital, including undefined metrics. The bootstrap samples
+31 whole hospitals with replacement 100,000 times, seed 20260905, keeping
+observed alert memberships fixed. Its wide CI does not include retraining or
+establish statistical significance of the old/new difference.
 
-### Internally Consistent Reference-Run Metrics
+**Log loss worsened and is 5.18 times the constant training-prevalence baseline.**
+It measures probabilistic prediction quality, not ranking alone. This refutes a
+claim of superior absolute probability estimates; it does not refute the
+independently measured ranking improvement.
 
-- Cohort: 177,418 ICU stays
-- Labeled stays: 171,833, including 1,401 proxy-positive stays (0.815% stay-level prevalence)
-- Hospital split: 135 train hospitals, 42 validation hospitals, 31 test hospitals
-- Held-out test rows: 2,078,011 patient-hours with 310 positive labeled windows
-  (0.0149% row prevalence)
-- Held-out `ML.EVALUATE`: ROC-AUC 0.6377, log loss 0.002723
-- Retrospective corpus-wide operating point at top 0.5% of test rows: 10,391 alerts, 21 positive labeled
-  windows, 0.2021% precision, 13.55x enrichment over test prevalence
-- First-crossing alert policy: 3,350 alerts, 8 positive labeled windows,
-  0.2388% precision
-- 12-hour quiet-period-debounced first-crossing (suppressed crossings reset the
-  window): 2,650 alerts, 7 positive labeled windows, 0.2642% precision
+Q1 measured **574,482 exposed historical feature rows**, including 106,328 test
+rows and 35 positive test windows, before regeneration. The corrected features
+remove exactly those contributions without changing cohort rows, labels, split
+assignments, or vital features. No contributing numeric lab records had unknown
+revision offsets; the explicit NULL policy excludes records with unknown
+availability.
 
-**Persistence-tier analysis: WITHDRAWN.** The tier classification logic was
-found defective in review and results will be republished after regeneration.
+The fixed final model uses all 444 positive hospital-validation windows and
+completed nine iterations. The prespecified same-feature AUTO_SPLIT control
+reserved only four positives, completed 18 iterations, and selected 38 TP
+(24.51x). It was not substituted for the final model. No threshold was tuned.
+See the audit for all coefficients and actual BQML split counts.
 
-These counts are row-level proxy-label results, not deduplicated clinical
-events and not prospective workflow outcomes.
+The canonical persistence-tier query and its assertion passed on the new run;
+new [tier aggregates](../audit/2026-09-05/pit_v4/tier_metrics.csv) replace no
+historical defective tier claims. The raw enrichment headline is independent
+of first crossing, debouncing, or persistence tiers.
 
-### Reference Files
-
-- `artifacts/reference_run/01_reference_run_counts.csv`
-- `artifacts/reference_run/02_reference_run_operating_point.csv`
-- `artifacts/reference_run/03_reference_run_alert_policy.csv`
-- `artifacts/reference_run/04_reference_run_weights.csv`
-- `artifacts/reference_run/05_reference_run_ml_evaluate.csv`
-
-The canonical evaluation queries are:
-
-- `sql/09_eval_alert_rate.sql` for precision in the corpus-wide top 0.5% of test rows
-- `sql/10_eval_temporal_alert_tiers.sql` for the corrected persistence-tier analysis pending regeneration
-- `sql/11_eval_first_crossing_cooldown.sql` for first-crossing quiet-period-debounce analysis
+An additional reconciliation found 7,823 rows (1,469 test rows, including one
+positive window) with last-lab changes outside Q1 exposure. All were explained
+by the deterministic highest-lab-ID draw-time tie rule already present in SQL
+before this pass. The old/new comparison therefore includes that inherited
+change as well as PIT availability and validation; it is not a pure estimate
+of the availability correction alone. The same-feature control isolates the
+validation-split comparison.

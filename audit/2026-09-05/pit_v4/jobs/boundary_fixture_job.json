@@ -1,0 +1,60 @@
+{
+  "kind": "bigquery#job",
+  "etag": "lnpUkkQW17WMvz+/ZsV4fQ==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_boundary_fixture_74ae8bfe5d11",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_boundary_fixture_74ae8bfe5d11?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- Execute the production predicates on adversarial timestamp boundaries.\nASSERT (\n  WITH cases AS (\n    SELECT * FROM UNNEST([\n      STRUCT('known_before' AS name,600 AS t,590 AS draw,595 AS revision,TRUE AS expected),\n      STRUCT('revision_in_future',600,590,660,FALSE),\n      STRUCT('revision_at_prediction',600,590,600,FALSE),\n      STRUCT('unknown_revision',600,590,CAST(NULL AS INT64),FALSE),\n      STRUCT('draw_in_future_revision_earlier',600,610,590,FALSE),\n      STRUCT('draw_at_prediction',600,600,590,FALSE),\n      STRUCT('lookback_lower_inclusive',600,240,590,TRUE),\n      STRUCT('too_old_draw_recent_revision',600,239,590,FALSE),\n      STRUCT('earlier_revision_known_draw',600,590,580,TRUE)\n    ])\n  ), evaluated AS (\n    SELECT *, IFNULL(draw >= t-360 AND draw < t AND revision IS NOT NULL\n      AND GREATEST(draw,revision) < t,FALSE) AS actual\n    FROM cases\n  )\n  SELECT COUNT(*)=9 AND COUNTIF(actual!=expected)=0 FROM evaluated\n) AS 'PIT availability boundary fixture failed';\nSELECT 9 AS boundary_cases_passed;\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+        "tableId": "anon47aabcd0cd6e84c9349bfebe5f761c61854406e1a0ad4222e27abcb4e6c04dfc"
+      },
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "boundary_fixture",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_boundary_fixture_74ae8bfe5d11",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788668295101",
+    "startTime": "1788668295165",
+    "endTime": "1788668296419",
+    "totalBytesProcessed": "0",
+    "query": {
+      "totalBytesProcessed": "0",
+      "totalBytesBilled": "0",
+      "totalSlotMs": "85",
+      "schema": {
+        "fields": [
+          {
+            "name": "boundary_cases_passed",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          }
+        ]
+      },
+      "statementType": "SCRIPT"
+    },
+    "totalSlotMs": "85",
+    "numChildJobs": "2"
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

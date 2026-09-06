@@ -1,0 +1,58 @@
+{
+  "kind": "bigquery#queryResponse",
+  "schema": {
+    "fields": [
+      {
+        "name": "split",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "y",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "windows_with_contributing_labs",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "windows_with_future_entered_value",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "windows_with_unknown_availability",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "windows_with_post_proxy_entry",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "contributing_lab_window_pairs",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "future_entered_lab_window_pairs",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "location": "US"
+  },
+  "totalBytesProcessed": "2147677130",
+  "jobComplete": true,
+  "cacheHit": false,
+  "totalBytesBilled": "0",
+  "location": "US",
+  "creationTime": "1788668069838",
+  "endTime": "1788668070227"
+}

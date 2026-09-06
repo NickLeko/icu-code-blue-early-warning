@@ -1,0 +1,55 @@
+{
+  "kind": "bigquery#job",
+  "etag": "wZaUIZs3IkPB6L/QWLzytg==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_features_3454e0c0d0a0",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_features_3454e0c0d0a0?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- 04_features_labs.sql\n-- Vitals + labs feature table (6h lookback, hourly grid).\n-- Important correctness note:\n--   Vitals and labs must be aggregated separately at the prediction-window level\n--   before joining. Joining raw vitalperiodic and lab rows in the same grouped\n--   query can multiply rows and corrupt count-based features.\n-- PIT v4: retain the specimen-based [t-360,t) lookback, but admit the\n-- stored lab value only when MAX(draw offset, revised-entry offset) < t.\n-- Both offsets must be known. NULL revised-entry time means unknown\n-- availability and excludes that lab record; do not fall back to draw time.\n-- This conservatively handles stored revisions; earlier result versions are\n-- not reconstructable from this table. \"Last\" remains latest draw among\n-- values available before t, with labid only a deterministic tie-breaker.\n-- Output: `citric-glow-485600-f4.icu_ml.features_v4_pit`\n\nCREATE OR REPLACE TABLE `citric-glow-485600-f4.icu_ml.features_v4_pit` AS\nWITH grid AS (\n  SELECT\n    patientunitstayid,\n    prediction_time_min\n  FROM `citric-glow-485600-f4.icu_ml.features_v2`\n),\nlabs_clean AS (\n  SELECT\n    labid,\n    patientunitstayid,\n    labresultoffset,\n    GREATEST(labresultoffset, labresultrevisedoffset) AS available_offset_min,\n    LOWER(TRIM(labname)) AS labname_norm,\n    COALESCE(\n      SAFE_CAST(labresult AS FLOAT64),\n      SAFE_CAST(REGEXP_EXTRACT(labresulttext, r'[-+]?\\d*\\.?\\d+') AS FLOAT64)\n    ) AS lab_value\n  FROM `physionet-data.eicu_crd.lab`\n  WHERE labresultoffset IS NOT NULL\n    AND labresultoffset >= 0\n    AND labresultrevisedoffset IS NOT NULL\n),\nlabs_agg AS (\n  SELECT\n    g.patientunitstayid,\n    g.prediction_time_min,\n\n    -- lactate\n    AVG(IF(l.labname_norm IN ('lactate','lactic acid'), l.lab_value, NULL)) AS lactate_mean_6h,\n    MIN(IF(l.labname_norm IN ('lactate','lactic acid'), l.lab_value, NULL)) AS lactate_min_6h,\n    MAX(IF(l.labname_norm IN ('lactate','lactic acid'), l.lab_value, NULL)) AS lactate_max_6h,\n    COUNTIF(l.labname_norm IN ('lactate','lactic acid') AND l.lab_value IS NOT NULL) AS lactate_n_6h,\n    ARRAY_AGG(IF(l.labname_norm IN ('lactate','lactic acid'), l.lab_value, NULL)\n              IGNORE NULLS ORDER BY l.labresultoffset DESC, l.labid DESC LIMIT 1)[SAFE_OFFSET(0)] AS lactate_last_6h,\n\n    -- pH\n    AVG(IF(l.labname_norm = 'ph', l.lab_value, NULL)) AS ph_mean_6h,\n    MIN(IF(l.labname_norm = 'ph', l.lab_value, NULL)) AS ph_min_6h,\n    MAX(IF(l.labname_norm = 'ph', l.lab_value, NULL)) AS ph_max_6h,\n    COUNTIF(l.labname_norm = 'ph' AND l.lab_value IS NOT NULL) AS ph_n_6h,\n    ARRAY_AGG(IF(l.labname_norm = 'ph', l.lab_value, NULL)\n              IGNORE NULLS ORDER BY l.labresultoffset DESC, l.labid DESC LIMIT 1)[SAFE_OFFSET(0)] AS ph_last_6h,\n\n    -- potassium\n    AVG(IF(l.labname_norm IN ('k','potassium'), l.lab_value, NULL)) AS k_mean_6h,\n    MIN(IF(l.labname_norm IN ('k','potassium'), l.lab_value, NULL)) AS k_min_6h,\n    MAX(IF(l.labname_norm IN ('k','potassium'), l.lab_value, NULL)) AS k_max_6h,\n    COUNTIF(l.labname_norm IN ('k','potassium') AND l.lab_value IS NOT NULL) AS k_n_6h,\n    ARRAY_AGG(IF(l.labname_norm IN ('k','potassium'), l.lab_value, NULL)\n              IGNORE NULLS ORDER BY l.labresultoffset DESC, l.labid DESC LIMIT 1)[SAFE_OFFSET(0)] AS k_last_6h,\n\n    -- creatinine\n    AVG(IF(l.labname_norm = 'creatinine', l.lab_value, NULL)) AS creat_mean_6h,\n    MIN(IF(l.labname_norm = 'creatinine', l.lab_value, NULL)) AS creat_min_6h,\n    MAX(IF(l.labname_norm = 'creatinine', l.lab_value, NULL)) AS creat_max_6h,\n    COUNTIF(l.labname_norm = 'creatinine' AND l.lab_value IS NOT NULL) AS creat_n_6h,\n    ARRAY_AGG(IF(l.labname_norm = 'creatinine', l.lab_value, NULL)\n              IGNORE NULLS ORDER BY l.labresultoffset DESC, l.labid DESC LIMIT 1)[SAFE_OFFSET(0)] AS creat_last_6h,\n\n    -- hemoglobin\n    AVG(IF(l.labname_norm IN ('hgb','hemoglobin'), l.lab_value, NULL)) AS hgb_mean_6h,\n    MIN(IF(l.labname_norm IN ('hgb','hemoglobin'), l.lab_value, NULL)) AS hgb_min_6h,\n    MAX(IF(l.labname_norm IN ('hgb','hemoglobin'), l.lab_value, NULL)) AS hgb_max_6h,\n    COUNTIF(l.labname_norm IN ('hgb','hemoglobin') AND l.lab_value IS NOT NULL) AS hgb_n_6h,\n    ARRAY_AGG(IF(l.labname_norm IN ('hgb','hemoglobin'), l.lab_value, NULL)\n              IGNORE NULLS ORDER BY l.labresultoffset DESC, l.labid DESC LIMIT 1)[SAFE_OFFSET(0)] AS hgb_last_6h,\n\n    -- WBC\n    AVG(IF(l.labname_norm IN ('wbc','wbc x 1000','white blood cell count'), l.lab_value, NULL)) AS wbc_mean_6h,\n    MIN(IF(l.labname_norm IN ('wbc','wbc x 1000','white blood cell count'), l.lab_value, NULL)) AS wbc_min_6h,\n    MAX(IF(l.labname_norm IN ('wbc','wbc x 1000','white blood cell count'), l.lab_value, NULL)) AS wbc_max_6h,\n    COUNTIF(l.labname_norm IN ('wbc','wbc x 1000','white blood cell count') AND l.lab_value IS NOT NULL) AS wbc_n_6h,\n    ARRAY_AGG(IF(l.labname_norm IN ('wbc','wbc x 1000','white blood cell count'), l.lab_value, NULL)\n              IGNORE NULLS ORDER BY l.labresultoffset DESC, l.labid DESC LIMIT 1)[SAFE_OFFSET(0)] AS wbc_last_6h\n\n  FROM grid g\n  LEFT JOIN labs_clean l\n    ON l.patientunitstayid = g.patientunitstayid\n   AND l.labresultoffset >= g.prediction_time_min - 360\n   AND l.labresultoffset <  g.prediction_time_min\n   AND l.available_offset_min < g.prediction_time_min\n  GROUP BY g.patientunitstayid, g.prediction_time_min\n)\nSELECT\n  v.*,\n  l.lactate_mean_6h,\n  l.lactate_min_6h,\n  l.lactate_max_6h,\n  l.lactate_n_6h,\n  l.lactate_last_6h,\n  l.ph_mean_6h,\n  l.ph_min_6h,\n  l.ph_max_6h,\n  l.ph_n_6h,\n  l.ph_last_6h,\n  l.k_mean_6h,\n  l.k_min_6h,\n  l.k_max_6h,\n  l.k_n_6h,\n  l.k_last_6h,\n  l.creat_mean_6h,\n  l.creat_min_6h,\n  l.creat_max_6h,\n  l.creat_n_6h,\n  l.creat_last_6h,\n  l.hgb_mean_6h,\n  l.hgb_min_6h,\n  l.hgb_max_6h,\n  l.hgb_n_6h,\n  l.hgb_last_6h,\n  l.wbc_mean_6h,\n  l.wbc_min_6h,\n  l.wbc_max_6h,\n  l.wbc_n_6h,\n  l.wbc_last_6h\nFROM `citric-glow-485600-f4.icu_ml.features_v2` v\nLEFT JOIN labs_agg l\n  USING (patientunitstayid, prediction_time_min);\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "icu_ml",
+        "tableId": "features_v4_pit"
+      },
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "features",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_features_3454e0c0d0a0",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788668356235",
+    "startTime": "1788668356692",
+    "endTime": "1788668356692",
+    "query": {
+      "statementType": "CREATE_TABLE_AS_SELECT"
+    }
+  },
+  "status": {
+    "errorResult": {
+      "reason": "billingNotEnabled",
+      "message": "Billing has not been enabled for this project. Enable billing at https://console.cloud.google.com/billing. Datasets must have a default expiration time and default partition expiration time of less than 60 days while in sandbox mode."
+    },
+    "errors": [
+      {
+        "reason": "billingNotEnabled",
+        "message": "Billing has not been enabled for this project. Enable billing at https://console.cloud.google.com/billing. Datasets must have a default expiration time and default partition expiration time of less than 60 days while in sandbox mode."
+      }
+    ],
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

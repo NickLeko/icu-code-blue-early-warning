@@ -1,0 +1,218 @@
+{
+  "kind": "bigquery#job",
+  "etag": "QlEiABYtmaI+chhBo0AgkA==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_export_04_reference_run_weights_1d9bfde113dc",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_export_04_reference_run_weights_1d9bfde113dc?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- Reviewer-facing model weights for the published final model.\n\nSELECT\n  processed_input,\n  weight\nFROM ML.WEIGHTS(MODEL `citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit`)\nORDER BY ABS(weight) DESC, processed_input;\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+        "tableId": "anondf7a6b86ab7b8b99d0d84e6e135a1cd8478a9f9cb20d343033e93c1fe729b50e"
+      },
+      "writeDisposition": "WRITE_TRUNCATE",
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "export_04_reference_run_weights",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_export_04_reference_run_weights_1d9bfde113dc",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788669390710",
+    "startTime": "1788669390895",
+    "endTime": "1788669391142",
+    "totalBytesProcessed": "1729",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Input",
+          "id": "0",
+          "startMs": "1788669391018",
+          "endMs": "1788669391035",
+          "waitRatioAvg": 0.08333333333333333,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.08333333333333333,
+          "waitMsMax": "1",
+          "readRatioAvg": 0.16666666666666666,
+          "readMsAvg": "2",
+          "readRatioMax": 0.16666666666666666,
+          "readMsMax": "2",
+          "computeRatioAvg": 1,
+          "computeMsAvg": "12",
+          "computeRatioMax": 1,
+          "computeMsMax": "12",
+          "writeRatioAvg": 0.3333333333333333,
+          "writeMsAvg": "4",
+          "writeRatioMax": 0.3333333333333333,
+          "writeMsMax": "4",
+          "shuffleOutputBytes": "1659",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:hr_mean_6h, $2:hr_min_6h, $3:hr_max_6h, $4:hr_n_6h, $5:rr_mean_6h, $6:rr_min_6h, $7:rr_max_6h, $8:rr_n_6h, $9:sao2_mean_6h, $10:sao2_min_6h, $11:sao2_n_6h, $12:temp_mean_6h, $13:temp_n_6h, $14:sbp_mean_6h, $15:sbp_min_6h, $16:sbp_n_6h",
+                "FROM citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit",
+                "WHERE is_null($51)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$60 := abs($81)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$70 := STRUCT_FIELD_OP(1, $90)",
+                "$71 := STRUCT_FIELD_OP(0, $90)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$90 := ML_WEIGHTS_ID('hr_mean_6h', ieee_divide($1, 16.99188122546386), 'hr_min_6h', ieee_divide($2, 16.859134520509592), 'hr_max_6h', ...)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$60, $80, $81",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "39",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S01: Output",
+          "id": "1",
+          "startMs": "1788669391037",
+          "endMs": "1788669391049",
+          "inputStages": [
+            "0"
+          ],
+          "waitRatioAvg": 0.08333333333333333,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.08333333333333333,
+          "waitMsMax": "1",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.75,
+          "computeMsAvg": "9",
+          "computeRatioMax": 0.75,
+          "computeMsMax": "9",
+          "writeRatioAvg": 0.08333333333333333,
+          "writeMsAvg": "1",
+          "writeRatioMax": 0.08333333333333333,
+          "writeMsMax": "1",
+          "shuffleOutputBytes": "1209",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "50",
+          "recordsWritten": "50",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$60, $80, $81",
+                "FROM __stage00_output"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$60 DESC, $80 ASC"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$100, $101",
+                "TO __stage01_output"
+              ]
+            }
+          ],
+          "slotMs": "12",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "1729",
+      "timeline": [
+        {
+          "elapsedMs": "105",
+          "totalSlotMs": "52",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "155",
+          "totalSlotMs": "52",
+          "pendingUnits": "0",
+          "completedUnits": "2",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "1729",
+      "totalBytesBilled": "10485760",
+      "billingTier": 1,
+      "totalSlotMs": "52",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "bqml_lr_v4_pit"
+        }
+      ],
+      "statementType": "SELECT",
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "bqml_lr_v4_pit"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "52",
+    "finalExecutionDurationMs": "37"
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

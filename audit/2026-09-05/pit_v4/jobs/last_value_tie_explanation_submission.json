@@ -1,0 +1,10 @@
+{
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_last_value_tie_explanation_427a28347760",
+    "location": "US"
+  },
+  "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/last_value_tie_explanation.sql",
+  "querySha256": "427a283477606da3621ec3ccc97e86a6aca4cc9cc5ef9adcb1c8ff044199997a",
+  "submittedAt": "2026-09-06T04:48:39.562917+00:00"
+}

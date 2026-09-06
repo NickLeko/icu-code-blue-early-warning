@@ -4,11 +4,11 @@
 -- This file is the canonical operating-point evaluation for the current repo;
 -- unreproduced benchmark comparisons are intentionally omitted.
 -- Outputs:
---   1) `{{PROJECT_ID}}.icu_ml.preds_test_v3` (test predictions with prob for class 1)
+--   1) `{{PROJECT_ID}}.icu_ml.preds_test_v4_pit` (test predictions with prob for class 1)
 --   2) A query to compute precision@0.5% alerts on the test set
 
 -- (A) Create predictions table for the test set
-CREATE OR REPLACE TABLE `{{PROJECT_ID}}.icu_ml.preds_test_v3` AS
+CREATE OR REPLACE TABLE `{{PROJECT_ID}}.icu_ml.preds_test_v4_pit` AS
 WITH raw AS (
   SELECT
     patientunitstayid,
@@ -16,7 +16,7 @@ WITH raw AS (
     y,
     predicted_y_probs
   FROM ML.PREDICT(
-    MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v3`,
+    MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v4_pit`,
     (
       SELECT
         patientunitstayid,
@@ -39,7 +39,7 @@ WITH raw AS (
         hgb_mean_6h, hgb_min_6h, hgb_max_6h, hgb_n_6h, hgb_last_6h,
         wbc_mean_6h, wbc_min_6h, wbc_max_6h, wbc_n_6h, wbc_last_6h
 
-      FROM `{{PROJECT_ID}}.icu_ml.model_table_v3`
+      FROM `{{PROJECT_ID}}.icu_ml.model_table_v4_pit`
       WHERE split = 'test'
     )
   )
@@ -61,7 +61,7 @@ WITH ranked AS (
     NTILE(200) OVER (
       ORDER BY prob_1 DESC, patientunitstayid, prediction_time_min
     ) AS bucket
-  FROM `{{PROJECT_ID}}.icu_ml.preds_test_v3`
+  FROM `{{PROJECT_ID}}.icu_ml.preds_test_v4_pit`
 )
 SELECT
   COUNT(*) AS alerts,

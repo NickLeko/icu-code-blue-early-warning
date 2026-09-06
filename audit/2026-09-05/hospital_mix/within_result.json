@@ -1,0 +1,1839 @@
+{
+  "kind": "bigquery#queryResponse",
+  "schema": {
+    "fields": [
+      {
+        "name": "hospitalid",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "n",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "k",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "distinct_scores",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "prevalence",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "auroc",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "average_precision",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "job_MQB7xNoPQHuFXcXXCndy3AG3b52P",
+    "location": "US"
+  },
+  "totalRows": "31",
+  "rows": [
+    {
+      "f": [
+        {
+          "v": "67"
+        },
+        {
+          "v": "17789"
+        },
+        {
+          "v": "2"
+        },
+        {
+          "v": "15700"
+        },
+        {
+          "v": "1.1242902917533307E-4"
+        },
+        {
+          "v": "0.998988024962051"
+        },
+        {
+          "v": "0.08116883116883117"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "73"
+        },
+        {
+          "v": "425080"
+        },
+        {
+          "v": "67"
+        },
+        {
+          "v": "423695"
+        },
+        {
+          "v": "1.5761738966782723E-4"
+        },
+        {
+          "v": "0.6533886882687452"
+        },
+        {
+          "v": "0.011301791635159125"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "83"
+        },
+        {
+          "v": "2340"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "2333"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "93"
+        },
+        {
+          "v": "2286"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "2286"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "108"
+        },
+        {
+          "v": "12899"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "12821"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "123"
+        },
+        {
+          "v": "8360"
+        },
+        {
+          "v": "4"
+        },
+        {
+          "v": "134"
+        },
+        {
+          "v": "4.784688995215311E-4"
+        },
+        {
+          "v": "0.4873743417903303"
+        },
+        {
+          "v": "4.811161895597787E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "136"
+        },
+        {
+          "v": "65"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "1"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "155"
+        },
+        {
+          "v": "32711"
+        },
+        {
+          "v": "15"
+        },
+        {
+          "v": "31881"
+        },
+        {
+          "v": "4.585613402219437E-4"
+        },
+        {
+          "v": "0.5496656063942582"
+        },
+        {
+          "v": "0.002097707614820136"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "156"
+        },
+        {
+          "v": "198"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "191"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "171"
+        },
+        {
+          "v": "62074"
+        },
+        {
+          "v": "28"
+        },
+        {
+          "v": "58647"
+        },
+        {
+          "v": "4.5107452395527916E-4"
+        },
+        {
+          "v": "0.5904985241364702"
+        },
+        {
+          "v": "0.008236316602567"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "176"
+        },
+        {
+          "v": "151758"
+        },
+        {
+          "v": "34"
+        },
+        {
+          "v": "150851"
+        },
+        {
+          "v": "2.2404090723388554E-4"
+        },
+        {
+          "v": "0.5426056135986862"
+        },
+        {
+          "v": "3.2550815037737067E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "180"
+        },
+        {
+          "v": "29403"
+        },
+        {
+          "v": "2"
+        },
+        {
+          "v": "29278"
+        },
+        {
+          "v": "6.802027004047206E-5"
+        },
+        {
+          "v": "0.9515662732560117"
+        },
+        {
+          "v": "0.001058196615785909"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "208"
+        },
+        {
+          "v": "178578"
+        },
+        {
+          "v": "20"
+        },
+        {
+          "v": "178031"
+        },
+        {
+          "v": "1.119958785516693E-4"
+        },
+        {
+          "v": "0.7158903549546926"
+        },
+        {
+          "v": "0.002538698698737858"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "212"
+        },
+        {
+          "v": "818"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "818"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "227"
+        },
+        {
+          "v": "74976"
+        },
+        {
+          "v": "14"
+        },
+        {
+          "v": "74716"
+        },
+        {
+          "v": "1.8672641912078532E-4"
+        },
+        {
+          "v": "0.7394565627537"
+        },
+        {
+          "v": "0.0011034726377975438"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "244"
+        },
+        {
+          "v": "58042"
+        },
+        {
+          "v": "8"
+        },
+        {
+          "v": "57867"
+        },
+        {
+          "v": "1.378312256641742E-4"
+        },
+        {
+          "v": "0.8627614846469311"
+        },
+        {
+          "v": "0.0034989714159109806"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "245"
+        },
+        {
+          "v": "26795"
+        },
+        {
+          "v": "2"
+        },
+        {
+          "v": "26363"
+        },
+        {
+          "v": "7.464079119238663E-5"
+        },
+        {
+          "v": "0.5140148546262083"
+        },
+        {
+          "v": "1.1404536008316412E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "252"
+        },
+        {
+          "v": "225499"
+        },
+        {
+          "v": "65"
+        },
+        {
+          "v": "225324"
+        },
+        {
+          "v": "2.882496152976288E-4"
+        },
+        {
+          "v": "0.6887189223385183"
+        },
+        {
+          "v": "0.0010919132337592536"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "262"
+        },
+        {
+          "v": "5812"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "5786"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "300"
+        },
+        {
+          "v": "248260"
+        },
+        {
+          "v": "12"
+        },
+        {
+          "v": "242823"
+        },
+        {
+          "v": "4.8336421493595424E-5"
+        },
+        {
+          "v": "0.2819817950866338"
+        },
+        {
+          "v": "3.445972112819845E-5"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "310"
+        },
+        {
+          "v": "52356"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "51959"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "318"
+        },
+        {
+          "v": "68276"
+        },
+        {
+          "v": "2"
+        },
+        {
+          "v": "65148"
+        },
+        {
+          "v": "2.9292870115413907E-5"
+        },
+        {
+          "v": "0.8860400738201951"
+        },
+        {
+          "v": "6.268301906768767E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "342"
+        },
+        {
+          "v": "6203"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "5755"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "399"
+        },
+        {
+          "v": "13609"
+        },
+        {
+          "v": "4"
+        },
+        {
+          "v": "12573"
+        },
+        {
+          "v": "2.939231390991256E-4"
+        },
+        {
+          "v": "0.8693862550532893"
+        },
+        {
+          "v": "0.0018041002865258832"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "402"
+        },
+        {
+          "v": "15265"
+        },
+        {
+          "v": "2"
+        },
+        {
+          "v": "15079"
+        },
+        {
+          "v": "1.3101867016049787E-4"
+        },
+        {
+          "v": "0.8550743628382362"
+        },
+        {
+          "v": "6.684855692621008E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "414"
+        },
+        {
+          "v": "8842"
+        },
+        {
+          "v": "2"
+        },
+        {
+          "v": "7458"
+        },
+        {
+          "v": "2.2619316896629722E-4"
+        },
+        {
+          "v": "0.9256221719457014"
+        },
+        {
+          "v": "0.0022188198697385047"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "433"
+        },
+        {
+          "v": "10937"
+        },
+        {
+          "v": "5"
+        },
+        {
+          "v": "10808"
+        },
+        {
+          "v": "4.5716375605741976E-4"
+        },
+        {
+          "v": "0.5078485181119649"
+        },
+        {
+          "v": "9.560496494716074E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "443"
+        },
+        {
+          "v": "295309"
+        },
+        {
+          "v": "11"
+        },
+        {
+          "v": "253008"
+        },
+        {
+          "v": "3.7249118719713925E-5"
+        },
+        {
+          "v": "0.5007825684870568"
+        },
+        {
+          "v": "1.1152840285106202E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "445"
+        },
+        {
+          "v": "14513"
+        },
+        {
+          "v": "6"
+        },
+        {
+          "v": "14372"
+        },
+        {
+          "v": "4.1342244883897194E-4"
+        },
+        {
+          "v": "0.6803956710553526"
+        },
+        {
+          "v": "8.295085779924492E-4"
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "447"
+        },
+        {
+          "v": "1120"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "1104"
+        },
+        {
+          "v": "0.0"
+        },
+        {
+          "v": null
+        },
+        {
+          "v": null
+        }
+      ]
+    },
+    {
+      "f": [
+        {
+          "v": "459"
+        },
+        {
+          "v": "27838"
+        },
+        {
+          "v": "5"
+        },
+        {
+          "v": "27765"
+        },
+        {
+          "v": "1.7961060421007257E-4"
+        },
+        {
+          "v": "0.8785398627528473"
+        },
+        {
+          "v": "0.041333118759462786"
+        }
+      ]
+    }
+  ],
+  "totalBytesProcessed": "52710952",
+  "jobComplete": true,
+  "cacheHit": false,
+  "queryId": "job_MQB7xNoPQHuFXcXXCndy3AG3b52P",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  },
+  "totalBytesBilled": "53477376",
+  "totalSlotMs": "46868",
+  "location": "US",
+  "creationTime": "1788636559056",
+  "startTime": "1788636559197",
+  "endTime": "1788636563613",
+  "pageRowCount": "31",
+  "auditJobStatistics": {
+    "creationTime": "1788636559056",
+    "startTime": "1788636559197",
+    "endTime": "1788636563613",
+    "totalBytesProcessed": "52710952",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Input",
+          "id": "0",
+          "startMs": "1788636560464",
+          "endMs": "1788636560631",
+          "waitRatioAvg": 0.000744047619047619,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.000744047619047619,
+          "waitMsMax": "2",
+          "readRatioAvg": 0.0033482142857142855,
+          "readMsAvg": "9",
+          "readRatioMax": 0.0033482142857142855,
+          "readMsMax": "9",
+          "computeRatioAvg": 0.03720238095238095,
+          "computeMsAvg": "100",
+          "computeRatioMax": 0.03720238095238095,
+          "computeMsMax": "100",
+          "writeRatioAvg": 0.005208333333333333,
+          "writeMsAvg": "14",
+          "writeRatioMax": 0.005208333333333333,
+          "writeMsMax": "14",
+          "shuffleOutputBytes": "3193524",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "177418",
+          "recordsWritten": "177418",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$10:patientunitstayid, $11:hospitalid",
+                "FROM citric-glow-485600-f4.icu_ml.cohort_v1"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$10, $11",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "189",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S02: Join+",
+          "id": "2",
+          "startMs": "1788636560636",
+          "endMs": "1788636560917",
+          "inputStages": [
+            "0"
+          ],
+          "waitRatioAvg": 0.0003720238095238095,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.000744047619047619,
+          "waitMsMax": "2",
+          "readRatioAvg": 0.002976190476190476,
+          "readMsAvg": "8",
+          "readRatioMax": 0.0033482142857142855,
+          "readMsMax": "9",
+          "computeRatioAvg": 0.1875,
+          "computeMsAvg": "504",
+          "computeRatioMax": 0.22172619047619047,
+          "computeMsMax": "596",
+          "writeRatioAvg": 0.00855654761904762,
+          "writeMsAvg": "23",
+          "writeRatioMax": 0.012648809523809524,
+          "writeMsMax": "34",
+          "shuffleOutputBytes": "90749025",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "2432847",
+          "recordsWritten": "2016645",
+          "parallelInputs": "4",
+          "completedParallelInputs": "4",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:patientunitstayid, $2:y, $3:prob_1",
+                "FROM citric-glow-485600-f4.icu_ml.preds_test_v3"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$10, $11",
+                "FROM __stage00_output"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $550 := $542, $551 := $541",
+                "$260 := COUNT_STAR()",
+                "$261 := COUNTIF($350)",
+                "$262 := COUNTIF($351)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$350 := equal($540, 1)",
+                "$351 := equal($540, 0)"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$540 := $2, $541 := $3, $542 := $11",
+                "INNER HASH JOIN EACH  WITH ALL  ON $1 = $10"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$551, $550, $260, $261, $262",
+                "TO __stage02_output",
+                "BY HASH($550, $551)"
+              ]
+            }
+          ],
+          "slotMs": "2215",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S03: Aggregate",
+          "id": "3",
+          "startMs": "1788636560941",
+          "endMs": "1788636562292",
+          "inputStages": [
+            "2"
+          ],
+          "waitRatioAvg": 0.000744047619047619,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.000744047619047619,
+          "waitMsMax": "2",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 1,
+          "computeMsAvg": "2688",
+          "computeRatioMax": 1,
+          "computeMsMax": "2688",
+          "writeRatioAvg": 0.0078125,
+          "writeMsAvg": "21",
+          "writeRatioMax": 0.0078125,
+          "writeMsMax": "21",
+          "shuffleOutputBytes": "90205875",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "2016645",
+          "recordsWritten": "2004575",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$551, $550, $260, $261, $262",
+                "FROM __stage02_output"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $560 := $550, $561 := $551",
+                "$180 := SUM_OF_COUNTS($260)",
+                "$181 := SUM_OF_COUNTS($261)",
+                "$182 := SUM_OF_COUNTS($262)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$561, $560, $180, $181, $182",
+                "TO __stage03_output"
+              ]
+            }
+          ],
+          "slotMs": "2089",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S05: Input",
+          "id": "5",
+          "startMs": "1788636562322",
+          "endMs": "1788636562368",
+          "waitRatioAvg": 0.000744047619047619,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.000744047619047619,
+          "waitMsMax": "2",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.0026041666666666665,
+          "computeMsAvg": "7",
+          "computeRatioMax": 0.0026041666666666665,
+          "computeMsMax": "7",
+          "writeRatioAvg": 0.007068452380952381,
+          "writeMsAvg": "19",
+          "writeRatioMax": 0.007068452380952381,
+          "writeMsMax": "19",
+          "shuffleOutputBytes": "0",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "0",
+          "recordsWritten": "0",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$280, $281, $282, $283, $284",
+                "FROM __SHUFFLE2"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$210 := coalesce($291, 0)",
+                "$211 := coalesce($291, 1)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$210, $211, $290, $291, $292, $293, $294",
+                "TO __stage05_output"
+              ]
+            }
+          ],
+          "slotMs": "36",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S06: Coalesce",
+          "id": "6",
+          "startMs": "1788636562371",
+          "endMs": "1788636562447",
+          "inputStages": [
+            "5"
+          ],
+          "waitRatioAvg": 0.0003720238095238095,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.0011160714285714285,
+          "waitMsMax": "3",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.003720238095238095,
+          "computeMsAvg": "10",
+          "computeRatioMax": 0.006324404761904762,
+          "computeMsMax": "17",
+          "writeRatioAvg": 0.005952380952380952,
+          "writeMsAvg": "16",
+          "writeRatioMax": 0.0078125,
+          "writeMsMax": "21",
+          "shuffleOutputBytes": "0",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "0",
+          "recordsWritten": "0",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "FROM __stage05_output"
+              ]
+            }
+          ],
+          "slotMs": "8710",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S07: Join+",
+          "id": "7",
+          "startMs": "1788636562383",
+          "endMs": "1788636562783",
+          "inputStages": [
+            "3",
+            "6"
+          ],
+          "waitRatioAvg": 0.000744047619047619,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.0033482142857142855,
+          "waitMsMax": "9",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.01525297619047619,
+          "computeMsAvg": "41",
+          "computeRatioMax": 0.29203869047619047,
+          "computeMsMax": "785",
+          "writeRatioAvg": 0.005208333333333333,
+          "writeMsAvg": "14",
+          "writeRatioMax": 0.011904761904761904,
+          "writeMsMax": "32",
+          "shuffleOutputBytes": "144329400",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "2004575",
+          "recordsWritten": "2004575",
+          "parallelInputs": "101",
+          "completedParallelInputs": "101",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$561, $560, $180, $181, $182",
+                "FROM __stage03_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$410, $411, $412, $600",
+                "FROM __SHUFFLE3"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$210, $211, $290, $291, $292, $293, $294",
+                "FROM __stage06_output"
+              ]
+            },
+            {
+              "kind": "ANALYTIC_FUNCTION",
+              "substeps": [
+                "$130 := SUM($572) OVER (PARTITION BY $571 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)",
+                "$131 := SUM($573) OVER (PARTITION BY $571 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)",
+                "$132 := SUM($574) OVER (PARTITION BY $571 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$271 ASC"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$625 := $300, $626 := $301, $627 := $302, $620 := $290, $621 := $291, $622 := $292, $623 := $293, $624 := $294",
+                "INNER HASH JOIN EACH  WITH ALL  ON $220 = $210, $221 = $211"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$220 := coalesce($610, 0)",
+                "$221 := coalesce($610, 1)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $610 := $600",
+                "$300 := SUM($410)",
+                "$301 := SUM($411)",
+                "$302 := SUM($412)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$120, $121, $122, $123, $124, $125, $126, $127",
+                "TO __stage07_output"
+              ]
+            }
+          ],
+          "slotMs": "10799",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S08: Input",
+          "id": "8",
+          "startMs": "1788636562811",
+          "endMs": "1788636562857",
+          "waitRatioAvg": 0.0003720238095238095,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.0003720238095238095,
+          "waitMsMax": "1",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.003720238095238095,
+          "computeMsAvg": "10",
+          "computeRatioMax": 0.003720238095238095,
+          "computeMsMax": "10",
+          "writeRatioAvg": 0.006324404761904762,
+          "writeMsAvg": "17",
+          "writeRatioMax": 0.006324404761904762,
+          "writeMsMax": "17",
+          "shuffleOutputBytes": "0",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "0",
+          "recordsWritten": "0",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$400, $401, $402, $791, $790",
+                "FROM __SHUFFLE11"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$170 := coalesce($811, 0)",
+                "$171 := coalesce($811, 1)"
+              ]
+            },
+            {
+              "kind": "ANALYTIC_FUNCTION",
+              "substeps": [
+                "$200 := SUM($800) OVER (PARTITION BY $804 ORDER BY $803 ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+                "$201 := SUM($801) OVER (PARTITION BY $804 ORDER BY $803 ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+                "$202 := SUM($802) OVER (PARTITION BY $804 ORDER BY $803 ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$790 ASC, $791 ASC"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$170, $171, $200, $201, $202, $810",
+                "TO __stage08_output"
+              ]
+            }
+          ],
+          "slotMs": "57",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S09: Input",
+          "id": "9",
+          "startMs": "1788636562826",
+          "endMs": "1788636562877",
+          "waitRatioAvg": 0.0003720238095238095,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.0003720238095238095,
+          "waitMsMax": "1",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.003720238095238095,
+          "computeMsAvg": "10",
+          "computeRatioMax": 0.003720238095238095,
+          "computeMsMax": "10",
+          "writeRatioAvg": 0.006696428571428571,
+          "writeMsAvg": "18",
+          "writeRatioMax": 0.006696428571428571,
+          "writeMsMax": "18",
+          "shuffleOutputBytes": "0",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "0",
+          "recordsWritten": "0",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$470, $510, $511, $512, $513, $514",
+                "FROM __SHUFFLE9"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$250 := coalesce($740, 0)",
+                "$251 := coalesce($740, 1)"
+              ]
+            },
+            {
+              "kind": "ANALYTIC_FUNCTION",
+              "substeps": [
+                "$340 := SUM($732) OVER (PARTITION BY $731, $730 ORDER BY $735 ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+                "$341 := SUM($733) OVER (PARTITION BY $731, $730 ORDER BY $735 ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+                "$342 := SUM($734) OVER (PARTITION BY $731, $730 ORDER BY $735 ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$510 ASC, $470 ASC, $514 ASC"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$250, $251, $340, $341, $342, $741",
+                "TO __stage09_output"
+              ]
+            }
+          ],
+          "slotMs": "57",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S0A: Coalesce",
+          "id": "10",
+          "startMs": "1788636562880",
+          "endMs": "1788636562951",
+          "inputStages": [
+            "9"
+          ],
+          "waitRatioAvg": 0.0003720238095238095,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.0018601190476190475,
+          "waitMsMax": "5",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.003720238095238095,
+          "computeMsAvg": "10",
+          "computeRatioMax": 0.005580357142857143,
+          "computeMsMax": "15",
+          "writeRatioAvg": 0.005208333333333333,
+          "writeMsAvg": "14",
+          "writeRatioMax": 0.010416666666666666,
+          "writeMsMax": "28",
+          "shuffleOutputBytes": "0",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "0",
+          "recordsWritten": "0",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "FROM __stage09_output"
+              ]
+            }
+          ],
+          "slotMs": "5360",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S0B: Coalesce",
+          "id": "11",
+          "startMs": "1788636562880",
+          "endMs": "1788636562951",
+          "inputStages": [
+            "8"
+          ],
+          "waitRatioAvg": 0.0011160714285714285,
+          "waitMsAvg": "3",
+          "waitRatioMax": 0.0033482142857142855,
+          "waitMsMax": "9",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.0033482142857142855,
+          "computeMsAvg": "9",
+          "computeRatioMax": 0.005952380952380952,
+          "computeMsMax": "16",
+          "writeRatioAvg": 0.004092261904761905,
+          "writeMsAvg": "11",
+          "writeRatioMax": 0.010416666666666666,
+          "writeMsMax": "28",
+          "shuffleOutputBytes": "0",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "0",
+          "recordsWritten": "0",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "FROM __stage08_output"
+              ]
+            }
+          ],
+          "slotMs": "4746",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S0C: Join+",
+          "id": "12",
+          "startMs": "1788636562899",
+          "endMs": "1788636563327",
+          "inputStages": [
+            "7",
+            "10",
+            "11"
+          ],
+          "waitRatioAvg": 0.000744047619047619,
+          "waitMsAvg": "2",
+          "waitRatioMax": 0.004464285714285714,
+          "waitMsMax": "12",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.018973214285714284,
+          "computeMsAvg": "51",
+          "computeRatioMax": 0.38058035714285715,
+          "computeMsMax": "1023",
+          "writeRatioAvg": 0.005208333333333333,
+          "writeMsAvg": "14",
+          "writeRatioMax": 0.010788690476190476,
+          "writeMsMax": "29",
+          "shuffleOutputBytes": "1953",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "2004575",
+          "recordsWritten": "31",
+          "parallelInputs": "101",
+          "completedParallelInputs": "101",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$120, $121, $122, $123, $124, $125, $126, $127",
+                "FROM __stage07_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$150, $700, $701, $702, $703, $704, $705, $706, $708",
+                "FROM __SHUFFLE8"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$250, $251, $340, $341, $342, $741",
+                "FROM __stage0A_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$170, $171, $200, $201, $202, $810",
+                "FROM __stage0B_output"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $840 := $70",
+                "$40 := COUNT_STAR()",
+                "$41 := MAX($76)",
+                "$42 := SUM($50)",
+                "$43 := MAX($74)",
+                "$44 := SUM($51)",
+                "$45 := MAX($75)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$50 := multiply(CAST($77 AS DOUBLE), add(CAST(subtract($74, $71) AS DOUBLE), multiply(0.5, CAST($78 AS DOUBLE))))",
+                "$51 := multiply(CAST($77 AS DOUBLE), safe_divide(CAST($72 AS DOUBLE), CAST($73 AS DOUBLE)))"
+              ]
+            },
+            {
+              "kind": "ANALYTIC_FUNCTION",
+              "substeps": [
+                "$80 := SUM($635) OVER (PARTITION BY $631 ORDER BY $630 DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+                "$81 := SUM($636) OVER (PARTITION BY $631 ORDER BY $630 DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)",
+                "$82 := SUM($637) OVER (PARTITION BY $631 ORDER BY $630 DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$141 ASC, $140 DESC"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$100 := if(equal($821, -1), if(equal($820, -1), NULL, $822), ...)",
+                "$101 := if(equal($821, -1), if(equal($820, -1), NULL, $823), ...)",
+                "$102 := if(equal($821, -1), if(equal($820, -1), NULL, $824), ...)"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$820 := $750, $821 := $751, $822 := $758, $823 := $759, $824 := $760, $825 := $752, $826 := $753, $827 := $754, $828 := $755, $829 := $756, $830 := $757, $831 := $200, $832 := $201, $833 := $202",
+                "LEFT OUTER HASH JOIN EACH  WITH ALL  ON $160 = $170, $161 = $171, $751 = $810"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$160 := coalesce($752, 0)",
+                "$161 := coalesce($752, 1)"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$750 := $242, $751 := $243, $752 := $500, $753 := $501, $754 := $502, $755 := $503, $756 := $504, $757 := $505, $758 := $340, $759 := $341, $760 := $342",
+                "LEFT OUTER HASH JOIN EACH  WITH ALL  ON $240 = $250, $241 = $251, $242 = $741"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$240 := coalesce($500, 0)",
+                "$241 := coalesce($500, 1)",
+                "$242 := if(or($420, $330), -1, $390)",
+                "$243 := if($420, -1, if($330, $331, subtract($331, 1)))"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$330 := equal(mod(add($390, 1), 16384), 0)",
+                "$331 := div($390, 16384)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$390 := if($421, subtract($506, 1), $460)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$420 := less($460, 0)",
+                "$421 := greater_or_equal($460, $506)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$460 := $507"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$40, $41, $42, $43, $44, $45, $840",
+                "TO __stage0C_output",
+                "BY HASH($840)"
+              ]
+            }
+          ],
+          "slotMs": "10205",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S0D: Aggregate+",
+          "id": "13",
+          "startMs": "1788636563343",
+          "endMs": "1788636563401",
+          "inputStages": [
+            "12"
+          ],
+          "waitRatioAvg": 0.0011160714285714285,
+          "waitMsAvg": "3",
+          "waitRatioMax": 0.001488095238095238,
+          "waitMsMax": "4",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.003720238095238095,
+          "computeMsAvg": "10",
+          "computeRatioMax": 0.00818452380952381,
+          "computeMsMax": "22",
+          "writeRatioAvg": 0.004836309523809524,
+          "writeMsAvg": "13",
+          "writeRatioMax": 0.009672619047619048,
+          "writeMsMax": "26",
+          "shuffleOutputBytes": "1793",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "31",
+          "recordsWritten": "31",
+          "parallelInputs": "31",
+          "completedParallelInputs": "31",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$40, $41, $42, $43, $44, $45, $840",
+                "FROM __stage0C_output"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$20 := safe_divide(CAST($35 AS DOUBLE), CAST($31 AS DOUBLE))",
+                "$21 := safe_divide($32, CAST(multiply($35, $33) AS DOUBLE))",
+                "$22 := safe_divide($34, CAST($35 AS DOUBLE))"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $850 := $840",
+                "$30 := SUM_OF_COUNTS($40)",
+                "$31 := MAX($41)",
+                "$32 := SUM($42)",
+                "$33 := MAX($43)",
+                "$34 := SUM($44)",
+                "$35 := MAX($45)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$20, $21, $22, $30, $31, $35, $850",
+                "TO __stage0D_output"
+              ]
+            }
+          ],
+          "slotMs": "1690",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S0E: Output",
+          "id": "14",
+          "startMs": "1788636563404",
+          "endMs": "1788636563456",
+          "inputStages": [
+            "13"
+          ],
+          "waitRatioAvg": 0.0003720238095238095,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.0003720238095238095,
+          "waitMsMax": "1",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.004836309523809524,
+          "computeMsAvg": "13",
+          "computeRatioMax": 0.004836309523809524,
+          "computeMsMax": "13",
+          "writeRatioAvg": 0.002232142857142857,
+          "writeMsAvg": "6",
+          "writeRatioMax": 0.002232142857142857,
+          "writeMsMax": "6",
+          "shuffleOutputBytes": "1793",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "31",
+          "recordsWritten": "31",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$20, $21, $22, $30, $31, $35, $850",
+                "FROM __stage0D_output"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$850 ASC"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$860, $861, $862, $863, $864, $865, $866",
+                "TO __stage0E_output"
+              ]
+            }
+          ],
+          "slotMs": "94",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "52710952",
+      "timeline": [
+        {
+          "elapsedMs": "803",
+          "totalSlotMs": "5149",
+          "pendingUnits": "1",
+          "completedUnits": "0",
+          "activeUnits": "1",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "1803",
+          "totalSlotMs": "46868",
+          "pendingUnits": "1",
+          "completedUnits": "5",
+          "activeUnits": "1",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "2803",
+          "totalSlotMs": "46868",
+          "pendingUnits": "1",
+          "completedUnits": "5",
+          "activeUnits": "1",
+          "estimatedRunnableUnits": "1"
+        },
+        {
+          "elapsedMs": "4261",
+          "totalSlotMs": "46868",
+          "pendingUnits": "0",
+          "completedUnits": "543",
+          "activeUnits": "156",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "52710952",
+      "totalBytesBilled": "53477376",
+      "billingTier": 1,
+      "totalSlotMs": "46868",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "cohort_v1"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "preds_test_v3"
+        }
+      ],
+      "statementType": "SELECT",
+      "queryInfo": {
+        "optimizationDetails": {
+          "optimizations": [
+            {
+              "enhanced_vectorization": "applied"
+            }
+          ]
+        }
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "cohort_v1"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "preds_test_v3"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "46868",
+    "finalExecutionDurationMs": "3013"
+  }
+}

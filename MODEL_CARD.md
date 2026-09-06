@@ -1,7 +1,7 @@
 # Model Card: Retrospective ICU Code-Event Proxy Ranking Model
 
-**Version:** 1.1  
-**Last Updated:** March 2026  
+**Version:** 2.0.0-pit (rerun completed)\
+**Last Updated:** September 2026\
 **Author:** Nicholas Leko  
 **License:** MIT  
 **Data License:** eICU-CRD (PhysioNet credentialed access required)
@@ -32,7 +32,7 @@ In the current artifact, the model is intended to:
 Any live clinical use would require additional local validation, silent-mode
 testing, workflow review, monitoring, and governance.
 
-Importantly, **model outputs alone do not define alerting behavior**. The current
+**Model outputs alone do not define alerting behavior**. The current
 post-model policy uses a quiet-period debounce in which suppressed crossings
 reset the window; it is not a cooldown measured from the last emitted alert.
 
@@ -57,7 +57,8 @@ This model is **not** intended to:
 - eICU Collaborative Research Database v2.0  
 
 **Population:**
-- Adult ICU stays  
+- Stays with numeric age 18–120; top-coded `> 89` and other nonnumeric ages are excluded
+- The source is eICU, but SQL applies no `unittype` restriction; a non-ICU exclusion is not established
 - Multiple hospitals across the United States  
 - Data collected within a consistent modern care era  
 
@@ -80,7 +81,7 @@ These exclusions are intentional to reduce care-pattern and provider leakage.
 - ICU stays with qualifying proxy events in the first 6 ICU hours  
 - Final 2 hours of each ICU stay, because the retrospective prediction grid is
   bounded by `unitdischargeoffset - 120`  
-- Non-ICU care settings  
+- Stays shorter than six hours at cohort construction; the downstream grid requires at least eight hours to yield a row
 
 ---
 
@@ -90,7 +91,10 @@ These exclusions are intentional to reduce care-pattern and provider leakage.
 - **Algorithm:** Logistic Regression (BigQuery ML)  
 - **Regularization:** L2  
 - **Feature set:** 49 non-intercept features (19 vital-sign summaries and 30 laboratory summaries)
-- **Cohort and row counts:** checked in under `artifacts/reference_run/` and regenerable via `artifacts/queries/`  
+- **Split:** `CUSTOM`, with `is_validation = (split = 'val')`; only train/val enter model creation. All validation hospitals are reserved for early stopping, not coefficient fitting.
+- **Stopping:** `EARLY_STOP=TRUE`, `MIN_REL_PROGRESS=0.01`, maximum 50 iterations; L2=1.
+- **Availability:** lab draws must be in `[t-360,t)` and `GREATEST(labresultoffset, labresultrevisedoffset) < t`. Missing revised-entry timestamps exclude records. A final revision cannot stand in for an unavailable earlier version.
+- **Counts/provenance:** `artifacts/reference_run/` is the historical v3 run, not an export of the new specification. The new export is `artifacts/reference_run_v4_pit/`, with job provenance in `audit/2026-09-05/pit_v4/`.
 
 ### Inference
 - **Lookback window:** 6 hours  
@@ -112,27 +116,40 @@ This model assumes:
 
 ## Evaluation Summary
 
-Evaluation was performed using a **hospital-level train/val/test split** to
-assess held-out-hospital performance within the same eICU data ecosystem. The
-current published repo path trains one prespecified final model on `train`; it
-does not reproduce a validation-based model-selection sweep.
+The model uses hospital-level train/val/test assignment with a CUSTOM BQML
+split. Actual temporary split tables confirm that 6,400,461 training rows
+(1,819 positives) fit the model and 2,015,025 validation rows (444 positives)
+are reserved for evaluation. Test rows do not enter model creation. The final
+model completed nine iterations; its effective options explicitly enable early
+stopping with 1% minimum relative progress and a 50-iteration cap. The returned
+metadata does not expose the precise reason for the nine-iteration termination.
 
-### Test Set Performance (Hospital Holdout)
+### Point-in-Time Corrected Test Performance
 
-- **Held-out hospitals:** 31
-- **Held-out patient-hours:** 2,078,011
-- **Positive labeled windows on test:** 310 (0.0149% row prevalence)
-- **Held-out `ML.EVALUATE`:** ROC-AUC 0.6377, log loss 0.002723
-- **Retrospective corpus-wide operating point at top 0.5% of test rows:** 10,391 alerts, 21 positive
-  labeled windows, 0.2021% precision, 13.55x enrichment over test prevalence
-- **First-crossing alert policy:** 3,350 alerts, 8 positive labeled windows,
-  0.2388% precision
-- **12-hour quiet-period-debounced first-crossing (suppressed crossings reset
-  the window):** 2,650 alerts, 7 positive labeled windows, 0.2642% precision
+- 31 hospitals; 2,078,011 patient-hours; 310 positive windows (0.014918% prevalence).
+- Raw global top 0.5%: **10,391 alerts, 36 TP, 0.3465% PPV, 11.61%
+  positive-window recall, 23.22x pooled enrichment (95% hospital-cluster CI
+  11.45–41.53)**.
+- Within-hospital AUROC: **0.7348 row-weighted, 0.7827 median** among 21 hospitals
+  with both classes; positive alerts occurred in **9/31 hospitals**, versus
+  7/31 previously. Ten hospitals have no positive windows; seven receive no alerts.
+- Hospital-mix expectation: 1.443 TP; observed/expected: 24.94x.
+- Global ROC-AUC: 0.7292. **Log loss: 0.007776, worse than the constant
+  training-prevalence baseline of 0.001502 and the prior model's 0.002723.**
+  Log loss is not a ranking metric. Poor probability quality can coexist with
+  ranking signal; these results do not justify interpreting scores as useful
+  absolute risk probabilities.
+- First crossing: 2,040 alerts/8 TP (0.3922% PPV). Quiet-period debounce:
+  1,596 alerts/8 TP (0.5013% PPV). Both retain 2.58% of positive windows.
 
-This is retrospective held-out-hospital evaluation only; it does **not**
-constitute external, prospective, or live-workflow validation. Exact aggregate
-counts supporting these metrics are checked in under `artifacts/reference_run/`.
+The CI uses 100,000 paired hospital resamples, seed 20260905, with fixed observed
+alert membership. It excludes uncertainty from retraining and source drift.
+Q1 found future-entered lab values in 106,328 historical test rows, including
+35 positive windows. The prior 13.55x enrichment is preserved only as a
+historical comparison. The endpoint remains a **documentation proxy, not
+adjudicated cardiac arrest**. See [the full version audit](audit/2026-09-05/pit_v4/REPORT.md)
+for exposure, per-hospital old/new metrics, the prespecified AUTO_SPLIT control,
+and the remaining limitations.
 
 ---
 

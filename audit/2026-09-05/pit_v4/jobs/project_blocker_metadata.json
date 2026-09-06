@@ -1,0 +1,41 @@
+{
+  "dataset": {
+    "kind": "bigquery#dataset",
+    "etag": "AD85+VUvdiiZ4Fn9lK9SwQ==",
+    "id": "citric-glow-485600-f4:icu_ml",
+    "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/datasets/icu_ml",
+    "datasetReference": {
+      "datasetId": "icu_ml",
+      "projectId": "citric-glow-485600-f4"
+    },
+    "access": [
+      {
+        "role": "WRITER",
+        "specialGroup": "projectWriters"
+      },
+      {
+        "role": "OWNER",
+        "specialGroup": "projectOwners"
+      },
+      {
+        "role": "OWNER",
+        "userByEmail": "Nicholas.Leko99@gmail.com"
+      },
+      {
+        "role": "READER",
+        "specialGroup": "projectReaders"
+      }
+    ],
+    "creationTime": "1769476483060",
+    "lastModifiedTime": "1769476483060",
+    "location": "US",
+    "type": "DEFAULT",
+    "isCaseInsensitive": false,
+    "maxTimeTravelHours": "168"
+  },
+  "billing": {
+    "name": "projects/citric-glow-485600-f4/billingInfo",
+    "projectId": "citric-glow-485600-f4",
+    "billingEnabled": false
+  }
+}

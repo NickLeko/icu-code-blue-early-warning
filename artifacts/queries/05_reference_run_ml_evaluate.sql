@@ -2,7 +2,7 @@
 
 SELECT *
 FROM ML.EVALUATE(
-  MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v3`,
+  MODEL `{{PROJECT_ID}}.icu_ml.bqml_lr_v4_pit`,
   (
     SELECT
       y,
@@ -18,7 +18,7 @@ FROM ML.EVALUATE(
       creat_mean_6h, creat_min_6h, creat_max_6h, creat_n_6h, creat_last_6h,
       hgb_mean_6h, hgb_min_6h, hgb_max_6h, hgb_n_6h, hgb_last_6h,
       wbc_mean_6h, wbc_min_6h, wbc_max_6h, wbc_n_6h, wbc_last_6h
-    FROM `{{PROJECT_ID}}.icu_ml.model_table_v3`
+    FROM `{{PROJECT_ID}}.icu_ml.model_table_v4_pit`
     WHERE split = 'test'
   )
 );

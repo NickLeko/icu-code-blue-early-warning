@@ -146,7 +146,7 @@ The system supports **prioritization**, not diagnosis or intervention.
 This project intentionally stops after:
 - Demonstrating feasible alert enrichment under realistic constraints
 - Designing post-model alerting-policy analyses; persistence-tier results are
-  withdrawn pending regeneration of the corrected classification logic
+  withdrawn; the corrected classification logic was regenerated for `2.0.0-pit`, with separate aggregate results in `audit/2026-09-05/pit_v4/tier_metrics.csv`
 - Establishing monitoring and change control boundaries
 
 Further model complexity is unlikely to yield proportional gains without prospective validation.

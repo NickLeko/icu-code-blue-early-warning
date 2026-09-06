@@ -1,0 +1,543 @@
+{
+  "version": "2.0.0-pit",
+  "packagedAt": "2026-09-06T09:43:24.683889+00:00",
+  "project": "citric-glow-485600-f4",
+  "dataset": "icu_ml",
+  "location": "US",
+  "environment": {
+    "python": "3.12.3",
+    "numpy": "2.4.3"
+  },
+  "protocol": "audit/2026-09-05/pit_v4/SPECIFICATION.md",
+  "sourceAndOutputMetadata": "audit/2026-09-05/pit_v4/jobs/metadata_after.json",
+  "preservationChecks": "audit/2026-09-05/pit_v4/preservation_checks.json",
+  "sha256": {
+    "artifacts/queries/01_reference_run_counts.sql": "774c00e1f74cc2dcdf4473a23e33c9bed8435357a18150be3d0b42faf87348e0",
+    "artifacts/queries/02_reference_run_operating_point.sql": "6aab6d43a8456b912e64165ae2e992e72d115dcc2cf5d02d0feabbec10476593",
+    "artifacts/queries/03_reference_run_alert_policy.sql": "e74abfcb562178d033d53a9920e31ca307526783dd3848a582354c04c19210ad",
+    "artifacts/queries/04_reference_run_weights.sql": "d4b6a59cfe14e13a5866a0d1f302b22951897346f7bc9cfc582d3a92bfbe5332",
+    "artifacts/queries/05_reference_run_ml_evaluate.sql": "5f81836e057edb59ab4154e94318dc72944bea8fb0069eaa0c57bdf296742a5a",
+    "artifacts/reference_run_v4_pit/01_reference_run_counts.csv": "27ac574b3d814bda7daf37b4a44ba36d0ae5abc165c3811c2fa897740aaa67d9",
+    "artifacts/reference_run_v4_pit/02_reference_run_operating_point.csv": "a70a43bfe464ec028f4baa22ebfe4d7ed728f33f33eb2e6204ab5fd7a6b488b7",
+    "artifacts/reference_run_v4_pit/03_reference_run_alert_policy.csv": "32265e9206ba8a11076b07e44d2e0985d1e1900623ac6cc4edfa5f07c9c54648",
+    "artifacts/reference_run_v4_pit/04_reference_run_weights.csv": "209bb15ea707d27d8674d9473308d2242cbe235521c96c5da255bc694f73f6d6",
+    "artifacts/reference_run_v4_pit/05_reference_run_ml_evaluate.csv": "24b099ff1ada0d17ce6c2c3ce3a4e370a428ab0a2af758f9bd0aa0d2b97694b5",
+    "audit/2026-09-05/pit_v4/actual_control_split_counts.sql": "6f487e99eb9bf80c65569f785baff93884c101c97d7e9e2240e91c20b0ea3389",
+    "audit/2026-09-05/pit_v4/actual_custom_split_counts.sql": "be8a1062d9961ffd84fd21cf4462f3ce13cb8ae60f05def84db83efd28c346e2",
+    "audit/2026-09-05/pit_v4/analyze.py": "bf453d1ebeab68e6cbf010339a533d3906eb1623bdd14a8a87e02fa4240c168e",
+    "audit/2026-09-05/pit_v4/boundary_fixture.sql": "74ae8bfe5d11a58553a1f40852f607e880f6089daa1327d1dc6d735271c39b9d",
+    "audit/2026-09-05/pit_v4/bq_job.py": "9888b0d144d1587ba948266a6b5f4178ed0b63ab54971098d3a1e5f88a4f19a6",
+    "audit/2026-09-05/pit_v4/bq_read_legacy.py": "1dc3be731d22afe083023d82ff40ffb2031bce2d5a26a694afea546e9b00984b",
+    "audit/2026-09-05/pit_v4/build_report.py": "8ca8a9d8184fca61bdb4fe39b2506719719489267eb6a201c5fa13b6e1509a41",
+    "audit/2026-09-05/pit_v4/capture_metadata.py": "c684eec6e8a66494a49d221a1a533e95e5b3f40ac7607e76c97411f3f09f83fa",
+    "audit/2026-09-05/pit_v4/compare.py": "54f2774fc210fb2ff070042fc628ecc9d5e09a475621f53da9b956c16b6b203f",
+    "audit/2026-09-05/pit_v4/control_model.sql": "66ebce8c4e1647d590dfba9044ac4d6690d947770ba8b02f322bd2ab585050c7",
+    "audit/2026-09-05/pit_v4/control_predictions.sql": "e407268640ae48a970e90d9e1318473039203434105599f6e621f2c6caab337f",
+    "audit/2026-09-05/pit_v4/custom_split_dry_only.sql": "000a5b713b1dec77c197117b3502665067608711b1c32d896bb92a0878397f54",
+    "audit/2026-09-05/pit_v4/expiration_probe.sql": "b55b7ccea4c976e289d23e3c881560e64917fbb214536b3bdf96d25fb6b5253e",
+    "audit/2026-09-05/pit_v4/feature_boundary_validation.sql": "7207a3986cf00137d3222dc126837be2438c4b2bf07a1d5c19617d6d01e492c8",
+    "audit/2026-09-05/pit_v4/feature_reconciliation.sql": "bdcf289d28a002b8d64d5cf4c01808e97edc02d02f7ae1202e0ffc3bd9c2040f",
+    "audit/2026-09-05/pit_v4/finalize_queries.py": "1b1216a76032dbb6a77d1990e5ee9641661e870b8e307ace90ade86b3559078d",
+    "audit/2026-09-05/pit_v4/integrity_new.sql": "210f0ba7530aaeebbcd48e020505086e11d8832254630e838fa0c51ea1c795ca",
+    "audit/2026-09-05/pit_v4/last_value_reconciliation.sql": "9cbffd2b1e96b49e5111252c0698e8efd0c9d35316032ea9cdee504081be55f1",
+    "audit/2026-09-05/pit_v4/last_value_tie_explanation.sql": "302e917ba9fd46323e7855c302c19de60cc61c6a3a45991a854118640439624d",
+    "audit/2026-09-05/pit_v4/model_comparison.sql": "38287ba761b46acfbf8d67b1a15db774ffa29a41eb373326e397aadd541354ac",
+    "audit/2026-09-05/pit_v4/package_release.py": "2d8fe635610c96b2b7f531799635c3249a167b93c26ae54d9a9d98ecefd7d67a",
+    "audit/2026-09-05/pit_v4/probability_baseline.sql": "39a1d67ebc9f00fdac98638f15f41f759624b44aeff26cd216ef82f76daddc77",
+    "audit/2026-09-05/pit_v4/q1_reference_exposure.sql": "92d9b557625f23a175783d91369541adb84362703de3709f427abbbab166f9ae",
+    "audit/2026-09-05/pit_v4/q6_new.sql": "6a489725a254040aef0980d040a29a09d1d8e54cd14eba937aba6f3da88b9e6e",
+    "audit/2026-09-05/pit_v4/resume.py": "681a1952a4a3f1adc12a71f302cfbb0c753b05c8330caaebb8fe017f8b97c1e2",
+    "audit/2026-09-05/pit_v4/split_counts.sql": "7a804e58f2c1abf289d40dfbb0919ccc1b6ecd28edcde535994d8b473509a38c",
+    "audit/2026-09-05/pit_v4/tier_fixture.sql": "df0dd63f55fd77a9f06f6e31ef6f2918564c64efdb42a21f06c6f5a55e10ee15",
+    "audit/2026-09-05/pit_v4/tier_metrics.sql": "d152b902ee613b43755d79cbcdb951d833b74bf5db27a64ce3f0f81b31d9eeda",
+    "audit/2026-09-05/pit_v4/weight_comparison.sql": "c061549080df763d866e0df7e9fc875d9ab0e18503673e7a417b89e829b959b3",
+    "audit/2026-09-05/pit_v4/within_new.sql": "18e651ed5ff8900abf610596754c9a83e2537a9dcb66cb631e24af00d81ca163",
+    "sql/01_cohort.sql": "264888415c5a1fd1af0d0b17bf5a5bc5cad9a1338351978ca7845f5c0541cbce",
+    "sql/02_labels.sql": "a0868cf10be8a033aba95aafd8cfc0837a8de4df21e88710442aa8a05c8631fc",
+    "sql/03_features_vitals.sql": "d167428f02d213dc1da07a47e95174d289e0a13cbd17502daefd0df0c252d46a",
+    "sql/04_features_labs.sql": "2e7a938c1ef6896de7280b71113d07a943a0e675182dba767a06135bd2fe9097",
+    "sql/05_train_rows.sql": "944b45d37c63a4f15d0fbc2ce4ea6b13d29d9bb3615c0cfdd50a74c6fa91b787",
+    "sql/06_splits.sql": "14868b0905ad4dc396a8aeb4e20169f98f22b845bfe088c12f6997e8d59f7f58",
+    "sql/07_model_table.sql": "f6588df0912a8ebf6ff07f1b4294ad61cd2d651bb156cced22b6c74097dd3afb",
+    "sql/08_bqml_models.sql": "5d0fe6afef7e2cc32ca1a0728540a3f2f2b2ebcf256fddced8736b0a0d499d8e",
+    "sql/09_eval_alert_rate.sql": "e60fcdea3d4a3706336d32b2a477aa4a01ee6eb0c8f57f7b73c70ef7b0ae9210",
+    "sql/10_eval_temporal_alert_tiers.sql": "f8b66c4748e2366da28ccb80fb91f5d6f80bcf2c23b04d0fa68a5d5f5f7a3959",
+    "sql/11_eval_first_crossing_cooldown.sql": "b36b4ba399930093b382074b91046305ef926b1090485c40ed6d0ea3ad9dd212"
+  },
+  "jobs": [
+    {
+      "stage": "actual_control_split_counts",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_actual_control_split_counts_6f487e99eb9b",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/actual_control_split_counts.sql",
+      "querySha256": "6f487e99eb9bf80c65569f785baff93884c101c97d7e9e2240e91c20b0ea3389",
+      "submittedAt": "2026-09-06T04:36:28.688985+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/actual_control_split_counts_result.json"
+    },
+    {
+      "stage": "actual_custom_split_counts",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_actual_custom_split_counts_be8a1062d996",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/actual_custom_split_counts.sql",
+      "querySha256": "be8a1062d9961ffd84fd21cf4462f3ce13cb8ae60f05def84db83efd28c346e2",
+      "submittedAt": "2026-09-06T04:35:16.555701+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/actual_custom_split_counts_result.json"
+    },
+    {
+      "stage": "boundary_fixture",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_boundary_fixture_74ae8bfe5d11",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/boundary_fixture.sql",
+      "querySha256": "74ae8bfe5d11a58553a1f40852f607e880f6089daa1327d1dc6d735271c39b9d",
+      "submittedAt": "2026-09-06T04:18:15.229527+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/boundary_fixture_result.json"
+    },
+    {
+      "stage": "expiration_probe",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_expiration_probe_cd83f19a7b36",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/expiration_probe.sql",
+      "querySha256": "cd83f19a7b36470e57c7bdbdc4a39cb122d8784c2f8dbee540031c8bfb57cc53",
+      "submittedAt": "2026-09-06T04:24:54.036152+00:00",
+      "state": "DONE",
+      "fatalError": {
+        "reason": "billingNotEnabled",
+        "message": "Billing has not been enabled for this project. Enable billing at https://console.cloud.google.com/billing. Datasets must have a default expiration time and default partition expiration time of less than 60 days while in sandbox mode."
+      },
+      "resultFile": null
+    },
+    {
+      "stage": "export_01_reference_run_counts",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_export_01_reference_run_counts_ee1f93903b53",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/artifacts/queries/01_reference_run_counts.sql",
+      "querySha256": "ee1f93903b53f822c58d4056e0e168e9324b30cb8dcebe8227135ee60b1b0455",
+      "submittedAt": "2026-09-06T04:36:24.663042+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/export_01_reference_run_counts_result.json"
+    },
+    {
+      "stage": "export_02_reference_run_operating_point",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_export_02_reference_run_operating_point_a73bb6213831",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/artifacts/queries/02_reference_run_operating_point.sql",
+      "querySha256": "a73bb6213831040daf9dd43760443637eb974c04a1c39f4ce90938362d285d92",
+      "submittedAt": "2026-09-06T04:36:27.204642+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/export_02_reference_run_operating_point_result.json"
+    },
+    {
+      "stage": "export_03_reference_run_alert_policy",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_export_03_reference_run_alert_policy_1891df22a37a",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/artifacts/queries/03_reference_run_alert_policy.sql",
+      "querySha256": "1891df22a37a7dc6551765593848f6a6f4260d4e5463d87b919a4ed1cc07ec0f",
+      "submittedAt": "2026-09-06T04:36:29.845836+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/export_03_reference_run_alert_policy_result.json"
+    },
+    {
+      "stage": "export_04_reference_run_weights",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_export_04_reference_run_weights_1d9bfde113dc",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/artifacts/queries/04_reference_run_weights.sql",
+      "querySha256": "1d9bfde113dcf17ae220f8223140a6dc7916d0c5008313a2be4d34ed99d05823",
+      "submittedAt": "2026-09-06T04:36:31.488482+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/export_04_reference_run_weights_result.json"
+    },
+    {
+      "stage": "export_05_reference_run_ml_evaluate",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_export_05_reference_run_ml_evaluate_1929a96256a4",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/artifacts/queries/05_reference_run_ml_evaluate.sql",
+      "querySha256": "1929a96256a4513244aceee4ab035c979d1b567a7e59134011683acd7f65c46c",
+      "submittedAt": "2026-09-06T04:36:33.952796+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/export_05_reference_run_ml_evaluate_result.json"
+    },
+    {
+      "stage": "feature_boundary_validation",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_feature_boundary_validation_d0ef93a6d74f",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/feature_boundary_validation.sql",
+      "querySha256": "d0ef93a6d74f5d8a53f90b856e5525028257c701261f81ac7324bcfbdc909ad5",
+      "submittedAt": "2026-09-06T04:26:26.705559+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/feature_boundary_validation_result.json"
+    },
+    {
+      "stage": "feature_reconciliation",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_feature_reconciliation_a27db4dc8f6b",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/feature_reconciliation.sql",
+      "querySha256": "a27db4dc8f6bdfeec3645a1811fc9ad2fdc555254bb20cfea24df49b522b15d4",
+      "submittedAt": "2026-09-06T04:31:23.254111+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/feature_reconciliation_result.json"
+    },
+    {
+      "stage": "features_billing_enabled",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_features_billing_enabled_3454e0c0d0a0",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/sql/04_features_labs.sql",
+      "querySha256": "3454e0c0d0a00b5f7986cad0a6ca47776ed7a2ce2cd2b3f41f9284eb1b6f77a6",
+      "submittedAt": "2026-09-06T04:29:06.277839+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/features_billing_enabled_result.json"
+    },
+    {
+      "stage": "features",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_features_3454e0c0d0a0",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/sql/04_features_labs.sql",
+      "querySha256": "3454e0c0d0a00b5f7986cad0a6ca47776ed7a2ce2cd2b3f41f9284eb1b6f77a6",
+      "submittedAt": "2026-09-06T04:19:16.840574+00:00",
+      "state": "DONE",
+      "fatalError": {
+        "reason": "billingNotEnabled",
+        "message": "Billing has not been enabled for this project. Enable billing at https://console.cloud.google.com/billing. Datasets must have a default expiration time and default partition expiration time of less than 60 days while in sandbox mode."
+      },
+      "resultFile": null
+    },
+    {
+      "stage": "first_crossing_canonical",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_first_crossing_canonical_b3b943f2c57d",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/sql/11_eval_first_crossing_cooldown.sql",
+      "querySha256": "b3b943f2c57d23105b7f03d15468294755cfe257e0125de0d4c5b237054909d1",
+      "submittedAt": "2026-09-06T04:37:29.546389+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/first_crossing_canonical_result.json"
+    },
+    {
+      "stage": "integrity_new",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_integrity_new_210f0ba7530a",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/integrity_new.sql",
+      "querySha256": "210f0ba7530aaeebbcd48e020505086e11d8832254630e838fa0c51ea1c795ca",
+      "submittedAt": "2026-09-06T04:36:22.804065+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/integrity_new_result.json"
+    },
+    {
+      "stage": "last_value_reconciliation",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_last_value_reconciliation_6c1a17676dda",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/last_value_reconciliation.sql",
+      "querySha256": "6c1a17676ddaa2628157fdba33082c98f7013c1c403607f3cee5355b67794561",
+      "submittedAt": "2026-09-06T04:46:50.043382+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/last_value_reconciliation_result.json"
+    },
+    {
+      "stage": "last_value_tie_explanation_fixed",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_last_value_tie_explanation_fixed_eebf6b6b38dc",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/last_value_tie_explanation.sql",
+      "querySha256": "eebf6b6b38dc4953b25ebc65d9e9750873191295c89abbec1834d45ec708d30c",
+      "submittedAt": "2026-09-06T09:40:05.277493+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/last_value_tie_explanation_fixed_result.json"
+    },
+    {
+      "stage": "last_value_tie_explanation",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_last_value_tie_explanation_427a28347760",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/last_value_tie_explanation.sql",
+      "querySha256": "427a283477606da3621ec3ccc97e86a6aca4cc9cc5ef9adcb1c8ff044199997a",
+      "submittedAt": "2026-09-06T04:48:39.562917+00:00",
+      "state": "DONE",
+      "fatalError": {
+        "reason": "invalidQuery",
+        "location": "query",
+        "message": "Aggregate functions with DISTINCT cannot be used with arguments of type STRUCT"
+      },
+      "resultFile": null
+    },
+    {
+      "stage": "model_comparison",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_model_comparison_b4fe8ea3e040",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/model_comparison.sql",
+      "querySha256": "b4fe8ea3e040dc71ae08ddc8db17db890a2b97d42070ca7a47b288a836712165",
+      "submittedAt": "2026-09-06T04:36:36.312724+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/model_comparison_result.json"
+    },
+    {
+      "stage": "model_control",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_model_control_736beba7440d",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/control_model.sql",
+      "querySha256": "736beba7440dcb87bd12a82fe3193cd1213b8fdae663606a5c46a4beaed7e940",
+      "submittedAt": "2026-09-06T04:31:32.956414+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/model_control_result.json"
+    },
+    {
+      "stage": "model_final",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_model_final_7039891e5c0b",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/sql/08_bqml_models.sql",
+      "querySha256": "7039891e5c0bbec57e13807ea0269fc3780a01d15872bdb35df498104d427970",
+      "submittedAt": "2026-09-06T04:31:29.987898+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/model_final_result.json"
+    },
+    {
+      "stage": "model_table",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_model_table_9f2dc1a42818",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/sql/07_model_table.sql",
+      "querySha256": "9f2dc1a42818b9a954ab2240180514c0cf5daf4e559828a4d5d6560ef785bdbc",
+      "submittedAt": "2026-09-06T04:30:58.519275+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/model_table_result.json"
+    },
+    {
+      "stage": "predictions_control",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_predictions_control_71c2586a8c8f",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/control_predictions.sql",
+      "querySha256": "71c2586a8c8fbe126aacb732cba7507a7a696ae3d4e28252af8065e4f485f3f8",
+      "submittedAt": "2026-09-06T04:35:53.757154+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/predictions_control_result.json"
+    },
+    {
+      "stage": "predictions_final",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_predictions_final_725e8a82840f",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/sql/09_eval_alert_rate.sql",
+      "querySha256": "725e8a82840fea4c7d7a33706277e739828a3af2b8de325466077af20ad727c5",
+      "submittedAt": "2026-09-06T04:35:30.472246+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/predictions_final_result.json"
+    },
+    {
+      "stage": "probability_baseline",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_probability_baseline_64172d26ca22",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/probability_baseline.sql",
+      "querySha256": "64172d26ca227a3dea51425476fde768d07ddb3a27b09f5d4c6a9a3dd0f54b74",
+      "submittedAt": "2026-09-06T04:36:38.453350+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/probability_baseline_result.json"
+    },
+    {
+      "stage": "q6_new",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_q6_new_6a489725a254",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/q6_new.sql",
+      "querySha256": "6a489725a254040aef0980d040a29a09d1d8e54cd14eba937aba6f3da88b9e6e",
+      "submittedAt": "2026-09-06T04:36:18.195038+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/q6_new_result.json"
+    },
+    {
+      "stage": "split_counts",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_split_counts_70dbc87a9250",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/split_counts.sql",
+      "querySha256": "70dbc87a925079cd2423813dadb4df9b418bf8ec791d43cd52020d7f6c0df558",
+      "submittedAt": "2026-09-06T04:31:25.801667+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/split_counts_result.json"
+    },
+    {
+      "stage": "temporal_tiers",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_temporal_tiers_a32597807492",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/sql/10_eval_temporal_alert_tiers.sql",
+      "querySha256": "a3259780749238d4c21a29599a7b8465b53234f70107e08b1ff99340bce592d4",
+      "submittedAt": "2026-09-06T04:37:23.244834+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/temporal_tiers_result.json"
+    },
+    {
+      "stage": "tier_metrics",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_tier_metrics_ae21bf019606",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/tier_metrics.sql",
+      "querySha256": "ae21bf019606e8ebfb7a6de2df394f833689eea9bcd2b14eff15994790bacb31",
+      "submittedAt": "2026-09-06T04:37:34.565972+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/tier_metrics_result.json"
+    },
+    {
+      "stage": "train_rows",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_train_rows_53720b8b6b22",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/sql/05_train_rows.sql",
+      "querySha256": "53720b8b6b228221862b2cd525320a5b61e66b96c64b81ff15b4e22d87c9f834",
+      "submittedAt": "2026-09-06T04:30:35.132697+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/train_rows_result.json"
+    },
+    {
+      "stage": "weight_comparison",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_weight_comparison_b8f391766449",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/weight_comparison.sql",
+      "querySha256": "b8f3917664493087ac024bbaae5d084317b20ea86b89b601687766a9280b8e98",
+      "submittedAt": "2026-09-06T04:37:18.242299+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/weight_comparison_result.json"
+    },
+    {
+      "stage": "within_new",
+      "jobReference": {
+        "projectId": "citric-glow-485600-f4",
+        "jobId": "codex_icu_pit_v4_20260905_within_new_18e651ed5ff8",
+        "location": "US"
+      },
+      "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/within_new.sql",
+      "querySha256": "18e651ed5ff8900abf610596754c9a83e2537a9dcb66cb631e24af00d81ca163",
+      "submittedAt": "2026-09-06T04:36:20.737812+00:00",
+      "state": "DONE",
+      "fatalError": null,
+      "resultFile": "audit/2026-09-05/pit_v4/jobs/within_new_result.json"
+    }
+  ],
+  "validation": {
+    "boundaryFixtureCases": 9,
+    "Q1ExposedRows": 574482,
+    "testExposedRows": 106328,
+    "newPredictionIntegrityErrors": 0,
+    "lastValueTieCasesUnexplained": 0,
+    "originalObjectsPreserved": true,
+    "originalBootstrapExactlyReproduced": true,
+    "tierCountsReconcile": true
+  },
+  "limitations": [
+    "Conditional fixed-policy hospital bootstrap; no retraining uncertainty.",
+    "Historical-to-new comparison includes inherited deterministic last-value tie-breaking.",
+    "Exact optimizer stopping reason is not exposed by metadata.",
+    "Documentation proxy and future-discharge-conditioned grid remain."
+  ]
+}

@@ -1,0 +1,553 @@
+{
+  "kind": "bigquery#getQueryResultsResponse",
+  "etag": "wqfUDfWH0MCPfGhmuvmabA==",
+  "schema": {
+    "fields": [
+      {
+        "name": "prediction_keys_not_in_test",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "test_keys_without_prediction",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "duplicate_prediction_or_test_keys",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "label_disagreements",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "bad_scores",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "bad_labels",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "duplicate_cohort_keys",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "assigned_test_hospitals",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "test_hospitals_with_predictions",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "prediction_hospitals_outside_test",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_integrity_new_210f0ba7530a",
+    "location": "US"
+  },
+  "totalRows": "1",
+  "rows": [
+    {
+      "f": [
+        {
+          "v": "0"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "0"
+        },
+        {
+          "v": "31"
+        },
+        {
+          "v": "31"
+        },
+        {
+          "v": "0"
+        }
+      ]
+    }
+  ],
+  "totalBytesProcessed": "388528391",
+  "jobComplete": true,
+  "cacheHit": false,
+  "auditJobStatistics": {
+    "creationTime": "1788669381619",
+    "startTime": "1788669381721",
+    "endTime": "1788669382601",
+    "totalBytesProcessed": "388528391",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Output",
+          "id": "0",
+          "startMs": "1788669381852",
+          "endMs": "1788669382492",
+          "waitRatioAvg": 0,
+          "waitMsAvg": "0",
+          "waitRatioMax": 0.00023277467411545624,
+          "waitMsMax": "1",
+          "readRatioAvg": 0.10544692737430168,
+          "readMsAvg": "453",
+          "readRatioMax": 0.6336126629422719,
+          "readMsMax": "2722",
+          "computeRatioAvg": 0.16666666666666666,
+          "computeMsAvg": "716",
+          "computeRatioMax": 1,
+          "computeMsMax": "4296",
+          "writeRatioAvg": 0,
+          "writeMsAvg": "0",
+          "writeRatioMax": 0.0011638733705772813,
+          "writeMsMax": "5",
+          "shuffleOutputBytes": "82",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "15004563",
+          "recordsWritten": "1",
+          "parallelInputs": "61",
+          "completedParallelInputs": "61",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$30:patientunitstayid, $31:prediction_time_min, $32:y, $33:split",
+                "FROM citric-glow-485600-f4.icu_ml.model_table_v4_pit",
+                "WHERE equal($33, 'test')"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$40:patientunitstayid, $41:prediction_time_min, $42:y, $43:prob_1",
+                "FROM citric-glow-485600-f4.icu_ml.preds_test_v4_pit"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$50:patientunitstayid",
+                "FROM citric-glow-485600-f4.icu_ml.cohort_v1",
+                "(1 similar table omitted)"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:hospitalid, $2:split",
+                "FROM citric-glow-485600-f4.icu_ml.split_hospital_v1"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$20:patientunitstayid, $21:hospitalid",
+                "FROM citric-glow-485600-f4.icu_ml.cohort_v1__1_"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$430 := $380, $431 := $381, $432 := $382, $433 := $383, $434 := $384, $435 := $385, $436 := $386, $437 := $60, $438 := $61, $439 := $62",
+                "CROSS EACH  WITH EACH "
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$380 := $70, $381 := $71, $382 := $72, $383 := $73, $384 := $74, $385 := $75, $386 := $80",
+                "CROSS EACH  WITH EACH "
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$70 := SUM_OF_COUNTS($100)",
+                "$71 := SUM_OF_COUNTS($101)",
+                "$72 := SUM_OF_COUNTS($102)",
+                "$73 := SUM_OF_COUNTS($103)",
+                "$74 := SUM($104)",
+                "$75 := SUM($105)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$100 := COUNTIF($130)",
+                "$101 := COUNTIF($131)",
+                "$102 := COUNTIF($132)",
+                "$103 := COUNTIF($133)",
+                "$104 := SUM($334)",
+                "$105 := SUM($335)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$130 := is_null($330)",
+                "$131 := is_null($332)",
+                "$132 := or(not_equal($330, 1), not_equal($332, 1))",
+                "$133 := not_equal($331, $333)"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$330 := $160, $331 := $161, $332 := $170, $333 := $171, $334 := $172, $335 := $173",
+                "FULL OUTER HASH JOIN ALL  WITH ALL  ON $300 = $320, $301 = $321"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $300 := $290, $301 := $291",
+                "$160 := SUM_OF_COUNTS($190)",
+                "$161 := MIN($191)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $290 := $30, $291 := $31",
+                "$190 := COUNT_STAR()",
+                "$191 := MIN($32)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $320 := $310, $321 := $311",
+                "$170 := SUM_OF_COUNTS($200)",
+                "$171 := MIN($201)",
+                "$172 := SUM_OF_COUNTS($202)",
+                "$173 := SUM_OF_COUNTS($203)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $310 := $40, $311 := $41",
+                "$200 := COUNT_STAR()",
+                "$201 := MIN($42)",
+                "$202 := COUNTIF($220)",
+                "$203 := COUNTIF($221)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$220 := or(is_null($43), is_nan($43), less($43, 0), greater($43, 1))",
+                "$221 := or(is_null($42), not(in($42, 0, 1)))"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$80 := subtract(if(is_null($111), 0, $111), if(is_null($110), 0, $110))"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$110 := ANY_VALUE($140)",
+                "$111 := ANY_VALUE($141)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$140 := ANY_VALUE($151)",
+                "$141 := ANY_VALUE($150)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$150 := if(equal($370, 0), $181, NULL)",
+                "$151 := if(equal($370, 1), $180, NULL)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $370 := $360",
+                "$180 := SUM_OF_COUNTS($210)",
+                "$181 := ANY_VALUE($211)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $360 := $350",
+                "$210 := COUNT($231)",
+                "$211 := ANY_VALUE($230)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$230 := if(equal($350, 0), $240, NULL)",
+                "$231 := if(equal($350, 1), $351, NULL)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $350 := $340, $351 := $341",
+                "$240 := SUM_OF_COUNTS($250)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $340 := $280, $341 := $260",
+                "$250 := COUNT_STAR()"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$260 := if(equal($280, 1), $50, NULL)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$270 := ARRAY<...>"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$60 := SUM_OF_COUNTS($90)",
+                "$61 := SUM_OF_COUNTS($91)",
+                "$62 := SUM_OF_COUNTS($92)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$90 := COUNTIF($120)",
+                "$91 := COUNTIF($121)",
+                "$92 := COUNTIF($122)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$120 := equal($420, 'test')",
+                "$121 := and(equal($420, 'test'), not(is_null($421)))",
+                "$122 := and(not(is_null($421)), or(is_null($420), not_equal($420, 'test')))"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$420 := $2, $421 := $410",
+                "FULL OUTER HASH JOIN ALL  WITH ALL  ON $1 = $410"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $410 := $400"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $400 := $390"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$390 := $21",
+                "INNER HASH JOIN ALL  WITH ALL  ON $10 = $20"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$437, $438, $439, $430, $431, $432, $433, $434, $435, $436",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "5430",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "388528391",
+      "timeline": [
+        {
+          "elapsedMs": "279",
+          "totalSlotMs": "5430",
+          "pendingUnits": "1",
+          "completedUnits": "0",
+          "activeUnits": "1",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "778",
+          "totalSlotMs": "5430",
+          "pendingUnits": "0",
+          "completedUnits": "61",
+          "estimatedRunnableUnits": "1"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "388528391",
+      "totalBytesBilled": "389021696",
+      "billingTier": 1,
+      "totalSlotMs": "5430",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v4_pit"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "split_hospital_v1"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "preds_test_v4_pit"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "cohort_v1"
+        }
+      ],
+      "statementType": "SELECT",
+      "searchStatistics": {
+        "indexUsageMode": "UNUSED",
+        "indexUnusedReasons": [
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.cohort_v1`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "cohort_v1"
+            }
+          },
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.model_table_v4_pit`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            }
+          },
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.preds_test_v4_pit`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "preds_test_v4_pit"
+            }
+          },
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.split_hospital_v1`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "split_hospital_v1"
+            }
+          }
+        ]
+      },
+      "queryInfo": {
+        "optimizationDetails": {
+          "optimizations": [
+            {
+              "enhanced_vectorization": "applied"
+            },
+            {
+              "short_query_optimization": "applied"
+            }
+          ]
+        }
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            },
+            "staleness": "0s"
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "split_hospital_v1"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "preds_test_v4_pit"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "cohort_v1"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "5430",
+    "finalExecutionDurationMs": "652"
+  }
+}

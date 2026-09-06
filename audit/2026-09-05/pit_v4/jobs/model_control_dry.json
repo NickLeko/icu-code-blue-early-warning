@@ -1,0 +1,77 @@
+{
+  "kind": "bigquery#job",
+  "etag": "IzUPRaQ+z5gCsfGSE3GXbQ==",
+  "id": "citric-glow-485600-f4:US.",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- Diagnostic attribution control only; never selected as released model.\n-- 08_bqml_models.sql\n-- Train the final prespecified BigQuery ML logistic regression model\n-- (vitals + labs).\n-- This repo publishes one fixed final-model path; it does not reproduce a\n-- hyperparameter sweep or validation-based benchmark selection story.\n-- Output model: `citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit_autosplit_control`\n\nCREATE OR REPLACE MODEL `citric-glow-485600-f4.icu_ml.bqml_lr_v4_pit_autosplit_control`\nOPTIONS(\n  model_type = 'LOGISTIC_REG',\n  input_label_cols = ['y'],\n  l2_reg = 1.0,\n  max_iterations = 50,\n  data_split_method = 'AUTO_SPLIT',\n  early_stop = TRUE,\n  min_rel_progress = 0.01\n) AS\nSELECT\n  y,\n\n  -- vitals\n  hr_mean_6h, hr_min_6h, hr_max_6h, hr_n_6h,\n  rr_mean_6h, rr_min_6h, rr_max_6h, rr_n_6h,\n  sao2_mean_6h, sao2_min_6h, sao2_n_6h,\n  temp_mean_6h, temp_n_6h,\n  sbp_mean_6h, sbp_min_6h, sbp_n_6h,\n  map_mean_6h, map_min_6h, map_n_6h,\n\n  -- labs\n  lactate_mean_6h, lactate_min_6h, lactate_max_6h, lactate_n_6h, lactate_last_6h,\n  ph_mean_6h, ph_min_6h, ph_max_6h, ph_n_6h, ph_last_6h,\n  k_mean_6h, k_min_6h, k_max_6h, k_n_6h, k_last_6h,\n  creat_mean_6h, creat_min_6h, creat_max_6h, creat_n_6h, creat_last_6h,\n  hgb_mean_6h, hgb_min_6h, hgb_max_6h, hgb_n_6h, hgb_last_6h,\n  wbc_mean_6h, wbc_min_6h, wbc_max_6h, wbc_n_6h, wbc_last_6h\n\nFROM `citric-glow-485600-f4.icu_ml.model_table_v4_pit`\nWHERE split = 'train';\n\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "icu_ml",
+        "tableId": "bqml_lr_v4_pit_autosplit_control"
+      },
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "200000000000",
+      "useLegacySql": false
+    },
+    "dryRun": true,
+    "labels": {
+      "stage": "model_control",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788669090830",
+    "endTime": "1788669091479",
+    "totalBytesProcessed": "2273590874",
+    "query": {
+      "totalBytesProcessed": "2273590874",
+      "totalBytesBilled": "0",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v4_pit"
+        }
+      ],
+      "statementType": "CREATE_MODEL",
+      "ddlOperationPerformed": "CREATE",
+      "ddlTargetTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "icu_ml",
+        "tableId": "bqml_lr_v4_pit_autosplit_control"
+      },
+      "totalBytesProcessedAccuracy": "PRECISE",
+      "mlStatistics": {
+        "maxIterations": "50",
+        "modelType": "LOGISTIC_REGRESSION",
+        "trainingType": "SINGLE_TRAINING"
+      },
+      "searchStatistics": {
+        "indexUnusedReasons": [
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.model_table_v4_pit`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com"
+}

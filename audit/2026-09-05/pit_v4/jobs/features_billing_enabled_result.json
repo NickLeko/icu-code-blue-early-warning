@@ -1,0 +1,1309 @@
+{
+  "kind": "bigquery#getQueryResultsResponse",
+  "etag": "raSY05ydf1AEfExAVd1PNg==",
+  "schema": {
+    "fields": [
+      {
+        "name": "patientunitstayid",
+        "type": "INTEGER"
+      },
+      {
+        "name": "prediction_time_min",
+        "type": "INTEGER"
+      },
+      {
+        "name": "hr_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hr_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "hr_max_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "hr_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "rr_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "rr_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "rr_max_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "rr_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "sao2_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "sao2_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "sao2_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "temp_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "temp_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "sbp_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "sbp_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "sbp_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "map_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "map_min_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "map_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "lactate_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "lactate_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "lactate_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "lactate_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "lactate_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "ph_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "ph_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "ph_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "ph_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "ph_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "k_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "k_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "k_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "k_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "k_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "creat_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "creat_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "creat_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "creat_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "creat_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hgb_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hgb_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hgb_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "hgb_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "hgb_last_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "wbc_mean_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "wbc_min_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "wbc_max_6h",
+        "type": "FLOAT"
+      },
+      {
+        "name": "wbc_n_6h",
+        "type": "INTEGER"
+      },
+      {
+        "name": "wbc_last_6h",
+        "type": "FLOAT"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_features_billing_enabled_3454e0c0d0a0",
+    "location": "US"
+  },
+  "totalBytesProcessed": "3603471120",
+  "jobComplete": true,
+  "cacheHit": false,
+  "auditJobStatistics": {
+    "creationTime": "1788668945796",
+    "startTime": "1788668946215",
+    "endTime": "1788668976101",
+    "totalBytesProcessed": "3603471120",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Input",
+          "id": "0",
+          "startMs": "1788668946536",
+          "endMs": "1788668947662",
+          "waitRatioAvg": 2.3620001417200085e-05,
+          "waitMsAvg": "1",
+          "waitRatioMax": 9.448000566880034e-05,
+          "waitMsMax": "4",
+          "readRatioAvg": 0.0018187401091244065,
+          "readMsAvg": "77",
+          "readRatioMax": 0.006117580367054822,
+          "readMsMax": "259",
+          "computeRatioAvg": 0.03590240215414413,
+          "computeMsAvg": "1520",
+          "computeRatioMax": 0.048491862909511775,
+          "computeMsMax": "2053",
+          "writeRatioAvg": 0.00044878002692680163,
+          "writeMsAvg": "19",
+          "writeRatioMax": 0.001393580083614805,
+          "writeMsMax": "59",
+          "shuffleOutputBytes": "1835528990",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "39132531",
+          "recordsWritten": "31792007",
+          "parallelInputs": "40",
+          "completedParallelInputs": "40",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$40:labid, $41:patientunitstayid, $42:labresultoffset, $43:labname, $44:labresult, $45:labresulttext, $46:labresultrevisedoffset",
+                "FROM physionet-data.eicu_crd.lab",
+                "WHERE and(not(is_null($42)), greater_or_equal($42, 0), not(is_null($46)))"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$140 := lower(trim($43))",
+                "$141 := coalesce($44, SAFE_EXPR(CAST(regexp_extract($45, '[-+]?\\d*\\.?\\d+') AS DOUBLE)))"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$40, $41, $42, $46, $140, $141",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "52768",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S01: Input",
+          "id": "1",
+          "startMs": "1788668946692",
+          "endMs": "1788668947030",
+          "waitRatioAvg": 2.3620001417200085e-05,
+          "waitMsAvg": "1",
+          "waitRatioMax": 4.724000283440017e-05,
+          "waitMsMax": "2",
+          "readRatioAvg": 0.001393580083614805,
+          "readMsAvg": "59",
+          "readRatioMax": 0.003991780239506814,
+          "readMsMax": "169",
+          "computeRatioAvg": 0.00833786050027163,
+          "computeMsAvg": "353",
+          "computeRatioMax": 0.012306020738361245,
+          "computeMsMax": "521",
+          "writeRatioAvg": 0.0006141200368472022,
+          "writeMsAvg": "26",
+          "writeRatioMax": 0.0010392800623568038,
+          "writeMsMax": "44",
+          "shuffleOutputBytes": "200975922",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "11165329",
+          "recordsWritten": "11165329",
+          "parallelInputs": "23",
+          "completedParallelInputs": "23",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$30:patientunitstayid, $31:prediction_time_min",
+                "FROM citric-glow-485600-f4.icu_ml.features_v2"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$30, $31",
+                "TO __stage01_output"
+              ]
+            }
+          ],
+          "slotMs": "8404",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S02: Join+",
+          "id": "2",
+          "startMs": "1788668947668",
+          "endMs": "1788668969497",
+          "inputStages": [
+            "1",
+            "0"
+          ],
+          "waitRatioAvg": 2.3620001417200085e-05,
+          "waitMsAvg": "1",
+          "waitRatioMax": 9.448000566880034e-05,
+          "waitMsMax": "4",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.5349694120981647,
+          "computeMsAvg": "22649",
+          "computeRatioMax": 1,
+          "computeMsMax": "42337",
+          "writeRatioAvg": 0.00040154002409240145,
+          "writeMsAvg": "17",
+          "writeRatioMax": 0.0014644400878664054,
+          "writeMsMax": "62",
+          "shuffleOutputBytes": "2487934134",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "42957336",
+          "recordsWritten": "11165350",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$30, $31",
+                "FROM __stage01_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$40, $41, $42, $46, $140, $141",
+                "FROM __stage00_output"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $160 := $150, $161 := $151",
+                "$90 := SHARD_AVG($131)",
+                "$91 := MIN($131)",
+                "$92 := MAX($131)",
+                "$93 := COUNTIF($120)",
+                "$94 := SHARD_ARRAY_AGG($131 ORDER BY $153 DESC, $152 DESC LIMIT 1)",
+                "$95 := SHARD_AVG($130)",
+                "$96 := MIN($130)",
+                "$97 := MAX($130)",
+                "$98 := COUNTIF($121)",
+                "$99 := SHARD_ARRAY_AGG($130 ORDER BY $153 DESC, $152 DESC LIMIT 1)",
+                "$100 := SHARD_AVG($129)",
+                "$101 := MIN($129)",
+                "$102 := MAX($129)",
+                "$103 := COUNTIF($122)",
+                "$104 := SHARD_ARRAY_AGG($129 ORDER BY $153 DESC, $152 DESC LIMIT 1)",
+                "$105 := SHARD_AVG($128)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$120 := and(in($155, 'lactate', 'lactic acid'), not(is_null($156)))",
+                "$121 := and(equal($155, 'ph'), not(is_null($156)))",
+                "$122 := and(in($155, 'k', 'potassium'), not(is_null($156)))",
+                "$123 := and(equal($155, 'creatinine'), not(is_null($156)))",
+                "$124 := and(in($155, 'hgb', 'hemoglobin'), not(is_null($156)))",
+                "$125 := and(in($155, 'wbc', 'wbc x 1000', 'white blood cell count'), not(is_null($156)))",
+                "$126 := if(in($155, 'wbc', 'wbc x 1000', 'white blood cell count'), $156, NULL)",
+                "$127 := if(in($155, 'hgb', 'hemoglobin'), $156, NULL)",
+                "$128 := if(equal($155, 'creatinine'), $156, NULL)",
+                "$129 := if(in($155, 'k', 'potassium'), $156, NULL)",
+                "$130 := if(equal($155, 'ph'), $156, NULL)",
+                "$131 := if(in($155, 'lactate', 'lactic acid'), $156, NULL)"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$150 := $30, $151 := $31, $152 := $40, $153 := $42, $154 := $46, $155 := $140, $156 := $141",
+                "LEFT OUTER HASH JOIN EACH  WITH EACH  ON $30 = $41"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$160, $161, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, $102, $103",
+                "TO __stage02_output",
+                "BY HASH($160, $161)"
+              ]
+            }
+          ],
+          "slotMs": "2350110",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S03: Repartition",
+          "id": "3",
+          "startMs": "1788668956060",
+          "endMs": "1788668969541",
+          "inputStages": [
+            "2"
+          ],
+          "waitRatioAvg": 2.3620001417200085e-05,
+          "waitMsAvg": "1",
+          "waitRatioMax": 2.3620001417200085e-05,
+          "waitMsMax": "1",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.03682358220941493,
+          "computeMsAvg": "1559",
+          "computeRatioMax": 0.04220894253253655,
+          "computeMsMax": "1787",
+          "writeRatioAvg": 0.00028344001700640104,
+          "writeMsAvg": "12",
+          "writeRatioMax": 0.00042516002550960154,
+          "writeMsMax": "18",
+          "shuffleOutputBytes": "212748984",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "955052",
+          "recordsWritten": "955052",
+          "parallelInputs": "2",
+          "completedParallelInputs": "2",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "FROM __stage02_output"
+              ]
+            }
+          ],
+          "slotMs": "63699",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S04: Repartition",
+          "id": "4",
+          "startMs": "1788668956247",
+          "endMs": "1788668969532",
+          "inputStages": [
+            "3",
+            "2"
+          ],
+          "waitRatioAvg": 2.3620001417200085e-05,
+          "waitMsAvg": "1",
+          "waitRatioMax": 4.724000283440017e-05,
+          "waitMsMax": "2",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.031154781869286913,
+          "computeMsAvg": "1319",
+          "computeRatioMax": 0.03760304225618254,
+          "computeMsMax": "1592",
+          "writeRatioAvg": 0.0004960200297612018,
+          "writeMsAvg": "21",
+          "writeRatioMax": 0.0005905000354300021,
+          "writeMsMax": "25",
+          "shuffleOutputBytes": "373922964",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "1678618",
+          "recordsWritten": "1678618",
+          "parallelInputs": "3",
+          "completedParallelInputs": "3",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "FROM __stage03_output"
+              ]
+            }
+          ],
+          "slotMs": "62884",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S05: Repartition",
+          "id": "5",
+          "startMs": "1788668956365",
+          "endMs": "1788668969536",
+          "inputStages": [
+            "4",
+            "2"
+          ],
+          "waitRatioAvg": 0.0007322200439332027,
+          "waitMsAvg": "31",
+          "waitRatioMax": 0.0007322200439332027,
+          "waitMsMax": "31",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.04242152254529135,
+          "computeMsAvg": "1796",
+          "computeRatioMax": 0.04242152254529135,
+          "computeMsMax": "1796",
+          "writeRatioAvg": 0.00014172000850320052,
+          "writeMsAvg": "6",
+          "writeRatioMax": 0.00014172000850320052,
+          "writeMsMax": "6",
+          "shuffleOutputBytes": "138054501",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "619578",
+          "recordsWritten": "619578",
+          "parallelInputs": "1",
+          "completedParallelInputs": "1",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "FROM __stage04_output"
+              ]
+            }
+          ],
+          "slotMs": "29331",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S06: Aggregate+",
+          "id": "6",
+          "startMs": "1788668969557",
+          "endMs": "1788668972229",
+          "inputStages": [
+            "2",
+            "5"
+          ],
+          "waitRatioAvg": 2.3620001417200085e-05,
+          "waitMsAvg": "1",
+          "waitRatioMax": 4.724000283440017e-05,
+          "waitMsMax": "2",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.07754446465266789,
+          "computeMsAvg": "3283",
+          "computeRatioMax": 0.1114864066891844,
+          "computeMsMax": "4720",
+          "writeRatioAvg": 0.0004724000283440017,
+          "writeMsAvg": "20",
+          "writeRatioMax": 0.0011810000708600043,
+          "writeMsMax": "50",
+          "shuffleOutputBytes": "1518918528",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "11165350",
+          "recordsWritten": "11165329",
+          "parallelInputs": "60",
+          "completedParallelInputs": "60",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$160, $161, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, $102, $103",
+                "FROM __stage02_output"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$50 := safe_array_at_offset($64, 0)",
+                "$51 := safe_array_at_offset($69, 0)",
+                "$52 := safe_array_at_offset($74, 0)",
+                "$53 := safe_array_at_offset($79, 0)",
+                "$54 := safe_array_at_offset($84, 0)",
+                "$55 := safe_array_at_offset($89, 0)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $170 := $160, $171 := $161",
+                "$60 := ROOT_AVG($90)",
+                "$61 := MIN($91)",
+                "$62 := MAX($92)",
+                "$63 := SUM_OF_COUNTS($93)",
+                "$64 := ROOT_ARRAY_AGG($94 ORDER BY  DESC,  DESC LIMIT 1)",
+                "$65 := ROOT_AVG($95)",
+                "$66 := MIN($96)",
+                "$67 := MAX($97)",
+                "$68 := SUM_OF_COUNTS($98)",
+                "$69 := ROOT_ARRAY_AGG($99 ORDER BY  DESC,  DESC LIMIT 1)",
+                "$70 := ROOT_AVG($100)",
+                "$71 := MIN($101)",
+                "$72 := MAX($102)",
+                "$73 := SUM_OF_COUNTS($103)",
+                "$74 := ROOT_ARRAY_AGG($104 ORDER BY  DESC,  DESC LIMIT 1)",
+                "$75 := ROOT_AVG($105)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$50, $51, $52, $53, $54, $55, $60, $61, $62, $63, $65, $66, $67, $68, $70, $71",
+                "TO __stage06_output"
+              ]
+            }
+          ],
+          "slotMs": "194407",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S07: Input",
+          "id": "7",
+          "startMs": "1788668970258",
+          "endMs": "1788668971393",
+          "waitRatioAvg": 9.448000566880034e-05,
+          "waitMsAvg": "4",
+          "waitRatioMax": 0.00011810000708600043,
+          "waitMsMax": "5",
+          "readRatioAvg": 0.0050783003046980186,
+          "readMsAvg": "215",
+          "readRatioMax": 0.007558400453504028,
+          "readMsMax": "320",
+          "computeRatioAvg": 0.03165080189904811,
+          "computeMsAvg": "1340",
+          "computeRatioMax": 0.04161844249710655,
+          "computeMsMax": "1762",
+          "writeRatioAvg": 0.00025982001558920095,
+          "writeMsAvg": "11",
+          "writeRatioMax": 0.0005432600325956019,
+          "writeMsMax": "23",
+          "shuffleOutputBytes": "1696969781",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "11165329",
+          "recordsWritten": "11165329",
+          "parallelInputs": "23",
+          "completedParallelInputs": "23",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:patientunitstayid, $2:prediction_time_min, $3:hr_mean_6h, $4:hr_min_6h, $5:hr_max_6h, $6:hr_n_6h, $7:rr_mean_6h, $8:rr_min_6h, $9:rr_max_6h, $10:rr_n_6h, $11:sao2_mean_6h, $12:sao2_min_6h, $13:sao2_n_6h, $14:temp_mean_6h, $15:temp_n_6h, $16:sbp_mean_6h",
+                "FROM citric-glow-485600-f4.icu_ml.features_v2"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16",
+                "TO __stage07_output"
+              ]
+            }
+          ],
+          "slotMs": "37128",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S08: Join",
+          "id": "8",
+          "startMs": "1788668972234",
+          "endMs": "1788668972928",
+          "inputStages": [
+            "6",
+            "7"
+          ],
+          "waitRatioAvg": 2.3620001417200085e-05,
+          "waitMsAvg": "1",
+          "waitRatioMax": 7.086000425160026e-05,
+          "waitMsMax": "3",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.01580178094810686,
+          "computeMsAvg": "669",
+          "computeRatioMax": 0.021399721283983278,
+          "computeMsMax": "906",
+          "writeRatioAvg": 0.0005668800340128021,
+          "writeMsAvg": "24",
+          "writeRatioMax": 0.0017715001062900064,
+          "writeMsMax": "75",
+          "shuffleOutputBytes": "2523637911",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "22330658",
+          "recordsWritten": "11165329",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16",
+                "FROM __stage07_output"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$50, $51, $52, $53, $54, $55, $60, $61, $62, $63, $65, $66, $67, $68, $70, $71",
+                "FROM __stage06_output"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$180 := $1, $181 := $2, $182 := $3, $183 := $4, $184 := $5, $185 := $6, $186 := $7, $187 := $8, $188 := $9, $189 := $10, $190 := $11, $191 := $12, $192 := $13, $193 := $14, $194 := $15, $195 := $16",
+                "LEFT OUTER HASH JOIN EACH  WITH EACH  ON $1 = $170, $2 = $171"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$180, $181, $182, $183, $184, $185, $186, $187, $188, $189, $190, $191, $192, $193, $194, $195",
+                "TO __stage08_output"
+              ]
+            }
+          ],
+          "slotMs": "61999",
+          "computeMode": "BIGQUERY"
+        },
+        {
+          "name": "S09: Output",
+          "id": "9",
+          "startMs": "1788668972992",
+          "endMs": "1788668975441",
+          "inputStages": [
+            "8"
+          ],
+          "waitRatioAvg": 0.001417200085032005,
+          "waitMsAvg": "60",
+          "waitRatioMax": 0.0014408200864492052,
+          "waitMsMax": "61",
+          "readRatioAvg": 0,
+          "readMsAvg": "0",
+          "readRatioMax": 0,
+          "readMsMax": "0",
+          "computeRatioAvg": 0.06143562368613742,
+          "computeMsAvg": "2601",
+          "computeRatioMax": 0.09313366558801993,
+          "computeMsMax": "3943",
+          "writeRatioAvg": 0.003944540236672414,
+          "writeMsAvg": "167",
+          "writeRatioMax": 0.029028981741738905,
+          "writeMsMax": "1229",
+          "shuffleOutputBytes": "0",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "11165329",
+          "recordsWritten": "11165329",
+          "parallelInputs": "50",
+          "completedParallelInputs": "50",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$180, $181, $182, $183, $184, $185, $186, $187, $188, $189, $190, $191, $192, $193, $194, $195",
+                "FROM __stage08_output"
+              ]
+            },
+            {
+              "kind": "EXPORT",
+              "substeps": [
+                "$180:patientunitstayid, $181:prediction_time_min, $182:hr_mean_6h, $183:hr_min_6h, $184:hr_max_6h, $185:hr_n_6h, $186:rr_mean_6h, $187:rr_min_6h, $188:rr_max_6h, $189:rr_n_6h, $190:sao2_mean_6h, $191:sao2_min_6h, $192:sao2_n_6h, $193:temp_mean_6h, $194:temp_n_6h, $195:sbp_mean_6h",
+                "TO icu_ml.features_v4_pit"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$180, $181, $182, $183, $184, $185, $186, $187, $188, $189, $190, $191, $192, $193, $194, $195",
+                "TO __stage09_output"
+              ]
+            }
+          ],
+          "slotMs": "138756",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "3603471120",
+      "timeline": [
+        {
+          "elapsedMs": "785",
+          "totalSlotMs": "445764",
+          "pendingUnits": "50",
+          "completedUnits": "13",
+          "activeUnits": "51",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "1785",
+          "totalSlotMs": "616760",
+          "pendingUnits": "100",
+          "completedUnits": "63",
+          "activeUnits": "100",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "2785",
+          "totalSlotMs": "839271",
+          "pendingUnits": "100",
+          "completedUnits": "63",
+          "activeUnits": "103",
+          "estimatedRunnableUnits": "1"
+        },
+        {
+          "elapsedMs": "3785",
+          "totalSlotMs": "1063624",
+          "pendingUnits": "100",
+          "completedUnits": "63",
+          "activeUnits": "109",
+          "estimatedRunnableUnits": "1"
+        },
+        {
+          "elapsedMs": "4785",
+          "totalSlotMs": "1277258",
+          "pendingUnits": "100",
+          "completedUnits": "63",
+          "activeUnits": "110",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "5785",
+          "totalSlotMs": "1482440",
+          "pendingUnits": "100",
+          "completedUnits": "63",
+          "activeUnits": "110",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "6785",
+          "totalSlotMs": "1668402",
+          "pendingUnits": "96",
+          "completedUnits": "67",
+          "activeUnits": "106",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "7785",
+          "totalSlotMs": "1785115",
+          "pendingUnits": "94",
+          "completedUnits": "69",
+          "activeUnits": "103",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "8785",
+          "totalSlotMs": "1940038",
+          "pendingUnits": "88",
+          "completedUnits": "75",
+          "activeUnits": "95",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "9785",
+          "totalSlotMs": "2072780",
+          "pendingUnits": "81",
+          "completedUnits": "82",
+          "activeUnits": "87",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "10785",
+          "totalSlotMs": "2174920",
+          "pendingUnits": "70",
+          "completedUnits": "99",
+          "activeUnits": "74",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "11785",
+          "totalSlotMs": "2246544",
+          "pendingUnits": "64",
+          "completedUnits": "105",
+          "activeUnits": "68",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "12785",
+          "totalSlotMs": "2331489",
+          "pendingUnits": "42",
+          "completedUnits": "127",
+          "activeUnits": "45",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "13785",
+          "totalSlotMs": "2389793",
+          "pendingUnits": "28",
+          "completedUnits": "141",
+          "activeUnits": "29",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "14785",
+          "totalSlotMs": "2435444",
+          "pendingUnits": "23",
+          "completedUnits": "146",
+          "activeUnits": "40",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "15785",
+          "totalSlotMs": "2463565",
+          "pendingUnits": "20",
+          "completedUnits": "149",
+          "activeUnits": "34",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "16785",
+          "totalSlotMs": "2486559",
+          "pendingUnits": "16",
+          "completedUnits": "153",
+          "activeUnits": "26",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "17785",
+          "totalSlotMs": "2510283",
+          "pendingUnits": "11",
+          "completedUnits": "158",
+          "activeUnits": "16",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "18785",
+          "totalSlotMs": "2530338",
+          "pendingUnits": "9",
+          "completedUnits": "160",
+          "activeUnits": "12",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "19785",
+          "totalSlotMs": "2550219",
+          "pendingUnits": "9",
+          "completedUnits": "160",
+          "activeUnits": "12",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "20785",
+          "totalSlotMs": "2567199",
+          "pendingUnits": "8",
+          "completedUnits": "161",
+          "activeUnits": "10",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "21785",
+          "totalSlotMs": "2615360",
+          "pendingUnits": "8",
+          "completedUnits": "161",
+          "activeUnits": "10",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "22785",
+          "totalSlotMs": "2784932",
+          "pendingUnits": "8",
+          "completedUnits": "161",
+          "activeUnits": "10",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "23785",
+          "totalSlotMs": "2860735",
+          "pendingUnits": "60",
+          "completedUnits": "169",
+          "activeUnits": "60",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "24785",
+          "totalSlotMs": "2946552",
+          "pendingUnits": "63",
+          "completedUnits": "189",
+          "activeUnits": "65",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "25785",
+          "totalSlotMs": "2989476",
+          "pendingUnits": "6",
+          "completedUnits": "246",
+          "activeUnits": "12",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "26785",
+          "totalSlotMs": "2999491",
+          "pendingUnits": "50",
+          "completedUnits": "352",
+          "activeUnits": "0",
+          "estimatedRunnableUnits": "100"
+        },
+        {
+          "elapsedMs": "27785",
+          "totalSlotMs": "2999491",
+          "pendingUnits": "35",
+          "completedUnits": "367",
+          "activeUnits": "35",
+          "estimatedRunnableUnits": "100"
+        },
+        {
+          "elapsedMs": "29272",
+          "totalSlotMs": "2999491",
+          "pendingUnits": "0",
+          "completedUnits": "402",
+          "activeUnits": "12",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "3603471120",
+      "totalBytesBilled": "3603955712",
+      "billingTier": 1,
+      "totalSlotMs": "2999491",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "features_v2"
+        },
+        {
+          "projectId": "physionet-data",
+          "datasetId": "eicu_crd",
+          "tableId": "lab"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "patientunitstayid",
+            "type": "INTEGER"
+          },
+          {
+            "name": "prediction_time_min",
+            "type": "INTEGER"
+          },
+          {
+            "name": "hr_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hr_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "hr_max_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "hr_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "rr_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "rr_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "rr_max_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "rr_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "sao2_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "sao2_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "sao2_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "temp_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "temp_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "sbp_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "sbp_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "sbp_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "map_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "map_min_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "map_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "lactate_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "lactate_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "lactate_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "lactate_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "lactate_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "ph_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "ph_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "ph_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "ph_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "ph_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "k_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "k_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "k_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "k_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "k_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "creat_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "creat_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "creat_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "creat_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "creat_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hgb_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hgb_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hgb_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "hgb_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "hgb_last_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "wbc_mean_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "wbc_min_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "wbc_max_6h",
+            "type": "FLOAT"
+          },
+          {
+            "name": "wbc_n_6h",
+            "type": "INTEGER"
+          },
+          {
+            "name": "wbc_last_6h",
+            "type": "FLOAT"
+          }
+        ]
+      },
+      "statementType": "CREATE_TABLE_AS_SELECT",
+      "ddlOperationPerformed": "CREATE",
+      "ddlTargetTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "icu_ml",
+        "tableId": "features_v4_pit"
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "features_v2"
+            },
+            "staleness": "0s"
+          },
+          {
+            "tableReference": {
+              "projectId": "physionet-data",
+              "datasetId": "eicu_crd",
+              "tableId": "lab"
+            },
+            "staleness": "0s"
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "2999491",
+    "finalExecutionDurationMs": "29102"
+  }
+}

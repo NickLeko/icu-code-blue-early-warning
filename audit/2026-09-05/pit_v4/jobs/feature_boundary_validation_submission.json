@@ -1,0 +1,10 @@
+{
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_feature_boundary_validation_d0ef93a6d74f",
+    "location": "US"
+  },
+  "sqlFile": "/Users/nicholasleko/projects/icu-code-blue-early-warning/audit/2026-09-05/pit_v4/feature_boundary_validation.sql",
+  "querySha256": "d0ef93a6d74f5d8a53f90b856e5525028257c701261f81ac7324bcfbdc909ad5",
+  "submittedAt": "2026-09-06T04:26:26.705559+00:00"
+}

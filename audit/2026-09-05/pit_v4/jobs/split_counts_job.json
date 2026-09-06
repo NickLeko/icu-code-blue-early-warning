@@ -1,0 +1,234 @@
+{
+  "kind": "bigquery#job",
+  "etag": "k3quA1Je2tBj1XgT1EhgGw==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_split_counts_70dbc87a9250",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_split_counts_70dbc87a9250?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "SELECT split, COUNT(*) AS n_rows, SUM(y) AS positive_windows, COUNT(DISTINCT hospitalid) AS hospitals FROM `citric-glow-485600-f4.icu_ml.model_table_v4_pit` GROUP BY split ORDER BY split;\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+        "tableId": "anonefe979b5f3ef31267f9d65fe151530a4241ebc93c2b19f1fa060310efe92ec25"
+      },
+      "writeDisposition": "WRITE_TRUNCATE",
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "split_counts",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_split_counts_70dbc87a9250",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788669085245",
+    "startTime": "1788669085361",
+    "endTime": "1788669085714",
+    "totalBytesProcessed": "235242370",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Output",
+          "id": "0",
+          "startMs": "1788669085519",
+          "endMs": "1788669085617",
+          "waitRatioAvg": 0.0008583690987124463,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.0008583690987124463,
+          "waitMsMax": "1",
+          "readRatioAvg": 0.47467811158798284,
+          "readMsAvg": "553",
+          "readRatioMax": 0.47467811158798284,
+          "readMsMax": "553",
+          "computeRatioAvg": 1,
+          "computeMsAvg": "1165",
+          "computeRatioMax": 1,
+          "computeMsMax": "1165",
+          "writeRatioAvg": 0.005150214592274678,
+          "writeMsAvg": "6",
+          "writeRatioMax": 0.005150214592274678,
+          "writeMsMax": "6",
+          "shuffleOutputBytes": "108",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "10493497",
+          "recordsWritten": "3",
+          "parallelInputs": "50",
+          "completedParallelInputs": "50",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:y, $2:hospitalid, $3:split",
+                "FROM citric-glow-485600-f4.icu_ml.model_table_v4_pit"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$170 ASC"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $170 := $160",
+                "$10 := ANY_VALUE($20)",
+                "$11 := ANY_VALUE($21)",
+                "$12 := ANY_VALUE($22)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $160 := $150",
+                "$20 := ANY_VALUE($32)",
+                "$21 := ANY_VALUE($31)",
+                "$22 := ANY_VALUE($30)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$30 := if(equal($151, 0), $42, NULL)",
+                "$31 := if(equal($151, 0), $41, NULL)",
+                "$32 := if(equal($151, 1), $40, NULL)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $150 := $140, $151 := $141",
+                "$40 := SUM_OF_COUNTS($50)",
+                "$41 := ANY_VALUE($51)",
+                "$42 := ANY_VALUE($52)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $140 := $130, $141 := $131",
+                "$50 := COUNT($62)",
+                "$51 := ANY_VALUE($61)",
+                "$52 := ANY_VALUE($60)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$60 := if(equal($131, 0), $71, NULL)",
+                "$61 := if(equal($131, 0), $70, NULL)",
+                "$62 := if(equal($131, 1), $132, NULL)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $130 := $120, $131 := $121, $132 := $122",
+                "$70 := SUM_OF_COUNTS($80)",
+                "$71 := SUM($81)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $120 := $3, $121 := $110, $122 := $90",
+                "$80 := COUNT_STAR()",
+                "$81 := SUM($91)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$90 := if(equal($110, 1), $2, NULL)",
+                "$91 := if(equal($110, 0), $1, NULL)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$100 := ARRAY<...>"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$180, $181, $182, $183",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "1888",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "235242370",
+      "timeline": [
+        {
+          "elapsedMs": "265",
+          "totalSlotMs": "1888",
+          "pendingUnits": "0",
+          "completedUnits": "50",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "235242370",
+      "totalBytesBilled": "235929600",
+      "billingTier": 1,
+      "totalSlotMs": "1888",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v4_pit"
+        }
+      ],
+      "statementType": "SELECT",
+      "queryInfo": {
+        "optimizationDetails": {
+          "optimizations": [
+            {
+              "enhanced_vectorization": "applied"
+            },
+            {
+              "short_query_optimization": "applied"
+            }
+          ]
+        }
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "1888",
+    "finalExecutionDurationMs": "116"
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "kind": "bigquery#job",
+  "etag": "xokadup2z3ikOV3G5iN/fw==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_last_value_tie_explanation_427a28347760",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_last_value_tie_explanation_427a28347760?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- Explain every last-value difference outside measured Q1 exposure.\nWITH mismatches AS (\n SELECT o.split,o.y,o.patientunitstayid,o.prediction_time_min,p.*\n FROM `citric-glow-485600-f4.icu_ml.model_table_v3` o\n JOIN `citric-glow-485600-f4.icu_ml.model_table_v4_pit` n USING(patientunitstayid,prediction_time_min)\n CROSS JOIN UNNEST([STRUCT('lactate' AS lab_kind,o.lactate_last_6h AS old_value,n.lactate_last_6h AS new_value),\nSTRUCT('ph' AS lab_kind,o.ph_last_6h AS old_value,n.ph_last_6h AS new_value),\nSTRUCT('k' AS lab_kind,o.k_last_6h AS old_value,n.k_last_6h AS new_value),\nSTRUCT('creat' AS lab_kind,o.creat_last_6h AS old_value,n.creat_last_6h AS new_value),\nSTRUCT('hgb' AS lab_kind,o.hgb_last_6h AS old_value,n.hgb_last_6h AS new_value),\nSTRUCT('wbc' AS lab_kind,o.wbc_last_6h AS old_value,n.wbc_last_6h AS new_value)]) p\n WHERE (o.lactate_n_6h=n.lactate_n_6h AND o.ph_n_6h=n.ph_n_6h AND o.k_n_6h=n.k_n_6h AND o.creat_n_6h=n.creat_n_6h AND o.hgb_n_6h=n.hgb_n_6h AND o.wbc_n_6h=n.wbc_n_6h) AND p.old_value IS DISTINCT FROM p.new_value\n), labs AS (\n SELECT labid,patientunitstayid,labresultoffset,labresultrevisedoffset,\n CASE WHEN LOWER(TRIM(labname)) IN ('lactate','lactic acid') THEN 'lactate'\n WHEN LOWER(TRIM(labname))='ph' THEN 'ph'\n WHEN LOWER(TRIM(labname)) IN ('k','potassium') THEN 'k'\n WHEN LOWER(TRIM(labname))='creatinine' THEN 'creat'\n WHEN LOWER(TRIM(labname)) IN ('hgb','hemoglobin') THEN 'hgb'\n WHEN LOWER(TRIM(labname)) IN ('wbc','wbc x 1000','white blood cell count') THEN 'wbc' END AS lab_kind,\n COALESCE(SAFE_CAST(labresult AS FLOAT64),SAFE_CAST(REGEXP_EXTRACT(labresulttext,r'[-+]?\\d*\\.?\\d+') AS FLOAT64)) AS lab_value\n FROM `physionet-data.eicu_crd.lab`\n), latest AS (\n SELECT m.*,l.labid,l.lab_value,l.labresultoffset,\n DENSE_RANK() OVER(PARTITION BY m.patientunitstayid,m.prediction_time_min,m.lab_kind ORDER BY l.labresultoffset DESC) AS draw_rank\n FROM mismatches m LEFT JOIN labs l\n ON m.patientunitstayid=l.patientunitstayid AND m.lab_kind=l.lab_kind\n AND l.lab_value IS NOT NULL\n AND l.labresultoffset>=m.prediction_time_min-360\n AND GREATEST(l.labresultoffset,l.labresultrevisedoffset)<m.prediction_time_min\n), explained AS (\n SELECT split,y,patientunitstayid,prediction_time_min,lab_kind,\n COUNT(DISTINCT lab_value)>1 AS different_values_at_latest_draw,\n COUNTIF(lab_value=old_value)>0 AS old_value_in_tie,\n ARRAY_AGG(lab_value IGNORE NULLS ORDER BY labid DESC LIMIT 1)[SAFE_OFFSET(0)]=ANY_VALUE(new_value) AS new_value_matches_max_labid\n FROM latest WHERE draw_rank=1 GROUP BY 1,2,3,4,5\n)\nSELECT split,y,COUNT(*) AS changed_feature_cells,\n COUNT(DISTINCT STRUCT(patientunitstayid,prediction_time_min)) AS changed_rows,\n COUNTIF(NOT COALESCE(different_values_at_latest_draw AND old_value_in_tie AND new_value_matches_max_labid,FALSE)) AS unexplained_feature_cells\nFROM explained GROUP BY split,y ORDER BY split,y;\n",
+      "writeDisposition": "WRITE_TRUNCATE",
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "last_value_tie_explanation",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_last_value_tie_explanation_427a28347760",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788670119061",
+    "startTime": "1788670119371",
+    "endTime": "1788670119443",
+    "query": {
+      "totalSlotMs": "0",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v4_pit"
+        },
+        {
+          "projectId": "physionet-data",
+          "datasetId": "eicu_crd",
+          "tableId": "lab"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v3"
+        }
+      ],
+      "statementType": "SELECT",
+      "searchStatistics": {
+        "indexUnusedReasons": [
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.model_table_v3`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v3"
+            }
+          },
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.model_table_v4_pit`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            }
+          },
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `physionet-data:eicu_crd.lab`.",
+            "baseTable": {
+              "projectId": "physionet-data",
+              "datasetId": "eicu_crd",
+              "tableId": "lab"
+            }
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "0"
+  },
+  "status": {
+    "errorResult": {
+      "reason": "invalidQuery",
+      "location": "query",
+      "message": "Aggregate functions with DISTINCT cannot be used with arguments of type STRUCT"
+    },
+    "errors": [
+      {
+        "reason": "invalidQuery",
+        "location": "query",
+        "message": "Aggregate functions with DISTINCT cannot be used with arguments of type STRUCT"
+      }
+    ],
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

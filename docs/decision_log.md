@@ -1,5 +1,15 @@
 # Decision Log
 
+## 2026-09-05: Version 2.0.0-pit — availability and validation correction
+
+- Enforced lab availability at the later of draw/revised-entry offset, strictly before prediction; unknown revision offsets exclude records.
+- Measured original Q1 exposure before regeneration: 574,482 modeled rows, including 106,328 test rows and 35 positive test windows.
+- Set CUSTOM hospital validation and explicit early stopping (TRUE, 1% progress, 50-iteration cap); retained the 49-feature logistic model, L2=1 and fixed global top-0.5% rule.
+- Preserved cohort, labels, vitals, and hospital assignments; documented top-coded age exclusion, absence of a unit-type filter, effective eight-hour eligibility, full-stay early-event exclusion, and the correct offset time origin.
+- Regenerated outputs under `v4_pit` and saved exact query/job metadata. Final enrichment is 23.22x (hospital-cluster CI 11.45–41.53), PPV 0.3465%, recall 11.61%, 36 TP in 10,391 alerts. Within-hospital AUROC is 0.7348 row-weighted and 0.7827 median; positive alerts occur in 9/31 hospitals.
+- Published worse log loss (0.007776 versus constant baseline 0.001502) alongside improved ranking. No score cutoff or model was selected to preserve performance.
+- Preserved the original v3 exports and added a prespecified AUTO_SPLIT diagnostic control for split-effect attribution. See `audit/2026-09-05/pit_v4/REPORT.md` for old/new tables and remaining limitations.
+
 ## 2026-03-31: Scientific correction and trust-tightening pass
 
 Scope:

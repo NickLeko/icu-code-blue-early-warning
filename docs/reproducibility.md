@@ -65,16 +65,21 @@ Core output objects produced by the pipeline:
 | Cohort | `{{PROJECT_ID}}.icu_ml.cohort_v1` |
 | Labels | `{{PROJECT_ID}}.icu_ml.labels_v2` |
 | Vitals features | `{{PROJECT_ID}}.icu_ml.features_v2` |
-| Final features | `{{PROJECT_ID}}.icu_ml.features_v3` |
-| Timepoint rows | `{{PROJECT_ID}}.icu_ml.train_rows_v3` |
+| Final features | `{{PROJECT_ID}}.icu_ml.features_v4_pit` |
+| Timepoint rows | `{{PROJECT_ID}}.icu_ml.train_rows_v4_pit` |
 | Split map | `{{PROJECT_ID}}.icu_ml.split_hospital_v1` |
-| Model table | `{{PROJECT_ID}}.icu_ml.model_table_v3` |
-| Trained model | `{{PROJECT_ID}}.icu_ml.bqml_lr_v3` |
-| Test predictions | `{{PROJECT_ID}}.icu_ml.preds_test_v3` |
+| Model table | `{{PROJECT_ID}}.icu_ml.model_table_v4_pit` |
+| Trained model | `{{PROJECT_ID}}.icu_ml.bqml_lr_v4_pit` |
+| Test predictions | `{{PROJECT_ID}}.icu_ml.preds_test_v4_pit` |
 
-Reported result summaries in the README and `docs/results.md` are derived from these artifacts and the evaluation SQL files.
+These names describe the new PIT specification. Historical result summaries
+come from v3 objects and are explicitly labeled as pre-fix results. The completed
+PIT run has separate aggregate exports and job provenance in
+`audit/2026-09-05/pit_v4/`.
 Aggregate-only reviewer exports are generated separately from `artifacts/queries/`,
-and the current checked-in reference bundle lives in `artifacts/reference_run/`.
+and the historical reference bundle lives in `artifacts/reference_run/`.
+The PIT audit stores exact SQL, hashes, job results, and the pre-fix Q1 exposure
+in `audit/2026-09-05/pit_v4/`; new aggregates belong in a separate versioned bundle.
 
 ## Manual Verification Checklist
 
@@ -88,17 +93,17 @@ Recommended checks after key steps:
 
 These checks are intentionally manual in this repo to keep the project lightweight and transparent.
 
-The checked-in reference metrics were generated before deterministic
-tie-breakers were added, so boundary rows with tied timestamps or scores could
-differ marginally on regeneration.
+The historical v3 export predates deterministic tie-breakers. The PIT version
+executes the current deterministic SQL and records exact job/query provenance;
+`last_value_reconciliation.sql` checks inherited last-value behavior outside Q1.
 
 ## Known Reproducibility Gaps
 
-- No one-command orchestration wrapper is provided
-- No automated BigQuery integration test is included
-- No frozen source snapshot of eICU is possible within the repo
+- The audit-specific `resume.py` is project-bound; no general production orchestrator is provided
+- Boundary fixtures and full-data reconciliations ran in BigQuery for this audit, but are not integrated into CI
+- Source metadata are recorded; no patient-level frozen source snapshot is distributed
 - Reported results are documented, but not regenerated automatically inside CI
-- Validation splits are materialized, but the current published path does not implement a reproduced validation-based model-selection sweep
+- The new hospital-validation run is executed; its exact optimizer termination reason is not exposed by the returned metadata
 
 These are acceptable tradeoffs for a portfolio artifact, but they should be stated explicitly.
 

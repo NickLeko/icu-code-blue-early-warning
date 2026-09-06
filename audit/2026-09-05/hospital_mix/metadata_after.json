@@ -1,0 +1,342 @@
+{
+  "preds_test_v3": {
+    "id": "citric-glow-485600-f4:icu_ml.preds_test_v3",
+    "etag": "M5097C4ie8pxa+ikP6BUCg==",
+    "creationTime": "1774945269053",
+    "lastModifiedTime": "1774945269054",
+    "numRows": "2078011",
+    "numBytes": "66496352",
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "y",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prob_1",
+          "type": "FLOAT"
+        }
+      ]
+    },
+    "type": "TABLE"
+  },
+  "cohort_v1": {
+    "id": "citric-glow-485600-f4:icu_ml.cohort_v1",
+    "etag": "3U/vcGmbVcZSkBszMtewug==",
+    "creationTime": "1774944215375",
+    "lastModifiedTime": "1774944215376",
+    "numRows": "177418",
+    "numBytes": "18235137",
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "uniquepid",
+          "type": "STRING"
+        },
+        {
+          "name": "patienthealthsystemstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hospitalid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "gender",
+          "type": "STRING"
+        },
+        {
+          "name": "age",
+          "type": "FLOAT"
+        },
+        {
+          "name": "unitadmitsource",
+          "type": "STRING"
+        },
+        {
+          "name": "unittype",
+          "type": "STRING"
+        },
+        {
+          "name": "unitvisitnumber",
+          "type": "INTEGER"
+        },
+        {
+          "name": "unitdischargeoffset",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hospitaldischargeoffset",
+          "type": "INTEGER"
+        }
+      ]
+    },
+    "type": "TABLE"
+  },
+  "model_table_v3": {
+    "id": "citric-glow-485600-f4:icu_ml.model_table_v3",
+    "etag": "IMvHDU13Oo+955B01rrjYQ==",
+    "creationTime": "1774944452116",
+    "lastModifiedTime": "1774944452117",
+    "numRows": "10493497",
+    "numBytes": "2568031626",
+    "schema": {
+      "fields": [
+        {
+          "name": "patientunitstayid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "prediction_time_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "rr_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_max_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "rr_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sao2_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sao2_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "temp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "temp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "sbp_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "sbp_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "map_min_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "map_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "lactate_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "lactate_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "ph_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "ph_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "k_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "k_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "creat_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "creat_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "hgb_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hgb_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_mean_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_min_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_max_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "wbc_n_6h",
+          "type": "INTEGER"
+        },
+        {
+          "name": "wbc_last_6h",
+          "type": "FLOAT"
+        },
+        {
+          "name": "event_offset_min",
+          "type": "INTEGER"
+        },
+        {
+          "name": "y",
+          "type": "INTEGER"
+        },
+        {
+          "name": "hospitalid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "split",
+          "type": "STRING"
+        }
+      ]
+    },
+    "type": "TABLE"
+  },
+  "split_hospital_v1": {
+    "id": "citric-glow-485600-f4:icu_ml.split_hospital_v1",
+    "etag": "RqymVdHJu1V6+JKz178vqQ==",
+    "creationTime": "1774944423678",
+    "lastModifiedTime": "1774944423679",
+    "numRows": "208",
+    "numBytes": "3005",
+    "schema": {
+      "fields": [
+        {
+          "name": "hospitalid",
+          "type": "INTEGER"
+        },
+        {
+          "name": "split",
+          "type": "STRING"
+        }
+      ]
+    },
+    "type": "TABLE"
+  }
+}

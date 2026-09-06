@@ -1,0 +1,45 @@
+{
+  "preds_test_v3": {
+    "etag": true,
+    "lastModifiedTime": true,
+    "numRows": true,
+    "numBytes": true
+  },
+  "cohort_v1": {
+    "etag": true,
+    "lastModifiedTime": true,
+    "numRows": true,
+    "numBytes": true
+  },
+  "model_table_v3": {
+    "etag": true,
+    "lastModifiedTime": true,
+    "numRows": true,
+    "numBytes": true
+  },
+  "split_hospital_v1": {
+    "etag": true,
+    "lastModifiedTime": true,
+    "numRows": true,
+    "numBytes": true
+  },
+  "bqml_lr_v3": {
+    "etag": true,
+    "lastModifiedTime": true
+  },
+  "artifacts/reference_run/04_reference_run_weights.csv": {
+    "unchanged_from_git": true
+  },
+  "artifacts/reference_run/02_reference_run_operating_point.csv": {
+    "unchanged_from_git": true
+  },
+  "artifacts/reference_run/05_reference_run_ml_evaluate.csv": {
+    "unchanged_from_git": true
+  },
+  "artifacts/reference_run/03_reference_run_alert_policy.csv": {
+    "unchanged_from_git": true
+  },
+  "artifacts/reference_run/01_reference_run_counts.csv": {
+    "unchanged_from_git": true
+  }
+}

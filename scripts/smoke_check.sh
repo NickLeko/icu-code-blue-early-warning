@@ -99,11 +99,11 @@ grep -q 'RUN.md' CASE_STUDY.md || {
   echo "CASE_STUDY.md should reference RUN.md" >&2
   exit 1
 }
-grep -q 'bqml_lr_v3' docs/results.md || {
+grep -q 'bqml_lr_v4_pit' docs/results.md || {
   echo "docs/results.md should reference final model artifact" >&2
   exit 1
 }
-grep -q 'preds_test_v3' docs/results.md || {
+grep -q 'preds_test_v4_pit' docs/results.md || {
   echo "docs/results.md should reference prediction artifact" >&2
   exit 1
 }

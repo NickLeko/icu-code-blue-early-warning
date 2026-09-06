@@ -16,7 +16,7 @@ row_labels AS (
     COUNT(*) AS train_rows,
     COUNTIF(y = 1) AS positive_rows,
     SAFE_DIVIDE(COUNTIF(y = 1), COUNT(*)) AS positive_row_prevalence
-  FROM `{{PROJECT_ID}}.icu_ml.train_rows_v3`
+  FROM `{{PROJECT_ID}}.icu_ml.train_rows_v4_pit`
 ),
 split_hospitals AS (
   SELECT
@@ -31,7 +31,7 @@ split_rows AS (
     COUNT(*) AS n_rows,
     COUNTIF(y = 1) AS n_positive_rows,
     SAFE_DIVIDE(COUNTIF(y = 1), COUNT(*)) AS row_prevalence
-  FROM `{{PROJECT_ID}}.icu_ml.model_table_v3`
+  FROM `{{PROJECT_ID}}.icu_ml.model_table_v4_pit`
   GROUP BY split
 )
 SELECT
@@ -79,7 +79,7 @@ SELECT
   NULL,
   'train_rows',
   CAST(train_rows AS FLOAT64),
-  'train_rows_v3'
+  'train_rows_v4_pit'
 FROM row_labels
 
 UNION ALL
@@ -89,7 +89,7 @@ SELECT
   NULL,
   'positive_rows',
   CAST(positive_rows AS FLOAT64),
-  'train_rows_v3'
+  'train_rows_v4_pit'
 FROM row_labels
 
 UNION ALL
@@ -99,7 +99,7 @@ SELECT
   NULL,
   'positive_row_prevalence',
   positive_row_prevalence,
-  'train_rows_v3'
+  'train_rows_v4_pit'
 FROM row_labels
 
 UNION ALL
@@ -119,7 +119,7 @@ SELECT
   split,
   'n_rows',
   CAST(n_rows AS FLOAT64),
-  'model_table_v3'
+  'model_table_v4_pit'
 FROM split_rows
 
 UNION ALL
@@ -129,7 +129,7 @@ SELECT
   split,
   'n_positive_rows',
   CAST(n_positive_rows AS FLOAT64),
-  'model_table_v3'
+  'model_table_v4_pit'
 FROM split_rows
 
 UNION ALL
@@ -139,7 +139,7 @@ SELECT
   split,
   'row_prevalence',
   row_prevalence,
-  'model_table_v3'
+  'model_table_v4_pit'
 FROM split_rows
 
 ORDER BY metric_group, split, metric;

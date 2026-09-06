@@ -1,0 +1,68 @@
+{
+  "kind": "bigquery#queryResponse",
+  "schema": {
+    "fields": [
+      {
+        "name": "prediction_keys_not_in_test",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "test_keys_without_prediction",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "duplicate_prediction_or_test_keys",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "label_disagreements",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "bad_scores",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "bad_labels",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "duplicate_cohort_keys",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "assigned_test_hospitals",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "test_hospitals_with_predictions",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "prediction_hospitals_outside_test",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "location": "US"
+  },
+  "totalBytesProcessed": "388528391",
+  "jobComplete": true,
+  "cacheHit": false,
+  "totalBytesBilled": "0",
+  "location": "US",
+  "creationTime": "1788636516658",
+  "endTime": "1788636516922"
+}

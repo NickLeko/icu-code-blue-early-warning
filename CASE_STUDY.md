@@ -1,5 +1,7 @@
 # Case Study: ICU Code Blue Early Warning Model
 
+**Version 2.0.0-pit — point-in-time correction and held-out rerun completed.** Lab features now require the later of draw and revised-entry time to precede prediction. The model uses the explicit hospital-validation set for early stopping. See [the full old/new audit](audit/2026-09-05/pit_v4/REPORT.md).
+
 ## At a Glance
 
 - **Task:** rank ICU patient-hours by risk of a documented code-event / resuscitation proxy in the next 2 hours
@@ -7,7 +9,7 @@
 - **Final model:** BigQuery ML logistic regression using vitals + labs
 - **Validation design:** hospital-level holdout split
 - **Primary metric:** precision in the corpus-wide top 0.5% of held-out test rows
-- **Published proof surface:** aggregate-only reviewer queries in `artifacts/queries/` plus a checked-in reference export in `artifacts/reference_run/`
+- **Published proof surface:** aggregate-only reviewer queries in `artifacts/queries/` plus new exports in `artifacts/reference_run_v4_pit/` and historical exports in `artifacts/reference_run/`
 
 This repo intentionally publishes one fixed final-model path. It does not
 currently reproduce benchmark comparisons for alternate model versions,
@@ -125,25 +127,31 @@ The reported analysis uses ranking rather than calibrated probability interpreta
 
 ---
 
-## What Worked Well
+## Point-in-Time Corrected Results
 
-The repo now has a cleaner proof boundary and a checked-in corrected reference
-run:
+The rerun corrected lab availability and used hospital validation for early
+stopping. It produced the following results without threshold tuning:
 
 - one fixed final-model path
 - one held-out operating-point evaluation query
 - separate post-model alert-policy analyses
 - aggregate-only reviewer exports for counts, operating-point metrics, and weights
 - 177,418 cohort stays and 2,078,011 held-out test patient-hours
-- corpus-wide top-0.5% operating point: 10,391 alerts, 21 positive labeled windows,
-  0.2021% precision, 13.55x enrichment over test prevalence
-- first-crossing alert policy: 3,350 alerts, 8 positive labeled windows,
-  0.2388% precision
+- corpus-wide top-0.5% operating point: 10,391 alerts, 36 positive labeled windows,
+  0.3465% PPV, 11.61% positive-window recall, **23.22x pooled enrichment
+  (95% hospital-cluster CI 11.45–41.53)**; within-hospital AUROC 0.7348
+  row-weighted and 0.7827 median; positive alerts in 9 of 31 hospitals
+  (previously 7 of 31)
+- first-crossing alert policy: 2,040 alerts, 8 positive labeled windows,
+  0.3922% precision
 - 12-hour quiet-period-debounced first-crossing (suppressed crossings reset the
-  window): 2,650 alerts, 7 positive labeled windows, 0.2642% precision
+  window): 1,596 alerts, 8 positive labeled windows, 0.5013% precision
 
-As a secondary ranking metric, held-out `ML.EVALUATE` reports ROC-AUC 0.6377
-and log loss 0.002723.
+Held-out ROC-AUC was 0.7292. Log loss was 0.007776, worse than both
+the prior model's 0.002723 and
+0.001502 for a constant training-prevalence predictor. Log loss measures
+probabilistic prediction quality, not ranking alone. This weakens any claim
+of useful absolute probabilities; it does not alone negate ranking skill.
 
 These are retrospective held-out-hospital results on a chart-derived proxy
 label. They should be read as ranking evidence, not prospective clinical-effect

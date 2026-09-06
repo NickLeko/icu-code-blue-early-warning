@@ -1,0 +1,53 @@
+{
+  "kind": "bigquery#getQueryResultsResponse",
+  "etag": "p0T9tjfx2uu8T1iZRGIizg==",
+  "schema": {
+    "fields": [
+      {
+        "name": "boundary_cases_passed",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_boundary_fixture_74ae8bfe5d11",
+    "location": "US"
+  },
+  "totalRows": "1",
+  "rows": [
+    {
+      "f": [
+        {
+          "v": "9"
+        }
+      ]
+    }
+  ],
+  "totalBytesProcessed": "0",
+  "jobComplete": true,
+  "auditJobStatistics": {
+    "creationTime": "1788668295101",
+    "startTime": "1788668295165",
+    "endTime": "1788668296419",
+    "totalBytesProcessed": "0",
+    "query": {
+      "totalBytesProcessed": "0",
+      "totalBytesBilled": "0",
+      "totalSlotMs": "85",
+      "schema": {
+        "fields": [
+          {
+            "name": "boundary_cases_passed",
+            "type": "INTEGER",
+            "mode": "NULLABLE"
+          }
+        ]
+      },
+      "statementType": "SCRIPT"
+    },
+    "totalSlotMs": "85",
+    "numChildJobs": "2"
+  }
+}

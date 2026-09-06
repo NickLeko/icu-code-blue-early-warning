@@ -1,0 +1,206 @@
+{
+  "kind": "bigquery#job",
+  "etag": "CioYLWOkFUtsccPnduzJcA==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_probability_baseline_64172d26ca22",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_probability_baseline_64172d26ca22?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- Baseline probability is learned from train only, never held-out prevalence.\nWITH train AS (\n SELECT AVG(y) AS train_prevalence FROM `citric-glow-485600-f4.icu_ml.model_table_v4_pit` WHERE split='train'\n), test AS (\n SELECT AVG(y) AS test_prevalence FROM `citric-glow-485600-f4.icu_ml.model_table_v4_pit` WHERE split='test'\n)\nSELECT train_prevalence,test_prevalence,\n -test_prevalence*LN(train_prevalence)-(1-test_prevalence)*LN(1-train_prevalence) AS constant_train_prevalence_log_loss\nFROM train CROSS JOIN test;\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+        "tableId": "anon03af65479f30535c3d5e1aaa061ae546ac791c575a16ab9b3eddc30805757532"
+      },
+      "writeDisposition": "WRITE_TRUNCATE",
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "probability_baseline",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_probability_baseline_64172d26ca22",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788669397200",
+    "startTime": "1788669397943",
+    "endTime": "1788669398281",
+    "totalBytesProcessed": "151294394",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Output",
+          "id": "0",
+          "startMs": "1788669398044",
+          "endMs": "1788669398180",
+          "waitRatioAvg": 0,
+          "waitMsAvg": "0",
+          "waitRatioMax": 0.0007961783439490446,
+          "waitMsMax": "1",
+          "readRatioAvg": 0.5,
+          "readMsAvg": "628",
+          "readRatioMax": 1,
+          "readMsMax": "1256",
+          "computeRatioAvg": 0.41878980891719747,
+          "computeMsAvg": "526",
+          "computeRatioMax": 0.8375796178343949,
+          "computeMsMax": "1052",
+          "writeRatioAvg": 0.0031847133757961785,
+          "writeMsAvg": "4",
+          "writeRatioMax": 0.006369426751592357,
+          "writeMsMax": "8",
+          "shuffleOutputBytes": "25",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "20986994",
+          "recordsWritten": "1",
+          "parallelInputs": "100",
+          "completedParallelInputs": "100",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:y, $2:split",
+                "FROM citric-glow-485600-f4.icu_ml.model_table_v4_pit",
+                "(1 similar table omitted)",
+                "WHERE equal($2, 'train')"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$20 := subtract(multiply(unary_minus($81), ln($80)), multiply(subtract(1, $81), ln(subtract(1, $80))))"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$80 := $30, $81 := $40",
+                "CROSS EACH  WITH EACH "
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$30 := ROOT_AVG($50)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$50 := SHARD_AVG($1)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$40 := ROOT_AVG($60)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "$60 := SHARD_AVG($10)"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$20, $80, $81",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "1421",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "151294394",
+      "timeline": [
+        {
+          "elapsedMs": "57",
+          "totalSlotMs": "1421",
+          "pendingUnits": "0",
+          "completedUnits": "0",
+          "activeUnits": "0"
+        },
+        {
+          "elapsedMs": "245",
+          "totalSlotMs": "1421",
+          "pendingUnits": "0",
+          "completedUnits": "100",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "151294394",
+      "totalBytesBilled": "152043520",
+      "billingTier": 1,
+      "totalSlotMs": "1421",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "model_table_v4_pit"
+        }
+      ],
+      "statementType": "SELECT",
+      "searchStatistics": {
+        "indexUsageMode": "UNUSED",
+        "indexUnusedReasons": [
+          {
+            "code": "INDEX_CONFIG_NOT_AVAILABLE",
+            "message": "There is no index configuration for the base table `citric-glow-485600-f4:icu_ml.model_table_v4_pit`.",
+            "baseTable": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            }
+          }
+        ]
+      },
+      "queryInfo": {
+        "optimizationDetails": {
+          "optimizations": [
+            {
+              "enhanced_vectorization": "applied"
+            },
+            {
+              "short_query_optimization": "applied"
+            }
+          ]
+        }
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "model_table_v4_pit"
+            },
+            "staleness": "0s"
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "1421",
+    "finalExecutionDurationMs": "151"
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

@@ -1,0 +1,331 @@
+{
+  "kind": "bigquery#job",
+  "etag": "RaFWrkKVs2+R2hlpcHMAMA==",
+  "id": "citric-glow-485600-f4:US.codex_icu_pit_v4_20260905_q6_new_6a489725a254",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/citric-glow-485600-f4/jobs/codex_icu_pit_v4_20260905_q6_new_6a489725a254?location=US",
+  "user_email": "Nicholas.Leko99@gmail.com",
+  "configuration": {
+    "query": {
+      "query": "-- Q6: Per-hospital pooled-policy performance and hospital-mix null comparator.\n-- observed_tp / expected_tp_given_hospital_mix tests a different question\n-- from pooled enrichment; it is descriptive, not a cluster-valid p-value.\nWITH ranked AS (\n  SELECT *, NTILE(200) OVER(ORDER BY prob_1 DESC,patientunitstayid,prediction_time_min) AS bucket\n  FROM `citric-glow-485600-f4.icu_ml.preds_test_v4_pit`\n), hospital AS (\n  SELECT c.hospitalid, COUNT(*) AS n, SUM(r.y) AS k,\n    COUNTIF(bucket=1) AS a, COUNTIF(bucket=1 AND r.y=1) AS tp,\n    COUNT(DISTINCT IF(r.y=1,r.patientunitstayid,NULL)) AS event_stays_with_positive_rows,\n    COUNT(DISTINCT IF(bucket=1 AND r.y=1,r.patientunitstayid,NULL)) AS detected_event_stays\n  FROM ranked r JOIN `citric-glow-485600-f4.icu_ml.cohort_v1` c USING(patientunitstayid)\n  GROUP BY 1\n)\nSELECT *, SAFE_DIVIDE(k,n) AS prevalence, SAFE_DIVIDE(a,n) AS alert_rate,\n  SAFE_DIVIDE(tp,a) AS ppv, SAFE_DIVIDE(tp,k) AS row_recall,\n  SAFE_DIVIDE(detected_event_stays,event_stays_with_positive_rows) AS evaluable_event_stay_recall,\n  a*SAFE_DIVIDE(k,n) AS expected_tp_given_hospital_mix,\n  SAFE_DIVIDE(SUM(tp) OVER(),SUM(a*SAFE_DIVIDE(k,n)) OVER()) AS pooled_observed_over_hospital_mix_expected\nFROM hospital ORDER BY hospitalid;\n\n",
+      "destinationTable": {
+        "projectId": "citric-glow-485600-f4",
+        "datasetId": "_36bcb2cf34934f993413629ae0991d97aa09a6a7",
+        "tableId": "anon8daf556988a11af56260ee89a601d184f4b541b6c00972c04d9501a49266e290"
+      },
+      "writeDisposition": "WRITE_TRUNCATE",
+      "priority": "INTERACTIVE",
+      "maximumBytesBilled": "50000000000",
+      "useLegacySql": false
+    },
+    "labels": {
+      "stage": "q6_new",
+      "run": "pit_v4_20260905"
+    },
+    "jobType": "QUERY"
+  },
+  "jobReference": {
+    "projectId": "citric-glow-485600-f4",
+    "jobId": "codex_icu_pit_v4_20260905_q6_new_6a489725a254",
+    "location": "US"
+  },
+  "statistics": {
+    "creationTime": "1788669376904",
+    "startTime": "1788669377054",
+    "endTime": "1788669378097",
+    "totalBytesProcessed": "69335040",
+    "query": {
+      "queryPlan": [
+        {
+          "name": "S00: Output",
+          "id": "0",
+          "startMs": "1788669377149",
+          "endMs": "1788669378005",
+          "waitRatioAvg": 0.0005277044854881266,
+          "waitMsAvg": "1",
+          "waitRatioMax": 0.0010554089709762533,
+          "waitMsMax": "2",
+          "readRatioAvg": 0.0158311345646438,
+          "readMsAvg": "30",
+          "readRatioMax": 0.03218997361477573,
+          "readMsMax": "61",
+          "computeRatioAvg": 0.49973614775725594,
+          "computeMsAvg": "947",
+          "computeRatioMax": 1,
+          "computeMsMax": "1895",
+          "writeRatioAvg": 0.0010554089709762533,
+          "writeMsAvg": "2",
+          "writeRatioMax": 0.0021108179419525065,
+          "writeMsMax": "4",
+          "shuffleOutputBytes": "3690",
+          "shuffleOutputBytesSpilled": "0",
+          "recordsRead": "2255429",
+          "recordsWritten": "31",
+          "parallelInputs": "5",
+          "completedParallelInputs": "5",
+          "status": "COMPLETE",
+          "steps": [
+            {
+              "kind": "READ",
+              "substeps": [
+                "$10:patientunitstayid, $11:prediction_time_min, $12:y, $13:prob_1",
+                "FROM citric-glow-485600-f4.icu_ml.preds_test_v4_pit"
+              ]
+            },
+            {
+              "kind": "READ",
+              "substeps": [
+                "$1:patientunitstayid, $2:hospitalid",
+                "FROM citric-glow-485600-f4.icu_ml.cohort_v1"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$260 ASC"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$20 := safe_divide(CAST($30 AS DOUBLE), $31)"
+              ]
+            },
+            {
+              "kind": "ANALYTIC_FUNCTION",
+              "substeps": [
+                "$30 := SUM($55) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)",
+                "$31 := SUM($45) OVER (ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$40 := safe_divide(CAST($53 AS DOUBLE), CAST($52 AS DOUBLE))",
+                "$41 := safe_divide(CAST($54 AS DOUBLE), CAST($52 AS DOUBLE))",
+                "$42 := safe_divide(CAST($55 AS DOUBLE), CAST($54 AS DOUBLE))",
+                "$43 := safe_divide(CAST($55 AS DOUBLE), CAST($53 AS DOUBLE))",
+                "$44 := safe_divide(CAST($50 AS DOUBLE), CAST($51 AS DOUBLE))",
+                "$45 := multiply(CAST($54 AS DOUBLE), safe_divide(CAST($53 AS DOUBLE), CAST($52 AS DOUBLE)))"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $250 := $240",
+                "$50 := ANY_VALUE($60)",
+                "$51 := ANY_VALUE($61)",
+                "$52 := ANY_VALUE($62)",
+                "$53 := ANY_VALUE($63)",
+                "$54 := ANY_VALUE($64)",
+                "$55 := ANY_VALUE($65)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $240 := $230",
+                "$60 := ANY_VALUE($75)",
+                "$61 := ANY_VALUE($74)",
+                "$62 := ANY_VALUE($73)",
+                "$63 := ANY_VALUE($72)",
+                "$64 := ANY_VALUE($71)",
+                "$65 := ANY_VALUE($70)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$70 := if(equal($231, 0), $85, NULL)",
+                "$71 := if(equal($231, 0), $84, NULL)",
+                "$72 := if(equal($231, 0), $83, NULL)",
+                "$73 := if(equal($231, 0), $82, NULL)",
+                "$74 := if(equal($231, 1), $81, NULL)",
+                "$75 := if(equal($231, 2), $80, NULL)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $230 := $220, $231 := $221",
+                "$80 := SUM_OF_COUNTS($90)",
+                "$81 := SUM_OF_COUNTS($91)",
+                "$82 := ANY_VALUE($92)",
+                "$83 := ANY_VALUE($93)",
+                "$84 := ANY_VALUE($94)",
+                "$85 := ANY_VALUE($95)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $220 := $210, $221 := $211",
+                "$90 := COUNT($105)",
+                "$91 := COUNT($104)",
+                "$92 := ANY_VALUE($103)",
+                "$93 := ANY_VALUE($102)",
+                "$94 := ANY_VALUE($101)",
+                "$95 := ANY_VALUE($100)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$100 := if(equal($211, 0), $113, NULL)",
+                "$101 := if(equal($211, 0), $112, NULL)",
+                "$102 := if(equal($211, 0), $111, NULL)",
+                "$103 := if(equal($211, 0), $110, NULL)",
+                "$104 := if(equal($211, 1), $213, NULL)",
+                "$105 := if(equal($211, 2), $212, NULL)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $210 := $200, $211 := $201, $212 := $202, $213 := $203",
+                "$110 := SUM_OF_COUNTS($120)",
+                "$111 := SUM($121)",
+                "$112 := SUM_OF_COUNTS($122)",
+                "$113 := SUM_OF_COUNTS($123)"
+              ]
+            },
+            {
+              "kind": "AGGREGATE",
+              "substeps": [
+                "GROUP BY $200 := $193, $201 := $150, $202 := $130, $203 := $131",
+                "$120 := COUNT_STAR()",
+                "$121 := SUM($134)",
+                "$122 := COUNTIF($133)",
+                "$123 := COUNTIF($132)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$130 := if(equal($150, 2), if(and(equal($192, 1), equal($191, 1)), $190, NULL), NULL)",
+                "$131 := if(equal($150, 1), if(equal($191, 1), $190, NULL), NULL)",
+                "$132 := if(equal($150, 0), and(equal($192, 1), equal($191, 1)), NULL)",
+                "$133 := if(equal($150, 0), equal($192, 1), NULL)",
+                "$134 := if(equal($150, 0), $191, NULL)"
+              ]
+            },
+            {
+              "kind": "COMPUTE",
+              "substeps": [
+                "$140 := ARRAY<...>"
+              ]
+            },
+            {
+              "kind": "JOIN",
+              "substeps": [
+                "$190 := $180, $191 := $181, $192 := $160, $193 := $2",
+                "INNER HASH JOIN ALL  WITH ALL  ON $180 = $1"
+              ]
+            },
+            {
+              "kind": "ANALYTIC_FUNCTION",
+              "substeps": [
+                "$160 := NTILE(200) OVER (ORDER BY $173 DESC, $170 ASC, $171 ASC)"
+              ]
+            },
+            {
+              "kind": "SORT",
+              "substeps": [
+                "$13 DESC, $10 ASC, $11 ASC"
+              ]
+            },
+            {
+              "kind": "WRITE",
+              "substeps": [
+                "$280, $281, $282, $283, $284, $285, $286, $287, $288, $289, $290, $291, $292, $293",
+                "TO __stage00_output"
+              ]
+            }
+          ],
+          "slotMs": "1713",
+          "computeMode": "BIGQUERY"
+        }
+      ],
+      "estimatedBytesProcessed": "69335040",
+      "timeline": [
+        {
+          "elapsedMs": "946",
+          "totalSlotMs": "1713",
+          "pendingUnits": "1",
+          "completedUnits": "0",
+          "activeUnits": "1",
+          "estimatedRunnableUnits": "0"
+        },
+        {
+          "elapsedMs": "959",
+          "totalSlotMs": "1713",
+          "pendingUnits": "0",
+          "completedUnits": "5",
+          "estimatedRunnableUnits": "0"
+        }
+      ],
+      "totalPartitionsProcessed": "0",
+      "totalBytesProcessed": "69335040",
+      "totalBytesBilled": "70254592",
+      "billingTier": 1,
+      "totalSlotMs": "1713",
+      "cacheHit": false,
+      "referencedTables": [
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "preds_test_v4_pit"
+        },
+        {
+          "projectId": "citric-glow-485600-f4",
+          "datasetId": "icu_ml",
+          "tableId": "cohort_v1"
+        }
+      ],
+      "statementType": "SELECT",
+      "queryInfo": {
+        "optimizationDetails": {
+          "optimizations": [
+            {
+              "enhanced_vectorization": "applied"
+            },
+            {
+              "short_query_optimization": "applied"
+            }
+          ]
+        }
+      },
+      "transferredBytes": "0",
+      "metadataCacheStatistics": {
+        "tableMetadataCacheUsage": [
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "preds_test_v4_pit"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          },
+          {
+            "tableReference": {
+              "projectId": "citric-glow-485600-f4",
+              "datasetId": "icu_ml",
+              "tableId": "cohort_v1"
+            },
+            "unusedReason": "OTHER_REASON",
+            "explanation": "Table does not have CMETA."
+          }
+        ]
+      }
+    },
+    "totalSlotMs": "1713",
+    "finalExecutionDurationMs": "870"
+  },
+  "status": {
+    "state": "DONE"
+  },
+  "principal_subject": "user:Nicholas.Leko99@gmail.com",
+  "jobCreationReason": {
+    "code": "REQUESTED"
+  }
+}

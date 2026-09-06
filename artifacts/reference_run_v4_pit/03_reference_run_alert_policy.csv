@@ -1,0 +1,4 @@
+policy,quiet_period_hours,alerts,positive_windows,precision,alert_ratio_vs_naive
+naive_top_0_5pct,12,10391,36,0.003464536618227312,1.0
+first_crossing,12,2040,8,0.00392156862745098,0.1963237416995477
+quiet_period_debounced_first_crossing,12,1596,8,0.005012531328320802,0.15359445674141084

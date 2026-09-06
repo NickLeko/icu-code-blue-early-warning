@@ -3,9 +3,9 @@
 -- Horizon: next 2 hours
 -- Lookback already handled in feature creation
 -- Leakage guardrail: exclude rows at/after event time
--- Output: `{{PROJECT_ID}}.icu_ml.train_rows_v3`
+-- Output: `{{PROJECT_ID}}.icu_ml.train_rows_v4_pit`
 
-CREATE OR REPLACE TABLE `{{PROJECT_ID}}.icu_ml.train_rows_v3` AS
+CREATE OR REPLACE TABLE `{{PROJECT_ID}}.icu_ml.train_rows_v4_pit` AS
 SELECT
   f.*,
   l.event_offset_min,
@@ -15,7 +15,7 @@ SELECT
      AND l.event_offset_min <= f.prediction_time_min + 120 THEN 1
     ELSE 0
   END AS y
-FROM `{{PROJECT_ID}}.icu_ml.features_v3` f
+FROM `{{PROJECT_ID}}.icu_ml.features_v4_pit` f
 JOIN `{{PROJECT_ID}}.icu_ml.labels_v2` l
   USING (patientunitstayid)
 WHERE
@@ -24,5 +24,5 @@ WHERE
 
 -- Optional sanity check (run manually)
 -- SELECT COUNT(*) AS n, SUM(y) AS n_pos, SAFE_DIVIDE(SUM(y), COUNT(*)) AS prev
--- FROM `{{PROJECT_ID}}.icu_ml.train_rows_v3`;
+-- FROM `{{PROJECT_ID}}.icu_ml.train_rows_v4_pit`;
 
